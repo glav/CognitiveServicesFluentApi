@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.Api.Fluent
 {
@@ -13,10 +14,10 @@ namespace Glav.CognitiveServices.Api.Fluent
             return new ApiAnalysisSettings(config);
         }
 
-        public static ApiAnalysisResults Analyse(this ApiAnalysisSettings apiAnalysisSettings)
+        public static Task<ApiAnalysisResults> AnalyseAllAsync(this ApiAnalysisSettings apiAnalysisSettings)
         {
             var factory = new AnalysisFactory(apiAnalysisSettings);
-            return factory.Analyse();
+            return factory.CreateAnalysisEngine().ExecuteAllAsync();
         }
     }
 }

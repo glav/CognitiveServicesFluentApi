@@ -13,10 +13,8 @@ namespace Glav.CognitiveServices.Api.Fluent
         {
             ActionType = actionType;
             _actionData = actionData;
-            Id = Guid.NewGuid();
         }
 
-        public Guid Id { get; private set; }
         public ApiActionType ActionType { get; private set; }
         public T ActionData<T>() where T : class, IApiActionData
         {

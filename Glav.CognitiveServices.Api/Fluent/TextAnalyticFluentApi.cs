@@ -11,7 +11,9 @@ namespace Glav.CognitiveServices.Api.Fluent
     {
         public static ApiAnalysisSettings WithSentimentAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse)
         {
-            apiAnalysis.ActionsToPerform.Add(new TextAnalyticApiAction(new TextAnalyticActionData { TextToAnalyse = textToAnalyse }));
+            var data = new TextAnalyticActionData();
+            data.Add(textToAnalyse);
+            apiAnalysis.ActionsToPerform.Add(new TextAnalyticApiAction(data));
             return apiAnalysis;
         }
     }

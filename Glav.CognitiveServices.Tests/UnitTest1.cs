@@ -10,9 +10,10 @@ namespace Glav.CognitiveServices.Tests
         [Fact]
         public void Test1()
         {
-            var result = ConfigurationBuilder.CreateUsingApiKey("636868abf46c47bc8e92306989e281cd")
+            var asyncResult = ConfigurationBuilder.CreateUsingApiKey("....")
                 .WithSentimentAnalysis("This is really good.")
-                .Analyse();
+                .AnalyseAllAsync().Result;
+
 
 
         }

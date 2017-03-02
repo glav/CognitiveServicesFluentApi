@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class TextAnalyticActionResultData : IApiActionResultData
+    public sealed class TextAnalyticActionResultData : IApiAnalysisResultData
     {
-        public string Result { get; set; }
+        public string RawResult { get; set; }
     }
 }

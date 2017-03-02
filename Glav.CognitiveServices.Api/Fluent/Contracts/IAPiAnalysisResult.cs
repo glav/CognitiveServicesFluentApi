@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.Contracts
 {
-    public interface IAPiActionResult
+    public interface IAPIAnalysisResult
     {
-        Guid ActionId { get;  }
+        long Id { get;  }
         IApiAction ActionPerformed { get; }
-        T ActionResult<T>() where T : class, IApiActionResultData;
+        T ActionResult<T>() where T : class, IApiAnalysisResultData;
     }
 }

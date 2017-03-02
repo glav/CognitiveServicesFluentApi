@@ -5,20 +5,20 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent
 {
-    public class ApiActionResult : IAPiActionResult
+    public class ApiAnalysisResult : IAPIAnalysisResult
     {
-        private readonly IApiActionResultData _actionResult;
+        private readonly IApiAnalysisResultData _actionResult;
 
-        public ApiActionResult(Guid actionId, IApiAction actionPerformed, IApiActionResultData actionResult)
+        public ApiAnalysisResult(long id, IApiAction actionPerformed, IApiAnalysisResultData actionResult)
         {
-            ActionId = actionId;
+            Id = id;
             ActionPerformed = ActionPerformed;
             _actionResult = actionResult;
         }
-        public Guid ActionId { get; private set; }
+        public long Id { get; private set; }
         public IApiAction ActionPerformed { get; private set; }
 
-        public T ActionResult<T>() where T : class, IApiActionResultData
+        public T ActionResult<T>() where T : class, IApiAnalysisResultData
         {
             return _actionResult as T;
         }
