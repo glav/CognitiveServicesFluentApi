@@ -32,7 +32,7 @@ namespace Glav.CognitiveServices.Api.Fluent
             if (sentiments.Count > 0)
             {
                 var client = CreateHttpClient();
-                var payload = "{ \"documents\":[ {\"language\":\"en\", \"id\":\"1\", \"text\":\"" + sentiments[0].ActionData + "\" } ] }";
+                var payload = "{ \"documents\":[ {\"language\":\"en\", \"id\":\"1\", \"text\":\"" + sentiments[0].ActionData<TextAnalytic.TextAnalyticActionData>().TextToAnalyse + "\" } ] }";
                 var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
                 var url = AnalysisSettings.ConfigurationSettings.BaseUrl + ApiUrlExtensions.ApiServiceUrl(ApiActionType.TextAnalyticsSentiment);
                 var result = client.PostAsync(url,content).Result;
