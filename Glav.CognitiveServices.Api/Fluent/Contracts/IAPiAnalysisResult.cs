@@ -6,8 +6,8 @@ namespace Glav.CognitiveServices.Api.Fluent.Contracts
 {
     public interface IApiAnalysisResult
     {
-        long Id { get;  }
-        IApiAction ActionPerformed { get; }
-        T ActionResult<T>() where T : class, IApiAnalysisResultData;
+        bool Successfull { get; }
+        string RawResult { get; }
+
     }
 }

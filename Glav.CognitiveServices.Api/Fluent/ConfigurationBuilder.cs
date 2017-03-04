@@ -16,8 +16,7 @@ namespace Glav.CognitiveServices.Api.Fluent
 
         public static Task<ApiAnalysisResults> AnalyseAllAsync(this ApiAnalysisSettings apiAnalysisSettings)
         {
-            var factory = new AnalysisFactory(apiAnalysisSettings);
-            return factory.CreateAnalysisEngine().ExecuteAllAsync();
+            return new AnalysisEngine(apiAnalysisSettings).ExecuteAllAsync();
         }
     }
 }

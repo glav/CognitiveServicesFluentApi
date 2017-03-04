@@ -28,14 +28,16 @@ namespace Glav.CognitiveServices.Api.Fluent
             var sentiments = _analysisSettings.ActionsToPerform.Where(a => a.ActionType == Configuration.ApiActionType.TextAnalyticsSentiment).ToList();
             if (sentiments.Count > 0)
             {
-                var actionData = new TextAnalyticActionData();
-                var payload = sentiments.First().ActionData<TextAnalyticActionData>().ToString();
+                var apiAction = sentiments.First() as TextAnalyticApiAction;
+                var payload = apiAction.ActionData<TextAnalyticActionData>().ToString();
 
                 var result = await new HttpFactory(_analysisSettings).CallService(ApiActionType.TextAnalyticsSentiment,payload);
 
                 if (result.Successfull)
                 {
-                    apiResults.SentimentResults = result.Data;
+                    var txtAnalyticResult = new TextAnalyticActionResult(result.Data);
+                    var resultSet = new TextAnalyticAnalysisResultSet(apiAction, txtAnalyticResult);
+                    return ApiAnalysisResults.Create(resultSet);
                 }
             }
 

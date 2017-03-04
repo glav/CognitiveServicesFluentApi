@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent
 {
-    public abstract class BaseDataCollection<T> where T : IActionDataItem
+    public abstract class BaseDataCollection<T> where T : class
     {
         protected List<T> _itemList = new List<T>();
 

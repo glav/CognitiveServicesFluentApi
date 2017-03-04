@@ -9,7 +9,7 @@ namespace Glav.CognitiveServices.IntegrationTests
         [Fact]
         public void SimplePositiveTextShouldAnalyseAsPositive()
         {
-            var asyncResult = ConfigurationBuilder.CreateUsingApiKey("....")
+            var result = ConfigurationBuilder.CreateUsingApiKey("636868abf46c47bc8e92306989e281cd")
                 .WithSentimentAnalysis("This is really good.")
                 .AnalyseAllAsync().Result;
         }
