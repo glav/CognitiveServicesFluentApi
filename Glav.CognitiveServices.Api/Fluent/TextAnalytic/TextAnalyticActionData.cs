@@ -5,25 +5,18 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class TextAnalyticActionData: IApiActionData
+    public sealed class TextAnalyticActionData: BaseDataCollection<TextAnalyticActionDataItem>, IApiActionData
     {
-        private List<TextAnalyticActionDataItem> _items = new List<TextAnalyticActionDataItem>();
-
         public void Add(string textToAnalyse, SupportedLanguage language = SupportedLanguage.English)
         {
-            _items.Add(new TextAnalyticActionDataItem(_items.Count + 1, textToAnalyse, language));
+            ItemList.Add(new TextAnalyticActionDataItem(ItemList.Count + 1, textToAnalyse, language));
         }
-
-        public IEnumerable<TextAnalyticActionDataItem> AllItems()
-        {
-            return _items.ToArray();
-        }
-
+ 
         public override string ToString()
         {
             var builder = new StringBuilder();
             builder.Append("{ \"documents\": [");
-            _items.ForEach(i =>
+            ItemList.ForEach(i =>
             {
                 builder.Append(i.ToString());
             });
@@ -32,7 +25,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         }
     }
 
-    public sealed class TextAnalyticActionDataItem
+    public sealed class TextAnalyticActionDataItem : IActionDataItem
     {
         public TextAnalyticActionDataItem(long id, string textToAnalyse)
         {

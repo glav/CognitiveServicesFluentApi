@@ -7,7 +7,7 @@ using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
 
 namespace Glav.CognitiveServices.Api.Fluent
 {
-    public static class TextAnalyticFluentApi
+    public static class TextAnalyticFluentApiExtensions
     {
         public static ApiAnalysisSettings WithSentimentAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse)
         {

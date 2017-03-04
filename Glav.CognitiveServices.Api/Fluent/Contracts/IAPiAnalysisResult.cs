@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.Contracts
 {
-    public interface IAPIAnalysisResult
+    public interface IApiAnalysisResult
     {
         long Id { get;  }
         IApiAction ActionPerformed { get; }

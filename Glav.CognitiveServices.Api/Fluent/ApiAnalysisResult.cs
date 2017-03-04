@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent
 {
-    public class ApiAnalysisResult : IAPIAnalysisResult
+    public class ApiAnalysisResult : IApiAnalysisResult
     {
         private readonly IApiAnalysisResultData _actionResult;
 
