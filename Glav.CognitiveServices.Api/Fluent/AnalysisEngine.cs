@@ -35,8 +35,24 @@ namespace Glav.CognitiveServices.Api.Fluent
 
                 if (result.Successfull)
                 {
-                    var txtAnalyticResult = new TextAnalyticActionResult(result.Data);
-                    var resultSet = new TextAnalyticAnalysisResultSet(apiAction, txtAnalyticResult);
+                    var txtAnalyticResult = new TextAnalyticSentimentResult(result.Data);
+                    var resultSet = new TextAnalyticAnalysisSentimentResultSet(apiAction, txtAnalyticResult);
+                    return ApiAnalysisResults.Create(resultSet);
+                }
+            }
+
+            var phrases = _analysisSettings.ActionsToPerform.Where(a => a.ActionType == Configuration.ApiActionType.TextAnalyticsKeyphrases).ToList();
+            if (phrases.Count > 0)
+            {
+                var apiAction = phrases.First() as TextAnalyticApiAction;
+                var payload = apiAction.ActionData<TextAnalyticActionData>().ToString();
+
+                var result = await new HttpFactory(_analysisSettings).CallService(ApiActionType.TextAnalyticsKeyphrases,payload);
+
+                if (result.Successfull)
+                {
+                    var txtAnalyticResult = new TextAnalyticKeyPhraseResult(result.Data);
+                    var resultSet = new TextAnalyticAnalysisKeyPhraseResultSet(apiAction, txtAnalyticResult);
                     return ApiAnalysisResults.Create(resultSet);
                 }
             }

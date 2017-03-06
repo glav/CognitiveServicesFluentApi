@@ -22,6 +22,16 @@ namespace Glav.CognitiveServices.Api.Configuration
 
         }
 
+        public static class TextAnalyticsKeyPhrase
+        {
+            static TextAnalyticsKeyPhrase()
+            {
+                Version = "v2.0";
+            }
+            public const string Template = "text/analytics/{0}/keyPhrases";
+            public static string Version { get; set; }
+
+        }
         public static class Emotion
         {
             static Emotion()

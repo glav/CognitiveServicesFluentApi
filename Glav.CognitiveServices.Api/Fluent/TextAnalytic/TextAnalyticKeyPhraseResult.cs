@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class TextAnalyticActionResult : BaseDataCollection<TextAnalyticActionResultResponseRoot>, IApiAnalysisResult
+    public sealed class TextAnalyticKeyPhraseResult : BaseDataCollection<TextAnalyticKeyPhraseResultResponseRoot>, IApiAnalysisResult
     {
-        public TextAnalyticActionResult(string rawData)
+        public TextAnalyticKeyPhraseResult(string rawData)
         {
             RawResult = rawData;
             AddResultToCollection();
@@ -18,21 +18,22 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         {
             if (string.IsNullOrWhiteSpace(RawResult))
             {
-                ItemList.Add(new TextAnalyticActionResultResponseRoot { errors = new string[] { "No data returned." } });
+                ItemList.Add(new TextAnalyticKeyPhraseResultResponseRoot { errors = new TextAnalyticApiError[] { new TextAnalyticApiError { id = 1, message = "No data returned." } } });
                 Successfull = false;
                 return;
             }
 
             try
             {
-                Result = Newtonsoft.Json.JsonConvert.DeserializeObject<TextAnalyticActionResultResponseRoot>(RawResult);
+                Result = Newtonsoft.Json.JsonConvert.DeserializeObject<TextAnalyticKeyPhraseResultResponseRoot>(RawResult);
                 if (Result.errors != null && Result.errors.Length > 0)
                 {
                     Successfull = false;
                 }
+                Successfull = true;
             } catch (Exception ex)
             {
-                ItemList.Add(new TextAnalyticActionResultResponseRoot { errors = new string[] { $"Error parsing results: {ex.Message}" } });
+                ItemList.Add(new TextAnalyticKeyPhraseResultResponseRoot { errors = new TextAnalyticApiError[] { new TextAnalyticApiError { id = 1, message = $"Error parsing results: {ex.Message}" } } });
                 Successfull = false;
             }
         }
@@ -40,7 +41,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         // {"documents":[{"score":0.7988085,"id":"1"}],"errors":[]}
         public string RawResult { get; private set; }
         public bool Successfull { get; private set; }
-        public TextAnalyticActionResultResponseRoot Result { get; private set; }
+        public TextAnalyticKeyPhraseResultResponseRoot Result { get; private set; }
     }
 
 

@@ -9,7 +9,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
     public class TextAnalyticApiAction : ApiAction
     {
-        public TextAnalyticApiAction(TextAnalyticActionData actionData) : base(ApiActionType.TextAnalyticsSentiment, actionData)
+        public TextAnalyticApiAction(ApiActionType apiType, TextAnalyticActionData actionData) : base(apiType, actionData)
         {
         }
     }

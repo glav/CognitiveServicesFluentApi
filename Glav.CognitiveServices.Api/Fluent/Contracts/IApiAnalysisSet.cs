@@ -9,7 +9,7 @@ namespace Glav.CognitiveServices.Api.Fluent.Contracts
                                                     where TResult : IApiAnalysisResult
     {
         ApiActionType AnalysisType { get; }
-        TData ActionData { get; }
+        TData AnalysisInput { get; }
 
         TResult AnalysisResult { get; }
     }
