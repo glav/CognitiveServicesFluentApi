@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses
 {
-    public sealed class TextAnalyticKeyPhraseResultResponseRoot : TextAnalyticBaseResponse<TextAnalyticKeyPhraseResultResponseItem>, IActionResponseRoot
+    public sealed class SentimentResultResponseRoot : BaseResponse<SentimentResultResponseItem>, IActionResponseRoot
     {
         
     }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses
 {
-    public sealed class TextAnalyticSentimentResultResponseItem
+    public sealed class SentimentResultResponseItem
     {
         public long id { get; set; }
         

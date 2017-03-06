@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses
 {
-    public sealed class TextAnalyticKeyPhraseResultResponseItem
+    public sealed class KeyPhraseResultResponseItem
     {
         
         public string[] keyPhrases { get; set; }

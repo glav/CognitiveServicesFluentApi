@@ -4,12 +4,9 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses
 {
-    public abstract class TextAnalyticBaseResponse<T> where T : class
+    public class ApiErrorResponse
     {
         public long id { get; set; }
-
-        public T[] documents { get; set; }
-
-        public TextAnalyticApiError[] errors { get; set; }
+        public string message { get; set; }
     }
 }
