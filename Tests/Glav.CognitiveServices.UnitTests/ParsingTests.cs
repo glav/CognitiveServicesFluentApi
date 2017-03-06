@@ -12,7 +12,7 @@ namespace Glav.CognitiveServices.UnitTests
         public void ShouldParseResultSuccessfully()
         {
             var input = "{\"documents\":[{\"score\":0.7988085,\"id\":\"1\"}],\"errors\":[]}";
-            var result = new TextAnalyticSentimentResult(input);
+            var result = new SentimentResult(input);
 
             Assert.NotNull(result);
             Assert.NotNull(result.Result);

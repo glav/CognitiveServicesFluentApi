@@ -7,16 +7,16 @@ namespace Glav.CognitiveServices.Api
 {
     public class ApiAnalysisResults
     {
-        public TextAnalyticAnalysisSentimentResultSet TextAnalyticSentimentAnalysis { get; private set; }
-        public TextAnalyticAnalysisKeyPhraseResultSet TextAnalyticKeyPhraseAnalysis { get; private set; }
+        public SentimentAnalysisSet TextAnalyticSentimentAnalysis { get; private set; }
+        public KeyPhraseAnalysisSet TextAnalyticKeyPhraseAnalysis { get; private set; }
 
-        public static ApiAnalysisResults Create(TextAnalyticAnalysisSentimentResultSet textAnalyticAnalysis)
+        public void SetResult(SentimentAnalysisSet textAnalyticAnalysis)
         {
-            return new ApiAnalysisResults { TextAnalyticSentimentAnalysis = textAnalyticAnalysis };
+            TextAnalyticSentimentAnalysis = textAnalyticAnalysis;
         }
-        public static ApiAnalysisResults Create(TextAnalyticAnalysisKeyPhraseResultSet textAnalyticAnalysis)
+        public void SetResult(KeyPhraseAnalysisSet textAnalyticAnalysis)
         {
-            return new ApiAnalysisResults { TextAnalyticKeyPhraseAnalysis = textAnalyticAnalysis };
+            TextAnalyticKeyPhraseAnalysis = textAnalyticAnalysis;
         }
     }
 }

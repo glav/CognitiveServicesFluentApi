@@ -25,35 +25,42 @@ namespace Glav.CognitiveServices.Api.Fluent
         public async Task<ApiAnalysisResults> ExecuteAllAsync()
         {
             var apiResults = new ApiAnalysisResults();
-            var sentiments = _analysisSettings.ActionsToPerform.Where(a => a.ActionType == Configuration.ApiActionType.TextAnalyticsSentiment).ToList();
-            if (sentiments.Count > 0)
+            if (_analysisSettings.ActionsToPerform.ContainsKey(ApiActionType.TextAnalyticsSentiment))
             {
-                var apiAction = sentiments.First() as TextAnalyticApiAction;
-                var payload = apiAction.ActionData<TextAnalyticActionData>().ToString();
+                var sentiments = _analysisSettings.ActionsToPerform[ApiActionType.TextAnalyticsSentiment] as TextAnalyticActionData;
+                var payload = sentiments.ToString();
 
-                var result = await new HttpFactory(_analysisSettings).CallService(ApiActionType.TextAnalyticsSentiment,payload);
+                var result = await new HttpFactory(_analysisSettings).CallService(ApiActionType.TextAnalyticsSentiment, payload);
 
+                SentimentResult txtAnalyticResult;
                 if (result.Successfull)
                 {
-                    var txtAnalyticResult = new TextAnalyticSentimentResult(result.Data);
-                    var resultSet = new TextAnalyticAnalysisSentimentResultSet(apiAction, txtAnalyticResult);
-                    return ApiAnalysisResults.Create(resultSet);
+                    txtAnalyticResult = new SentimentResult(result.Data);
                 }
+                else
+                {
+                    txtAnalyticResult = new SentimentResult();
+                }
+                var resultSet = new SentimentAnalysisSet(sentiments, txtAnalyticResult);
+                apiResults.SetResult(resultSet);
             }
 
-            var phrases = _analysisSettings.ActionsToPerform.Where(a => a.ActionType == Configuration.ApiActionType.TextAnalyticsKeyphrases).ToList();
-            if (phrases.Count > 0)
+            if (_analysisSettings.ActionsToPerform.ContainsKey(ApiActionType.TextAnalyticsKeyphrases))
             {
-                var apiAction = phrases.First() as TextAnalyticApiAction;
-                var payload = apiAction.ActionData<TextAnalyticActionData>().ToString();
+                var phrases = _analysisSettings.ActionsToPerform[ApiActionType.TextAnalyticsKeyphrases] as TextAnalyticActionData;
+                var payload = phrases.ToString();
 
-                var result = await new HttpFactory(_analysisSettings).CallService(ApiActionType.TextAnalyticsKeyphrases,payload);
+                var result = await new HttpFactory(_analysisSettings).CallService(ApiActionType.TextAnalyticsKeyphrases, payload);
 
+                KeyPhraseResult txtAnalyticResult;
                 if (result.Successfull)
                 {
-                    var txtAnalyticResult = new TextAnalyticKeyPhraseResult(result.Data);
-                    var resultSet = new TextAnalyticAnalysisKeyPhraseResultSet(apiAction, txtAnalyticResult);
-                    return ApiAnalysisResults.Create(resultSet);
+                    txtAnalyticResult = new KeyPhraseResult(result.Data);
+                    var resultSet = new KeyPhraseAnalysisSet(phrases, txtAnalyticResult);
+                    apiResults.SetResult(resultSet);
+                } else
+                {
+                    txtAnalyticResult = new KeyPhraseResult();
                 }
             }
 

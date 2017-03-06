@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.Contracts
 {
-    public interface IApiAction
+    public interface IApiAction<T> where T : class, IApiActionData
     {
         ApiActionType ActionType { get;  }
 
-        T ActionData<T>() where T : class, IApiActionData;
+        T ActionData();
     }
 }

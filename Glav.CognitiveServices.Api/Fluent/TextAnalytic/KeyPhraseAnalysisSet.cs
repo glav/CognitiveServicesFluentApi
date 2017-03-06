@@ -6,17 +6,17 @@ using Glav.CognitiveServices.Api.Configuration;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public class TextAnalyticAnalysisSentimentResultSet : IApiAnalysisSet<TextAnalyticApiAction, TextAnalyticSentimentResult>
+    public class KeyPhraseAnalysisSet : IApiAnalysisSet<TextAnalyticActionData, KeyPhraseResult>
     {
-        public TextAnalyticAnalysisSentimentResultSet(TextAnalyticApiAction actionData, TextAnalyticSentimentResult analysisResult)
+        public KeyPhraseAnalysisSet(TextAnalyticActionData actionData, KeyPhraseResult analysisResult)
         {
             AnalysisInput = actionData;
             AnalysisResult = analysisResult;
         }
         public ApiActionType AnalysisType { get { return ApiActionType.TextAnalyticsSentiment; } }
 
-        public TextAnalyticApiAction AnalysisInput { get; private set; }
+        public TextAnalyticActionData AnalysisInput { get; private set; }
 
-        public TextAnalyticSentimentResult AnalysisResult { get; private set; }
+        public KeyPhraseResult AnalysisResult { get; private set; }
 }
 }
