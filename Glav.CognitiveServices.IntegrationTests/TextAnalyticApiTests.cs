@@ -22,7 +22,7 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result);
             Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents);
 
-            Assert.Equal<SentimentClassification>(SentimentClassification.Positive, result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents[0].SentimentClassification);
+            Assert.Equal(SentimentClassification.Positive, result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents[0].SentimentClassification);
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result);
             Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents);
 
-            Assert.Equal<SentimentClassification>(SentimentClassification.Negative, result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents[0].SentimentClassification);
+            Assert.Equal(SentimentClassification.Negative, result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents[0].SentimentClassification);
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult);
             Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result);
             Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents);
-            Assert.Equal<SentimentClassification>(SentimentClassification.Negative, result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents[0].SentimentClassification);
+            Assert.Equal(SentimentClassification.Negative, result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents[0].SentimentClassification);
         }
     }
 }

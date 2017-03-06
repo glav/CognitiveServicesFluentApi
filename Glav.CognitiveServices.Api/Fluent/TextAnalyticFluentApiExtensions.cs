@@ -12,31 +12,26 @@ namespace Glav.CognitiveServices.Api.Fluent
     {
         public static ApiAnalysisSettings WithSentimentAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse)
         {
-            if (apiAnalysis.ActionsToPerform.Keys.Contains(ApiActionType.TextAnalyticsSentiment))
-            {
-                var textAnalyticAction = apiAnalysis.ActionsToPerform[ApiActionType.TextAnalyticsSentiment] as TextAnalyticActionData;
-                textAnalyticAction.Add(ApiActionType.TextAnalyticsSentiment, textToAnalyse);
-                return apiAnalysis;
-            }
-
-            var data = new TextAnalyticActionData();
-            data.Add(ApiActionType.TextAnalyticsSentiment, textToAnalyse);
-            apiAnalysis.ActionsToPerform.Add(ApiActionType.TextAnalyticsSentiment, data);
-            return apiAnalysis;
+            return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsSentiment);
         }
 
         public static ApiAnalysisSettings WithKeyPhraseAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse)
         {
-            if (apiAnalysis.ActionsToPerform.Keys.Contains(ApiActionType.TextAnalyticsKeyphrases))
+            return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsKeyphrases);
+        }
+
+        private static ApiAnalysisSettings AddTextForAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse, ApiActionType actionType)
+        {
+            if (apiAnalysis.ActionsToPerform.ContainsKey(actionType))
             {
-                var textAnalyticAction = apiAnalysis.ActionsToPerform[ApiActionType.TextAnalyticsKeyphrases] as TextAnalyticActionData;
-                textAnalyticAction.Add(ApiActionType.TextAnalyticsKeyphrases, textToAnalyse);
+                var textAnalyticAction = apiAnalysis.ActionsToPerform[actionType] as TextAnalyticActionData;
+                textAnalyticAction.Add(actionType, textToAnalyse);
                 return apiAnalysis;
             }
 
             var data = new TextAnalyticActionData();
-            data.Add(ApiActionType.TextAnalyticsKeyphrases, textToAnalyse);
-            apiAnalysis.ActionsToPerform.Add(ApiActionType.TextAnalyticsKeyphrases,data);
+            data.Add(actionType, textToAnalyse);
+            apiAnalysis.ActionsToPerform.Add(actionType, data);
             return apiAnalysis;
         }
     }
