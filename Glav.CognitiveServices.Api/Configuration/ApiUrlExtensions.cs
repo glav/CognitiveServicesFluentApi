@@ -18,6 +18,16 @@ namespace Glav.CognitiveServices.Api.Configuration
                 return string.Format(ApiServiceUrlFragments.TextAnalyticsKeyPhrase.Template, ApiServiceUrlFragments.TextAnalyticsSentiment.Version);
             }
 
+            if (apiActionType == ApiActionType.TextAnalyticsLanguages)
+            {
+                return string.Format(ApiServiceUrlFragments.TextAnalyticsLanguage.Template, ApiServiceUrlFragments.TextAnalyticsLanguage.Version);
+            }
+
+            if (apiActionType == ApiActionType.TextAnalyticsTopics)
+            {
+                return string.Format(ApiServiceUrlFragments.TextAnalyticsTopics.Template, ApiServiceUrlFragments.TextAnalyticsTopics.Version);
+            }
+
             throw new NotSupportedException();
         }
     }

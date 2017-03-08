@@ -7,7 +7,7 @@ namespace Glav.CognitiveServices.IntegrationTests
 {
     public class TextAnalyticApiTests
     {
-        const string ApiKey = "...";
+        const string ApiKey = "636868abf46c47bc8e92306989e281cd";
 
         [Fact]
         public void SimplePositiveTextShouldAnalyseAsPositive()

@@ -7,6 +7,7 @@ namespace Glav.CognitiveServices.Api.Configuration
     public static class ApiServiceUrlFragments
     {
         public const string BASE_URL_TEMPLATE = "https://{0}.api.cognitive.microsoft.com/";
+        public const string TEXT_ANALYTIC_VERSION = "v2.0";
 
         static ApiServiceUrlFragments()
         {
@@ -15,7 +16,7 @@ namespace Glav.CognitiveServices.Api.Configuration
         {
             static TextAnalyticsSentiment()
             {
-                Version = "v2.0";
+                Version = TEXT_ANALYTIC_VERSION;
             }
             public const string Template = "text/analytics/{0}/sentiment";
             public static string Version { get; set; }
@@ -26,12 +27,35 @@ namespace Glav.CognitiveServices.Api.Configuration
         {
             static TextAnalyticsKeyPhrase()
             {
-                Version = "v2.0";
+                Version = TEXT_ANALYTIC_VERSION;
             }
             public const string Template = "text/analytics/{0}/keyPhrases";
             public static string Version { get; set; }
 
         }
+
+        public static class TextAnalyticsLanguage
+        {
+            static TextAnalyticsLanguage()
+            {
+                Version = TEXT_ANALYTIC_VERSION;
+            }
+            public const string Template = "text/analytics/{0}/languages";
+            public static string Version { get; set; }
+
+        }
+
+        public static class TextAnalyticsTopics
+        {
+            static TextAnalyticsTopics()
+            {
+                Version = TEXT_ANALYTIC_VERSION;
+            }
+            public const string Template = "text/analytics/{0}/topics";
+            public static string Version { get; set; }
+
+        }
+
         public static class Emotion
         {
             static Emotion()
