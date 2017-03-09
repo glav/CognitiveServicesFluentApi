@@ -16,7 +16,7 @@ namespace Glav.CognitiveServices.Api
 
         public static Task<ApiAnalysisResults> AnalyseAllAsync(this ApiAnalysisSettings apiAnalysisSettings)
         {
-            return new AnalysisEngine(apiAnalysisSettings).ExecuteAllAsync();
+            return new AnalysisEngine(apiAnalysisSettings).AnalyseAllAsync();
         }
     }
 }

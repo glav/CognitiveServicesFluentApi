@@ -22,50 +22,34 @@ namespace Glav.CognitiveServices.Api
 
         public ApiAnalysisSettings AnalysisSettings { get { return _analysisSettings; } }
 
-        public async Task<ApiAnalysisResults> ExecuteAllAsync()
+        public async Task<ApiAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new ApiAnalysisResults();
-            if (_analysisSettings.ActionsToPerform.ContainsKey(ApiActionType.TextAnalyticsSentiment))
-            {
-                var sentiments = _analysisSettings.ActionsToPerform[ApiActionType.TextAnalyticsSentiment] as TextAnalyticActionData;
-                var payload = sentiments.ToString();
-
-                var result = await new HttpFactory(_analysisSettings).CallService(ApiActionType.TextAnalyticsSentiment, payload);
-
-                SentimentResult txtAnalyticResult;
-                if (result.Successfull)
-                {
-                    txtAnalyticResult = new SentimentResult(result.Data);
-                }
-                else
-                {
-                    txtAnalyticResult = new SentimentResult();
-                }
-                var resultSet = new SentimentAnalysisContext(sentiments, txtAnalyticResult);
-                apiResults.SetResult(resultSet);
-            }
-
-            if (_analysisSettings.ActionsToPerform.ContainsKey(ApiActionType.TextAnalyticsKeyphrases))
-            {
-                var phrases = _analysisSettings.ActionsToPerform[ApiActionType.TextAnalyticsKeyphrases] as TextAnalyticActionData;
-                var payload = phrases.ToString();
-
-                var result = await new HttpFactory(_analysisSettings).CallService(ApiActionType.TextAnalyticsKeyphrases, payload);
-
-                KeyPhraseResult txtAnalyticResult;
-                if (result.Successfull)
-                {
-                    txtAnalyticResult = new KeyPhraseResult(result.Data);
-                    var resultSet = new KeyPhraseAnalysisContext(phrases, txtAnalyticResult);
-                    apiResults.SetResult(resultSet);
-                } else
-                {
-                    txtAnalyticResult = new KeyPhraseResult();
-                }
-            }
+            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsSentiment);
+            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsKeyphrases);
 
             return apiResults;
+        }
 
+        private async Task AnalyseAllAsyncForAction(ApiAnalysisResults apiResults, ApiActionType apiAction)
+        {
+            if (_analysisSettings.ActionsToPerform.ContainsKey(apiAction))
+            {
+                var actions = _analysisSettings.ActionsToPerform[apiAction] as TextAnalyticActionData;
+                var payload = actions.ToString();
+
+                var result = await new HttpFactory(_analysisSettings).CallService(apiAction, payload);
+
+                switch (apiAction)
+                {
+                    case ApiActionType.TextAnalyticsSentiment:
+                        apiResults.SetResult(new SentimentAnalysisContext(actions, new SentimentResult(result.Data)));
+                        break;
+                    case ApiActionType.TextAnalyticsKeyphrases:
+                        apiResults.SetResult(new KeyPhraseAnalysisContext(actions, new KeyPhraseResult(result.Data)));
+                        break;
+                }
+            }
         }
     }
 }
