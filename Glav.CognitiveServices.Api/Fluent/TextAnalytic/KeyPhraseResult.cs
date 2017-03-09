@@ -33,6 +33,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
                 if (Result.errors != null && Result.errors.Length > 0)
                 {
                     Successfull = false;
+                    return;
                 }
                 Successfull = true;
             } catch (Exception ex)

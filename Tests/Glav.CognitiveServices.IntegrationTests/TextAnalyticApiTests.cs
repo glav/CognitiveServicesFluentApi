@@ -79,6 +79,25 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents);
             Assert.Equal(SentimentClassification.Negative, result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents[0].SentimentClassification);
         }
+
+        [Fact]
+        public void SimplePhraseTextShouldAnalyseToEnglish()
+        {
+            var result = ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+                .WithKeyLanguageAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
+                .AnalyseAllAsync().Result;
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.TextAnalyticLanguageAnalysis);
+            Assert.NotNull(result.TextAnalyticLanguageAnalysis.AnalysisResult);
+            Assert.NotNull(result.TextAnalyticLanguageAnalysis.AnalysisResult.Result);
+            Assert.NotEmpty(result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents);
+            Assert.NotEmpty(result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents[0].detectedLanguages);
+
+            Assert.Equal<string>("en", result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents[0].detectedLanguages[0].iso6391name);
+            Assert.Equal<string>("English", result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents[0].detectedLanguages[0].name);
+            Assert.Equal<double>(1, result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents[0].detectedLanguages[0].score);
+        }
     }
 }
  

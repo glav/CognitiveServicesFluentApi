@@ -20,6 +20,11 @@ namespace Glav.CognitiveServices.Api.Fluent
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsKeyphrases);
         }
 
+        public static ApiAnalysisSettings WithKeyLanguageAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse)
+        {
+            return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsLanguages);
+        }
+
         private static ApiAnalysisSettings AddTextForAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse, ApiActionType actionType)
         {
             if (apiAnalysis.ActionsToPerform.ContainsKey(actionType))

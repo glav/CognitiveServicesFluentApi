@@ -27,6 +27,7 @@ namespace Glav.CognitiveServices.Api
             var apiResults = new ApiAnalysisResults();
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsSentiment);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsKeyphrases);
+            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsLanguages);
 
             return apiResults;
         }
@@ -48,6 +49,11 @@ namespace Glav.CognitiveServices.Api
                     case ApiActionType.TextAnalyticsKeyphrases:
                         apiResults.SetResult(new KeyPhraseAnalysisContext(actions, new KeyPhraseResult(result.Data)));
                         break;
+                    case ApiActionType.TextAnalyticsLanguages:
+                        apiResults.SetResult(new LanguageAnalysisContext(actions, new LanguagesResult(result.Data)));
+                        break;
+                    default:
+                        throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
                 }
             }
         }

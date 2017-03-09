@@ -6,13 +6,13 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class SentimentResult : BaseDataCollection<SentimentResultResponseRoot>, IApiAnalysisResult
+    public sealed class LanguagesResult : BaseDataCollection<LanguagesResultResponseRoot>, IApiAnalysisResult
     {
-        public SentimentResult()
+        public LanguagesResult()
         {
             Successfull = false;
         }
-        public SentimentResult(string rawData)
+        public LanguagesResult(string rawData)
         {
             RawResult = rawData;
             AddResultToCollection();
@@ -22,14 +22,14 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         {
             if (string.IsNullOrWhiteSpace(RawResult))
             {
-                ItemList.Add(new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } } );
+                ItemList.Add(new LanguagesResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } } );
                 Successfull = false;
                 return;
             }
 
             try
             {
-                Result = Newtonsoft.Json.JsonConvert.DeserializeObject<SentimentResultResponseRoot>(RawResult);
+                Result = Newtonsoft.Json.JsonConvert.DeserializeObject<LanguagesResultResponseRoot>(RawResult);
                 if (Result.errors != null && Result.errors.Length > 0)
                 {
                     Successfull = false;
@@ -38,7 +38,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
                 Successfull = true;
             } catch (Exception ex)
             {
-                ItemList.Add(new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } });
+                ItemList.Add(new LanguagesResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } });
                 Successfull = false;
             }
         }
@@ -46,7 +46,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         // {"documents":[{"score":0.7988085,"id":"1"}],"errors":[]}
         public string RawResult { get; private set; }
         public bool Successfull { get; private set; }
-        public SentimentResultResponseRoot Result { get; private set; }
+        public LanguagesResultResponseRoot Result { get; private set; }
     }
 
 
