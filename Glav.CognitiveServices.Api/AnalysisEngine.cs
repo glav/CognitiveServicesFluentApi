@@ -41,7 +41,7 @@ namespace Glav.CognitiveServices.Api
                 {
                     txtAnalyticResult = new SentimentResult();
                 }
-                var resultSet = new SentimentAnalysisSet(sentiments, txtAnalyticResult);
+                var resultSet = new SentimentAnalysisContext(sentiments, txtAnalyticResult);
                 apiResults.SetResult(resultSet);
             }
 
@@ -56,7 +56,7 @@ namespace Glav.CognitiveServices.Api
                 if (result.Successfull)
                 {
                     txtAnalyticResult = new KeyPhraseResult(result.Data);
-                    var resultSet = new KeyPhraseAnalysisSet(phrases, txtAnalyticResult);
+                    var resultSet = new KeyPhraseAnalysisContext(phrases, txtAnalyticResult);
                     apiResults.SetResult(resultSet);
                 } else
                 {

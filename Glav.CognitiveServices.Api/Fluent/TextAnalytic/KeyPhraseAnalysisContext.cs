@@ -6,9 +6,9 @@ using Glav.CognitiveServices.Api.Configuration;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public class SentimentAnalysisSet : IApiAnalysisSet<TextAnalyticActionData, SentimentResult>
+    public class KeyPhraseAnalysisContext : IApiAnalysisContext<TextAnalyticActionData, KeyPhraseResult>
     {
-        public SentimentAnalysisSet(TextAnalyticActionData actionData, SentimentResult analysisResult)
+        public KeyPhraseAnalysisContext(TextAnalyticActionData actionData, KeyPhraseResult analysisResult)
         {
             AnalysisInput = actionData;
             AnalysisResult = analysisResult;
@@ -17,6 +17,6 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 
         public TextAnalyticActionData AnalysisInput { get; private set; }
 
-        public SentimentResult AnalysisResult { get; private set; }
+        public KeyPhraseResult AnalysisResult { get; private set; }
 }
 }
