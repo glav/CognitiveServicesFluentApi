@@ -2,6 +2,7 @@ using Glav.CognitiveServices.Api;
 using Glav.CognitiveServices.Api.Fluent;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
 using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Glav.CognitiveServices.IntegrationTests
@@ -11,11 +12,11 @@ namespace Glav.CognitiveServices.IntegrationTests
         const string ApiKey = "636868abf46c47bc8e92306989e281cd";
 
         [Fact]
-        public void SimplePositiveTextShouldAnalyseAsPositive()
+        public async Task SimplePositiveTextShouldAnalyseAsPositive()
         {
-            var result = ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+            var result = await ConfigurationBuilder.CreateUsingApiKey(ApiKey)
                 .WithSentimentAnalysis("I am having a fantastic time.")
-                .AnalyseAllAsync().Result;
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticSentimentAnalysis);
@@ -27,11 +28,11 @@ namespace Glav.CognitiveServices.IntegrationTests
         }
 
         [Fact]
-        public void SimpleNegativeTextShouldAnalyseAsNegative()
+        public async Task SimpleNegativeTextShouldAnalyseAsNegative()
         {
-            var result = ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+            var result = await ConfigurationBuilder.CreateUsingApiKey(ApiKey)
                 .WithSentimentAnalysis("I am having a terrible time.")
-                .AnalyseAllAsync().Result;
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticSentimentAnalysis);
@@ -43,11 +44,11 @@ namespace Glav.CognitiveServices.IntegrationTests
         }
 
         [Fact]
-        public void SimplePhraseTextShouldAnalyseAsAtLeastOneKeyPhrase()
+        public async Task SimplePhraseTextShouldAnalyseAsAtLeastOneKeyPhrase()
         {
-            var result = ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+            var result = await ConfigurationBuilder.CreateUsingApiKey(ApiKey)
                 .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-                .AnalyseAllAsync().Result;
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis);
@@ -59,12 +60,12 @@ namespace Glav.CognitiveServices.IntegrationTests
         }
 
         [Fact]
-        public void SimplePhraseAndSentimentTextShouldAnalysBothItems()
+        public async Task SimplePhraseAndSentimentTextShouldAnalysBothItems()
         {
-            var result = ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+            var result = await ConfigurationBuilder.CreateUsingApiKey(ApiKey)
                 .WithSentimentAnalysis("I am having a terrible time.")
                 .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-                .AnalyseAllAsync().Result;
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis);
@@ -81,11 +82,11 @@ namespace Glav.CognitiveServices.IntegrationTests
         }
 
         [Fact]
-        public void SimplePhraseTextShouldAnalyseToEnglish()
+        public async Task SimplePhraseTextShouldAnalyseToEnglish()
         {
-            var result = ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+            var result = await ConfigurationBuilder.CreateUsingApiKey(ApiKey)
                 .WithKeyLanguageAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-                .AnalyseAllAsync().Result;
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticLanguageAnalysis);
