@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Glav.CognitiveServices.Api.Fluent
+namespace Glav.CognitiveServices.Api
 {
     public static class ConfigurationBuilder
     {

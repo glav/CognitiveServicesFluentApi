@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Glav.CognitiveServices.Api.Fluent
+namespace Glav.CognitiveServices.Api
 {
     public sealed class AnalysisEngine
     {

@@ -1,3 +1,4 @@
+using Glav.CognitiveServices.Api;
 using Glav.CognitiveServices.Api.Fluent;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
 using System;

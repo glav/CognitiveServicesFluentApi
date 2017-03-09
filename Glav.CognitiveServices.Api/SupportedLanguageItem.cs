@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Glav.CognitiveServices.Api.Fluent
+namespace Glav.CognitiveServices.Api
 {
     public sealed class SupportedLanguageItem
     {

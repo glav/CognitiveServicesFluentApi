@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Glav.CognitiveServices.Api.Fluent
+namespace Glav.CognitiveServices.Api
 {
     public abstract class BaseDataCollection<T> where T : class
     {
