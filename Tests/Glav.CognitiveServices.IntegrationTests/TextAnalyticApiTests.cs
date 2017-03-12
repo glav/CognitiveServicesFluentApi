@@ -99,6 +99,26 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.Equal<string>("English", result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents[0].detectedLanguages[0].name);
             Assert.Equal<double>(1, result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents[0].detectedLanguages[0].score);
         }
+
+        [Fact]
+        public async Task SimpleTopicsShouldAnalyseAndBeDetected()
+        {
+            var config = ConfigurationBuilder.CreateUsingApiKey(ApiKey);
+            for (var cnt = 0; cnt < 100; cnt++)
+            {
+                config.WithKeyTopicAnalysis($"This is line {cnt} for a block of text on numbers.");
+            }
+
+            var result = await config.AnalyseAllAsync();
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.TextAnalyticTopicAnalysis);
+            Assert.NotNull(result.TextAnalyticTopicAnalysis.AnalysisResult);
+            Assert.NotNull(result.TextAnalyticTopicAnalysis.AnalysisResult.Result);
+            Assert.NotEmpty(result.TextAnalyticTopicAnalysis.AnalysisResult.Result.documents);
+            Assert.NotEmpty(result.TextAnalyticTopicAnalysis.AnalysisResult.Result.documents[0].keyPhrases);
+
+        }
     }
 }
  

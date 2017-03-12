@@ -1,0 +1,73 @@
+﻿using Glav.CognitiveServices.Api.Configuration;
+using Glav.CognitiveServices.Api.Fluent.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
+{
+    public sealed class TextAnalyticTopicActionData : BaseDataCollection<TextAnalyticTopicActionDataItem>, IApiActionData
+    {
+        private List<string> _stopWords = new List<string>();
+        private List<string> _topicsToExclude = new List<string>();
+
+        public void Add(string textToAnalyse)
+        {
+            ItemList.Add(new TextAnalyticTopicActionDataItem(ItemList.Count + 1, textToAnalyse));
+        }
+ 
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.Append("{ ");
+            builder.Append(" \"stopWords\": [");
+
+            WriteStringArray(builder, _stopWords);
+
+            builder.Append("],");
+
+            builder.Append(" \"topicsToExclude\": [");
+            WriteStringArray(builder, _topicsToExclude);
+            builder.Append("], ");
+
+            builder.Append("\"documents\": [");
+            for (var cnt= 0; cnt < ItemList.Count;cnt++)
+            {
+                if (cnt > 0) { builder.Append(","); }
+                var item = ItemList[cnt];
+                builder.Append(item.ToString());
+            };
+            builder.Append("] }");
+            return builder.ToString();
+        }
+        private void WriteStringArray(StringBuilder builder, List<string> listItems)
+        {
+            for (var index = 0; index < listItems.Count; index++)
+            {
+                if (index > 0) { builder.Append(","); }
+                builder.Append($"\"{listItems[index]}\"");
+            }
+
+        }
+    }
+
+
+    public sealed class TextAnalyticTopicActionDataItem : IActionDataItem
+    {
+        public TextAnalyticTopicActionDataItem(long id, string textToAnalyse)
+        {
+            Id = id;
+            TextToAnalyse = textToAnalyse;
+            ApiType = ApiActionType.TextAnalyticsTopics;
+        }
+        public long Id { get; private set; }
+        public ApiActionType ApiType { get; private set; }
+        public string TextToAnalyse { get; private set; }
+
+        public override string ToString()
+        {
+            return $"{{\"id\":\"{Id.ToString()}\", \"text\":\"{TextToAnalyse}\"}}";
+        }
+
+    }
+}

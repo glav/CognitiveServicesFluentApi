@@ -6,13 +6,13 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class KeyPhraseResult : BaseDataCollection<KeyPhraseResultResponseRoot>, IApiAnalysisResult
+    public sealed class TopicResult : BaseDataCollection<KeyPhraseResultResponseRoot>, IApiAnalysisResult
     {
-        public KeyPhraseResult()
+        public TopicResult()
         {
             Successfull = false;
         }
-        public KeyPhraseResult(string rawData)
+        public TopicResult(string rawData)
         {
             RawResult = rawData;
             AddResultToCollection();
@@ -30,9 +30,13 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             try
             {
                 Result = Newtonsoft.Json.JsonConvert.DeserializeObject<KeyPhraseResultResponseRoot>(RawResult);
-                if (Result == null || Result.documents == null || Result.errors != null && Result.errors.Length > 0)
+                if (Result ==null || Result.documents == null|| Result.errors != null && Result.errors.Length > 0)
                 {
                     Successfull = false;
+                    if (Result == null || Result.documents == null)
+                    {
+                        ItemList.Add(new KeyPhraseResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "Bad request. Probably badly formatted request." } } });
+                    }
                     return;
                 }
                 Successfull = true;
@@ -43,7 +47,6 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             }
         }
 
-        // {"documents":[{"score":0.7988085,"id":"1"}],"errors":[]}
         public string RawResult { get; private set; }
         public bool Successfull { get; private set; }
         public KeyPhraseResultResponseRoot Result { get; private set; }

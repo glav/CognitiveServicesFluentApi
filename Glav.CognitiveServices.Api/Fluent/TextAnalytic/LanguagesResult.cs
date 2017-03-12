@@ -30,7 +30,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             try
             {
                 Result = Newtonsoft.Json.JsonConvert.DeserializeObject<LanguagesResultResponseRoot>(RawResult);
-                if (Result.errors != null && Result.errors.Length > 0)
+                if (Result == null || Result.documents == null || Result.errors != null && Result.errors.Length > 0)
                 {
                     Successfull = false;
                     return;

@@ -28,6 +28,7 @@ namespace Glav.CognitiveServices.Api
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsSentiment);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsKeyphrases);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsLanguages);
+            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsTopics);
 
             return apiResults;
         }
@@ -36,21 +37,31 @@ namespace Glav.CognitiveServices.Api
         {
             if (_analysisSettings.ActionsToPerform.ContainsKey(apiAction))
             {
-                var actions = _analysisSettings.ActionsToPerform[apiAction] as TextAnalyticActionData;
-                var payload = actions.ToString();
+                string payload = null;
+                IApiActionData actions = _analysisSettings.ActionsToPerform[apiAction];
+                if (apiAction == ApiActionType.TextAnalyticsTopics)
+                {
+                    payload = (actions as TextAnalyticTopicActionData).ToString();
+                } else
+                {
+                    payload = (actions as TextAnalyticActionData).ToString();
+                }
 
                 var result = await new HttpFactory(_analysisSettings).CallService(apiAction, payload);
 
                 switch (apiAction)
                 {
                     case ApiActionType.TextAnalyticsSentiment:
-                        apiResults.SetResult(new SentimentAnalysisContext(actions, new SentimentResult(result.Data)));
+                        apiResults.SetResult(new SentimentAnalysisContext((actions as TextAnalyticActionData), new SentimentResult(result.Data)));
                         break;
                     case ApiActionType.TextAnalyticsKeyphrases:
-                        apiResults.SetResult(new KeyPhraseAnalysisContext(actions, new KeyPhraseResult(result.Data)));
+                        apiResults.SetResult(new KeyPhraseAnalysisContext((actions as TextAnalyticActionData), new KeyPhraseResult(result.Data)));
                         break;
                     case ApiActionType.TextAnalyticsLanguages:
-                        apiResults.SetResult(new LanguageAnalysisContext(actions, new LanguagesResult(result.Data)));
+                        apiResults.SetResult(new LanguageAnalysisContext((actions as TextAnalyticActionData), new LanguagesResult(result.Data)));
+                        break;
+                    case ApiActionType.TextAnalyticsTopics:
+                        apiResults.SetResult(new TopicAnalysisContext((actions as TextAnalyticTopicActionData), new TopicResult(result.Data)));
                         break;
                     default:
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
