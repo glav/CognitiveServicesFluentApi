@@ -56,6 +56,17 @@ namespace Glav.CognitiveServices.Api.Configuration
 
         }
 
+        public static class TextAnalyticsOperationStatus
+        {
+            static TextAnalyticsOperationStatus()
+            {
+                Version = TEXT_ANALYTIC_VERSION;
+            }
+            public const string Template = "text/analytics/{0}/operations";
+            public static string Version { get; set; }
+
+        }
+
         public static class Emotion
         {
             static Emotion()

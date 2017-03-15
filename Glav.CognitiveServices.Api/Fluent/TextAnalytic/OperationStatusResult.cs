@@ -7,13 +7,13 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class LanguagesResult : BaseDataCollection<LanguagesResultResponseRoot>, IApiAnalysisResult<LanguagesResultResponseRoot>
+    public sealed class OperationStatusResult : BaseDataCollection<OperationStatusResultResponseRoot>, IApiAnalysisResult<OperationStatusResultResponseRoot>
     {
-        public LanguagesResult()
+        public OperationStatusResult()
         {
             Successfull = false;
         }
-        public LanguagesResult(HttpResult apiCallResult)
+        public OperationStatusResult(HttpResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             AddResultToCollection();
@@ -23,15 +23,21 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         {
             if (ApiCallResult == null)
             {
-                ItemList.Add(new LanguagesResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } } );
+                ItemList.Add(new OperationStatusResultResponseRoot { status="Failed",  message = "No data returned." });
+                Successfull = false;
+                return;
+            }
+
+            if (!ApiCallResult.Successfull)
+            {
                 Successfull = false;
                 return;
             }
 
             try
             {
-                ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LanguagesResultResponseRoot>(ApiCallResult.Data);
-                if (ResponseData == null || ResponseData.documents == null || ResponseData.errors != null && ResponseData.errors.Length > 0)
+                ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<OperationStatusResultResponseRoot>(ApiCallResult.Data);
+                if (ResponseData == null || string.IsNullOrWhiteSpace(ResponseData.status) ||  ResponseData.status == "BadRequest")
                 {
                     Successfull = false;
                     return;
@@ -39,7 +45,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
                 Successfull = true;
             } catch (Exception ex)
             {
-                ItemList.Add(new LanguagesResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } });
+                ItemList.Add(new OperationStatusResultResponseRoot { status = "Failed", message = $"Error parsing results: {ex.Message}" });
                 Successfull = false;
             }
         }
@@ -47,7 +53,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         // {"documents":[{"score":0.7988085,"id":"1"}],"errors":[]}
         public HttpResult ApiCallResult { get; private set; }
         public bool Successfull { get; private set; }
-        public LanguagesResultResponseRoot ResponseData { get; private set; }
+        public OperationStatusResultResponseRoot ResponseData { get; private set; }
     }
 
 

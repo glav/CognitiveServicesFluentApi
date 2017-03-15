@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.Api.Fluent.Contracts;
+using Glav.CognitiveServices.Api.Fluent.Http;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses;
 using System;
 using System.Collections.Generic;
@@ -6,50 +7,56 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class TopicResult : BaseDataCollection<KeyPhraseResultResponseRoot>, IApiAnalysisResult
+    public sealed class TopicResult : BaseDataCollection<TopicResultResponseRoot>, IApiAnalysisResult<TopicResultResponseRoot>
     {
         public TopicResult()
         {
             Successfull = false;
         }
-        public TopicResult(string rawData)
+        public TopicResult(HttpResult apiCallResult)
         {
-            RawResult = rawData;
+            ApiCallResult = apiCallResult;
             AddResultToCollection();
         }
 
         private void AddResultToCollection()
         {
-            if (string.IsNullOrWhiteSpace(RawResult))
+            if (ApiCallResult == null)
             {
-                ItemList.Add(new KeyPhraseResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } });
+                ItemList.Add(new TopicResultResponseRoot { code = "BadRequest", message = "No data returned." });
                 Successfull = false;
+                return;
+            }
+
+            if (ApiCallResult.OperationLocationUri == null)
+            {
+                Successfull = false;
+                ItemList.Add(new TopicResultResponseRoot { code = "BadRequest", message = "Bad request. Probably badly formatted request." });
                 return;
             }
 
             try
             {
-                Result = Newtonsoft.Json.JsonConvert.DeserializeObject<KeyPhraseResultResponseRoot>(RawResult);
-                if (Result ==null || Result.documents == null|| Result.errors != null && Result.errors.Length > 0)
+                ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<TopicResultResponseRoot>(ApiCallResult.Data);
+                if (ResponseData == null || !string.IsNullOrWhiteSpace(ResponseData.code))
                 {
                     Successfull = false;
-                    if (Result == null || Result.documents == null)
-                    {
-                        ItemList.Add(new KeyPhraseResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "Bad request. Probably badly formatted request." } } });
-                    }
                     return;
                 }
-                Successfull = true;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                ItemList.Add(new KeyPhraseResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } });
+                ItemList.Add(new TopicResultResponseRoot { code = "BadRequest", message = $"Error parsing result: [{ex.Message}]" });
                 Successfull = false;
             }
+
+            ResponseData = new TopicResultResponseRoot { code = "Submitted" };
+            Successfull = true;
         }
 
-        public string RawResult { get; private set; }
+        public HttpResult ApiCallResult { get; private set; }
         public bool Successfull { get; private set; }
-        public KeyPhraseResultResponseRoot Result { get; private set; }
+        public TopicResultResponseRoot ResponseData { get; private set; }
     }
 
 

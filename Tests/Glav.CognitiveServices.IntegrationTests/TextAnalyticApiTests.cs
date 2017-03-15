@@ -21,10 +21,10 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticSentimentAnalysis);
             Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult);
-            Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result);
-            Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents);
+            Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData);
+            Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents);
 
-            Assert.Equal(SentimentClassification.Positive, result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents[0].SentimentClassification);
+            Assert.Equal(SentimentClassification.Positive, result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents[0].SentimentClassification);
         }
 
         [Fact]
@@ -37,10 +37,10 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticSentimentAnalysis);
             Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult);
-            Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result);
-            Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents);
+            Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData);
+            Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents);
 
-            Assert.Equal(SentimentClassification.Negative, result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents[0].SentimentClassification);
+            Assert.Equal(SentimentClassification.Negative, result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents[0].SentimentClassification);
         }
 
         [Fact]
@@ -53,10 +53,10 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis);
             Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis.AnalysisResult);
-            Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.Result);
-            Assert.NotEmpty(result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.Result.documents);
+            Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData);
+            Assert.NotEmpty(result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents);
 
-            Assert.Equal<string>("basic sentence", result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.Result.documents[0].keyPhrases[0]);
+            Assert.Equal<string>("basic sentence", result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents[0].keyPhrases[0]);
         }
 
         [Fact]
@@ -70,15 +70,15 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis);
             Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis.AnalysisResult);
-            Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.Result);
-            Assert.NotEmpty(result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.Result.documents);
-            Assert.Equal<string>("basic sentence", result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.Result.documents[0].keyPhrases[0]);
+            Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData);
+            Assert.NotEmpty(result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents);
+            Assert.Equal<string>("basic sentence", result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents[0].keyPhrases[0]);
 
             Assert.NotNull(result.TextAnalyticSentimentAnalysis);
             Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult);
-            Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result);
-            Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents);
-            Assert.Equal(SentimentClassification.Negative, result.TextAnalyticSentimentAnalysis.AnalysisResult.Result.documents[0].SentimentClassification);
+            Assert.NotNull(result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData);
+            Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents);
+            Assert.Equal(SentimentClassification.Negative, result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents[0].SentimentClassification);
         }
 
         [Fact]
@@ -91,19 +91,21 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticLanguageAnalysis);
             Assert.NotNull(result.TextAnalyticLanguageAnalysis.AnalysisResult);
-            Assert.NotNull(result.TextAnalyticLanguageAnalysis.AnalysisResult.Result);
-            Assert.NotEmpty(result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents);
-            Assert.NotEmpty(result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents[0].detectedLanguages);
+            Assert.NotNull(result.TextAnalyticLanguageAnalysis.AnalysisResult.ResponseData);
+            Assert.NotEmpty(result.TextAnalyticLanguageAnalysis.AnalysisResult.ResponseData.documents);
+            Assert.NotEmpty(result.TextAnalyticLanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguages);
 
-            Assert.Equal<string>("en", result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents[0].detectedLanguages[0].iso6391name);
-            Assert.Equal<string>("English", result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents[0].detectedLanguages[0].name);
-            Assert.Equal<double>(1, result.TextAnalyticLanguageAnalysis.AnalysisResult.Result.documents[0].detectedLanguages[0].score);
+            Assert.Equal<string>("en", result.TextAnalyticLanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguages[0].iso6391name);
+            Assert.Equal<string>("English", result.TextAnalyticLanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguages[0].name);
+            Assert.Equal<double>(1, result.TextAnalyticLanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguages[0].score);
         }
 
         [Fact]
         public async Task SimpleTopicsShouldAnalyseAndBeDetected()
         {
             var config = ConfigurationBuilder.CreateUsingApiKey(ApiKey);
+
+            //Build up at least 100 documents as the service requires a minimum of 100
             for (var cnt = 0; cnt < 100; cnt++)
             {
                 config.WithKeyTopicAnalysis($"This is line {cnt} for a block of text on numbers.");
@@ -114,9 +116,8 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticTopicAnalysis);
             Assert.NotNull(result.TextAnalyticTopicAnalysis.AnalysisResult);
-            Assert.NotNull(result.TextAnalyticTopicAnalysis.AnalysisResult.Result);
-            Assert.NotEmpty(result.TextAnalyticTopicAnalysis.AnalysisResult.Result.documents);
-            Assert.NotEmpty(result.TextAnalyticTopicAnalysis.AnalysisResult.Result.documents[0].keyPhrases);
+            Assert.NotNull(result.TextAnalyticTopicAnalysis.AnalysisResult.ResponseData);
+            Assert.NotNull(result.TextAnalyticTopicAnalysis.AnalysisResult.ApiCallResult.OperationLocationUri);
 
         }
     }

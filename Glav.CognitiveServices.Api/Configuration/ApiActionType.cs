@@ -10,6 +10,7 @@ namespace Glav.CognitiveServices.Api.Configuration
         TextAnalyticsSentiment,
         TextAnalyticsKeyphrases,
         TextAnalyticsTopics,
+        TextAnalyticsOperationStatus,
         Emotion,
         Speech
     }

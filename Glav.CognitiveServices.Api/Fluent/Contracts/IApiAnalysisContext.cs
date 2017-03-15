@@ -6,7 +6,7 @@ using System.Text;
 namespace Glav.CognitiveServices.Api.Fluent.Contracts
 {
     public interface IApiAnalysisContext<TData,TResult> where TData : IApiActionData
-                                                    where TResult : IApiAnalysisResult
+                                                    where TResult : IApiCallResult
     {
         ApiActionType AnalysisType { get; }
         TData AnalysisInput { get; }

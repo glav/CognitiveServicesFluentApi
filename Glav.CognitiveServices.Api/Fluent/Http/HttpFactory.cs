@@ -10,11 +10,11 @@ namespace Glav.CognitiveServices.Api.Fluent.Http
 {
     internal class HttpFactory
     {
-        private readonly ApiAnalysisSettings _analysisSettings;
+        private readonly ConfigurationSettings _configurationSettings;
 
-        public HttpFactory(ApiAnalysisSettings analysisSettings)
+        public HttpFactory(ConfigurationSettings configurationSettings)
         {
-            _analysisSettings = analysisSettings;
+            _configurationSettings = configurationSettings;
         }
         public static HttpClient CreateHttpClient(string apiKey)
         {
@@ -24,22 +24,37 @@ namespace Glav.CognitiveServices.Api.Fluent.Http
             return client;
         }
 
-        public async Task<HttpResult> CallService(ApiActionType apiActionType, string payload)
+        public async Task<HttpResult> CallServiceAsync(ApiActionType apiActionType, string payload)
         {
+            var uri = _configurationSettings.BaseUrl + ApiUrlExtensions.ApiServiceUrl(apiActionType);
             var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
-            var url = _analysisSettings.ConfigurationSettings.BaseUrl + ApiUrlExtensions.ApiServiceUrl(apiActionType);
             try
             {
-                using (var httpClient = HttpFactory.CreateHttpClient(_analysisSettings.ConfigurationSettings.ApiKey))
+                using (var httpClient = HttpFactory.CreateHttpClient(_configurationSettings.ApiKey))
                 {
-                    var httpResult = await httpClient.PostAsync(url, content);
-                    return HttpResult.Success(await httpResult.Content.ReadAsStringAsync());
+                    var httpResult = await httpClient.PostAsync(uri, content);
+                    return new HttpResult(httpResult);
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return HttpResult.Fail(ex.Message);
             }
-
+        }
+        public async Task<HttpResult> CallServiceAsync(string uri)
+        {
+            try
+            {
+                using (var httpClient = HttpFactory.CreateHttpClient(_configurationSettings.ApiKey))
+                {
+                    var httpResult = await httpClient.GetAsync(uri);
+                    return new HttpResult(httpResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                return HttpResult.Fail(ex.Message);
+            }
         }
     }
 }

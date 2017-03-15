@@ -5,11 +5,9 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.Contracts
 {
-    public interface IApiAnalysisResult<T> : IApiCallResult where T : IActionResponseRoot
+    public interface IApiCallResult
     {
-
-        T ResponseData { get;  }
-
+        bool Successfull { get; }
+        HttpResult ApiCallResult { get; }
     }
-
 }

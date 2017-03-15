@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.Api.Fluent.Contracts;
+using Glav.CognitiveServices.Api.Fluent.Http;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses;
 using System;
 using System.Collections.Generic;
@@ -6,21 +7,21 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class SentimentResult : BaseDataCollection<SentimentResultResponseRoot>, IApiAnalysisResult
+    public sealed class SentimentResult : BaseDataCollection<SentimentResultResponseRoot>, IApiAnalysisResult<SentimentResultResponseRoot>
     {
         public SentimentResult()
         {
             Successfull = false;
         }
-        public SentimentResult(string rawData)
+        public SentimentResult(HttpResult apiCallResult)
         {
-            RawResult = rawData;
+            ApiCallResult = apiCallResult;
             AddResultToCollection();
         }
 
         private void AddResultToCollection()
         {
-            if (string.IsNullOrWhiteSpace(RawResult))
+            if (ApiCallResult == null)
             {
                 ItemList.Add(new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } } );
                 Successfull = false;
@@ -29,8 +30,8 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 
             try
             {
-                Result = Newtonsoft.Json.JsonConvert.DeserializeObject<SentimentResultResponseRoot>(RawResult);
-                if (Result == null || Result.documents == null || Result.errors != null && Result.errors.Length > 0)
+                ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<SentimentResultResponseRoot>(ApiCallResult.Data);
+                if (ResponseData == null || ResponseData.documents == null || ResponseData.errors != null && ResponseData.errors.Length > 0)
                 {
                     Successfull = false;
                     return;
@@ -44,9 +45,9 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         }
 
         // {"documents":[{"score":0.7988085,"id":"1"}],"errors":[]}
-        public string RawResult { get; private set; }
+        public HttpResult ApiCallResult { get; private set; }
         public bool Successfull { get; private set; }
-        public SentimentResultResponseRoot Result { get; private set; }
+        public SentimentResultResponseRoot ResponseData { get; private set; }
     }
 
 
