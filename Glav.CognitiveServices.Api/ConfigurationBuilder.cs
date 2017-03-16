@@ -1,7 +1,4 @@
 ﻿using Glav.CognitiveServices.Api.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.Api
