@@ -1,8 +1,6 @@
 ﻿using Glav.CognitiveServices.Api.Fluent.Contracts;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using Glav.CognitiveServices.Api.Fluent.Http;
+using Glav.CognitiveServices.Api.Http;
 
 namespace Glav.CognitiveServices.Api
 {

@@ -1,9 +1,6 @@
-﻿using Glav.CognitiveServices.Api.Fluent.Contracts;
-using Glav.CognitiveServices.Api.Fluent.Http;
+﻿using Glav.CognitiveServices.Api.Http;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {

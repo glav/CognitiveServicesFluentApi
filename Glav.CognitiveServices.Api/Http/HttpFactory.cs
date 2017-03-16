@@ -1,12 +1,10 @@
 ﻿using Glav.CognitiveServices.Api.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Glav.CognitiveServices.Api.Fluent.Http
+namespace Glav.CognitiveServices.Api.Http
 {
     internal class HttpFactory
     {

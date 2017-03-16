@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Linq;
 
-namespace Glav.CognitiveServices.Api.Fluent.Http
+namespace Glav.CognitiveServices.Api.Http
 {
     public sealed class HttpResult
     {

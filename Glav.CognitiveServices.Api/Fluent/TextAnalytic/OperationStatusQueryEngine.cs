@@ -1,9 +1,5 @@
 ﻿using Glav.CognitiveServices.Api.Configuration;
-using Glav.CognitiveServices.Api.Fluent.Http;
-using Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Glav.CognitiveServices.Api.Http;
 using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
