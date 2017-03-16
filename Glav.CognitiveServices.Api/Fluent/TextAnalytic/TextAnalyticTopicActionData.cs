@@ -6,14 +6,15 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class TextAnalyticTopicActionData : BaseDataCollection<TextAnalyticTopicActionDataItem>, IApiActionData
+    public sealed class TextAnalyticTopicActionData : IApiActionData
     {
         private List<string> _stopWords = new List<string>();
         private List<string> _topicsToExclude = new List<string>();
+        private List<TextAnalyticTopicActionDataItem> _itemsList = new List<TextAnalyticTopicActionDataItem>();
 
         public void Add(string textToAnalyse)
         {
-            ItemList.Add(new TextAnalyticTopicActionDataItem(ItemList.Count + 1, textToAnalyse));
+            _itemsList.Add(new TextAnalyticTopicActionDataItem(_itemsList.Count + 1, textToAnalyse));
         }
  
         public override string ToString()
@@ -31,10 +32,10 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             builder.Append("], ");
 
             builder.Append("\"documents\": [");
-            for (var cnt= 0; cnt < ItemList.Count;cnt++)
+            for (var cnt= 0; cnt < _itemsList.Count;cnt++)
             {
                 if (cnt > 0) { builder.Append(","); }
-                var item = ItemList[cnt];
+                var item = _itemsList[cnt];
                 builder.Append(item.ToString());
             };
             builder.Append("] }");

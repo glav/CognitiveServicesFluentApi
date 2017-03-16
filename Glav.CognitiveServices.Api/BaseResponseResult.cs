@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Glav.CognitiveServices.Api.Fluent.Http;
 
 namespace Glav.CognitiveServices.Api
 {
-    public abstract class BaseDataCollection<T> where T : class
+    public abstract class BaseResponseResult<T> : IApiAnalysisResult<T> where T : IActionResponseRoot
     {
         protected List<T> _itemList = new List<T>();
 
@@ -16,5 +17,9 @@ namespace Glav.CognitiveServices.Api
 
         protected List<T> ItemList { get { return _itemList; } }
 
+        public T ResponseData { get; protected set; }
+
+        public HttpResult ApiCallResult { get; protected set; }
+        public bool Successfull { get; protected set; }
     }
 }

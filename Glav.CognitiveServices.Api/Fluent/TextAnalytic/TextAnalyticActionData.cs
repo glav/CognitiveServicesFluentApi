@@ -6,18 +6,19 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class TextAnalyticActionData: BaseDataCollection<TextAnalyticActionDataItem>, IApiActionData
+    public sealed class TextAnalyticActionData: IApiActionData
     {
+        private List<TextAnalyticActionDataItem> _itemList = new List<TextAnalyticActionDataItem>();
         public void Add(ApiActionType apiType, string textToAnalyse, SupportedLanguageType language = SupportedLanguageType.English)
         {
-            ItemList.Add(new TextAnalyticActionDataItem(ItemList.Count + 1, textToAnalyse, language, apiType));
+            _itemList.Add(new TextAnalyticActionDataItem(_itemList.Count + 1, textToAnalyse, language, apiType));
         }
  
         public override string ToString()
         {
             var builder = new StringBuilder();
             builder.Append("{ \"documents\": [");
-            ItemList.ForEach(i =>
+            _itemList.ForEach(i =>
             {
                 builder.Append(i.ToString());
             });

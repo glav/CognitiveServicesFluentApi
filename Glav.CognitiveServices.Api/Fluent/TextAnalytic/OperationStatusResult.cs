@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
-    public sealed class OperationStatusResult : BaseDataCollection<OperationStatusResultResponseRoot>, IApiAnalysisResult<OperationStatusResultResponseRoot>
+    public sealed class OperationStatusResult : BaseResponseResult<OperationStatusResultResponseRoot>
     {
         public OperationStatusResult()
         {
@@ -50,10 +50,6 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             }
         }
 
-        // {"documents":[{"score":0.7988085,"id":"1"}],"errors":[]}
-        public HttpResult ApiCallResult { get; private set; }
-        public bool Successfull { get; private set; }
-        public OperationStatusResultResponseRoot ResponseData { get; private set; }
     }
 
 
