@@ -9,12 +9,11 @@ namespace Glav.CognitiveServices.IntegrationTests
 {
     public class TextAnalyticApiTests
     {
-        const string ApiKey = "636868abf46c47bc8e92306989e281cd";
-
         [Fact]
         public async Task SimplePositiveTextShouldAnalyseAsPositive()
         {
-            var result = await ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+            var result = await ConfigurationBuilder.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+                .UsingHttpCommunication()
                 .WithSentimentAnalysis("I am having a fantastic time.")
                 .AnalyseAllAsync();
 
@@ -30,7 +29,8 @@ namespace Glav.CognitiveServices.IntegrationTests
         [Fact]
         public async Task SimpleNegativeTextShouldAnalyseAsNegative()
         {
-            var result = await ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+            var result = await ConfigurationBuilder.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+                .UsingHttpCommunication()
                 .WithSentimentAnalysis("I am having a terrible time.")
                 .AnalyseAllAsync();
 
@@ -46,7 +46,8 @@ namespace Glav.CognitiveServices.IntegrationTests
         [Fact]
         public async Task SimplePhraseTextShouldAnalyseAsAtLeastOneKeyPhrase()
         {
-            var result = await ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+            var result = await ConfigurationBuilder.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+                .UsingHttpCommunication()
                 .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
                 .AnalyseAllAsync();
 
@@ -62,7 +63,8 @@ namespace Glav.CognitiveServices.IntegrationTests
         [Fact]
         public async Task SimplePhraseAndSentimentTextShouldAnalysBothItems()
         {
-            var result = await ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+            var result = await ConfigurationBuilder.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+                .UsingHttpCommunication()
                 .WithSentimentAnalysis("I am having a terrible time.")
                 .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
                 .AnalyseAllAsync();
@@ -84,7 +86,8 @@ namespace Glav.CognitiveServices.IntegrationTests
         [Fact]
         public async Task SimplePhraseTextShouldAnalyseToEnglish()
         {
-            var result = await ConfigurationBuilder.CreateUsingApiKey(ApiKey)
+            var result = await ConfigurationBuilder.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+                .UsingHttpCommunication()
                 .WithKeyLanguageAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
                 .AnalyseAllAsync();
 
@@ -103,7 +106,8 @@ namespace Glav.CognitiveServices.IntegrationTests
         [Fact]
         public async Task SimpleTopicsShouldAnalyseAndBeDetected()
         {
-            var config = ConfigurationBuilder.CreateUsingApiKey(ApiKey);
+            var config = ConfigurationBuilder.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+                .UsingHttpCommunication();
 
             //Build up at least 100 documents as the service requires a minimum of 100
             for (var cnt = 0; cnt < 100; cnt++)
@@ -111,13 +115,15 @@ namespace Glav.CognitiveServices.IntegrationTests
                 config.WithKeyTopicAnalysis($"This is line {cnt} for a block of text on numbers.");
             }
 
-            var result = await config.AnalyseAllAsync();
+            var analysisResult = await config.AnalyseAllAsync();
 
-            Assert.NotNull(result);
-            Assert.NotNull(result.TextAnalyticTopicAnalysis);
-            Assert.NotNull(result.TextAnalyticTopicAnalysis.AnalysisResult);
-            Assert.NotNull(result.TextAnalyticTopicAnalysis.AnalysisResult.ResponseData);
-            Assert.NotNull(result.TextAnalyticTopicAnalysis.AnalysisResult.ApiCallResult.OperationLocationUri);
+            Assert.NotNull(analysisResult);
+            Assert.NotNull(analysisResult.TextAnalyticTopicAnalysis);
+            Assert.NotNull(analysisResult.TextAnalyticTopicAnalysis.AnalysisResult);
+            Assert.NotNull(analysisResult.TextAnalyticTopicAnalysis.AnalysisResult.ResponseData);
+            Assert.NotNull(analysisResult.TextAnalyticTopicAnalysis.AnalysisResult.ApiCallResult.OperationLocationUri);
+
+            var checkResult = await analysisResult.CheckTopicAnalysisStatusAsync();
 
         }
     }

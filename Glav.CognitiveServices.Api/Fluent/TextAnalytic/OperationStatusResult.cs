@@ -1,4 +1,4 @@
-﻿using Glav.CognitiveServices.Api.Http;
+﻿using Glav.CognitiveServices.Api.Communication;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses;
 using System;
 
@@ -8,19 +8,22 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
     {
         public OperationStatusResult()
         {
+            OperationState = OperationStateType.NotStarted;
             Successfull = false;
         }
-        public OperationStatusResult(HttpResult apiCallResult)
+        public OperationStatusResult(CommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             AddResultToCollection();
         }
 
+        public OperationStateType OperationState { get; private set; }
+
         private void AddResultToCollection()
         {
             if (ApiCallResult == null)
             {
-                ItemList.Add(new OperationStatusResultResponseRoot { status="Failed",  message = "No data returned." });
+                ItemList.Add(new OperationStatusResultResponseRoot { status=OperationStatusResponseMessages.StatusFailed,  message = "No data returned." });
                 Successfull = false;
                 return;
             }
@@ -34,19 +37,32 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             try
             {
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<OperationStatusResultResponseRoot>(ApiCallResult.Data);
-                if (ResponseData == null || string.IsNullOrWhiteSpace(ResponseData.status) ||  ResponseData.status == "BadRequest")
+                if (ResponseData == null || string.IsNullOrWhiteSpace(ResponseData.status))
                 {
                     Successfull = false;
+                    OperationState = OperationStateType.BadRequest;
                     return;
                 }
+
+                ParseResult(ResponseData);
                 Successfull = true;
             } catch (Exception ex)
             {
-                ItemList.Add(new OperationStatusResultResponseRoot { status = "Failed", message = $"Error parsing results: {ex.Message}" });
+                OperationState = OperationStateType.Failed;
+                ItemList.Add(new OperationStatusResultResponseRoot { status = OperationStatusResponseMessages.StatusFailed, message = $"Error parsing results: {ex.Message}" });
                 Successfull = false;
             }
         }
 
+        private void ParseResult(OperationStatusResultResponseRoot responseData)
+        {
+            if (responseData.status == OperationStatusResponseMessages.StatusBadRequest)
+            {
+                OperationState = OperationStateType.BadRequest;
+                return;
+            }
+            OperationState = responseData.status.ToOperationStatus();
+        }
     }
 
 

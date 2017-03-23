@@ -1,6 +1,6 @@
 ﻿using Glav.CognitiveServices.Api.Fluent.Contracts;
 using System.Collections.Generic;
-using Glav.CognitiveServices.Api.Http;
+using Glav.CognitiveServices.Api.Communication;
 
 namespace Glav.CognitiveServices.Api
 {
@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.Api
 
         public T ResponseData { get; protected set; }
 
-        public HttpResult ApiCallResult { get; protected set; }
+        public CommunicationResult ApiCallResult { get; protected set; }
         public bool Successfull { get; protected set; }
     }
 }

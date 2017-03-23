@@ -1,10 +1,10 @@
-﻿using Glav.CognitiveServices.Api.Http;
+﻿using Glav.CognitiveServices.Api.Communication;
 
 namespace Glav.CognitiveServices.Api.Fluent.Contracts
 {
     public interface IApiCallResult
     {
         bool Successfull { get; }
-        HttpResult ApiCallResult { get; }
+        CommunicationResult ApiCallResult { get; }
     }
 }

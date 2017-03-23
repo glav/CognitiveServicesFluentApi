@@ -1,5 +1,5 @@
 ﻿using Glav.CognitiveServices.Api.Configuration;
-using Glav.CognitiveServices.Api.Http;
+using Glav.CognitiveServices.Api.Communication;
 using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 
         public async Task<OperationStatusResult> CheckOperationStatus()
         {
-            var factory = new HttpFactory(_configurationSettings);
+            var factory = new CommunicationEngine(_configurationSettings);
             var serviceResult = await factory.CallServiceAsync(_topicResult.ApiCallResult.OperationLocationUri.AbsoluteUri);
             var result = new OperationStatusResult(serviceResult);
             return result;

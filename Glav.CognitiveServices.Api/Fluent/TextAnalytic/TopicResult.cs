@@ -1,4 +1,4 @@
-﻿using Glav.CognitiveServices.Api.Http;
+﻿using Glav.CognitiveServices.Api.Communication;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses;
 using System;
 
@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         {
             Successfull = false;
         }
-        public TopicResult(HttpResult apiCallResult)
+        public TopicResult(CommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             AddResultToCollection();
@@ -35,7 +35,8 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             try
             {
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<TopicResultResponseRoot>(ApiCallResult.Data);
-                if (ResponseData == null || !string.IsNullOrWhiteSpace(ResponseData.code))
+                // initial submission of topics returns no body of response just an 'accepted' and then it goes and processes it.
+                if (ResponseData != null && !string.IsNullOrWhiteSpace(ResponseData.code)) 
                 {
                     Successfull = false;
                     return;

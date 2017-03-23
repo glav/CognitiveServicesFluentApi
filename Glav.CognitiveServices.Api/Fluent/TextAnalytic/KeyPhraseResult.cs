@@ -1,4 +1,4 @@
-﻿using Glav.CognitiveServices.Api.Http;
+﻿using Glav.CognitiveServices.Api.Communication;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses;
 using System;
 
@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         {
             Successfull = false;
         }
-        public KeyPhraseResult(HttpResult apiCallResult)
+        public KeyPhraseResult(CommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             AddResultToCollection();

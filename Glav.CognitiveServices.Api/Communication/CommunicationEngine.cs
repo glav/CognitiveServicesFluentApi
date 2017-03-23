@@ -4,17 +4,17 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace Glav.CognitiveServices.Api.Http
+namespace Glav.CognitiveServices.Api.Communication
 {
-    internal class HttpFactory
+    internal class CommunicationEngine : ICommunicationEngine
     {
         private readonly ConfigurationSettings _configurationSettings;
 
-        public HttpFactory(ConfigurationSettings configurationSettings)
+        public CommunicationEngine(ConfigurationSettings configurationSettings)
         {
             _configurationSettings = configurationSettings;
         }
-        public static HttpClient CreateHttpClient(string apiKey)
+        private static HttpClient CreateHttpClient(string apiKey)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey);
@@ -22,36 +22,36 @@ namespace Glav.CognitiveServices.Api.Http
             return client;
         }
 
-        public async Task<HttpResult> CallServiceAsync(ApiActionType apiActionType, string payload)
+        public async Task<CommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload)
         {
             var uri = _configurationSettings.BaseUrl + ApiUrlExtensions.ApiServiceUrl(apiActionType);
             var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
             try
             {
-                using (var httpClient = HttpFactory.CreateHttpClient(_configurationSettings.ApiKey))
+                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKey))
                 {
                     var httpResult = await httpClient.PostAsync(uri, content);
-                    return new HttpResult(httpResult);
+                    return new CommunicationResult(httpResult);
                 }
             }
             catch (Exception ex)
             {
-                return HttpResult.Fail(ex.Message);
+                return CommunicationResult.Fail(ex.Message);
             }
         }
-        public async Task<HttpResult> CallServiceAsync(string uri)
+        public async Task<CommunicationResult> CallServiceAsync(string uri)
         {
             try
             {
-                using (var httpClient = HttpFactory.CreateHttpClient(_configurationSettings.ApiKey))
+                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKey))
                 {
                     var httpResult = await httpClient.GetAsync(uri);
-                    return new HttpResult(httpResult);
+                    return new CommunicationResult(httpResult);
                 }
             }
             catch (Exception ex)
             {
-                return HttpResult.Fail(ex.Message);
+                return CommunicationResult.Fail(ex.Message);
             }
         }
     }

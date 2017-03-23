@@ -1,5 +1,5 @@
 ﻿using Glav.CognitiveServices.Api.Configuration;
-using Glav.CognitiveServices.Api.Http;
+using Glav.CognitiveServices.Api.Communication;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
 using System;
 using System.Threading.Tasks;
@@ -19,7 +19,7 @@ namespace Glav.CognitiveServices.Api
 
         public async Task<ApiAnalysisResults> AnalyseAllAsync()
         {
-            var apiResults = new ApiAnalysisResults();
+            var apiResults = new ApiAnalysisResults(_analysisSettings);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsSentiment);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsKeyphrases);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsLanguages);
@@ -42,7 +42,7 @@ namespace Glav.CognitiveServices.Api
                     payload = (actions as TextAnalyticActionData).ToString();
                 }
 
-                var result = await new HttpFactory(_analysisSettings.ConfigurationSettings).CallServiceAsync(apiAction, payload);
+                var result = await _analysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload);
 
                 switch (apiAction)
                 {

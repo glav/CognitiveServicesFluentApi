@@ -6,6 +6,7 @@ using Glav.CognitiveServices.Api.Fluent;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
 using System.Linq;
 using Glav.CognitiveServices.Api.Fluent.Contracts;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.Api.Fluent
 {

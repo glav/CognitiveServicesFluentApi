@@ -7,6 +7,14 @@ namespace Glav.CognitiveServices.Api
 {
     public class ApiAnalysisResults
     {
+        private readonly ApiAnalysisSettings _analysisSettings;
+
+        public ApiAnalysisResults(ApiAnalysisSettings analysisSettings)
+        {
+            _analysisSettings = analysisSettings;
+        }
+        public ApiAnalysisSettings AnalysisSettings { get { return _analysisSettings; } }
+
         public SentimentAnalysisContext TextAnalyticSentimentAnalysis { get; private set; }
         public KeyPhraseAnalysisContext TextAnalyticKeyPhraseAnalysis { get; private set; }
         public TopicAnalysisContext TextAnalyticTopicAnalysis { get; private set; }

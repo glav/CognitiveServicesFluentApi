@@ -3,17 +3,17 @@ using System.Net;
 using System.Net.Http;
 using System.Linq;
 
-namespace Glav.CognitiveServices.Api.Http
+namespace Glav.CognitiveServices.Api.Communication
 {
-    public sealed class HttpResult
+    public sealed class CommunicationResult
     {
         private readonly HttpResponseMessage _httpResponse;
 
-        private HttpResult()
+        private CommunicationResult()
         {
 
         }
-        public HttpResult(HttpResponseMessage httpResponse)
+        public CommunicationResult(HttpResponseMessage httpResponse)
         {
             _httpResponse = httpResponse;
             AnalyseResponse();
@@ -56,9 +56,9 @@ namespace Glav.CognitiveServices.Api.Http
 
         public string Data { get; private set; }
 
-        public static HttpResult Fail(string errorMessage)
+        public static CommunicationResult Fail(string errorMessage)
         {
-            return new HttpResult { Successfull = false, ErrorMessage = errorMessage };
+            return new CommunicationResult { Successfull = false, ErrorMessage = errorMessage };
         }
 
     }
