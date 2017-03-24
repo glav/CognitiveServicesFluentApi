@@ -5,6 +5,6 @@ namespace Glav.CognitiveServices.Api.Fluent.Contracts
     public interface IApiCallResult
     {
         bool Successfull { get; }
-        CommunicationResult ApiCallResult { get; }
+        ICommunicationResult ApiCallResult { get; }
     }
 }

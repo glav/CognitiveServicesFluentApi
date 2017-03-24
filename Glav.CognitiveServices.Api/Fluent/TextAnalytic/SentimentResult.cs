@@ -6,11 +6,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
     public sealed class SentimentResult : BaseResponseResult<SentimentResultResponseRoot>
     {
-        public SentimentResult()
-        {
-            Successfull = false;
-        }
-        public SentimentResult(CommunicationResult apiCallResult)
+        public SentimentResult(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             AddResultToCollection();

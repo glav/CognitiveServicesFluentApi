@@ -6,13 +6,9 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
     public sealed class OperationStatusResult : BaseResponseResult<OperationStatusResultResponseRoot>
     {
-        public OperationStatusResult()
+        public OperationStatusResult(ICommunicationResult apiCallResult)
         {
             OperationState = OperationStateType.NotStarted;
-            Successfull = false;
-        }
-        public OperationStatusResult(CommunicationResult apiCallResult)
-        {
             ApiCallResult = apiCallResult;
             AddResultToCollection();
         }

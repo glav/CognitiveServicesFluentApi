@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.Api
 
         public T ResponseData { get; protected set; }
 
-        public CommunicationResult ApiCallResult { get; protected set; }
+        public ICommunicationResult ApiCallResult { get; protected set; }
         public bool Successfull { get; protected set; }
     }
 }

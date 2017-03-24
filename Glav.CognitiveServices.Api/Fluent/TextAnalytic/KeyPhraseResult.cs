@@ -6,11 +6,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
     public sealed class KeyPhraseResult : BaseResponseResult<KeyPhraseResultResponseRoot>
     {
-        public KeyPhraseResult()
-        {
-            Successfull = false;
-        }
-        public KeyPhraseResult(CommunicationResult apiCallResult)
+        public KeyPhraseResult(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             AddResultToCollection();

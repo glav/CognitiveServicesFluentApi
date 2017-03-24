@@ -6,11 +6,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
     public sealed class LanguagesResult : BaseResponseResult<LanguagesResultResponseRoot>
     {
-        public LanguagesResult()
-        {
-            Successfull = false;
-        }
-        public LanguagesResult(CommunicationResult apiCallResult)
+        public LanguagesResult(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             AddResultToCollection();

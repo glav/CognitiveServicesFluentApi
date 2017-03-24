@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.Api.Communication
 {
-    public sealed class CommunicationResult
+    public sealed class CommunicationResult : ICommunicationResult
     {
         private readonly HttpResponseMessage _httpResponse;
 
