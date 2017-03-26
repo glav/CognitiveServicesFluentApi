@@ -15,7 +15,7 @@ namespace Glav.CognitiveServices.Api.Fluent
 
         public static async Task<OperationStatusResult> CheckTopicAnalysisStatusAsync(this ApiAnalysisResults analysisResults)
         {
-            var queryEngine = new OperationStatusQueryEngine(analysisResults.AnalysisSettings.ConfigurationSettings, analysisResults.TextAnalyticTopicAnalysis.AnalysisResult);
+            var queryEngine = new OperationStatusQueryEngine(analysisResults, analysisResults.TextAnalyticTopicAnalysis.AnalysisResult);
             var result = await queryEngine.CheckOperationStatus();
             return result;
         }

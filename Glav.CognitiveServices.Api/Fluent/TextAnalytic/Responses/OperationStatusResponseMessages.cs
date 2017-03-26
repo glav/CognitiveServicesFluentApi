@@ -6,10 +6,12 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses
 {
     internal static class OperationStatusResponseMessages
     {
-        public const string StatusBadRequest = "BadRequest";
-        public const string StatusFailed = "Failed";
-        public const string StatusFinished = "Finished";
-        public const string StatusSubmitted = "Submitted";
+        public const string StatusBadRequest = "badrequest";
+        public const string StatusFailed = "failed";
+        public const string StatusFinished = "finished";
+        public const string StatusSubmitted = "submitted";
+        public const string StatusNotStarted = "notstarted";
+        public const string StatusRunning = "running";
     }
 
     internal static class OperationStatusMessagesExtensions
@@ -19,9 +21,11 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses
         static OperationStatusMessagesExtensions()
         {
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusBadRequest, OperationStateType.BadRequest);
-            _mappedStateTypes.Add(OperationStatusResponseMessages.StatusFailed, OperationStateType.NotStarted);
+            _mappedStateTypes.Add(OperationStatusResponseMessages.StatusFailed, OperationStateType.Failed);
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusFinished, OperationStateType.CompletedSuccessfully);
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusSubmitted, OperationStateType.Submitted);
+            _mappedStateTypes.Add(OperationStatusResponseMessages.StatusNotStarted, OperationStateType.NotStarted);
+            _mappedStateTypes.Add(OperationStatusResponseMessages.StatusRunning, OperationStateType.Running);
         }
         public static OperationStateType ToOperationStatus(this string statusMessage)
         {

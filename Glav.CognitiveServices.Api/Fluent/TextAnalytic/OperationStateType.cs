@@ -9,6 +9,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         NotStarted,
         BadRequest,
         Submitted,
+        Running,
         CompletedSuccessfully,
         Failed
     }

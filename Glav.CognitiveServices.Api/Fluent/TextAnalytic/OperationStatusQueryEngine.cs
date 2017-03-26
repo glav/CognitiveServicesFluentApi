@@ -7,18 +7,18 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
     public sealed class OperationStatusQueryEngine
     {
         private readonly TopicResult _topicResult;
-        private readonly ConfigurationSettings _configurationSettings;
+        private readonly ApiAnalysisResults _analysisResults;
 
-        public OperationStatusQueryEngine(ConfigurationSettings configurationSettings, TopicResult topicResult)
+        public OperationStatusQueryEngine(ApiAnalysisResults analysisResults, TopicResult topicResult)
         {
-            _configurationSettings = configurationSettings;
+            _analysisResults = analysisResults;
             _topicResult = topicResult;
         }
 
         public async Task<OperationStatusResult> CheckOperationStatus()
         {
-            var factory = new CommunicationEngine(_configurationSettings);
-            var serviceResult = await factory.CallServiceAsync(_topicResult.ApiCallResult.OperationLocationUri.AbsoluteUri);
+            var commsEngine = _analysisResults.AnalysisSettings.CommunicationEngine;
+            var serviceResult = await commsEngine.CallServiceAsync(_topicResult.ApiCallResult.OperationLocationUri.AbsoluteUri);
             var result = new OperationStatusResult(serviceResult);
             return result;
         }
