@@ -10,22 +10,22 @@ namespace Glav.CognitiveServices.Api.Configuration
         {
             if (apiActionType == ApiActionType.TextAnalyticsSentiment)
             {
-                return string.Format(ApiServiceUrlFragments.TextAnalyticsSentiment.Template, ApiServiceUrlFragments.TextAnalyticsSentiment.Version);
+                return ApiServiceUrlFragments.SentimentService.ServiceUri;
             }
 
             if (apiActionType == ApiActionType.TextAnalyticsKeyphrases)
             {
-                return string.Format(ApiServiceUrlFragments.TextAnalyticsKeyPhrase.Template, ApiServiceUrlFragments.TextAnalyticsSentiment.Version);
+                return ApiServiceUrlFragments.KeyPhraseService.ServiceUri;
             }
 
             if (apiActionType == ApiActionType.TextAnalyticsLanguages)
             {
-                return string.Format(ApiServiceUrlFragments.TextAnalyticsLanguage.Template, ApiServiceUrlFragments.TextAnalyticsLanguage.Version);
+                return ApiServiceUrlFragments.LanguageService.ServiceUri;
             }
 
             if (apiActionType == ApiActionType.TextAnalyticsTopics)
             {
-                return string.Format(ApiServiceUrlFragments.TextAnalyticsTopics.Template, ApiServiceUrlFragments.TextAnalyticsTopics.Version);
+                return ApiServiceUrlFragments.TopicService.ServiceUri;
             }
 
             throw new NotSupportedException();

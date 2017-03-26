@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Glav.CognitiveServices.Api.Configuration.TextAnalytic;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,74 +8,22 @@ namespace Glav.CognitiveServices.Api.Configuration
     public static class ApiServiceUrlFragments
     {
         public const string BASE_URL_TEMPLATE = "https://{0}.api.cognitive.microsoft.com/";
-        public const string TEXT_ANALYTIC_VERSION = "v2.0";
+        private static Dictionary<ApiActionType, BaseApiServiceUriFragment> _services = new Dictionary<ApiActionType, BaseApiServiceUriFragment>();
 
         static ApiServiceUrlFragments()
         {
-        }
-        public static class TextAnalyticsSentiment
-        {
-            static TextAnalyticsSentiment()
-            {
-                Version = TEXT_ANALYTIC_VERSION;
-            }
-            public const string Template = "text/analytics/{0}/sentiment";
-            public static string Version { get; set; }
-
+            _services.Add(ApiActionType.TextAnalyticsTopics, new TopicServiceConfig());
+            _services.Add(ApiActionType.TextAnalyticsSentiment, new SentimentServiceConfig());
+            _services.Add(ApiActionType.TextAnalyticsKeyphrases, new KeyPhraseServiceConfig());
+            _services.Add(ApiActionType.TextAnalyticsLanguages, new LanguageServiceConfig());
+            _services.Add(ApiActionType.TextAnalyticsOperationStatus, new OperationStatusServiceConfig());
         }
 
-        public static class TextAnalyticsKeyPhrase
-        {
-            static TextAnalyticsKeyPhrase()
-            {
-                Version = TEXT_ANALYTIC_VERSION;
-            }
-            public const string Template = "text/analytics/{0}/keyPhrases";
-            public static string Version { get; set; }
-
-        }
-
-        public static class TextAnalyticsLanguage
-        {
-            static TextAnalyticsLanguage()
-            {
-                Version = TEXT_ANALYTIC_VERSION;
-            }
-            public const string Template = "text/analytics/{0}/languages";
-            public static string Version { get; set; }
-
-        }
-
-        public static class TextAnalyticsTopics
-        {
-            static TextAnalyticsTopics()
-            {
-                Version = TEXT_ANALYTIC_VERSION;
-            }
-            public const string Template = "text/analytics/{0}/topics";
-            public static string Version { get; set; }
-
-        }
-
-        public static class TextAnalyticsOperationStatus
-        {
-            static TextAnalyticsOperationStatus()
-            {
-                Version = TEXT_ANALYTIC_VERSION;
-            }
-            public const string Template = "text/analytics/{0}/operations";
-            public static string Version { get; set; }
-
-        }
-
-        public static class Emotion
-        {
-            static Emotion()
-            {
-                Version = "v1.0";
-            }
-            public const string Template = "emotion/{0}";
-            public static string Version { get; set; }
-        }
+        public static SentimentServiceConfig SentimentService => _services[ApiActionType.TextAnalyticsSentiment] as SentimentServiceConfig;
+        public static KeyPhraseServiceConfig KeyPhraseService => _services[ApiActionType.TextAnalyticsKeyphrases] as KeyPhraseServiceConfig;
+        public static LanguageServiceConfig LanguageService => _services[ApiActionType.TextAnalyticsLanguages] as LanguageServiceConfig;
+        public static TopicServiceConfig TopicService => _services[ApiActionType.TextAnalyticsTopics] as TopicServiceConfig;
+        public static OperationStatusServiceConfig OperationStatusService => _services[ApiActionType.TextAnalyticsOperationStatus] as OperationStatusServiceConfig;
+        public static EmotionServiceConfig EmotionService => _services[ApiActionType.Emotion] as EmotionServiceConfig;
     }
 }

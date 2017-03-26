@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.Api", "Glav.CognitiveServices.Api\Glav.CognitiveServices.Api.csproj", "{6C0BF99F-89B3-43BC-9B79-A76181155412}"
 EndProject
@@ -10,6 +10,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.UnitTests", "Tests\Glav.CognitiveServices.UnitTests\Glav.CognitiveServices.UnitTests.csproj", "{C72E8DDA-13D6-4933-8C68-720A41FED7CB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.IntegrationTests", "Tests\Glav.CognitiveServices.IntegrationTests\Glav.CognitiveServices.IntegrationTests.csproj", "{0049C04C-35EB-4261-9ADE-A808D793F20B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneralArtifacts", "GeneralArtifacts", "{86C79682-B240-4A42-BA88-F03E07832C2E}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
