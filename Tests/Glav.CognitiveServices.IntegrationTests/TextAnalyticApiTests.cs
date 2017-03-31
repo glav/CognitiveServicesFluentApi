@@ -2,6 +2,7 @@ using Glav.CognitiveServices.Api;
 using Glav.CognitiveServices.Api.Fluent;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -24,6 +25,17 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents);
 
             Assert.Equal(SentimentClassification.Positive, result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents[0].SentimentClassification);
+            Assert.Equal(1, result.TextAnalyticSentimentAnalysis.NumberOfResponses(SentimentClassification.Positive));
+
+            // Get Original Id of input data
+            var submittedId = result.TextAnalyticSentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
+            var resultById = result.TextAnalyticSentimentAnalysis.GetResult(submittedId);
+            Assert.NotNull(resultById);
+            Assert.Equal(SentimentClassification.Positive, resultById.SentimentClassification);
+
+            var collectedResults = result.TextAnalyticSentimentAnalysis.GetResults(SentimentClassification.Positive);
+            Assert.NotNull(collectedResults);
+            Assert.Equal(1, collectedResults.Count());
         }
 
         [Fact]
@@ -41,6 +53,17 @@ namespace Glav.CognitiveServices.IntegrationTests
             Assert.NotEmpty(result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents);
 
             Assert.Equal(SentimentClassification.Negative, result.TextAnalyticSentimentAnalysis.AnalysisResult.ResponseData.documents[0].SentimentClassification);
+            Assert.Equal(1, result.TextAnalyticSentimentAnalysis.NumberOfResponses(SentimentClassification.Negative));
+
+            // Get Original Id of input data
+            var submittedId = result.TextAnalyticSentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
+            var resultById = result.TextAnalyticSentimentAnalysis.GetResult(submittedId);
+            Assert.NotNull(resultById);
+            Assert.Equal(SentimentClassification.Negative, resultById.SentimentClassification);
+
+            var collectedResults = result.TextAnalyticSentimentAnalysis.GetResults(SentimentClassification.Negative);
+            Assert.NotNull(collectedResults);
+            Assert.Equal(1, collectedResults.Count());
         }
 
         [Fact]

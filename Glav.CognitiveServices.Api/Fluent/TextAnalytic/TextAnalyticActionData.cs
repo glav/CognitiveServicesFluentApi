@@ -3,6 +3,7 @@ using Glav.CognitiveServices.Api.Fluent.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
@@ -24,6 +25,16 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             });
             builder.Append("] }");
             return builder.ToString();
+        }
+
+        public TextAnalyticActionDataItem GetItemById(long id)
+        {
+            return _itemList.FirstOrDefault(i => i.Id == id);
+        }
+
+        public TextAnalyticActionDataItem[] GetAllItems()
+        {
+            return _itemList.ToArray();
         }
     }
 
