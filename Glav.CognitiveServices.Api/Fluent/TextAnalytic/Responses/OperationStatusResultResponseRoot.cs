@@ -11,12 +11,12 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses
         public string createdDateTime { get; set; }
         public string lastActionDateTime { get; set; }
         public string operationType { get; set; }
-        public TextAlayticOperationProcessingResult operationProcessingResult { get; set; }
+        public TextAnalyticOperationProcessingResult operationProcessingResult { get; set; }
         public string discriminator { get; set; }
         public string message { get; set; }
     }
 
-    public class TextAlayticOperationProcessingResult
+    public class TextAnalyticOperationProcessingResult
     {
         public ApiErrorResponse[] errors { get; set; }
     }

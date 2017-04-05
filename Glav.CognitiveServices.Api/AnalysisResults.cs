@@ -5,15 +5,15 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api
 {
-    public class ApiAnalysisResults
+    public class AnalysisResults
     {
-        private readonly ApiAnalysisSettings _analysisSettings;
+        private readonly AnalysisSettings _analysisSettings;
 
-        public ApiAnalysisResults(ApiAnalysisSettings analysisSettings)
+        public AnalysisResults(AnalysisSettings analysisSettings)
         {
             _analysisSettings = analysisSettings;
         }
-        public ApiAnalysisSettings AnalysisSettings { get { return _analysisSettings; } }
+        public AnalysisSettings AnalysisSettings { get { return _analysisSettings; } }
 
         public SentimentAnalysisContext TextAnalyticSentimentAnalysis { get; private set; }
         public KeyPhraseAnalysisContext TextAnalyticKeyPhraseAnalysis { get; private set; }

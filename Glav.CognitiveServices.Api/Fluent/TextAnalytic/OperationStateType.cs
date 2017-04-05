@@ -11,6 +11,8 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
         Submitted,
         Running,
         CompletedSuccessfully,
-        Failed
+        Failed,
+        TimedOut,
+        Cancelled
     }
 }

@@ -8,18 +8,18 @@ namespace Glav.CognitiveServices.Api
 {
     public sealed class AnalysisEngine
     {
-        private readonly ApiAnalysisSettings _analysisSettings;
+        private readonly AnalysisSettings _analysisSettings;
 
-        public AnalysisEngine(ApiAnalysisSettings analysisSettings)
+        public AnalysisEngine(AnalysisSettings analysisSettings)
         {
             _analysisSettings = analysisSettings;
         }
 
-        public ApiAnalysisSettings AnalysisSettings { get { return _analysisSettings; } }
+        public AnalysisSettings AnalysisSettings { get { return _analysisSettings; } }
 
-        public async Task<ApiAnalysisResults> AnalyseAllAsync()
+        public async Task<AnalysisResults> AnalyseAllAsync()
         {
-            var apiResults = new ApiAnalysisResults(_analysisSettings);
+            var apiResults = new AnalysisResults(_analysisSettings);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsSentiment);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsKeyphrases);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsLanguages);
@@ -28,7 +28,7 @@ namespace Glav.CognitiveServices.Api
             return apiResults;
         }
 
-        private async Task AnalyseAllAsyncForAction(ApiAnalysisResults apiResults, ApiActionType apiAction)
+        private async Task AnalyseAllAsyncForAction(AnalysisResults apiResults, ApiActionType apiAction)
         {
             if (_analysisSettings.ActionsToPerform.ContainsKey(apiAction))
             {

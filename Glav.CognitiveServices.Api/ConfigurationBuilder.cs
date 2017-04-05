@@ -13,17 +13,17 @@ namespace Glav.CognitiveServices.Api
             return config;
         }
 
-        public static ApiAnalysisSettings UsingHttpCommunication(this ConfigurationSettings configSettings)
+        public static AnalysisSettings UsingHttpCommunication(this ConfigurationSettings configSettings)
         {
-            return new ApiAnalysisSettings(configSettings, new CommunicationEngine(configSettings));
+            return new AnalysisSettings(configSettings, new CommunicationEngine(configSettings));
         }
 
-        public static ApiAnalysisSettings UsingCustomCommunication(this ConfigurationSettings configSettings, ICommunicationEngine communicationEngine)
+        public static AnalysisSettings UsingCustomCommunication(this ConfigurationSettings configSettings, ICommunicationEngine communicationEngine)
         {
-            return new ApiAnalysisSettings(configSettings, communicationEngine);
+            return new AnalysisSettings(configSettings, communicationEngine);
         }
 
-        public static async Task<ApiAnalysisResults> AnalyseAllAsync(this ApiAnalysisSettings apiAnalysisSettings)
+        public static async Task<AnalysisResults> AnalyseAllAsync(this AnalysisSettings apiAnalysisSettings)
         {
             var engine = new AnalysisEngine(apiAnalysisSettings);
             return await engine.AnalyseAllAsync();

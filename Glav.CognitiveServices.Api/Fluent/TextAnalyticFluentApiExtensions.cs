@@ -12,34 +12,44 @@ namespace Glav.CognitiveServices.Api.Fluent
 {
     public static class TextAnalyticFluentApiExtensions
     {
-        public static ApiAnalysisSettings WithSentimentAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse)
+        public static AnalysisSettings WithSentimentAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsSentiment);
         }
 
-        public static ApiAnalysisSettings WithKeyPhraseAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse)
+        public static AnalysisSettings WithKeyPhraseAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsKeyphrases);
         }
 
-        public static ApiAnalysisSettings WithKeyLanguageAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse)
+        public static AnalysisSettings WithKeyLanguageAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsLanguages);
         }
 
-        public static ApiAnalysisSettings WithKeyTopicAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse)
+        public static AnalysisSettings WithKeyTopicAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsTopics);
         }
+        public static AnalysisSettings WithKeyTopicAnalysisSplittingDataIntoSentences(this AnalysisSettings apiAnalysis, string textToAnalyse)
+        {
+            var sentences = textToAnalyse.SplitTextIntoSentences();
+            foreach(var sentence in sentences)
+            {
+                apiAnalysis.AddTextForAnalysis(sentence, ApiActionType.TextAnalyticsTopics);
+            }
+            return apiAnalysis;
+            
+        }
 
-        public static ApiAnalysisSettings WithKeyTopicAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse, IEnumerable<string> topicsToExclude)
+        public static AnalysisSettings WithKeyTopicAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse, IEnumerable<string> topicsToExclude)
         {
             var actionData = GetOrCreateActionInstance<TextAnalyticTopicActionData>(apiAnalysis, ApiActionType.TextAnalyticsTopics);
             actionData.Add(textToAnalyse);
             return apiAnalysis;//.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsTopics);
         }
 
-        private static T GetOrCreateActionInstance<T>(ApiAnalysisSettings apiAnalysis, ApiActionType actionType) where T : class, IApiActionData, new()
+        private static T GetOrCreateActionInstance<T>(AnalysisSettings apiAnalysis, ApiActionType actionType) where T : class, IApiActionData, new()
         {
             if (apiAnalysis.ActionsToPerform.ContainsKey(actionType))
             {
@@ -51,7 +61,7 @@ namespace Glav.CognitiveServices.Api.Fluent
             return data;
 
         }
-        private static ApiAnalysisSettings AddTextForAnalysis(this ApiAnalysisSettings apiAnalysis, string textToAnalyse, ApiActionType actionType)
+        private static AnalysisSettings AddTextForAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse, ApiActionType actionType)
         {
             if (actionType == ApiActionType.TextAnalyticsTopics)
             {

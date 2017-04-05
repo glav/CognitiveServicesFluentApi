@@ -59,6 +59,19 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             }
             OperationState = responseData.status.ToOperationStatus();
         }
+
+        public static OperationStatusResult CreateTimeoutOperation(ICommunicationResult apiCallResult)
+        {
+            var result = new OperationStatusResult(apiCallResult);
+            result.OperationState = OperationStateType.TimedOut;
+            return result;
+        }
+        public static OperationStatusResult CreateCancelledOperation(ICommunicationResult apiCallResult)
+        {
+            var result = new OperationStatusResult(apiCallResult);
+            result.OperationState = OperationStateType.Cancelled;
+            return result;
+        }
     }
 
 

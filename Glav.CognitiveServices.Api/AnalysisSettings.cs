@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api
 {
-    public sealed class ApiAnalysisSettings
+    public sealed class AnalysisSettings
     {
         private readonly ICommunicationEngine _communicationEngine;
 
-        public ApiAnalysisSettings(ConfigurationSettings settings, ICommunicationEngine communicationEngine)
+        public AnalysisSettings(ConfigurationSettings settings, ICommunicationEngine communicationEngine)
         {
             ActionsToPerform = new Dictionary<ApiActionType, IApiActionData>();
             ConfigurationSettings = settings;
