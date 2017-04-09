@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Glav.CognitiveServices.Api.Diagnostics
 {
-    class ILogger
+    public enum DiagnosticMessageType
     {
+        Information,
+        Warning,
+        Error
     }
 }

@@ -5,11 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="TestData\ABronte_Agnes.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="TestData\ABronte_Agnes.txt" />
+    <EmbeddedResource Include="TestData\SampleTopicText.txt" />
   </ItemGroup>
 
   <ItemGroup>

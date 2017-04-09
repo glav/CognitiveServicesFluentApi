@@ -20,13 +20,13 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             if (ApiCallResult == null)
             {
                 ItemList.Add(new OperationStatusResultResponseRoot { status=OperationStatusResponseMessages.StatusFailed,  message = "No data returned." });
-                Successfull = false;
+                ActionSubmittedSuccessfully = false;
                 return;
             }
 
             if (!ApiCallResult.Successfull)
             {
-                Successfull = false;
+                ActionSubmittedSuccessfully = false;
                 return;
             }
 
@@ -35,18 +35,18 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<OperationStatusResultResponseRoot>(ApiCallResult.Data);
                 if (ResponseData == null || string.IsNullOrWhiteSpace(ResponseData.status))
                 {
-                    Successfull = false;
+                    ActionSubmittedSuccessfully = false;
                     OperationState = OperationStateType.BadRequest;
                     return;
                 }
 
                 ParseResult(ResponseData);
-                Successfull = true;
+                ActionSubmittedSuccessfully = true;
             } catch (Exception ex)
             {
                 OperationState = OperationStateType.Failed;
                 ItemList.Add(new OperationStatusResultResponseRoot { status = OperationStatusResponseMessages.StatusFailed, message = $"Error parsing results: {ex.Message}" });
-                Successfull = false;
+                ActionSubmittedSuccessfully = false;
             }
         }
 

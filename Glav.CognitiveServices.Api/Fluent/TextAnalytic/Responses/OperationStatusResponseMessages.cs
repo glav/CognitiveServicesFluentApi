@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic.Responses
     {
         public const string StatusBadRequest = "badrequest";
         public const string StatusFailed = "failed";
-        public const string StatusFinished = "finished";
+        public const string StatusFinished = "succeeded";
         public const string StatusSubmitted = "submitted";
         public const string StatusNotStarted = "notstarted";
         public const string StatusRunning = "running";

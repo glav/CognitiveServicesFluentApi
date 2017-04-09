@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             if (ApiCallResult == null)
             {
                 ItemList.Add(new KeyPhraseResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } });
-                Successfull = false;
+                ActionSubmittedSuccessfully = false;
                 return;
             }
 
@@ -26,14 +26,14 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<KeyPhraseResultResponseRoot>(ApiCallResult.Data);
                 if (ResponseData == null || ResponseData.documents == null || ResponseData.errors != null && ResponseData.errors.Length > 0)
                 {
-                    Successfull = false;
+                    ActionSubmittedSuccessfully = false;
                     return;
                 }
-                Successfull = true;
+                ActionSubmittedSuccessfully = true;
             } catch (Exception ex)
             {
                 ItemList.Add(new KeyPhraseResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } });
-                Successfull = false;
+                ActionSubmittedSuccessfully = false;
             }
         }
 

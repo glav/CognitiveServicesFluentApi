@@ -17,13 +17,13 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
             if (ApiCallResult == null)
             {
                 ItemList.Add(new TopicResultResponseRoot { code = "BadRequest", message = "No data returned." });
-                Successfull = false;
+                ActionSubmittedSuccessfully = false;
                 return;
             }
 
             if (ApiCallResult.OperationLocationUri == null)
             {
-                Successfull = false;
+                ActionSubmittedSuccessfully = false;
                 ItemList.Add(new TopicResultResponseRoot { code = "BadRequest", message = "Bad request. Probably badly formatted request." });
                 return;
             }
@@ -34,18 +34,18 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
                 // initial submission of topics returns no body of response just an 'accepted' and then it goes and processes it.
                 if (ResponseData != null && !string.IsNullOrWhiteSpace(ResponseData.code)) 
                 {
-                    Successfull = false;
+                    ActionSubmittedSuccessfully = false;
                     return;
                 }
             }
             catch (Exception ex)
             {
                 ItemList.Add(new TopicResultResponseRoot { code = "BadRequest", message = $"Error parsing result: [{ex.Message}]" });
-                Successfull = false;
+                ActionSubmittedSuccessfully = false;
             }
 
             ResponseData = new TopicResultResponseRoot { code = "Submitted" };
-            Successfull = true;
+            ActionSubmittedSuccessfully = true;
         }
 
     }

@@ -21,7 +21,7 @@ namespace Glav.CognitiveServices.IntegrationTests
 
             var asm = this.GetType().GetTypeInfo().Assembly;
             string testData;
-            using (var stream = asm.GetManifestResourceStream("Glav.CognitiveServices.IntegrationTests.TestData.ABronte_Agnes.txt"))
+            using (var stream = asm.GetManifestResourceStream("Glav.CognitiveServices.IntegrationTests.TestData.SampleTopicText.txt"))
             {
                 using (var sr = new System.IO.StreamReader(stream))
                 {
@@ -41,7 +41,15 @@ namespace Glav.CognitiveServices.IntegrationTests
 
             var checkResult = await analysisResult.CheckTopicAnalysisStatusAsync();
 
+            Assert.NotNull(checkResult);
+            Assert.True(checkResult.ActionSubmittedSuccessfully);
+            Assert.Equal(OperationStateType.NotStarted, checkResult.OperationState);
+
             var waitForResult = await analysisResult.WaitForTopicAnalysisToCompleteAsync();
+
+            Assert.NotNull(waitForResult);
+            Assert.True(waitForResult.ActionSubmittedSuccessfully);
+            Assert.Equal(OperationStateType.CompletedSuccessfully, waitForResult.OperationState);
 
         }
     }

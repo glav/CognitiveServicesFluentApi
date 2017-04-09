@@ -22,7 +22,7 @@ namespace Glav.CognitiveServices.Api.Communication
             return client;
         }
 
-        public async Task<CommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload)
+        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload)
         {
             var uri = _configurationSettings.BaseUrl + ApiUrlExtensions.ApiServiceUrl(apiActionType);
             var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
@@ -39,7 +39,7 @@ namespace Glav.CognitiveServices.Api.Communication
                 return CommunicationResult.Fail(ex.Message);
             }
         }
-        public async Task<CommunicationResult> CallServiceAsync(string uri)
+        public async Task<ICommunicationResult> CallServiceAsync(string uri)
         {
             try
             {

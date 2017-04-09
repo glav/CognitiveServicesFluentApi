@@ -1,10 +1,9 @@
 using Glav.CognitiveServices.Api.Fluent;
-using Glav.CognitiveServices.Api.Configuration;
-using System;
 using Xunit;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
-using Glav.CognitiveServices.Api.Communication;
-using System.Net;
+using System.Reflection;
+using Glav.CognitiveServices.Api;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.UnitTests
 {
@@ -14,37 +13,42 @@ namespace Glav.CognitiveServices.UnitTests
         public void ShouldParseResultSuccessfully()
         {
             var input = "{\"documents\":[{\"score\":0.7988085,\"id\":\"1\"}],\"errors\":[]}";
-            var result = new SentimentResult(new MockSentimentResult(input));
+            var result = new SentimentResult(new MockCommsResult(input));
 
             Assert.NotNull(result);
             Assert.NotNull(result.ApiCallResult);
-            Assert.True(result.Successfull);
+            Assert.True(result.ActionSubmittedSuccessfully);
             Assert.NotNull(result.ResponseData);
             Assert.NotEmpty(result.ResponseData.documents);
             Assert.Equal<long>(1, result.ResponseData.documents[0].id);
             Assert.Equal<double>(0.7988085, result.ResponseData.documents[0].score);
             Assert.Empty(result.ResponseData.errors);
         }
-    }
 
-    public class MockSentimentResult : ICommunicationResult
-    {
-        public MockSentimentResult(string data)
+        [Fact]
+        public async Task ShouldParseTopicResultWithSucceededResponseAsync()
         {
-            Data = data;
+            var asm = this.GetType().GetTypeInfo().Assembly;
+            string testData;
+            using (var stream = asm.GetManifestResourceStream("Glav.CognitiveServices.UnitTests.TestData.topic-api-raw-result.json"))
+            {
+                using (var sr = new System.IO.StreamReader(stream))
+                {
+                    testData = sr.ReadToEnd();
+                }
+            }
+
+            var config = ConfigurationBuilder.CreateUsingApiKey("test")
+                .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(testData)))
+                .WithKeyTopicAnalysis(testData);
+
+
+            var analysisResult = await config.AnalyseAllAsync();
+            var checkResult = await analysisResult.CheckTopicAnalysisStatusAsync();
+
+            Assert.NotNull(checkResult);
+            Assert.Equal(OperationStateType.CompletedSuccessfully, checkResult.OperationState);
+
         }
-        public string Data { get; set; }
-
-        public string ErrorMessage => null;
-
-        public Uri LocationUri => new Uri("http://dummy");
-
-        public Uri OperationLocationUri => new Uri("http://dummy");
-
-        public Guid RequestId => Guid.NewGuid();
-
-        public HttpStatusCode StatusCode => HttpStatusCode.OK;
-
-        public bool Successfull => true;
     }
 }
