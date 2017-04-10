@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneralArtifacts", "General
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glav.CognitiveService.Api.Core", "Glav.CognitiveService.Api.Core\Glav.CognitiveService.Api.Core.csproj", "{CCD33982-6720-4985-AE10-62377E012DB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glav.CognitiveServices.Api.Core", "Glav.CognitiveService.Api.Core\Glav.CognitiveServices.Api.Core.csproj", "{CCD33982-6720-4985-AE10-62377E012DB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
