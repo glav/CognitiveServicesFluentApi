@@ -1,8 +1,8 @@
-using Glav.CognitiveServices.Api.Fluent;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent;
 using Xunit;
-using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
 using System.Reflection;
-using Glav.CognitiveServices.Api;
+using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.UnitTests

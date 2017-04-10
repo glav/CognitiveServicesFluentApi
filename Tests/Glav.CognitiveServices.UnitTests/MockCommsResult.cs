@@ -1,5 +1,5 @@
 ﻿using System;
-using Glav.CognitiveServices.Api.Communication;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Communication;
 using System.Net;
 
 namespace Glav.CognitiveServices.UnitTests
