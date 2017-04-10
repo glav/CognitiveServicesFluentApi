@@ -3,7 +3,6 @@ using Glav.CognitiveServices.Api.Core.Configuration;
 using Glav.CognitiveServices.Api.Core.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Glav.CognitiveServices.Api.Core
 {

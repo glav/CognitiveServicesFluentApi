@@ -7,11 +7,19 @@ using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
 using System.Linq;
 using Glav.CognitiveServices.Api.Fluent.Contracts;
 using System.Threading.Tasks;
+using Glav.CognitiveServices.Api.Core;
+using Glav.CognitiveServices.Api.Core.Configuration;
 
 namespace Glav.CognitiveServices.Api.Fluent
 {
     public static class TextAnalyticFluentApiExtensions
     {
+        public static async Task<AnalysisResults> AnalyseAllAsync(this AnalysisSettings apiAnalysisSettings)
+        {
+            var engine = new TextAnalyticAnalysisEngine(apiAnalysisSettings);
+            return await engine.AnalyseAllAsync();
+        }
+
         public static AnalysisSettings WithSentimentAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsSentiment);

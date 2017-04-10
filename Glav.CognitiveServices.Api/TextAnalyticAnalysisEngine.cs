@@ -1,25 +1,26 @@
-﻿using Glav.CognitiveServices.Api.Configuration;
-using Glav.CognitiveServices.Api.Communication;
+﻿using Glav.CognitiveServices.Api.Core.Configuration;
+using Glav.CognitiveServices.Api.Core.Communication;
 using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
 using System;
 using System.Threading.Tasks;
+using Glav.CognitiveServices.Api.Core;
 
 namespace Glav.CognitiveServices.Api
 {
-    public sealed class AnalysisEngine
+    public sealed class TextAnalyticAnalysisEngine
     {
         private readonly AnalysisSettings _analysisSettings;
 
-        public AnalysisEngine(AnalysisSettings analysisSettings)
+        public TextAnalyticAnalysisEngine(AnalysisSettings analysisSettings)
         {
             _analysisSettings = analysisSettings;
         }
 
         public AnalysisSettings AnalysisSettings { get { return _analysisSettings; } }
 
-        public async Task<AnalysisResults> AnalyseAllAsync()
+        public async Task<TextAnalyticAnalysisResults> AnalyseAllAsync()
         {
-            var apiResults = new AnalysisResults(_analysisSettings);
+            var apiResults = new TextAnalyticAnalysisResults(_analysisSettings);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsSentiment);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsKeyphrases);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsLanguages);
@@ -28,7 +29,7 @@ namespace Glav.CognitiveServices.Api
             return apiResults;
         }
 
-        private async Task AnalyseAllAsyncForAction(AnalysisResults apiResults, ApiActionType apiAction)
+        private async Task AnalyseAllAsyncForAction(TextAnalyticAnalysisResults apiResults, ApiActionType apiAction)
         {
             if (_analysisSettings.ActionsToPerform.ContainsKey(apiAction))
             {

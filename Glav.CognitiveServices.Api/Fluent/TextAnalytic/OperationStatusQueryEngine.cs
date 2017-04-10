@@ -6,9 +6,9 @@ namespace Glav.CognitiveServices.Api.Fluent.TextAnalytic
 {
     public sealed class OperationStatusQueryEngine
     {
-        private readonly AnalysisResults _analysisResults;
+        private readonly TextAnalyticAnalysisResults _analysisResults;
 
-        public OperationStatusQueryEngine(AnalysisResults analysisResults)
+        public OperationStatusQueryEngine(TextAnalyticAnalysisResults analysisResults)
         {
             _analysisResults = analysisResults;
         }

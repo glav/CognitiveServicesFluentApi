@@ -17,20 +17,20 @@ namespace Glav.CognitiveServices.Api.Fluent
         private const int OperationStateQueryDelayInMilliseconds = 2000;
         private const int OperationStateQueryTimoutInMilliseconds = 300000;
 
-        public static async Task<OperationStatusResult> CheckTopicAnalysisStatusAsync(this AnalysisResults analysisResults)
+        public static async Task<OperationStatusResult> CheckTopicAnalysisStatusAsync(this TextAnalyticAnalysisResults analysisResults)
         {
             var queryEngine = new OperationStatusQueryEngine(analysisResults);
             var result = await queryEngine.CheckOperationStatus();
             return result;
         }
 
-        public static async Task<OperationStatusResult> WaitForTopicAnalysisToCompleteAsync(this AnalysisResults analysisResults, 
+        public static async Task<OperationStatusResult> WaitForTopicAnalysisToCompleteAsync(this TextAnalyticAnalysisResults analysisResults, 
             int timeoutInMilliseconds = OperationStateQueryTimoutInMilliseconds)
         {
             var cancelToken = CancellationToken.None;
             return await WaitForTopicAnalysisToCompleteAsync(analysisResults, cancelToken, timeoutInMilliseconds);
         }
-        public static async Task<OperationStatusResult> WaitForTopicAnalysisToCompleteAsync(this AnalysisResults analysisResults, 
+        public static async Task<OperationStatusResult> WaitForTopicAnalysisToCompleteAsync(this TextAnalyticAnalysisResults analysisResults, 
             CancellationToken cancelToken, 
             int timeoutInMilliseconds = OperationStateQueryTimoutInMilliseconds)
         {

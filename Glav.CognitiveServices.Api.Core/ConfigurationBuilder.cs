@@ -22,11 +22,6 @@ namespace Glav.CognitiveServices.Api.Core
             return new AnalysisSettings(configSettings, communicationEngine);
         }
 
-        public static async Task<AnalysisResults> AnalyseAllAsync(this AnalysisSettings apiAnalysisSettings)
-        {
-            var engine = new AnalysisEngine(apiAnalysisSettings);
-            return await engine.AnalyseAllAsync();
-        }
 
     }
 }

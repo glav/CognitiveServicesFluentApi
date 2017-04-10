@@ -1,15 +1,16 @@
-﻿using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
+﻿using Glav.CognitiveServices.Api.Core;
+using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Glav.CognitiveServices.Api
 {
-    public class AnalysisResults
+    public class TextAnalyticAnalysisResults
     {
         private readonly AnalysisSettings _analysisSettings;
 
-        public AnalysisResults(AnalysisSettings analysisSettings)
+        public TextAnalyticAnalysisResults(AnalysisSettings analysisSettings)
         {
             _analysisSettings = analysisSettings;
         }
