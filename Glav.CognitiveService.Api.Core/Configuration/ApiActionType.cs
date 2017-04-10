@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Glav.CognitiveServices.Api.Configuration
+namespace Glav.CognitiveServices.Api.Core.Configuration
 {
     public enum ApiActionType
     {

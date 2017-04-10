@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Glav.CognitiveServices.Api.Communication
+namespace Glav.CognitiveServices.Api.Core.Communication
 {
     public interface ICommunicationResult
     {

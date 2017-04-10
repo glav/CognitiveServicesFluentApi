@@ -1,10 +1,10 @@
-﻿using Glav.CognitiveServices.Api.Configuration;
+﻿using Glav.CognitiveServices.Api.Core.Configuration;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace Glav.CognitiveServices.Api.Communication
+namespace Glav.CognitiveServices.Api.Core.Communication
 {
     internal class CommunicationEngine : ICommunicationEngine
     {

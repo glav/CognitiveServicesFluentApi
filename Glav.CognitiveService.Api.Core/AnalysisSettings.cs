@@ -1,11 +1,11 @@
-﻿using Glav.CognitiveServices.Api.Communication;
-using Glav.CognitiveServices.Api.Configuration;
-using Glav.CognitiveServices.Api.Fluent.Contracts;
+﻿using Glav.CognitiveServices.Api.Core.Communication;
+using Glav.CognitiveServices.Api.Core.Configuration;
+using Glav.CognitiveServices.Api.Core.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Glav.CognitiveServices.Api
+namespace Glav.CognitiveServices.Api.Core
 {
     public sealed class AnalysisSettings
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Glav.CognitiveServices.Api.Diagnostics
+namespace Glav.CognitiveServices.Api.Core.Diagnostics
 {
     public enum DiagnosticMessageType
     {

@@ -1,6 +1,6 @@
-﻿using Glav.CognitiveServices.Api.Communication;
+﻿using Glav.CognitiveServices.Api.Core.Communication;
 
-namespace Glav.CognitiveServices.Api.Fluent.Contracts
+namespace Glav.CognitiveServices.Api.Core.Contracts
 {
     public interface IApiCallResult
     {

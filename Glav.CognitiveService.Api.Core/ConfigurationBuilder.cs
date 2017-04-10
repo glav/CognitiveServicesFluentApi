@@ -1,9 +1,8 @@
-﻿using Glav.CognitiveServices.Api.Communication;
-using Glav.CognitiveServices.Api.Configuration;
-using Glav.CognitiveServices.Api.Fluent.TextAnalytic;
+﻿using Glav.CognitiveServices.Api.Core.Communication;
+using Glav.CognitiveServices.Api.Core.Configuration;
 using System.Threading.Tasks;
 
-namespace Glav.CognitiveServices.Api
+namespace Glav.CognitiveServices.Api.Core
 {
     public static class ConfigurationBuilder
     {

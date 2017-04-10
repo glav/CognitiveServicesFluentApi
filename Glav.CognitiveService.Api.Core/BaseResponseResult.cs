@@ -1,8 +1,8 @@
-﻿using Glav.CognitiveServices.Api.Fluent.Contracts;
+﻿using Glav.CognitiveServices.Api.Core.Contracts;
 using System.Collections.Generic;
-using Glav.CognitiveServices.Api.Communication;
+using Glav.CognitiveServices.Api.Core.Communication;
 
-namespace Glav.CognitiveServices.Api
+namespace Glav.CognitiveServices.Api.Core
 {
     public abstract class BaseResponseResult<T> : IApiAnalysisResult<T> where T : IActionResponseRoot
     {

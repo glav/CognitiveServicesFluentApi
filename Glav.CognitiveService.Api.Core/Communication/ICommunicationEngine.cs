@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Glav.CognitiveServices.Api.Configuration;
+using Glav.CognitiveServices.Api.Core.Configuration;
 
-namespace Glav.CognitiveServices.Api.Communication
+namespace Glav.CognitiveServices.Api.Core.Communication
 {
     public interface ICommunicationEngine
     {

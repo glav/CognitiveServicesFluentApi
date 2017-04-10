@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Linq;
 
-namespace Glav.CognitiveServices.Api.Communication
+namespace Glav.CognitiveServices.Api.Core.Communication
 {
     public sealed class CommunicationResult : ICommunicationResult
     {
