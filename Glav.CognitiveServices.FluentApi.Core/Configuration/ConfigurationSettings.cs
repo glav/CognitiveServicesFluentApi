@@ -4,36 +4,34 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 {
-    public class ConfigurationSettings
+    public abstract class ConfigurationSettings
     {
-        public ConfigurationSettings()
-        {
-            Location = LocationKeys.WestUsa;
-        }
 
-
-        public ConfigurationSettings(string apiKey)
+        public ConfigurationSettings(string apiKey, ApiServiceUrlFragmentsBase serviceUrls)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
                 throw new ArgumentException("APIKey cannot be empty");
             }
-            Location = LocationKeys.WestUsa;
+            LocationKey = LocationKeys.WestUsa;
             ApiKey = apiKey;
+            ServiceUrls = serviceUrls;
         }
 
         public ConfigurationSettings(ConfigurationSettings settings)
         {
             this.ApiKey = settings.ApiKey;
-            this.Location = settings.Location;
+            this.LocationKey = settings.LocationKey;
+            this.ServiceUrls = settings.ServiceUrls;
         }
-        public string ApiKey { get; private set; }
-        public string Location { get; private set; }
+        public string ApiKey { get; protected set; }
+        public string LocationKey { get; protected set; }
+        public ApiServiceUrlFragmentsBase ServiceUrls { get; protected set; }
         public string BaseUrl
         {
             get
             {
-                return string.Format(ApiServiceUrlFragmentsBase.BASE_URL_TEMPLATE, Location);
+                return string.Format(ApiServiceUrlFragmentsBase.BASE_URL_TEMPLATE, LocationKey);
             }
         }
     }

@@ -24,7 +24,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
 
         public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload)
         {
-            var uri = _configurationSettings.BaseUrl + TextAnalyticUrlExtensions.ApiServiceUrl(apiActionType);
+            //var uri = _configurationSettings.BaseUrl + TextAnalyticUrlExtensions.ApiServiceUrl(apiActionType);
+            var uri = _configurationSettings.ServiceUrls.GetServiceConfig(apiActionType).ServiceUri;
             var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
             try
             {

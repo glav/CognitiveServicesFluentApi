@@ -1,4 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.TextAnalytic.Communication;
+﻿using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Communication;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic.Responses;
 using System;
 

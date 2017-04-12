@@ -5,10 +5,10 @@ using System.Text;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
 using System.Linq;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.Contracts;
 using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core.Contracts;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
 {

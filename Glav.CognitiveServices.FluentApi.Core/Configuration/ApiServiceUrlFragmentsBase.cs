@@ -10,5 +10,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         private Dictionary<ApiActionType, BaseApiServiceUriFragment> _services = new Dictionary<ApiActionType, BaseApiServiceUriFragment>();
 
         protected Dictionary<ApiActionType, BaseApiServiceUriFragment> Services => _services;
+
+        public BaseApiServiceUriFragment GetServiceConfig(ApiActionType apiAction)
+        {
+            return Services[apiAction];
+        }
     }
 }

@@ -14,11 +14,11 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
             Services.Add(ApiActionType.Emotion, new EmotionServiceConfig());
         }
 
-        public SentimentServiceConfig SentimentService => Services[ApiActionType.TextAnalyticsSentiment] as SentimentServiceConfig;
-        public KeyPhraseServiceConfig KeyPhraseService => Services[ApiActionType.TextAnalyticsKeyphrases] as KeyPhraseServiceConfig;
-        public LanguageServiceConfig LanguageService => Services[ApiActionType.TextAnalyticsLanguages] as LanguageServiceConfig;
-        public TopicServiceConfig TopicService => Services[ApiActionType.TextAnalyticsTopics] as TopicServiceConfig;
-        public OperationStatusServiceConfig OperationStatusService => Services[ApiActionType.TextAnalyticsOperationStatus] as OperationStatusServiceConfig;
-        public EmotionServiceConfig EmotionService => Services[ApiActionType.Emotion] as EmotionServiceConfig;
+        //public SentimentServiceConfig SentimentService => Services[ApiActionType.TextAnalyticsSentiment] as SentimentServiceConfig;
+        //public KeyPhraseServiceConfig KeyPhraseService => Services[ApiActionType.TextAnalyticsKeyphrases] as KeyPhraseServiceConfig;
+        //public LanguageServiceConfig LanguageService => Services[ApiActionType.TextAnalyticsLanguages] as LanguageServiceConfig;
+        //public TopicServiceConfig TopicService => Services[ApiActionType.TextAnalyticsTopics] as TopicServiceConfig;
+        //public OperationStatusServiceConfig OperationStatusService => Services[ApiActionType.TextAnalyticsOperationStatus] as OperationStatusServiceConfig;
+        //public EmotionServiceConfig EmotionService => Services[ApiActionType.Emotion] as EmotionServiceConfig;
     }
 }

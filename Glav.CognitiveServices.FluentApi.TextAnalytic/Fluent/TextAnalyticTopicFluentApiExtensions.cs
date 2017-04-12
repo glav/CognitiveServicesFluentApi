@@ -1,11 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
+﻿using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
 using System.Linq;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.Contracts;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;

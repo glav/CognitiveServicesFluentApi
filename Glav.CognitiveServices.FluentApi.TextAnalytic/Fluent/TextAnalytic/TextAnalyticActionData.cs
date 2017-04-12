@@ -1,9 +1,10 @@
-﻿using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Glav.CognitiveServices.FluentApi.Core.Contracts;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
 {

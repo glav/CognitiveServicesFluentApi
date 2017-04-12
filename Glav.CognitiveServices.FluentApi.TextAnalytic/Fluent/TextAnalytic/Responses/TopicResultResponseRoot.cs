@@ -1,4 +1,4 @@
-﻿using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.Contracts;
+﻿using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;

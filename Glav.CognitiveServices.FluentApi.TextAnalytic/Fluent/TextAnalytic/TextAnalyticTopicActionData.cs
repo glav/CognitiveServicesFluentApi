@@ -1,5 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.Contracts;
+﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System.Collections.Generic;
 using System.Text;
 

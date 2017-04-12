@@ -6,11 +6,11 @@ namespace Glav.CognitiveServices.FluentApi.Core
 {
     public static class ConfigurationBuilder
     {
-        public static ConfigurationSettings CreateUsingApiKey(string apiKey)
-        {
-            var config = new ConfigurationSettings(apiKey);
-            return config;
-        }
+        //public static ConfigurationSettings CreateUsingApiKey(string apiKey)
+        //{
+        //    var config = new ConfigurationSettings(apiKey);
+        //    return config;
+        //}
 
         public static AnalysisSettings UsingHttpCommunication(this ConfigurationSettings configSettings)
         {
