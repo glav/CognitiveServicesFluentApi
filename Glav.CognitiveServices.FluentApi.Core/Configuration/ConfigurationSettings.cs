@@ -6,25 +6,29 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 {
     public abstract class ConfigurationSettings
     {
+        private Dictionary<ApiActionCategory, string> _apiKeys = new Dictionary<ApiActionCategory, string>();
+        protected ConfigurationSettings()
+        {
 
-        public ConfigurationSettings(string apiKey, ApiServiceUrlFragmentsBase serviceUrls)
+        }
+        public ConfigurationSettings(ApiActionCategory apiCategory, string apiKey, ApiServiceUrlFragmentsBase serviceUrls)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
                 throw new ArgumentException("APIKey cannot be empty");
             }
             LocationKey = LocationKeys.WestUsa;
-            ApiKey = apiKey;
+            _apiKeys.Add(apiCategory, apiKey);
             ServiceUrls = serviceUrls;
         }
 
         public ConfigurationSettings(ConfigurationSettings settings)
         {
-            this.ApiKey = settings.ApiKey;
+            _apiKeys = settings.ApiKeys;
             this.LocationKey = settings.LocationKey;
             this.ServiceUrls = settings.ServiceUrls;
         }
-        public string ApiKey { get; protected set; }
+        public Dictionary<ApiActionCategory, string> ApiKeys => _apiKeys;
         public string LocationKey { get; protected set; }
         public ApiServiceUrlFragmentsBase ServiceUrls { get; protected set; }
         public string BaseUrl

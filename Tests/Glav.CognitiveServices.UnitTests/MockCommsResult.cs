@@ -1,5 +1,5 @@
-﻿using System;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Communication;
+﻿using Glav.CognitiveServices.FluentApi.Core.Communication;
+using System;
 using System.Net;
 
 namespace Glav.CognitiveServices.UnitTests

@@ -29,7 +29,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
             try
             {
-                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKey))
+                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[ApiActionCategory.TextAnalytics]))
                 {
                     var httpResult = await httpClient.PostAsync(uri, content);
                     return new CommunicationResult(httpResult);
@@ -44,7 +44,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         {
             try
             {
-                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKey))
+                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[ApiActionCategory.TextAnalytics]))
                 {
                     var httpResult = await httpClient.GetAsync(uri);
                     return new CommunicationResult(httpResult);

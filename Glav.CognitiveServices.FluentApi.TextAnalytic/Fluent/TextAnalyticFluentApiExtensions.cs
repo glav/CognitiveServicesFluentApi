@@ -1,10 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent;
+﻿using System.Collections.Generic;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
-using System.Linq;
 using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
@@ -14,7 +9,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
 {
     public static class TextAnalyticFluentApiExtensions
     {
-        public static async Task<AnalysisResults> AnalyseAllAsync(this AnalysisSettings apiAnalysisSettings)
+        public static async Task<TextAnalyticAnalysisResults> AnalyseAllSentimentsAsync(this AnalysisSettings apiAnalysisSettings)
         {
             var engine = new TextAnalyticAnalysisEngine(apiAnalysisSettings);
             return await engine.AnalyseAllAsync();

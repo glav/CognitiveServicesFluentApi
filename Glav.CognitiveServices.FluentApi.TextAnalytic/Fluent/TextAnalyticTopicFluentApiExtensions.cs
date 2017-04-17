@@ -50,7 +50,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
                     {
                         return result;
                     }
-                    System.Threading.Thread.Sleep(OperationStateQueryDelayInMilliseconds);
+
+                    await System.Threading.Tasks.Task.Delay(OperationStateQueryDelayInMilliseconds);
+                    //System.Threading.Thread.Sleep(OperationStateQueryDelayInMilliseconds);
                     if (stopWatch.ElapsedMilliseconds > timeoutInMilliseconds)
                     {
                         return OperationStatusResult.CreateTimeoutOperation(result.ApiCallResult);

@@ -2,8 +2,9 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent;
 using Xunit;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
 using System.Reflection;
-using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using System.Threading.Tasks;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
+using Glav.CognitiveServices.FluentApi.Core;
 
 namespace Glav.CognitiveServices.UnitTests
 {
@@ -38,12 +39,12 @@ namespace Glav.CognitiveServices.UnitTests
                 }
             }
 
-            var config = ConfigurationBuilder.CreateUsingApiKey("test")
+            var config = TextAnalyticConfigurationSettings.CreateUsingApiKey("test")
                 .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(testData)))
                 .WithKeyTopicAnalysis(testData);
 
 
-            var analysisResult = await config.AnalyseAllAsync();
+            var analysisResult = await config.AnalyseAllSentimentsAsync();
             var checkResult = await analysisResult.CheckTopicAnalysisStatusAsync();
 
             Assert.NotNull(checkResult);

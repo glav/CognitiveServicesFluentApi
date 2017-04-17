@@ -1,4 +1,6 @@
+using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
 using System;
@@ -14,10 +16,10 @@ namespace Glav.CognitiveServices.IntegrationTests
         [Fact]
         public async Task SimplePhraseTextShouldAnalyseAsAtLeastOneKeyPhrase()
         {
-            var result = await ConfigurationBuilder.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+            var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
                 .UsingHttpCommunication()
                 .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-                .AnalyseAllAsync();
+                .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis);
@@ -31,11 +33,11 @@ namespace Glav.CognitiveServices.IntegrationTests
         [Fact]
         public async Task SimplePhraseAndSentimentTextShouldAnalysBothItems()
         {
-            var result = await ConfigurationBuilder.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+            var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
                 .UsingHttpCommunication()
                 .WithSentimentAnalysis("I am having a terrible time.")
                 .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-                .AnalyseAllAsync();
+                .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticKeyPhraseAnalysis);
@@ -54,10 +56,10 @@ namespace Glav.CognitiveServices.IntegrationTests
         [Fact]
         public async Task SimplePhraseTextShouldAnalyseToEnglish()
         {
-            var result = await ConfigurationBuilder.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+            var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
                 .UsingHttpCommunication()
                 .WithKeyLanguageAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-                .AnalyseAllAsync();
+                .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.TextAnalyticLanguageAnalysis);

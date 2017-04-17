@@ -1,5 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Communication;
+﻿using Glav.CognitiveServices.FluentApi.Core.Communication;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.UnitTests

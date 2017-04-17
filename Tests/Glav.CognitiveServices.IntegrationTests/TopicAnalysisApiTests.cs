@@ -1,4 +1,6 @@
+using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
 using System;
@@ -16,7 +18,7 @@ namespace Glav.CognitiveServices.IntegrationTests
         [Fact]
         public async Task SimpleTopicsShouldAnalyseAndBeDetected()
         {
-            var config = ConfigurationBuilder.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+            var config = TextAnalyticConfigurationSettings.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
                 .UsingHttpCommunication();
 
             var asm = this.GetType().GetTypeInfo().Assembly;
@@ -31,7 +33,7 @@ namespace Glav.CognitiveServices.IntegrationTests
             //Build up at least 100 documents as the service requires a minimum of 100
             config.WithKeyTopicAnalysisSplittingDataIntoSentences(testData);
 
-            var analysisResult = await config.AnalyseAllAsync();
+            var analysisResult = await config.AnalyseAllSentimentsAsync();
 
             Assert.NotNull(analysisResult);
             Assert.NotNull(analysisResult.TextAnalyticTopicAnalysis);
