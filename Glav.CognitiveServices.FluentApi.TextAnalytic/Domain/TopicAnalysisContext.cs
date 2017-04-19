@@ -2,7 +2,7 @@
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
     public class TopicAnalysisContext : IApiAnalysisContext<TextAnalyticTopicActionData, TopicResult>
     {

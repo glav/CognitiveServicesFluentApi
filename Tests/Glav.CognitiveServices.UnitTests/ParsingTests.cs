@@ -1,10 +1,10 @@
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent;
 using Xunit;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
 using System.Reflection;
 using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 
 namespace Glav.CognitiveServices.UnitTests
 {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic.Responses
+﻿
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses
 {
     public sealed class LanguagesResultResponseItem
     {

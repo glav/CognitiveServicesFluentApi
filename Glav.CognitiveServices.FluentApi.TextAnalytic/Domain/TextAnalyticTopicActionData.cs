@@ -3,7 +3,7 @@ using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
     public sealed class TextAnalyticTopicActionData : IApiActionData
     {

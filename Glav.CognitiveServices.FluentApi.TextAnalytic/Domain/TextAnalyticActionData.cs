@@ -6,7 +6,7 @@ using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
     public sealed class TextAnalyticActionData: IApiActionData
     {

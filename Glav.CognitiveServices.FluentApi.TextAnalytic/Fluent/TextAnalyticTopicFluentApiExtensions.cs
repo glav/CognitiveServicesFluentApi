@@ -1,8 +1,7 @@
-﻿using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
 {

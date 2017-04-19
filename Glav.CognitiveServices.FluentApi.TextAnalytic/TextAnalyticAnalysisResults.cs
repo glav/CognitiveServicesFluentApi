@@ -1,20 +1,15 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public class TextAnalyticAnalysisResults
     {
-        private readonly AnalysisSettings _analysisSettings;
-
         public TextAnalyticAnalysisResults(AnalysisSettings analysisSettings)
         {
-            _analysisSettings = analysisSettings;
+            AnalysisSettings = analysisSettings;
         }
-        public AnalysisSettings AnalysisSettings { get { return _analysisSettings; } }
+        public AnalysisSettings AnalysisSettings { get; private set;}
 
         public SentimentAnalysisContext TextAnalyticSentimentAnalysis { get; private set; }
         public KeyPhraseAnalysisContext TextAnalyticKeyPhraseAnalysis { get; private set; }

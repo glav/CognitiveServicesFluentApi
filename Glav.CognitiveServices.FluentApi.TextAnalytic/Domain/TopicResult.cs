@@ -1,9 +1,9 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic.Responses;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
 using System;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
     public sealed class TopicResult : BaseResponseResult<TopicResultResponseRoot>
     {

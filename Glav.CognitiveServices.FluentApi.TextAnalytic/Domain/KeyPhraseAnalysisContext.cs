@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
-using Glav.CognitiveServices.FluentApi.Core.Configuration;
+﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
     public class KeyPhraseAnalysisContext : IApiAnalysisContext<TextAnalyticActionData, KeyPhraseResult>
     {

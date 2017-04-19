@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
     public sealed class OperationStatusQueryEngine
     {

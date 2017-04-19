@@ -1,13 +1,13 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic.Responses;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
 using System;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public sealed class KeyPhraseResult : BaseResponseResult<KeyPhraseResultResponseRoot>
+    public sealed class SentimentResult : BaseResponseResult<SentimentResultResponseRoot>
     {
-        public KeyPhraseResult(ICommunicationResult apiCallResult)
+        public SentimentResult(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             AddResultToCollection();
@@ -17,14 +17,14 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
         {
             if (ApiCallResult == null)
             {
-                ItemList.Add(new KeyPhraseResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } });
+                ItemList.Add(new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } } );
                 ActionSubmittedSuccessfully = false;
                 return;
             }
 
             try
             {
-                ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<KeyPhraseResultResponseRoot>(ApiCallResult.Data);
+                ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<SentimentResultResponseRoot>(ApiCallResult.Data);
                 if (ResponseData == null || ResponseData.documents == null || ResponseData.errors != null && ResponseData.errors.Length > 0)
                 {
                     ActionSubmittedSuccessfully = false;
@@ -33,7 +33,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
                 ActionSubmittedSuccessfully = true;
             } catch (Exception ex)
             {
-                ItemList.Add(new KeyPhraseResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } });
+                ItemList.Add(new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } });
                 ActionSubmittedSuccessfully = false;
             }
         }
