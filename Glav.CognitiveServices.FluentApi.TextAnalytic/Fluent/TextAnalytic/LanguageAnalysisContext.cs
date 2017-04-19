@@ -14,7 +14,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent.TextAnalytic
             AnalysisInput = actionData;
             AnalysisResult = analysisResult;
         }
-        public ApiActionType AnalysisType { get { return ApiActionType.TextAnalyticsSentiment; } }
+        public ApiActionType AnalysisType { get { return ApiActionType.TextAnalyticsLanguages; } }
 
         public TextAnalyticActionData AnalysisInput { get; private set; }
 
