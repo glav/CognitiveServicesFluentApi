@@ -6,7 +6,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
     {
         public EmotionServiceConfig()
         {
-            Version = TEXT_ANALYTIC_VERSION;
+            Version = "v2.0";
             Template = "emotion/{0}";
         }
 

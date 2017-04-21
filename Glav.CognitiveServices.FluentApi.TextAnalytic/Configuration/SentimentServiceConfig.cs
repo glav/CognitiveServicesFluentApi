@@ -7,7 +7,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
     {
         public SentimentServiceConfig()
         {
-            Version = TEXT_ANALYTIC_VERSION;
+            Version = ApiConstants.TEXT_ANALYTIC_VERSION;
             Template = "text/analytics/{0}/sentiment";
         }
 
