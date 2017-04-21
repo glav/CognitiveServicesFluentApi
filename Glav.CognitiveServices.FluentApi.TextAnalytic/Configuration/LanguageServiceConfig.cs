@@ -7,7 +7,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
     {
         public LanguageServiceConfig()
         {
-            Version = TEXT_ANALYTIC_VERSION;
+            Version = ApiConstants.TEXT_ANALYTIC_VERSION;
             Template = "text/analytics/{0}/languages";
         }
 
