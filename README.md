@@ -28,11 +28,6 @@ You can also chain operations:
 ```c#
 var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-key")
     .UsingHttpCommunication()
-    .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-    .AnalyseAllSentimentsAsync();
-
-var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-key")
-    .UsingHttpCommunication()
     .WithSentimentAnalysis("I am having a terrible time.")
     .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
     .AnalyseAllSentimentsAsync();
