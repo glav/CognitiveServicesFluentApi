@@ -21,7 +21,7 @@ var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-k
     .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
     .AnalyseAllSentimentsAsync();
 
-var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-key")
     .UsingHttpCommunication()
     .WithSentimentAnalysis("I am having a terrible time.")
     .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
@@ -32,7 +32,7 @@ Assert.Equal<string>("basic sentence", result.TextAnalyticKeyPhraseAnalysis.Anal
 
 You can also chain operations:
 ```c#
-var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-key")
     .UsingHttpCommunication()
     .WithSentimentAnalysis("I am having a terrible time.")
     .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
