@@ -2,13 +2,13 @@
 
 namespace Glav.CognitiveServices.FluentApi.Emotion.Configuration
 {
-    public class EmotionServiceConfig : BaseApiServiceUriFragment
+    public class EmotionImageRecognitionServiceConfig : BaseApiServiceUriFragment
     {
 
-        public EmotionServiceConfig()
+        public EmotionImageRecognitionServiceConfig()
         {
             Version = ApiConstants.EMOTION_VERSION;
-            Template = "emotion/{0}";
+            Template = "emotion/{0}/recognize";
         }
 
     }

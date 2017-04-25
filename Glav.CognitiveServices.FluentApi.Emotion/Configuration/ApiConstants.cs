@@ -6,6 +6,6 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Configuration
 {
     public static class ApiConstants
     {
-        public const string EMOTION_VERSION = "v2.0";
+        public const string EMOTION_VERSION = "v1.0";
     }
 }
