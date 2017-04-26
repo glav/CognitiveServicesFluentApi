@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Glav.CognitiveServices.FluentApi.Core": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "BuildConfiguration": "development"
+      }
+    }
+  }
+}
