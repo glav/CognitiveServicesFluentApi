@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Glav.CognitiveServices.IntegrationTests
+namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
 {
     public class KeyPhraseAnalysisApiTests
     {

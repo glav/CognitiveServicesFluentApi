@@ -6,7 +6,7 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 
-namespace Glav.CognitiveServices.UnitTests
+namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
     public class ParsingTests
     {
