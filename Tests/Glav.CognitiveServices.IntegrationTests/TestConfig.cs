@@ -33,7 +33,7 @@ namespace Glav.CognitiveServices.IntegrationTests
 
                         if (Environment.GetEnvironmentVariable("BuildConfiguration") == "development")
                         {
-                            builder.AddJsonFile("appsettings.local.json");
+                            //TODO: User secrets
                         }
 
                         Configuration = builder.Build();
