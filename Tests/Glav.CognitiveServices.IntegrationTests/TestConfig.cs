@@ -28,9 +28,16 @@ namespace Glav.CognitiveServices.IntegrationTests
                     try
                     {
                         var builder = new ConfigurationBuilder()
-                        .AddJsonFile("appsettings.json");
+                        .AddJsonFile("appsettings.json")
+                        .AddEnvironmentVariables();
+
+                        if (Environment.GetEnvironmentVariable("BuildConfiguration") == "development")
+                        {
+                            //TODO: User secrets
+                        }
 
                         Configuration = builder.Build();
+                        
                     } catch (Exception ex)
                     {
                         Debug.WriteLine("No appsettings.json file or it was invalid.");

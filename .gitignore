@@ -6,6 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+Tests/Glav.CognitiveServices.IntegrationTests/appsettings.local.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
