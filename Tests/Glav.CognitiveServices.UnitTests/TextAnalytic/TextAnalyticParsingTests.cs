@@ -8,7 +8,7 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
-    public class ParsingTests
+    public class TextAnalyticParsingTests
     {
         [Fact]
         public void ShouldParseResultSuccessfully()
