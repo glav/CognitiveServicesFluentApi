@@ -9,6 +9,13 @@ namespace Glav.CognitiveServices.UnitTests
         public MockCommsResult(string data)
         {
             Data = data;
+            StatusCode = HttpStatusCode.OK;
+        }
+
+        public MockCommsResult(string data, HttpStatusCode statusCodeToReturn) : this(data)
+        {
+            StatusCode = statusCodeToReturn;
+
         }
         public string Data { get; set; }
 
@@ -20,7 +27,7 @@ namespace Glav.CognitiveServices.UnitTests
 
         public Guid RequestId => Guid.NewGuid();
 
-        public HttpStatusCode StatusCode => HttpStatusCode.OK;
+        public HttpStatusCode StatusCode { get; private set; }
 
         public bool Successfull => true;
     }
