@@ -33,7 +33,7 @@ namespace Glav.CognitiveServices.IntegrationTests
 
                         if (Environment.GetEnvironmentVariable("BuildConfiguration") == "development")
                         {
-                            //TODO: User secrets
+                            //TODO: User secrets - perhaps load in apikeys from environ vars
                         }
 
                         Configuration = builder.Build();

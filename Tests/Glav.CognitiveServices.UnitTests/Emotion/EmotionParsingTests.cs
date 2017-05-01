@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
                 ",     \"scores\": {       \"anger\": 0.00300731952,       \"contempt\": 5.14648448E-08,       \"disgust\": 9.180124E-06," +
                 "       \"fear\": 0.0001912825,       \"happiness\": 0.9875571,       \"neutral\": 0.0009861537,       \"sadness\": 1.889955E-05," +
                 "       \"surprise\": 0.008229999     }   } ]";
-            var result = new EmotionImageRecognitionResult(new MockCommsResult(input));
+            var result = new ImageRecognitionResult(new MockCommsResult(input));
 
             Assert.NotNull(result);
             Assert.NotNull(result.ApiCallResult);
@@ -51,7 +51,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
         {
             // Simulate error response with error data and http code
             var input = "{  \"error\": {    \"code\": \"BadBody\",    \"message\": \"Invalid face image.\"  }    }";
-            var result = new EmotionImageRecognitionResult(new MockCommsResult(input,System.Net.HttpStatusCode.BadRequest)); 
+            var result = new ImageRecognitionResult(new MockCommsResult(input,System.Net.HttpStatusCode.BadRequest)); 
 
             Assert.NotNull(result);
             Assert.NotNull(result.ApiCallResult);
