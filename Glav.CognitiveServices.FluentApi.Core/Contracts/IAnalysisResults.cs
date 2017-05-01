@@ -6,5 +6,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
     public interface IAnalysisResults
     {
+        AnalysisSettings AnalysisSettings { get;}
     }
 }
