@@ -3,23 +3,22 @@ using System;
 using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
+using Glav.CognitiveServices.FluentApi.Core.Contracts;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
-    public sealed class TextAnalyticAnalysisEngine
+    public sealed class TextAnalyticAnalysisEngine : IAnalysisEngine<TextAnalyticAnalysisResults>
     {
-        private readonly AnalysisSettings _analysisSettings;
-
         public TextAnalyticAnalysisEngine(AnalysisSettings analysisSettings)
         {
-            _analysisSettings = analysisSettings;
+            AnalysisSettings = analysisSettings;
         }
 
-        public AnalysisSettings AnalysisSettings { get { return _analysisSettings; } }
+        public AnalysisSettings AnalysisSettings { get; private set; }
 
         public async Task<TextAnalyticAnalysisResults> AnalyseAllAsync()
         {
-            var apiResults = new TextAnalyticAnalysisResults(_analysisSettings);
+            var apiResults = new TextAnalyticAnalysisResults(AnalysisSettings);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsSentiment);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsKeyphrases);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsLanguages);
@@ -28,12 +27,13 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return apiResults;
         }
 
+
         private async Task AnalyseAllAsyncForAction(TextAnalyticAnalysisResults apiResults, ApiActionType apiAction)
         {
-            if (_analysisSettings.ActionsToPerform.ContainsKey(apiAction))
+            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction))
             {
                 string payload = null;
-                var actions = _analysisSettings.ActionsToPerform[apiAction];
+                var actions = AnalysisSettings.ActionsToPerform[apiAction];
                 if (apiAction == ApiActionType.TextAnalyticsTopics)
                 {
                     payload = (actions as TextAnalyticTopicActionData).ToString();
@@ -42,7 +42,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
                     payload = (actions as TextAnalyticActionData).ToString();
                 }
 
-                var result = await _analysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload);
+                var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload);
 
                 switch (apiAction)
                 {

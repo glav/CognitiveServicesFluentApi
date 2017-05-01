@@ -1,9 +1,10 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
-    public class TextAnalyticAnalysisResults
+    public class TextAnalyticAnalysisResults : IAnalysisResults
     {
         public TextAnalyticAnalysisResults(AnalysisSettings analysisSettings)
         {

@@ -4,7 +4,7 @@ using Glav.CognitiveServices.FluentApi.Core.Communication;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
-    public abstract class BaseResponseResult<T> : IApiAnalysisResult<T> where T : IActionResponseRoot
+    public abstract class BaseResponseResult<T> : IApiRequestResult<T> where T : IActionResponseRoot
     {
         protected List<T> _itemList = new List<T>();
 

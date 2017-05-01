@@ -2,7 +2,7 @@
 
 namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
-    public interface IApiAnalysisResult<T> : IApiCallResult where T : IActionResponseRoot
+    public interface IApiRequestResult<T> : IApiCallResult where T : IActionResponseRoot
     {
         T ResponseData { get;  }
 

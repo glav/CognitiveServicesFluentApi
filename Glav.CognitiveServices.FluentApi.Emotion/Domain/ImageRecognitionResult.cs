@@ -8,7 +8,7 @@ using Glav.CognitiveServices.FluentApi.Core;
 
 namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
 {
-    public sealed class ImageRecognitionResult : IApiAnalysisResult<EmotionImageRecognitionResponseRoot>
+    public sealed class ImageRecognitionResult : IApiRequestResult<EmotionImageRecognitionResponseRoot>
     {
         public ImageRecognitionResult(ICommunicationResult apiCallResult)
         {
