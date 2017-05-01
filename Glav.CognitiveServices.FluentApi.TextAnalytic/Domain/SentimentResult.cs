@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         {
             if (ApiCallResult == null)
             {
-                ItemList.Add(new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } } );
+                ResponseData = new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } };
                 ActionSubmittedSuccessfully = false;
                 return;
             }
@@ -33,7 +33,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
                 ActionSubmittedSuccessfully = true;
             } catch (Exception ex)
             {
-                ItemList.Add(new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } });
+                ResponseData = new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } };
                 ActionSubmittedSuccessfully = false;
             }
         }

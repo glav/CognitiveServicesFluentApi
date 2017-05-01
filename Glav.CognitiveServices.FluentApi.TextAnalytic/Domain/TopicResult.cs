@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         {
             if (ApiCallResult == null)
             {
-                ItemList.Add(new TopicResultResponseRoot { code = "BadRequest", message = "No data returned." });
+                ResponseData = new TopicResultResponseRoot { code = "BadRequest", message = "No data returned." };
                 ActionSubmittedSuccessfully = false;
                 return;
             }
@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             if (ApiCallResult.OperationLocationUri == null)
             {
                 ActionSubmittedSuccessfully = false;
-                ItemList.Add(new TopicResultResponseRoot { code = "BadRequest", message = "Bad request. Probably badly formatted request." });
+                ResponseData = new TopicResultResponseRoot { code = "BadRequest", message = "Bad request. Probably badly formatted request." };
                 return;
             }
 
@@ -41,7 +41,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             }
             catch (Exception ex)
             {
-                ItemList.Add(new TopicResultResponseRoot { code = "BadRequest", message = $"Error parsing result: [{ex.Message}]" });
+                ResponseData = new TopicResultResponseRoot { code = "BadRequest", message = $"Error parsing result: [{ex.Message}]" };
                 ActionSubmittedSuccessfully = false;
             }
 

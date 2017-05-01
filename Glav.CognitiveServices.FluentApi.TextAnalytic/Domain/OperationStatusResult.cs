@@ -20,7 +20,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         {
             if (ApiCallResult == null)
             {
-                ItemList.Add(new OperationStatusResultResponseRoot { status=OperationStatusResponseMessages.StatusFailed,  message = "No data returned." });
+                ResponseData = new OperationStatusResultResponseRoot { status=OperationStatusResponseMessages.StatusFailed,  message = "No data returned." };
                 ActionSubmittedSuccessfully = false;
                 return;
             }
@@ -46,7 +46,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             } catch (Exception ex)
             {
                 OperationState = OperationStateType.Failed;
-                ItemList.Add(new OperationStatusResultResponseRoot { status = OperationStatusResponseMessages.StatusFailed, message = $"Error parsing results: {ex.Message}" });
+                ResponseData = new OperationStatusResultResponseRoot { status = OperationStatusResponseMessages.StatusFailed, message = $"Error parsing results: {ex.Message}" };
                 ActionSubmittedSuccessfully = false;
             }
         }
