@@ -8,15 +8,13 @@ using Glav.CognitiveServices.FluentApi.Core;
 
 namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
 {
-    public sealed class ImageRecognitionResult : IApiRequestResult<EmotionImageRecognitionResponseRoot>
+    public sealed class ImageRecognitionResult : BaseResponseResult<EmotionImageRecognitionResponseRoot>
     {
         public ImageRecognitionResult(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             ParseResponseData();
         }
-
-        public EmotionImageRecognitionResponseRoot ResponseData { get; private set; }
 
         private void ParseResponseData()
         {
@@ -52,9 +50,5 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
                 ActionSubmittedSuccessfully = false;
             }
         }
-
-        public bool ActionSubmittedSuccessfully { get; private set; }
-
-        public ICommunicationResult ApiCallResult { get; private set; }
     }
 }
