@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
+using Glav.CognitiveServices.UnitTests.Helpers;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
     public class TextAnalyticParsingTests
     {
+        private TestDataHelper _dataHelper = new TestDataHelper();
+
         [Fact]
         public void ShouldParseResultSuccessfully()
         {
@@ -29,21 +32,11 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         [Fact]
         public async Task ShouldParseTopicResultWithSucceededResponseAsync()
         {
-            var asm = this.GetType().GetTypeInfo().Assembly;
-            string testData;
-            using (var stream = asm.GetManifestResourceStream("Glav.CognitiveServices.UnitTests.TestData.topic-api-raw-result.json"))
-            {
-                using (var sr = new System.IO.StreamReader(stream))
-                {
-                    testData = sr.ReadToEnd();
-                }
-            }
+            var testData = _dataHelper.GetFileDataEmbeddedInAssembly("topic-api-raw-result.json");
 
             var config = TextAnalyticConfigurationSettings.CreateUsingApiKey("test")
                 .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(testData)))
                 .WithKeyTopicAnalysis(testData);
-
-
             var analysisResult = await config.AnalyseAllSentimentsAsync();
             var checkResult = await analysisResult.CheckTopicAnalysisStatusAsync();
 
