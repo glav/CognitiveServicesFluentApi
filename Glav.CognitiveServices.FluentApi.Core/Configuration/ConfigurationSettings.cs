@@ -17,7 +17,18 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             {
                 throw new ArgumentException("APIKey cannot be empty");
             }
-            LocationKey = LocationKeys.WestUsa;
+            LocationKey = LocationKeyIdentifier.WestUs; // almost all services are available in this region
+            _apiKeys.Add(apiCategory, apiKey);
+            ServiceUrls = serviceUrls;
+        }
+
+        public ConfigurationSettings(ApiActionCategory apiCategory, string apiKey, LocationKeyIdentifier locationKey, ApiServiceUrlFragmentsBase serviceUrls)
+        {
+            if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                throw new ArgumentException("APIKey cannot be empty");
+            }
+            LocationKey = locationKey;
             _apiKeys.Add(apiCategory, apiKey);
             ServiceUrls = serviceUrls;
         }
@@ -29,13 +40,13 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             this.ServiceUrls = settings.ServiceUrls;
         }
         public Dictionary<ApiActionCategory, string> ApiKeys => _apiKeys;
-        public string LocationKey { get; protected set; }
+        public LocationKeyIdentifier LocationKey { get; protected set; }
         public ApiServiceUrlFragmentsBase ServiceUrls { get; protected set; }
         public string BaseUrl
         {
             get
             {
-                return string.Format(ApiServiceUrlFragmentsBase.BASE_URL_TEMPLATE, LocationKey);
+                return string.Format(ApiServiceUrlFragmentsBase.BASE_URL_TEMPLATE, LocationKey.ToTextLocation());
             }
         }
     }

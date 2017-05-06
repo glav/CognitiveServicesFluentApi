@@ -4,8 +4,13 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 {
-    public static class LocationKeys
+    public enum LocationKeyIdentifier
     {
-        public const string WestUsa = "westus";
+        WestUs,
+        EastUs2,
+        SouthEastAsia,
+        WestCentralUs,
+        WestEurope
     }
+   
 }
