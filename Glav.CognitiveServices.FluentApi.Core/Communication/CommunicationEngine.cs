@@ -24,12 +24,12 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
 
         public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload)
         {
-            //var uri = _configurationSettings.BaseUrl + TextAnalyticUrlExtensions.ApiServiceUrl(apiActionType);
-            var uri = string.Format("{0}{1}", _configurationSettings.BaseUrl,_configurationSettings.ServiceUrls.GetServiceConfig(apiActionType).ServiceUri);
+            var svcConfig = _configurationSettings.ServiceUrls.GetServiceConfig(apiActionType);
+            var uri = string.Format("{0}{1}", _configurationSettings.BaseUrl,svcConfig.ServiceUri);
             var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
             try
             {
-                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[ApiActionCategory.TextAnalytics]))
+                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[svcConfig.ApiCategory]))
                 {
                     var httpResult = await httpClient.PostAsync(uri, content);
                     return new CommunicationResult(httpResult);
@@ -40,11 +40,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                 return CommunicationResult.Fail(ex.Message);
             }
         }
-        public async Task<ICommunicationResult> CallServiceAsync(string uri)
+        public async Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory)
         {
             try
             {
-                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[ApiActionCategory.TextAnalytics]))
+                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory]))
                 {
                     var httpResult = await httpClient.GetAsync(uri);
                     return new CommunicationResult(httpResult);

@@ -7,8 +7,8 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
 {
     public class TextAnalyticConfigurationSettings : ConfigurationSettings
     {
-        public TextAnalyticConfigurationSettings(string apiKey) 
-                : base(ApiActionCategory.TextAnalytics,apiKey, new ApiServiceUrlFragments())
+        public TextAnalyticConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey) 
+                : base(ApiActionCategory.TextAnalytics,apiKey, locationKey, new ApiServiceUrlFragments())
         {
         }
 
@@ -16,9 +16,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
         {
         }
 
-        public static TextAnalyticConfigurationSettings CreateUsingApiKey(string apiKey)
+        public static TextAnalyticConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey)
         {
-            return new TextAnalyticConfigurationSettings(apiKey);
+            return new TextAnalyticConfigurationSettings(apiKey,locationKey);
         }
     }
 }

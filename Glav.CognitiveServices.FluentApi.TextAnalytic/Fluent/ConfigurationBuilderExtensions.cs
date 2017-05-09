@@ -8,9 +8,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
 {
     public static class ConfigurationBuilderExtensions
     {
-        public static ConfigurationSettings CreateUsingApiKeyForTextAnalytics(this TextAnalyticConfigurationSettings configSettings, string apiKey)
+        public static ConfigurationSettings CreateUsingConfigurationKeysForTextAnalytics(this TextAnalyticConfigurationSettings configSettings, string apiKey, LocationKeyIdentifier locationKey)
         {
-            var config = new TextAnalyticConfigurationSettings(apiKey);
+            var config = new TextAnalyticConfigurationSettings(apiKey, locationKey);
             return config;
         }
 

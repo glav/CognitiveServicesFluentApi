@@ -6,6 +6,7 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using Glav.CognitiveServices.UnitTests.Helpers;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
@@ -34,7 +35,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         {
             var testData = _dataHelper.GetFileDataEmbeddedInAssembly("topic-api-raw-result.json");
 
-            var config = TextAnalyticConfigurationSettings.CreateUsingApiKey("test")
+            var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
                 .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(testData)))
                 .WithKeyTopicAnalysis(testData);
             var analysisResult = await config.AnalyseAllSentimentsAsync();

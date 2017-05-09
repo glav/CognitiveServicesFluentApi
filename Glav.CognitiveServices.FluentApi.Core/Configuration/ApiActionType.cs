@@ -14,4 +14,5 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         EmotionImageRecognition,
         Speech
     }
+
 }

@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.UnitTests
             return Task.FromResult<ICommunicationResult>(_mockResult);
         }
 
-        public Task<ICommunicationResult> CallServiceAsync(string uri)
+        public Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory)
         {
             return Task.FromResult<ICommunicationResult>(_mockResult);
         }

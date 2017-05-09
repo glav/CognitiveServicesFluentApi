@@ -6,6 +6,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
     public interface ICommunicationEngine
     {
         Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload);
-        Task<ICommunicationResult> CallServiceAsync(string uri);
+        Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory);
     }
 }

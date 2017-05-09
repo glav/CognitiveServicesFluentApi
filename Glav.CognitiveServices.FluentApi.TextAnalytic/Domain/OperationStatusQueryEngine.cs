@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
@@ -14,7 +15,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         public async Task<OperationStatusResult> CheckOperationStatus()
         {
             var commsEngine = _analysisResults.AnalysisSettings.CommunicationEngine;
-            var serviceResult = await commsEngine.CallServiceAsync(_analysisResults.TextAnalyticTopicAnalysis.AnalysisResult.ApiCallResult.OperationLocationUri.AbsoluteUri);
+            var serviceResult = await commsEngine.CallServiceAsync(_analysisResults.TextAnalyticTopicAnalysis.AnalysisResult.ApiCallResult.OperationLocationUri.AbsoluteUri, ApiActionCategory.TextAnalytics);
             var result = new OperationStatusResult(serviceResult);
             return result;
         }

@@ -1,4 +1,5 @@
 using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
@@ -16,7 +17,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         [Fact]
         public async Task SimplePhraseTextShouldAnalyseAsAtLeastOneKeyPhrase()
         {
-            var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+            var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
                 .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
                 .AnalyseAllSentimentsAsync();
@@ -33,7 +34,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         [Fact]
         public async Task SimplePhraseAndSentimentTextShouldAnalysBothItems()
         {
-            var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+            var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
                 .WithSentimentAnalysis("I am having a terrible time.")
                 .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
@@ -56,7 +57,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         [Fact]
         public async Task SimplePhraseTextShouldAnalyseToEnglish()
         {
-            var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey(TestConfig.TextAnalyticsApiKey)
+            var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
                 .WithKeyLanguageAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
                 .AnalyseAllSentimentsAsync();

@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
+namespace Glav.CognitiveServices.FluentApi.Emotion.Configuration
 {
     public class EmotionConfigurationSettings : ConfigurationSettings
     {
-        public EmotionConfigurationSettings(string apiKey) 
-                : base(ApiActionCategory.Emotion,apiKey, new ApiServiceUrlFragments())
+        public EmotionConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey) 
+                : base(ApiActionCategory.Emotion,apiKey,locationKey, new ApiServiceUrlFragments())
         {
         }
 
@@ -17,9 +17,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
         {
         }
 
-        public static EmotionConfigurationSettings CreateUsingApiKey(string apiKey)
+        public static EmotionConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey)
         {
-            return new EmotionConfigurationSettings(apiKey);
+            return new EmotionConfigurationSettings(apiKey, locationKey);
         }
     }
 }

@@ -1,16 +1,13 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Glav.CognitiveServices.FluentApi.Emotion.Configuration;
 
 namespace Glav.CognitiveServices.FluentApi.Emotion.Fluent
 {
     public static class ConfigurationBuilderExtensions
     {
-        public static ConfigurationSettings CreateUsingApiKeyForEmotion(this EmotionConfigurationSettings configSettings, string apiKey)
+        public static ConfigurationSettings CreateUsingConfigurationKeysForEmotion(this EmotionConfigurationSettings configSettings, string apiKey, LocationKeyIdentifier locationKey)
         {
-            var config = new EmotionConfigurationSettings(apiKey);
+            var config = new EmotionConfigurationSettings(apiKey,locationKey);
             return config;
         }
 
