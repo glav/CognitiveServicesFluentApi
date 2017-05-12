@@ -1,5 +1,6 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Emotion.Configuration;
 using Glav.CognitiveServices.FluentApi.Emotion.Domain;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,18 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Fluent
 {
     public static class EmotionFluentApiExtensions
     {
-        public static AnalysisSettings WithImageRecognition(this AnalysisSettings apiAnalysis, string url)
+        public static EmotionAnalysisSettings AddImageRecognition(this EmotionAnalysisSettings apiAnalysis, string url)
         {
             apiAnalysis.ActionsToPerform.Add(ApiActionType.EmotionImageRecognition, new EmotionActionData(new Uri(url)));
             return apiAnalysis;
         }
-        public static AnalysisSettings WithImageRecognition(this AnalysisSettings apiAnalysis, Uri uri)
+        public static EmotionAnalysisSettings AddImageRecognition(this EmotionAnalysisSettings apiAnalysis, Uri uri)
         {
             apiAnalysis.ActionsToPerform.Add(ApiActionType.EmotionImageRecognition, new EmotionActionData(uri));
             return apiAnalysis;
         }
 
-        public static async Task<EmotionAnalysisResults> AnalyseAllEmotionsAsync(this AnalysisSettings apiAnalysisSettings)
+        public static async Task<EmotionAnalysisResults> AnalyseAllEmotionsAsync(this EmotionAnalysisSettings apiAnalysisSettings)
         {
             var engine = new EmotionAnalysisEngine(apiAnalysisSettings);
             return await engine.AnalyseAllAsync();

@@ -17,7 +17,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         public async Task SimpleTopicsShouldAnalyseAndBeDetected()
         {
             var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
-                .UsingHttpCommunication();
+                .UsingHttpCommunication()
+                .WithTextAnalyticAnalysisActions();
 
             var asm = this.GetType().GetTypeInfo().Assembly;
             string testData;
@@ -29,7 +30,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 }
             }
             //Build up at least 100 documents as the service requires a minimum of 100
-            config.WithKeyTopicAnalysisSplittingDataIntoSentences(testData);
+            config.AddKeyTopicAnalysisSplittingDataIntoSentences(testData);
 
             var analysisResult = await config.AnalyseAllSentimentsAsync();
 

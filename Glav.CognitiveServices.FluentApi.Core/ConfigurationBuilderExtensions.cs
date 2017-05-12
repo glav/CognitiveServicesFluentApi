@@ -1,21 +1,20 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Communication;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
     public static class ConfigurationBuilderExtensions
     {
-        public static AnalysisSettings UsingHttpCommunication(this ConfigurationSettings configSettings)
+        public static CoreAnalysisSettings UsingHttpCommunication(this ConfigurationSettings configSettings)
         {
-            return new AnalysisSettings(configSettings, new CommunicationEngine(configSettings));
+            return new CoreAnalysisSettings(configSettings, new HttpCommunicationEngine(configSettings));
         }
 
-        public static AnalysisSettings UsingCustomCommunication(this ConfigurationSettings configSettings, ICommunicationEngine communicationEngine)
+        public static CoreAnalysisSettings UsingCustomCommunication(this ConfigurationSettings configSettings, ICommunicationEngine communicationEngine)
         {
-            return new AnalysisSettings(configSettings, communicationEngine);
+            return new CoreAnalysisSettings(configSettings, communicationEngine);
         }
-
-
     }
 }

@@ -5,7 +5,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
     public interface IAnalysisEngine<T> where T : IAnalysisResults
     {
-        AnalysisSettings AnalysisSettings { get; }
+        CoreAnalysisSettings AnalysisSettings { get; }
 
         Task<T> AnalyseAllAsync();
     }

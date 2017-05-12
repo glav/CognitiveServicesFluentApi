@@ -6,11 +6,11 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public class TextAnalyticAnalysisResults : IAnalysisResults
     {
-        public TextAnalyticAnalysisResults(AnalysisSettings analysisSettings)
+        public TextAnalyticAnalysisResults(CoreAnalysisSettings analysisSettings)
         {
             AnalysisSettings = analysisSettings;
         }
-        public AnalysisSettings AnalysisSettings { get; private set;}
+        public CoreAnalysisSettings AnalysisSettings { get; private set;}
 
         public SentimentAnalysisContext TextAnalyticSentimentAnalysis { get; private set; }
         public KeyPhraseAnalysisContext TextAnalyticKeyPhraseAnalysis { get; private set; }

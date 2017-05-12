@@ -11,11 +11,11 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
 {
     public class EmotionAnalysisEngine : IAnalysisEngine<EmotionAnalysisResults>
     {
-        public EmotionAnalysisEngine(AnalysisSettings analysisSettings)
+        public EmotionAnalysisEngine(CoreAnalysisSettings analysisSettings)
         {
             AnalysisSettings = analysisSettings;
         }
-        public AnalysisSettings AnalysisSettings { get; private set; }
+        public CoreAnalysisSettings AnalysisSettings { get; private set; }
 
         public async Task<EmotionAnalysisResults> AnalyseAllAsync()
         {

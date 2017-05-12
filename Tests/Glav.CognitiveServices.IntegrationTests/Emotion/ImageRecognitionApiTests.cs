@@ -1,9 +1,7 @@
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Emotion.Configuration;
-using Glav.CognitiveServices.FluentApi.Emotion.Domain;
 using Glav.CognitiveServices.FluentApi.Emotion.Fluent;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -16,7 +14,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Emotion
         {
             var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.EmotionApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
-                .WithImageRecognition("http://www.scface.org/examples/001_frontal.jpg")
+                .WithEmotionAnalysisActions()
+                .AddImageRecognition("http://www.scface.org/examples/001_frontal.jpg")
                 //.WithImageRecognition("http://www.cse.oulu.fi/wsgi/CMV/Downloads/Pbfd?action=AttachFile&do=get&target=hh.jpg")
                 .AnalyseAllEmotionsAsync();
 
@@ -27,7 +26,6 @@ namespace Glav.CognitiveServices.IntegrationTests.Emotion
             Assert.NotNull(result.ImageRecognitionAnalysis.AnalysisResult.ResponseData);
             Assert.True(result.ImageRecognitionAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
             Assert.NotEmpty(result.ImageRecognitionAnalysis.AnalysisResult.ResponseData.faces);
-            
         }
 
 

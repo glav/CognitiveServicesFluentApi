@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Communication
 {
-    internal class CommunicationEngine : ICommunicationEngine
+    internal class HttpCommunicationEngine : ICommunicationEngine
     {
         private readonly ConfigurationSettings _configurationSettings;
 
-        public CommunicationEngine(ConfigurationSettings configurationSettings)
+        public HttpCommunicationEngine(ConfigurationSettings configurationSettings)
         {
             _configurationSettings = configurationSettings;
         }
@@ -29,7 +29,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
             try
             {
-                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[svcConfig.ApiCategory]))
+                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[svcConfig.ApiCategory]))
                 {
                     var httpResult = await httpClient.PostAsync(uri, content);
                     return new CommunicationResult(httpResult);
@@ -44,7 +44,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         {
             try
             {
-                using (var httpClient = CommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory]))
+                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory]))
                 {
                     var httpResult = await httpClient.GetAsync(uri);
                     return new CommunicationResult(httpResult);

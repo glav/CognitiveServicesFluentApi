@@ -6,20 +6,25 @@ using System.Collections.Generic;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
-    public sealed class AnalysisSettings
+    public class CoreAnalysisSettings : IAnalysisSettings
     {
-        private readonly ICommunicationEngine _communicationEngine;
-
-        public AnalysisSettings(ConfigurationSettings settings, ICommunicationEngine communicationEngine)
+        public CoreAnalysisSettings(ConfigurationSettings settings, ICommunicationEngine communicationEngine)
         {
             ActionsToPerform = new Dictionary<ApiActionType, IApiActionData>();
             ConfigurationSettings = settings;
-            _communicationEngine = communicationEngine;
+            CommunicationEngine = communicationEngine;
+        }
+
+        public CoreAnalysisSettings(IAnalysisSettings analysisSettings)
+        {
+            ActionsToPerform = analysisSettings.ActionsToPerform;
+            ConfigurationSettings = analysisSettings.ConfigurationSettings;
+            CommunicationEngine = analysisSettings.CommunicationEngine;
         }
 
         public ConfigurationSettings ConfigurationSettings { get; private set; }
         public Dictionary<ApiActionType,IApiActionData> ActionsToPerform { get; private set; }
-        public ICommunicationEngine CommunicationEngine { get { return _communicationEngine; }}
+        public ICommunicationEngine CommunicationEngine { get; private set; }
        
     }
 

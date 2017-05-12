@@ -16,7 +16,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
-                .WithSentimentAnalysis("I am having a fantastic time.")
+                .WithTextAnalyticAnalysisActions()
+                .AddSentimentAnalysis("I am having a fantastic time.")
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
@@ -33,7 +34,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
-                .WithSentimentAnalysis("I am having a fantastic time.")
+                .WithTextAnalyticAnalysisActions()
+                .AddSentimentAnalysis("I am having a fantastic time.")
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
@@ -55,7 +57,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
-                .WithSentimentAnalysis("I am having a terrible time.")
+                .WithTextAnalyticAnalysisActions()
+                .AddSentimentAnalysis("I am having a terrible time.")
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
@@ -72,7 +75,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
-                .WithSentimentAnalysis("I am having a terrible time.")
+                .WithTextAnalyticAnalysisActions()
+                .AddSentimentAnalysis("I am having a terrible time.")
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);

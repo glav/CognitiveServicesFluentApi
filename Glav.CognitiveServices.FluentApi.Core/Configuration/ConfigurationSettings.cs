@@ -11,16 +11,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         {
 
         }
-        //public ConfigurationSettings(ApiActionCategory apiCategory, string apiKey, ApiServiceUrlFragmentsBase serviceUrls)
-        //{
-        //    if (string.IsNullOrWhiteSpace(apiKey))
-        //    {
-        //        throw new ArgumentException("APIKey cannot be empty");
-        //    }
-        //    LocationKey = LocationKeyIdentifier.WestUs; // almost all services are available in this region
-        //    _apiKeys.Add(apiCategory, apiKey);
-        //    ServiceUrls = serviceUrls;
-        //}
 
         public ConfigurationSettings(ApiActionCategory apiCategory, string apiKey, LocationKeyIdentifier locationKey, ApiServiceUrlFragmentsBase serviceUrls)
         {

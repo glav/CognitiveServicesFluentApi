@@ -37,7 +37,8 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 
             var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
                 .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(testData)))
-                .WithKeyTopicAnalysis(testData);
+                .WithTextAnalyticAnalysisActions()
+                .AddKeyTopicAnalysis(testData);
             var analysisResult = await config.AnalyseAllSentimentsAsync();
             var checkResult = await analysisResult.CheckTopicAnalysisStatusAsync();
 

@@ -9,11 +9,11 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
 {
     public class EmotionAnalysisResults : IAnalysisResults
     {
-        public EmotionAnalysisResults(AnalysisSettings analysisSettings)
+        public EmotionAnalysisResults(CoreAnalysisSettings analysisSettings)
         {
             AnalysisSettings = analysisSettings;
         }
-        public AnalysisSettings AnalysisSettings { get; private set; }
+        public CoreAnalysisSettings AnalysisSettings { get; private set; }
 
         public ImageRecognitionAnalysisContext ImageRecognitionAnalysis { get; private set; }
         public void SetResult(ImageRecognitionAnalysisContext imageRecognitionAnalysis)

@@ -19,7 +19,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
-                .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
+                .WithTextAnalyticAnalysisActions()
+                .AddKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
@@ -36,8 +37,9 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
-                .WithSentimentAnalysis("I am having a terrible time.")
-                .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
+                .WithTextAnalyticAnalysisActions()
+                .AddSentimentAnalysis("I am having a terrible time.")
+                .AddKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
@@ -59,7 +61,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
-                .WithKeyLanguageAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
+                .WithTextAnalyticAnalysisActions()
+                .AddKeyLanguageAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);

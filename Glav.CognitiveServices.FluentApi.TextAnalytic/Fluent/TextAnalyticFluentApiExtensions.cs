@@ -4,37 +4,38 @@ using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
 {
     public static class TextAnalyticFluentApiExtensions
     {
-        public static async Task<TextAnalyticAnalysisResults> AnalyseAllSentimentsAsync(this AnalysisSettings apiAnalysisSettings)
+        public static async Task<TextAnalyticAnalysisResults> AnalyseAllSentimentsAsync(this TextAnalyticAnalysisSettings apiAnalysisSettings)
         {
             var engine = new TextAnalyticAnalysisEngine(apiAnalysisSettings);
             return await engine.AnalyseAllAsync();
         }
 
-        public static AnalysisSettings WithSentimentAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse)
+        public static TextAnalyticAnalysisSettings AddSentimentAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsSentiment);
         }
 
-        public static AnalysisSettings WithKeyPhraseAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse)
+        public static TextAnalyticAnalysisSettings AddKeyPhraseAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsKeyphrases);
         }
 
-        public static AnalysisSettings WithKeyLanguageAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse)
+        public static TextAnalyticAnalysisSettings AddKeyLanguageAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsLanguages);
         }
 
-        public static AnalysisSettings WithKeyTopicAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse)
+        public static TextAnalyticAnalysisSettings AddKeyTopicAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsTopics);
         }
-        public static AnalysisSettings WithKeyTopicAnalysisSplittingDataIntoSentences(this AnalysisSettings apiAnalysis, string textToAnalyse)
+        public static TextAnalyticAnalysisSettings AddKeyTopicAnalysisSplittingDataIntoSentences(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
             var sentences = textToAnalyse.SplitTextIntoSentences();
             foreach(var sentence in sentences)
@@ -45,14 +46,14 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
             
         }
 
-        public static AnalysisSettings WithKeyTopicAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse, IEnumerable<string> topicsToExclude)
+        public static TextAnalyticAnalysisSettings AddKeyTopicAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse, IEnumerable<string> topicsToExclude)
         {
             var actionData = GetOrCreateActionInstance<TextAnalyticTopicActionData>(apiAnalysis, ApiActionType.TextAnalyticsTopics);
             actionData.Add(textToAnalyse);
             return apiAnalysis;//.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsTopics);
         }
 
-        private static T GetOrCreateActionInstance<T>(AnalysisSettings apiAnalysis, ApiActionType actionType) where T : class, IApiActionData, new()
+        private static T GetOrCreateActionInstance<T>(TextAnalyticAnalysisSettings apiAnalysis, ApiActionType actionType) where T : class, IApiActionData, new()
         {
             if (apiAnalysis.ActionsToPerform.ContainsKey(actionType))
             {
@@ -64,7 +65,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
             return data;
 
         }
-        private static AnalysisSettings AddTextForAnalysis(this AnalysisSettings apiAnalysis, string textToAnalyse, ApiActionType actionType)
+        private static TextAnalyticAnalysisSettings AddTextForAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse, ApiActionType actionType)
         {
             if (actionType == ApiActionType.TextAnalyticsTopics)
             {

@@ -9,12 +9,12 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public sealed class TextAnalyticAnalysisEngine : IAnalysisEngine<TextAnalyticAnalysisResults>
     {
-        public TextAnalyticAnalysisEngine(AnalysisSettings analysisSettings)
+        public TextAnalyticAnalysisEngine(CoreAnalysisSettings analysisSettings)
         {
             AnalysisSettings = analysisSettings;
         }
 
-        public AnalysisSettings AnalysisSettings { get; private set; }
+        public CoreAnalysisSettings AnalysisSettings { get; private set; }
 
         public async Task<TextAnalyticAnalysisResults> AnalyseAllAsync()
         {
