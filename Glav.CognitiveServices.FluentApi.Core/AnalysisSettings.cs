@@ -22,4 +22,5 @@ namespace Glav.CognitiveServices.FluentApi.Core
         public ICommunicationEngine CommunicationEngine { get { return _communicationEngine; }}
        
     }
+
 }

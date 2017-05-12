@@ -16,10 +16,18 @@ namespace Glav.CognitiveServices.IntegrationTests.Emotion
         {
             var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.EmotionApiKey, LocationKeyIdentifier.WestUs)
                 .UsingHttpCommunication()
-                .WithImageRecognition("https://pixabay.com/en/laugh-child-girl-face-happy-human-536287/")
+                .WithImageRecognition("http://www.scface.org/examples/001_frontal.jpg")
+                //.WithImageRecognition("http://www.cse.oulu.fi/wsgi/CMV/Downloads/Pbfd?action=AttachFile&do=get&target=hh.jpg")
                 .AnalyseAllEmotionsAsync();
 
             Assert.NotNull(result);
+            Assert.NotNull(result.ImageRecognitionAnalysis);
+            Assert.NotNull(result.ImageRecognitionAnalysis.AnalysisResult);
+            Assert.NotNull(result.ImageRecognitionAnalysis.AnalysisResult.ApiCallResult);
+            Assert.NotNull(result.ImageRecognitionAnalysis.AnalysisResult.ResponseData);
+            Assert.True(result.ImageRecognitionAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            Assert.NotEmpty(result.ImageRecognitionAnalysis.AnalysisResult.ResponseData.faces);
+            
         }
 
 
