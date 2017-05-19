@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>0.5.0</Version>
+    <Authors>Paul Glavich</Authors>
+    <Company />
+    <Product>Cognitive Services Fluent API - Emotion</Product>
+    <Description>A fluent API for using the Emotion detection set of cognitive services</Description>
+    <Copyright>Paul Glavich 2017</Copyright>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Cognitive services</PackageTags>
+    <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
