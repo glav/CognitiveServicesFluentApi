@@ -1,8 +1,7 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
-using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Emotion.Configuration;
 
-namespace Glav.CognitiveServices.FluentApi.Emotion.Fluent
+namespace Glav.CognitiveServices.FluentApi.Emotion
 {
     public static class ConfigurationBuilderExtensions
     {

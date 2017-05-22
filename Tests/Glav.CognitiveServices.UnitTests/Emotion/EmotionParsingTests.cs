@@ -1,10 +1,4 @@
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent;
 using Xunit;
-using System.Reflection;
-using System.Threading.Tasks;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
-using Glav.CognitiveServices.FluentApi.Core;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using Glav.CognitiveServices.FluentApi.Emotion.Domain;
 
 namespace Glav.CognitiveServices.UnitTests.Emotion

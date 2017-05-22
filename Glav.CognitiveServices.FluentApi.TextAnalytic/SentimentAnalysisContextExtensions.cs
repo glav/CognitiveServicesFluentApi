@@ -3,7 +3,7 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public static class SentimentAnalysisContextExtensions
     {

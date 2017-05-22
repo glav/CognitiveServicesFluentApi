@@ -1,4 +1,3 @@
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent;
 using Xunit;
 using System.Reflection;
 using System.Threading.Tasks;

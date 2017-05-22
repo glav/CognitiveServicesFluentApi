@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Glav.CognitiveServices.FluentApi.Emotion.Fluent
+namespace Glav.CognitiveServices.FluentApi.Emotion
 {
     public static class EmotionImageRecognitionResponseItemExtensions
     {

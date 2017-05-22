@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Glav.CognitiveServices.FluentApi.Emotion.Configuration
+namespace Glav.CognitiveServices.FluentApi.Emotion
 {
     public class EmotionConfigurationSettings : ConfigurationSettings
     {

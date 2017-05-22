@@ -1,11 +1,9 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Glav.CognitiveServices.FluentApi.Core;
 using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Emotion.Domain;
+using Glav.CognitiveServices.FluentApi.Core;
 
 namespace Glav.CognitiveServices.FluentApi.Emotion
 {

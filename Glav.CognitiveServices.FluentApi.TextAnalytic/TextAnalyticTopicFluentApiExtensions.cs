@@ -3,7 +3,7 @@ using System.Threading;
 using System.Diagnostics;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public static class TextAnalyticTopicFluentApiExtensions
     {

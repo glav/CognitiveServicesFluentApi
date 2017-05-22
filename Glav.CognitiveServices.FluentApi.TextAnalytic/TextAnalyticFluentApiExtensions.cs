@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
+using Glav.CognitiveServices.FluentApi.TextAnalytic;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Fluent
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public static class TextAnalyticFluentApiExtensions
     {

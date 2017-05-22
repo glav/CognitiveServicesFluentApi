@@ -1,7 +1,6 @@
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
-using Glav.CognitiveServices.FluentApi.Emotion.Configuration;
-using Glav.CognitiveServices.FluentApi.Emotion.Fluent;
+using Glav.CognitiveServices.FluentApi.Emotion;
 using System.Threading.Tasks;
 using Xunit;
 
