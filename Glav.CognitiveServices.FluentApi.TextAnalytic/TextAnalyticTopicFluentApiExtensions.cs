@@ -34,6 +34,8 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
                 return result;
             }
 
+            analysisResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("Waiting for operation status to complete...", "TextAnalysis");
+
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             try
@@ -42,18 +44,23 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
                 {
                     if (cancelToken.IsCancellationRequested)
                     {
+                        analysisResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("Querying operation status was cancelled", "TextAnalysis");
                         return OperationStatusResult.CreateCancelledOperation(result.ApiCallResult);
                     }
                     result = await queryEngine.CheckOperationStatus();
                     if (HasOperationEnded(result.OperationState))
                     {
+                        analysisResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Querying for operation status completed in {stopWatch.ElapsedMilliseconds} milliseconds.", "TextAnalysis");
+
                         return result;
                     }
 
                     await System.Threading.Tasks.Task.Delay(OperationStateQueryDelayInMilliseconds);
-                    //System.Threading.Thread.Sleep(OperationStateQueryDelayInMilliseconds);
+
                     if (stopWatch.ElapsedMilliseconds > timeoutInMilliseconds)
                     {
+                        analysisResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Querying for operation status timed out. Operation took {stopWatch.ElapsedMilliseconds} which was greater than threshold {timeoutInMilliseconds} milliseconds.", "TextAnalysis");
+
                         return OperationStatusResult.CreateTimeoutOperation(result.ApiCallResult);
                     }
                 }

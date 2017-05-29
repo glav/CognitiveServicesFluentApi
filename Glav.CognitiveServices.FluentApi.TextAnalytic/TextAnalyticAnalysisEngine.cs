@@ -34,6 +34,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             {
                 string payload = null;
                 var actions = AnalysisSettings.ActionsToPerform[apiAction];
+                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseAll");
                 if (apiAction == ApiActionType.TextAnalyticsTopics)
                 {
                     payload = (actions as TextAnalyticTopicActionData).ToString();
@@ -42,7 +43,11 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
                     payload = (actions as TextAnalyticActionData).ToString();
                 }
 
+                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
+
                 var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload);
+
+                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Processing results of service call for {apiAction.ToString()}", "AnalyseAll");
 
                 switch (apiAction)
                 {

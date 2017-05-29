@@ -10,14 +10,14 @@ namespace Glav.CognitiveServices.FluentApi.Core
     {
         public static CoreAnalysisSettings UsingHttpCommunication(this ConfigurationSettings configSettings)
         {
-            configSettings.DiagnosticLogger.LogInfo("Communications", "Using HttpCommunication");
+            configSettings.DiagnosticLogger.LogInfo("Using HttpCommunication","Communications");
 
             return new CoreAnalysisSettings(configSettings, new HttpCommunicationEngine(configSettings));
         }
 
         public static CoreAnalysisSettings UsingCustomCommunication(this ConfigurationSettings configSettings, ICommunicationEngine communicationEngine)
         {
-            configSettings.DiagnosticLogger.LogInfo("Communications", "Using custom communication");
+            configSettings.DiagnosticLogger.LogInfo("Using custom communication","Communications");
 
             return new CoreAnalysisSettings(configSettings, communicationEngine);
         }

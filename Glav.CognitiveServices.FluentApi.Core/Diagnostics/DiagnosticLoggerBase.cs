@@ -74,7 +74,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
 
         private string DateTimeDescriptor()
         {
-            return $"[{DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.nnnn")} UTC]";
+            return $"[{DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.ffff")} UTC]";
         }
 
     }

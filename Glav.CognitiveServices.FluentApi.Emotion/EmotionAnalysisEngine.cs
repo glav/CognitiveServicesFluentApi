@@ -28,8 +28,15 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
             if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction))
             {
                 var actions = AnalysisSettings.ActionsToPerform[apiAction];
+
+                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseAll");
+
                 var payload = (actions as EmotionActionData).ToString();
+
+                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
                 var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload);
+
+                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseAll");
 
                 switch (apiAction)
                 {
