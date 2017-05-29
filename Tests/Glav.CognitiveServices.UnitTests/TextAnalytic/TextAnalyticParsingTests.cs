@@ -5,6 +5,7 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using Glav.CognitiveServices.UnitTests.Helpers;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
@@ -34,6 +35,9 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var testData = _dataHelper.GetFileDataEmbeddedInAssembly("topic-api-raw-result.json");
 
             var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddConsoleDiagnosticLogging()
+                .AddDebugDiagnosticLogging()
                 .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(testData)))
                 .WithTextAnalyticAnalysisActions()
                 .AddKeyTopicAnalysis(testData);

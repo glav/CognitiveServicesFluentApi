@@ -1,5 +1,6 @@
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 using Glav.CognitiveServices.FluentApi.Emotion;
 using System.Threading.Tasks;
 using Xunit;
@@ -12,6 +13,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Emotion
         public async Task SimplePositiveTextShouldAnalyseAsPositive()
         {
             var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.EmotionApiKey, LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithEmotionAnalysisActions()
                 .AddImageRecognition("http://www.scface.org/examples/001_frontal.jpg")

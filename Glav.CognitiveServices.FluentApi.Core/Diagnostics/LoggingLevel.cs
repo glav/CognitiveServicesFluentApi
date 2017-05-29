@@ -4,10 +4,11 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
 {
-    public enum DiagnosticMessageType
+    public enum LoggingLevel
     {
-        Information,
-        Warning,
-        Error
+        None = 0,
+        ErrorsOnly = 1,
+        WarningsAndErrors = 2,
+        Everything = 4
     }
 }
