@@ -69,7 +69,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
 
         protected virtual string FormLogMessage(string topic, string message, string messageType)
         {
-            return $"{DateTimeDescriptor()} <{messageType}> #{topic}# - {message}";
+            return $"{DateTimeDescriptor()},<{messageType}>,#{topic}#, {message}";
         }
 
         private string DateTimeDescriptor()
