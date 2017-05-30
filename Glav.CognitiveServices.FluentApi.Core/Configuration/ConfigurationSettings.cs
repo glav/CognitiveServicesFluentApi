@@ -19,7 +19,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         }
 
         public ConfigurationSettings(ApiActionCategory apiCategory, string apiKey, LocationKeyIdentifier locationKey,
-                    ApiServiceUrlFragmentsBase serviceUrls)
+                    ApiServiceUriCollectionBase serviceUris)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -27,7 +27,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             }
             LocationKey = locationKey;
             _apiKeys.Add(apiCategory, apiKey);
-            ServiceUrls = serviceUrls;
+            ServiceUris = serviceUris;
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, _logLevel);
         }
 
@@ -35,7 +35,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         {
             _apiKeys = settings.ApiKeys;
             this.LocationKey = settings.LocationKey;
-            this.ServiceUrls = settings.ServiceUrls;
+            this.ServiceUris = settings.ServiceUris;
             this.LogLevel = settings.LogLevel;
             this.RegisteredDiagnosticTraceLoggers = settings.RegisteredDiagnosticTraceLoggers;
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, _logLevel);
@@ -68,12 +68,12 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         }
         public Dictionary<ApiActionCategory, string> ApiKeys => _apiKeys;
         public LocationKeyIdentifier LocationKey { get; protected set; }
-        public ApiServiceUrlFragmentsBase ServiceUrls { get; protected set; }
+        public ApiServiceUriCollectionBase ServiceUris { get; protected set; }
         public string BaseUrl
         {
             get
             {
-                return string.Format(ApiServiceUrlFragmentsBase.BASE_URL_TEMPLATE, LocationKey.ToTextLocation());
+                return string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, LocationKey.ToTextLocation());
             }
         }
     }

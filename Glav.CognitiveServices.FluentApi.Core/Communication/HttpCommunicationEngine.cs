@@ -26,7 +26,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         {
             _configurationSettings.DiagnosticLogger.LogInfo($"Performing async service call for {apiActionType}", "HttpCommunicationEngine");
 
-            var svcConfig = _configurationSettings.ServiceUrls.GetServiceConfig(apiActionType);
+            var svcConfig = _configurationSettings.ServiceUris.GetServiceConfig(apiActionType);
             var uri = string.Format("{0}{1}", _configurationSettings.BaseUrl,svcConfig.ServiceUri);
             var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
             try

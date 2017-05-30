@@ -4,7 +4,7 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
 {
-    public class LanguageServiceConfig : BaseApiServiceUriFragment
+    public class LanguageServiceConfig : ApiServiceUriFragment
     {
         public override ApiActionCategory ApiCategory => ApiActionCategory.TextAnalytics;
         public override string Template => "text/analytics/{0}/languages";

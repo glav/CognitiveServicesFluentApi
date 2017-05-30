@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
     public class TextAnalyticConfigurationSettings : ConfigurationSettings
     {
         public TextAnalyticConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey) 
-                : base(ApiActionCategory.TextAnalytics,apiKey, locationKey, new ApiServiceUrlFragments())
+                : base(ApiActionCategory.TextAnalytics,apiKey, locationKey, new ApiServiceUriCollection())
         {
         }
 

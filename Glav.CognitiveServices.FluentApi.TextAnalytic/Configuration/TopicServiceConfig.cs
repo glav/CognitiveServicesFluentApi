@@ -4,7 +4,7 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
 {
-    public class TopicServiceConfig : BaseApiServiceUriFragment
+    public class TopicServiceConfig : ApiServiceUriFragment
     {
         public override ApiActionCategory ApiCategory => ApiActionCategory.TextAnalytics;
         public override string Template => "text/analytics/{0}/topics";

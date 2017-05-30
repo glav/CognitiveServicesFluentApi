@@ -1,9 +1,8 @@
 ﻿
 namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 {
-    public abstract class BaseApiServiceUriFragment
+    public abstract class ApiServiceUriFragment
     {
-        public const string BASE_URL_TEMPLATE = "https://{0}.api.cognitive.microsoft.com/";
 
         public abstract string Template { get;  }
 

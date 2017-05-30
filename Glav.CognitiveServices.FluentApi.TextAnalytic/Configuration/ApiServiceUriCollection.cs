@@ -2,9 +2,9 @@
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
 {
-    public class ApiServiceUrlFragments : ApiServiceUrlFragmentsBase
+    public class ApiServiceUriCollection : ApiServiceUriCollectionBase
     {
-        public ApiServiceUrlFragments()
+        public ApiServiceUriCollection()
         {
             Services.Add(ApiActionType.TextAnalyticsTopics, new TopicServiceConfig());
             Services.Add(ApiActionType.TextAnalyticsSentiment, new SentimentServiceConfig());

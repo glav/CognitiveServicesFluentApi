@@ -2,9 +2,9 @@
 
 namespace Glav.CognitiveServices.FluentApi.Emotion.Configuration
 {
-    public class ApiServiceUrlFragments : ApiServiceUrlFragmentsBase
+    public class ApiServiceUriCollection : ApiServiceUriCollectionBase
     {
-        public ApiServiceUrlFragments()
+        public ApiServiceUriCollection()
         {
             Services.Add(ApiActionType.EmotionImageRecognition, new EmotionImageRecognitionServiceConfig());
         }

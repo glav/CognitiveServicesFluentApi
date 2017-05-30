@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
     public class EmotionConfigurationSettings : ConfigurationSettings
     {
         public EmotionConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey) 
-                : base(ApiActionCategory.Emotion,apiKey,locationKey, new ApiServiceUrlFragments())
+                : base(ApiActionCategory.Emotion,apiKey,locationKey, new ApiServiceUriCollection())
         {
         }
 
