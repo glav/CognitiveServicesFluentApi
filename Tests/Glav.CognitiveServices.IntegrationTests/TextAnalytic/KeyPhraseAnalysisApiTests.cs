@@ -1,5 +1,6 @@
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         public async Task SimplePhraseTextShouldAnalyseAsAtLeastOneKeyPhrase()
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
@@ -32,6 +35,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         public async Task SimplePhraseAndSentimentTextShouldAnalysBothItems()
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
@@ -56,6 +61,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         public async Task SimplePhraseTextShouldAnalyseToEnglish()
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddKeyLanguageAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")

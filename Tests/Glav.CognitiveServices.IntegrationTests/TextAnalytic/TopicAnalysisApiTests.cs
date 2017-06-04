@@ -1,5 +1,6 @@
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using System.Reflection;
@@ -16,6 +17,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         public async Task SimpleTopicsShouldAnalyseAndBeDetected()
         {
             var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions();
 

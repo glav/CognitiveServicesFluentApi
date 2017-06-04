@@ -5,6 +5,7 @@ using System.Text;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 
 namespace Glav.CognitiveServices.UnitTests.Diagnostics
 {
@@ -17,7 +18,7 @@ namespace Glav.CognitiveServices.UnitTests.Diagnostics
 
             var mockCommsEngine = new MockCommsEngine(new MockCommsResult("{ \"code\":\"Bad Request\"}", System.Net.HttpStatusCode.BadRequest));
             var result = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
-                .SetDiagnosticLoggingLevel(FluentApi.Core.Diagnostics.LoggingLevel.WarningsAndErrors)
+                .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddCustomDiagnosticLogging(logger)
                 .UsingCustomCommunication(mockCommsEngine)
                 .WithTextAnalyticAnalysisActions()
@@ -35,7 +36,7 @@ namespace Glav.CognitiveServices.UnitTests.Diagnostics
 
             var mockCommsEngine = new MockCommsEngine(new MockCommsResult("{ \"code\":\"Bad Request\"}", System.Net.HttpStatusCode.BadRequest));
             var result = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
-                .SetDiagnosticLoggingLevel(FluentApi.Core.Diagnostics.LoggingLevel.Everything)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddCustomDiagnosticLogging(logger)
                 .UsingCustomCommunication(mockCommsEngine)
                 .WithTextAnalyticAnalysisActions()

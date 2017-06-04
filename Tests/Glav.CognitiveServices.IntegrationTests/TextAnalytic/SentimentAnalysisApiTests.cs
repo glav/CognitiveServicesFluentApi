@@ -1,5 +1,6 @@
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         public async Task SimplePositiveTextShouldAnalyseAsPositive()
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a fantastic time.")
@@ -32,6 +35,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         public async Task SimplePositiveTextShouldReturnPositiveResultsUsingExtensions()
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a fantastic time.")
@@ -55,6 +60,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         public async Task SimpleNegativeTextShouldAnalyseAsNegative()
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
@@ -73,6 +80,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
         public async Task SimpleNegativeTextShouldReturnNegativeResultsUsingExtensions()
         {
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
