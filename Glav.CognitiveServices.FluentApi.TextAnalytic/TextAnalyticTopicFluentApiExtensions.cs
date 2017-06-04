@@ -7,7 +7,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public static class TextAnalyticTopicFluentApiExtensions
     {
-        private const int OperationStateQueryDelayInMilliseconds = 2000;
+        private const int OperationStateQueryDelayInMilliseconds = 3000;
         private const int OperationStateQueryTimoutInMilliseconds = 300000;
 
         public static async Task<OperationStatusResult> CheckTopicAnalysisStatusAsync(this TextAnalyticAnalysisResults analysisResults)

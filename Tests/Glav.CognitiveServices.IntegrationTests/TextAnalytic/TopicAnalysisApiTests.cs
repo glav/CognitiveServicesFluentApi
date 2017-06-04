@@ -48,7 +48,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.True(checkResult.ActionSubmittedSuccessfully);
             Assert.Equal(OperationStateType.NotStarted, checkResult.OperationState);
 
-            var waitForResult = await analysisResult.WaitForTopicAnalysisToCompleteAsync();
+            var waitForResult = await analysisResult.WaitForTopicAnalysisToCompleteAsync(600000); //yes, this can take some time
 
             Assert.NotNull(waitForResult);
             Assert.True(waitForResult.ActionSubmittedSuccessfully);
