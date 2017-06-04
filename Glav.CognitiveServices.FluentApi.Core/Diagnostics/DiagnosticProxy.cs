@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
 {
-    public class DiagnosticProxy : IDiagnosticTraceLogger
+    public class DiagnosticProxy : IDiagnosticLogger
     {
-        private readonly List<IDiagnosticTraceLogger> _loggers;
+        private readonly List<IDiagnosticLogger> _loggers;
         private readonly LoggingLevel _logLevel;
 
-        public DiagnosticProxy(IEnumerable<IDiagnosticTraceLogger> loggers, LoggingLevel logLevel)
+        public DiagnosticProxy(IEnumerable<IDiagnosticLogger> loggers, LoggingLevel logLevel)
         {
-            _loggers = loggers != null ? loggers.ToList() : new List<IDiagnosticTraceLogger>();
+            _loggers = loggers != null ? loggers.ToList() : new List<IDiagnosticLogger>();
             _logLevel = logLevel;
         }
 
@@ -34,7 +34,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
 
         public void LogInfo(string message, string topic = null)
         {
-            if ((int)_logLevel >= (int)LoggingLevel.ErrorsOnly)
+            if ((int)_logLevel >= (int)LoggingLevel.Everything)
             {
                 _loggers.ForEach(l => l.LogInfo(message, topic));
             }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
 {
-    public abstract class DiagnosticLoggerBase : IDiagnosticTraceLogger
+    public abstract class DiagnosticLoggerBase : IDiagnosticLogger
     {
         const string MessageType_Error = "Error";
         const string MessageType_Warning = "Wrning";

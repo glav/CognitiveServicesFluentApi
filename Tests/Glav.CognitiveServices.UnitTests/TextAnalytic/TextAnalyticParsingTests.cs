@@ -35,7 +35,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var testData = _dataHelper.GetFileDataEmbeddedInAssembly("topic-api-raw-result.json");
 
             var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
-                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                 .AddConsoleDiagnosticLogging()
                 .AddDebugDiagnosticLogging()
                 .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(testData)))

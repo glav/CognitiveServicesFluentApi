@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
 {
-    public interface IDiagnosticTraceLogger
+    public interface IDiagnosticLogger
     {
         void LogInfo(string message, string topic = null);
         void LogWarning(string message, string topic = null);

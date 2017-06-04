@@ -27,7 +27,7 @@ namespace Glav.CognitiveServices.FluentApi.Core
             configSettings.RegisterDiagnosticLogger(new ConsoleLogger());
             return configSettings;
         }
-        public static ConfigurationSettings AddCustomDiagnosticLogging(this ConfigurationSettings configSettings, IDiagnosticTraceLogger diagnosticLogger)
+        public static ConfigurationSettings AddCustomDiagnosticLogging(this ConfigurationSettings configSettings, IDiagnosticLogger diagnosticLogger)
         {
             configSettings.RegisterDiagnosticLogger(diagnosticLogger);
             return configSettings;

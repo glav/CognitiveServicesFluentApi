@@ -9,8 +9,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
     public abstract class ConfigurationSettings
     {
         private Dictionary<ApiActionCategory, string> _apiKeys = new Dictionary<ApiActionCategory, string>();
-        private List<IDiagnosticTraceLogger> _registeredDiagnosticLoggers = new List<IDiagnosticTraceLogger>();
-        private IDiagnosticTraceLogger _diagnosticLogger;
+        private List<IDiagnosticLogger> _registeredDiagnosticLoggers = new List<IDiagnosticLogger>();
+        private IDiagnosticLogger _diagnosticLogger;
         private LoggingLevel _logLevel = LoggingLevel.None;
 
         protected ConfigurationSettings()
@@ -41,7 +41,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, _logLevel);
         }
 
-        public void RegisterDiagnosticLogger(IDiagnosticTraceLogger logger)
+        public void RegisterDiagnosticLogger(IDiagnosticLogger logger)
         {
             _registeredDiagnosticLoggers.Add(logger);
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers,_logLevel);
@@ -51,14 +51,14 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         {
             get => _logLevel; set => _logLevel = value;
         }
-        public IDiagnosticTraceLogger DiagnosticLogger
+        public IDiagnosticLogger DiagnosticLogger
         {
             get
             {
                 return _diagnosticLogger;
             }
         }
-        public IEnumerable<IDiagnosticTraceLogger> RegisteredDiagnosticTraceLoggers
+        public IEnumerable<IDiagnosticLogger> RegisteredDiagnosticTraceLoggers
         {
             get
             {
