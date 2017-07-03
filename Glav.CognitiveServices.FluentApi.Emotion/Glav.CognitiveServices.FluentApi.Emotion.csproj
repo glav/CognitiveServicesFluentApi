@@ -10,7 +10,7 @@
     <Description>A fluent API for using the Emotion detection set of cognitive services</Description>
     <Copyright>Paul Glavich 2017</Copyright>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>Cognitive services</PackageTags>
+    <PackageTags>Cognitive services, .net core, azure</PackageTags>
     <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
   </PropertyGroup>
 

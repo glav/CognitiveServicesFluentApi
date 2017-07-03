@@ -11,7 +11,7 @@
     <Description>This package represents a set of common core components to be used with the various cognitive services fluent API packages.</Description>
     <Copyright>Paul Glavich 2017</Copyright>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>Cognitive services</PackageTags>
+    <PackageTags>Cognitive services, .net core, azure</PackageTags>
     <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
   </PropertyGroup>
 
