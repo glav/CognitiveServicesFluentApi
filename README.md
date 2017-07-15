@@ -8,7 +8,8 @@ var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-k
     .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
     .AddDebugDiagnosticLogging()
     .UsingHttpCommunication()
-    .WithSentimentAnalysis("I am having a fantastic time.")
+    .WithTextAnalyticAnalysisActions()
+    .AddSentimentAnalysis("I am having a fantastic time.")
     .AnalyseAllSentimentsAsync();
 
 var collectedResults = result.TextAnalyticSentimentAnalysis.GetResults(SentimentClassification.Positive);
@@ -22,7 +23,8 @@ var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-k
     .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
     .AddDebugDiagnosticLogging()
     .UsingHttpCommunication()
-    .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
+    .WithTextAnalyticAnalysisActions()
+    .AddKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
     .AnalyseAllSentimentsAsync();
 
 Assert.Equal<string>("basic sentence", result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents[0].keyPhrases[0]);
@@ -34,8 +36,9 @@ var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-k
     .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
     .AddConsoleDiagnosticLogging()  // just log to the console
     .UsingHttpCommunication()
-    .WithSentimentAnalysis("I am having a terrible time.")
-    .WithKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
+    .WithTextAnalyticAnalysisActions()
+    .AddSentimentAnalysis("I am having a terrible time.")
+    .AddKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
     .AnalyseAllSentimentsAsync();
 ```
 
