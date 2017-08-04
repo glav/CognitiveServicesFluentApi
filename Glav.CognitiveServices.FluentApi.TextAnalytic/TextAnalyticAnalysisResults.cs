@@ -14,7 +14,6 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 
         public SentimentAnalysisContext TextAnalyticSentimentAnalysis { get; private set; }
         public KeyPhraseAnalysisContext TextAnalyticKeyPhraseAnalysis { get; private set; }
-        public TopicAnalysisContext TextAnalyticTopicAnalysis { get; private set; }
 
         public LanguageAnalysisContext TextAnalyticLanguageAnalysis { get; private set; }
 
@@ -29,10 +28,6 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         public void SetResult(LanguageAnalysisContext textAnalyticAnalysis)
         {
             TextAnalyticLanguageAnalysis = textAnalyticAnalysis;
-        }
-        public void SetResult(TopicAnalysisContext textAnalyticAnalysis)
-        {
-            TextAnalyticTopicAnalysis = textAnalyticAnalysis;
         }
     }
 }

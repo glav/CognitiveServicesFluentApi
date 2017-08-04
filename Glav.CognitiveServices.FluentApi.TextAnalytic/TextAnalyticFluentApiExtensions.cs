@@ -31,28 +31,6 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsLanguages);
         }
 
-        public static TextAnalyticAnalysisSettings AddKeyTopicAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
-        {
-            return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsTopics);
-        }
-        public static TextAnalyticAnalysisSettings AddKeyTopicAnalysisSplittingDataIntoSentences(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
-        {
-            var sentences = textToAnalyse.SplitTextIntoSentences();
-            foreach(var sentence in sentences)
-            {
-                apiAnalysis.AddTextForAnalysis(sentence, ApiActionType.TextAnalyticsTopics);
-            }
-            return apiAnalysis;
-            
-        }
-
-        public static TextAnalyticAnalysisSettings AddKeyTopicAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse, IEnumerable<string> topicsToExclude)
-        {
-            var actionData = GetOrCreateActionInstance<TextAnalyticTopicActionData>(apiAnalysis, ApiActionType.TextAnalyticsTopics);
-            actionData.Add(textToAnalyse);
-            return apiAnalysis;//.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsTopics);
-        }
-
         private static T GetOrCreateActionInstance<T>(TextAnalyticAnalysisSettings apiAnalysis, ApiActionType actionType) where T : class, IApiActionData, new()
         {
             if (apiAnalysis.ActionsToPerform.ContainsKey(actionType))
@@ -67,12 +45,6 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         }
         private static TextAnalyticAnalysisSettings AddTextForAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse, ApiActionType actionType)
         {
-            if (actionType == ApiActionType.TextAnalyticsTopics)
-            {
-                var topicActionData = GetOrCreateActionInstance<TextAnalyticTopicActionData>(apiAnalysis, actionType);
-                topicActionData.Add(textToAnalyse);
-                return apiAnalysis;
-            }
             var actionData = GetOrCreateActionInstance<TextAnalyticActionData>(apiAnalysis, actionType);
             actionData.Add(actionType, textToAnalyse);
             return apiAnalysis;

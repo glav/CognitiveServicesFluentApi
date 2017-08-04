@@ -29,24 +29,5 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.Empty(result.ResponseData.errors);
         }
 
-        [Fact]
-        public async Task ShouldParseTopicResultWithSucceededResponseAsync()
-        {
-            var testData = _dataHelper.GetFileDataEmbeddedInAssembly("topic-api-raw-result.json");
-
-            var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
-                .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
-                .AddConsoleDiagnosticLogging()
-                .AddDebugDiagnosticLogging()
-                .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(testData)))
-                .WithTextAnalyticAnalysisActions()
-                .AddKeyTopicAnalysis(testData);
-            var analysisResult = await config.AnalyseAllSentimentsAsync();
-            var checkResult = await analysisResult.CheckTopicAnalysisStatusAsync();
-
-            Assert.NotNull(checkResult);
-            Assert.Equal(OperationStateType.CompletedSuccessfully, checkResult.OperationState);
-
-        }
     }
 }

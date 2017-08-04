@@ -22,7 +22,6 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsSentiment);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsKeyphrases);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsLanguages);
-            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsTopics);
 
             return apiResults;
         }
@@ -32,16 +31,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         {
             if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction))
             {
-                string payload = null;
                 var actions = AnalysisSettings.ActionsToPerform[apiAction];
                 apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseAll");
-                if (apiAction == ApiActionType.TextAnalyticsTopics)
-                {
-                    payload = (actions as TextAnalyticTopicActionData).ToString();
-                } else
-                {
-                    payload = (actions as TextAnalyticActionData).ToString();
-                }
+                var payload = (actions as TextAnalyticActionData).ToString();
 
                 apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
 
@@ -59,9 +51,6 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
                         break;
                     case ApiActionType.TextAnalyticsLanguages:
                         apiResults.SetResult(new LanguageAnalysisContext((actions as TextAnalyticActionData), new LanguagesResult(result)));
-                        break;
-                    case ApiActionType.TextAnalyticsTopics:
-                        apiResults.SetResult(new TopicAnalysisContext((actions as TextAnalyticTopicActionData), new TopicResult(result)));
                         break;
                     default:
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
