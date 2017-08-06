@@ -1,5 +1,4 @@
 using Glav.CognitiveServices.FluentApi.Core;
-using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using System.Threading.Tasks;
 using Xunit;
