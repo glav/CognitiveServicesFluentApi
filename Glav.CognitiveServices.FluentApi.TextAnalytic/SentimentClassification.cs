@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
+namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public enum SentimentClassification
     {

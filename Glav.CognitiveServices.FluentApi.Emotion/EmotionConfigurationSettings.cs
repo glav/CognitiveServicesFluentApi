@@ -1,5 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
-using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
+﻿using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Emotion.Configuration;
 using System;
 using System.Collections.Generic;
