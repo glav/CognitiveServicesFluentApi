@@ -1,7 +1,0 @@
-<dependencies>
-
-    <group targetFramework="netstandard2.0">
-	<dependency id="NETStandard.Library" version="2.0" />
-    </group>
-
-</dependencies>

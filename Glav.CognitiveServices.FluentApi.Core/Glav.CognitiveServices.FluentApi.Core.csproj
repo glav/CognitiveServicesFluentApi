@@ -20,6 +20,10 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <OutputPath></OutputPath>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Update="NETStandard.Library" Version="2.0.0" />
