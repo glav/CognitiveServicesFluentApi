@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputType>exe</OutputType>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <PropertyGroup>    
-    <TargetFramework>netcoreapp2.0</TargetFramework>    
-    <ApplicationIcon />    
-    <OutputTypeEx>exe</OutputTypeEx>    
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputPath></OutputPath>
+    <ApplicationIcon />
     <StartupObject />
   </PropertyGroup>
 
