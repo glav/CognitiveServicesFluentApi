@@ -8,8 +8,4 @@
     <ProjectReference Include="..\Glav.CognitiveServices.FluentApi.Core\Glav.CognitiveServices.FluentApi.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
-
 </Project>
