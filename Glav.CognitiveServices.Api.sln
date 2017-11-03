@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{74E950BA-80F3-495D-B089-A0286FBD8DDC}"
 EndProject
@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.Flue
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.TextAnalytic", "Glav.CognitiveServices.FluentApi.TextAnalytic\Glav.CognitiveServices.FluentApi.TextAnalytic.csproj", "{8A2C8924-E430-448F-9B33-095F5800EA2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glav.CognitiveServices.FluentApi.Emotion", "Glav.CognitiveServices.FluentApi.Emotion\Glav.CognitiveServices.FluentApi.Emotion.csproj", "{78477446-4BE0-44FC-BE5B-0EBA35AB1276}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.Emotion", "Glav.CognitiveServices.FluentApi.Emotion\Glav.CognitiveServices.FluentApi.Emotion.csproj", "{78477446-4BE0-44FC-BE5B-0EBA35AB1276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glav.CognitiveServices.FluentApi.ComputerVision", "Glav.CognitiveServices.FluentApi.ComputerVision\Glav.CognitiveServices.FluentApi.ComputerVision.csproj", "{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,18 @@ Global
 		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Release|x64.Build.0 = Release|Any CPU
 		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Release|x86.ActiveCfg = Release|Any CPU
 		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Release|x86.Build.0 = Release|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Debug|x64.Build.0 = Debug|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Debug|x86.Build.0 = Debug|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Release|x64.ActiveCfg = Release|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Release|x64.Build.0 = Release|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Release|x86.ActiveCfg = Release|Any CPU
+		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,5 +112,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C72E8DDA-13D6-4933-8C68-720A41FED7CB} = {74E950BA-80F3-495D-B089-A0286FBD8DDC}
 		{0049C04C-35EB-4261-9ADE-A808D793F20B} = {74E950BA-80F3-495D-B089-A0286FBD8DDC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C139EAE-B6AD-475C-857D-7458AAD8710D}
 	EndGlobalSection
 EndGlobal
