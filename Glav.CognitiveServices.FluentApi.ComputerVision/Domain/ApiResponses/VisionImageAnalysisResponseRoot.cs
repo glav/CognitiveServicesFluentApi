@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Glav.CognitiveServices.FluentApi.Core.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
 {
-    public class VisionImageAnalysisResponseRoot
+    public class VisionImageAnalysisResponseRoot : IActionResponseRoot
     {
         public string requestId { get; set; }
         public CategoriesResponseCollection categories { get; set; }
@@ -26,11 +27,6 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
         public double racyScore { get; set; }
     }
 
-    public class DescriptionCaptionResponseItem
-    {
-        public string text { get; set; }
-        public double confidence { get; set; }
-    }
 
     public class MetadataResponseItem
     {
