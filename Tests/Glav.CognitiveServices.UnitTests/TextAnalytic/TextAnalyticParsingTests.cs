@@ -1,18 +1,11 @@
 using Xunit;
-using System.Threading.Tasks;
-using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using Glav.CognitiveServices.UnitTests.Helpers;
-using Glav.CognitiveServices.FluentApi.Core.Configuration;
-using Glav.CognitiveServices.FluentApi.Core;
-using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
     public class TextAnalyticParsingTests
     {
-        private TestDataHelper _dataHelper = new TestDataHelper();
-
         [Fact]
         public void ShouldParseResultSuccessfully()
         {

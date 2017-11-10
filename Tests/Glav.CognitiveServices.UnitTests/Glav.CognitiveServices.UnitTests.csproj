@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.ComputerVision\Glav.CognitiveServices.FluentApi.ComputerVision.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Core\Glav.CognitiveServices.FluentApi.Core.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Emotion\Glav.CognitiveServices.FluentApi.Emotion.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.TextAnalytic\Glav.CognitiveServices.FluentApi.TextAnalytic.csproj" />
