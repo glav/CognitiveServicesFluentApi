@@ -6,10 +6,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
     {
         public ApiServiceUriCollection()
         {
-            //Services.Add(ApiActionType.TextAnalyticsSentiment, new SentimentServiceConfig());
-            //Services.Add(ApiActionType.TextAnalyticsKeyphrases, new KeyPhraseServiceConfig());
-            //Services.Add(ApiActionType.TextAnalyticsLanguages, new LanguageServiceConfig());
-            //Services.Add(ApiActionType.TextAnalyticsOperationStatus, new OperationStatusServiceConfig());
+            Services.Add(ApiActionType.ComputerVisionImageAnalysis, new ImageAnalysisServiceConfig());
         }
     }
 }
