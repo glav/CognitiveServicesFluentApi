@@ -10,34 +10,56 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         public ImageAnalysisResult(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
-            //ParseResponseData();
+            ParseResponseData();
         }
 
-        //private void ParseResponseData()
-        //{
-        //    if (ApiCallResult == null)
-        //    {
-        //        ResponseData = new VisionImageAnalysisResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } };
-        //        ActionSubmittedSuccessfully = false;
-        //        return;
-        //    }
+        private void ParseResponseData()
+        {
+            if (ApiCallResult == null)
+            {
+                ResponseData = new VisionImageAnalysisResponseRoot
+                {
+                    error = new ApiErrorResponse
+                    {
+                        code = StandardResponseCodes.NoDataReturned,
+                        message = "No data returned."
+                    }
+                };
+                ActionSubmittedSuccessfully = false;
+                return;
+            }
 
-        //    try
-        //    {
-        //        ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<VisionImageAnalysisResponseRoot>(ApiCallResult.Data);
-        //        if (ResponseData == null || ResponseData.documents == null || ResponseData.errors != null && ResponseData.errors.Length > 0)
-        //        {
-        //            ActionSubmittedSuccessfully = false;
-        //            return;
-        //        }
-        //        ActionSubmittedSuccessfully = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ResponseData = new VisionImageAnalysisResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } };
-        //        ActionSubmittedSuccessfully = false;
-        //    }
-        //}
+            try
+            {
+                if ((int)ApiCallResult.StatusCode >= 400)
+                {
+                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
+                    ResponseData = new VisionImageAnalysisResponseRoot { error = errorResponse };
+                    ActionSubmittedSuccessfully = false;
+                    return;
+                }
+
+                ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<VisionImageAnalysisResponseRoot>(ApiCallResult.Data);
+                if (ResponseData == null)
+                {
+                    ActionSubmittedSuccessfully = false;
+                    return;
+                }
+                ActionSubmittedSuccessfully = true;
+            }
+            catch (Exception ex)
+            {
+                ResponseData = new VisionImageAnalysisResponseRoot
+                {
+                    error = new ApiErrorResponse
+                    {
+                        code = StandardResponseCodes.ServerError,
+                        message = $"Error parsing results: {ex.Message}"
+                    }
+                };
+                ActionSubmittedSuccessfully = false;
+            }
+        }
 
     }
 }

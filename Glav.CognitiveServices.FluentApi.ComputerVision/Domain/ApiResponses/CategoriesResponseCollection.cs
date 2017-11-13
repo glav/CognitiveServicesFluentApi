@@ -4,12 +4,6 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
 {
-    public class CategoriesResponseCollection
-    {
-        public CategoriesResponseItem[] categories { get; set; }
-
-    }
-
     public class CategoriesResponseItem
     {
         public string name { get; set; }

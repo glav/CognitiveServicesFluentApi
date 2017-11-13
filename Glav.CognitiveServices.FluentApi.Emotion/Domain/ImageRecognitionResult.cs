@@ -20,7 +20,14 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
         {
             if (ApiCallResult == null)
             {
-                ResponseData = new EmotionImageRecognitionResponseRoot { error = new ApiErrorResponse { code = "BadRequest", message = "No data returned." } };
+                ResponseData = new EmotionImageRecognitionResponseRoot
+                {
+                    error = new ApiErrorResponse
+                    {
+                        code = StandardResponseCodes.NoDataReturned,
+                        message = "No data returned."
+                    }
+                };
                 ActionSubmittedSuccessfully = false;
                 return;
             }
@@ -40,13 +47,21 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
                     return;
                 }
 
+                //TODO: Need to double check this logic. On revisiting, it does not look right.
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<EmotionImageRecognitionResponseRoot>(ApiCallResult.Data);
                 ActionSubmittedSuccessfully = false;
 
             }
             catch (Exception ex)
             {
-                ResponseData = new EmotionImageRecognitionResponseRoot { error = new ApiErrorResponse { code = "ServerError", message = $"Error parsing results: {ex.Message}" } };
+                ResponseData = new EmotionImageRecognitionResponseRoot
+                {
+                    error = new ApiErrorResponse
+                    {
+                        code = StandardResponseCodes.ServerError,
+                        message = $"Error parsing results: {ex.Message}"
+                    }
+                };
                 ActionSubmittedSuccessfully = false;
             }
         }
