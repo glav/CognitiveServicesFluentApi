@@ -20,6 +20,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
             Assert.NotNull(result.ApiCallResult);
             Assert.True(result.ActionSubmittedSuccessfully);
             Assert.NotNull(result.ResponseData);
+            Assert.Equal("0dbec5ad-a3d3-4f7e-96b4-dfd57efe967d",result.ResponseData.requestId);
 
             // Face rectabgle dimensions
             Assert.NotEmpty(result.ResponseData.faces);
@@ -44,6 +45,41 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
             var satya = peopleCategory.detail.celebrities.FirstOrDefault(s => s.name == "Satya Nadella");
             Assert.NotNull(satya);
             Assert.Equal(0.999028444, satya.confidence);
+
+            // Assert the landmark
+            Assert.NotNull(peopleCategory.detail.landmarks);
+            var forbiddenCity = peopleCategory.detail.landmarks.FirstOrDefault(s => s.name == "Forbidden City");
+            Assert.NotNull(forbiddenCity);
+            Assert.Equal(0.9978346, forbiddenCity.confidence);
+
+            // Now onto the adult stuff where the real fun is :-)
+            Assert.NotNull(result.ResponseData.adult);
+            Assert.False(result.ResponseData.adult.isAdultContent);
+            Assert.False(result.ResponseData.adult.isRacyContent);
+            Assert.Equal(0.0934349000453949, result.ResponseData.adult.adultScore);
+            Assert.Equal(0.068613491952419281, result.ResponseData.adult.racyScore);
+
+            // Tags - getting bored now
+            Assert.NotNull(result.ResponseData.tags);
+            Assert.Equal(4, result.ResponseData.tags.Length);
+
+            // Metadata - yawn'
+            Assert.NotNull(result.ResponseData.metadata);
+            Assert.Equal(1500, result.ResponseData.metadata.width);
+            Assert.Equal(1000, result.ResponseData.metadata.height);
+            Assert.Equal("Jpeg", result.ResponseData.metadata.format);
+
+            // Colour - almost there
+            Assert.NotNull(result.ResponseData.color);
+            Assert.Equal("Brown", result.ResponseData.color.dominantColorBackground);
+            Assert.Equal("Brown", result.ResponseData.color.dominantColorForeground);
+            Assert.False(result.ResponseData.color.isBWImg);
+            Assert.Equal("873B59", result.ResponseData.color.accentColor);
+
+            // image type - and done
+            Assert.NotNull(result.ResponseData.imageType);
+            Assert.Equal(0, result.ResponseData.imageType.clipArtType);
+            Assert.Equal(0, result.ResponseData.imageType.lineDrawingType);
         }
     }
 }
