@@ -3,7 +3,7 @@ using Glav.CognitiveServices.FluentApi.Emotion;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Glav.CognitiveServices.IntegrationTests.Emotion
+namespace Glav.CognitiveServices.IntegrationTests.ComputerVsion
 {
     public class ImageRecognitionApiTests
     {
