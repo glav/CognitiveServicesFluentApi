@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         [Fact]
         public async Task SimplePositiveTextShouldAnalyseAsPositive()
         {
-            var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.EmotionApiKey, LocationKeyIdentifier.WestUs)
+            var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.WestUs)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
