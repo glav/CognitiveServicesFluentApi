@@ -7,15 +7,12 @@ using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
-    public class ComputerVisionAnalysisEngine : IAnalysisEngine<ComputerVisionAnalysisResults>
+    public class ComputerVisionAnalysisEngine : BaseAnalysisEngine<ComputerVisionAnalysisResults, ImageAnalysisActionData>
     {
-        public ComputerVisionAnalysisEngine(CoreAnalysisSettings analysisSettings)
-        {
-            AnalysisSettings = analysisSettings;
-        }
-        public CoreAnalysisSettings AnalysisSettings { get; private set; }
+        public ComputerVisionAnalysisEngine(CoreAnalysisSettings analysisSettings) : base(analysisSettings)
+        { }
 
-        public async Task<ComputerVisionAnalysisResults> AnalyseAllAsync()
+        public override async Task<ComputerVisionAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new ComputerVisionAnalysisResults(AnalysisSettings);
             await AnalyseAllAsyncForAction(apiResults, ApiActionType.ComputerVisionImageAnalysis);
@@ -23,31 +20,20 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 
         }
 
-        private async Task AnalyseAllAsyncForAction(ComputerVisionAnalysisResults apiResults, ApiActionType apiAction)
+        public override async Task AnalyseAllAsyncForAction(ComputerVisionAnalysisResults apiResults, ApiActionType apiAction)
         {
-            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction))
-            {
-                var actions = AnalysisSettings.ActionsToPerform[apiAction];
+            await base.AnalyseAllAsyncForAction(apiResults, apiAction, (actionData, commsResult) =>
+              {
+                  switch (apiAction)
+                  {
+                      case ApiActionType.ComputerVisionImageAnalysis:
+                          apiResults.SetResult(new ImageAnalysisContext((actionData as ImageAnalysisActionData), new ImageAnalysisResult(commsResult)));
+                          break;
+                      default:
+                          throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
+                  }
 
-                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseAll");
-
-                var payload = (actions as ImageAnalysisActionData).ToString();
-
-                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
-                var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload);
-
-                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseAll");
-
-                switch (apiAction)
-                {
-                    case ApiActionType.ComputerVisionImageAnalysis:
-                        apiResults.SetResult(new ImageAnalysisContext((actions as ImageAnalysisActionData), new ImageAnalysisResult(result)));
-                        break;
-                    default:
-                        throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
-                }
-            }
+              });
         }
-
     }
 }
