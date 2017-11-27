@@ -3,10 +3,18 @@ namespace Glav.CognitiveServices.FluentApi.Core
 {
     public enum LocationKeyIdentifier
     {
-        WestUs,
+        AustraliaEast,
+        AustraliaSouthEast,
+        BrazilSouth,
+        EastUs,
         EastUs2,
-        SouthEastAsia,
+        WestUs,
+        WestUs2,
+        SouthCentralUs,
         WestCentralUs,
+        EastAsia,
+        SouthEastAsia,
+        NorthEurope,
         WestEurope
     }
    
