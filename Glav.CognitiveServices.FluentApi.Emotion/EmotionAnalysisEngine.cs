@@ -16,14 +16,14 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
         public override async Task<EmotionAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new EmotionAnalysisResults(AnalysisSettings);
-            await AnalyseAllAsyncForAction(apiResults, ApiActionType.EmotionImageRecognition);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.EmotionImageRecognition);
             return apiResults;
 
         }
 
-        public override async Task AnalyseAllAsyncForAction(EmotionAnalysisResults apiResults, ApiActionType apiAction)
+        public override async Task AnalyseApiActionAsync(EmotionAnalysisResults apiResults, ApiActionType apiAction)
         {
-            await base.AnalyseAllAsyncForAction(apiResults, apiAction, (actionData, commsResult) =>
+            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
             {
                 switch (apiAction)
                 {

@@ -15,14 +15,14 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public override async Task<ComputerVisionAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new ComputerVisionAnalysisResults(AnalysisSettings);
-            await AnalyseAllAsyncForAction(apiResults, ApiActionType.ComputerVisionImageAnalysis);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionImageAnalysis);
             return apiResults;
 
         }
 
-        public override async Task AnalyseAllAsyncForAction(ComputerVisionAnalysisResults apiResults, ApiActionType apiAction)
+        public override async Task AnalyseApiActionAsync(ComputerVisionAnalysisResults apiResults, ApiActionType apiAction)
         {
-            await base.AnalyseAllAsyncForAction(apiResults, apiAction, (actionData, commsResult) =>
+            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
               {
                   switch (apiAction)
                   {

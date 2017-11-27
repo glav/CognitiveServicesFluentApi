@@ -25,9 +25,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
         public abstract Task<TAnalysisResults> AnalyseAllAsync();
 
-        public abstract Task AnalyseAllAsyncForAction(TAnalysisResults apiResults, ApiActionType apiAction);
+        public abstract Task AnalyseApiActionAsync(TAnalysisResults apiResults, ApiActionType apiAction);
 
-        protected async Task AnalyseAllAsyncForAction(TAnalysisResults apiResults, ApiActionType apiAction, Action<IApiActionData, ICommunicationResult> apiActionHandler)
+        protected async Task AnalyseApiActionAsync(TAnalysisResults apiResults, ApiActionType apiAction, Action<IApiActionData, ICommunicationResult> apiActionHandler)
         {
             if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction))
             {
@@ -43,14 +43,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                 apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseAll");
 
                 apiActionHandler(actions,result);
-                //switch (apiAction)
-                //{
-                //    case ApiActionType.EmotionImageRecognition:
-                //        apiResults.SetResult(new ImageRecognitionAnalysisContext((actions as EmotionActionData), new ImageRecognitionResult(result)));
-                //        break;
-                //    default:
-                //        throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
-                //}
             }
         }
 

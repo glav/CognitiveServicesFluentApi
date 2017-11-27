@@ -17,16 +17,16 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         public override async Task<TextAnalyticAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new TextAnalyticAnalysisResults(AnalysisSettings);
-            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsSentiment);
-            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsKeyphrases);
-            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsLanguages);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsSentiment);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsKeyphrases);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsLanguages);
 
             return apiResults;
         }
 
-        public override async Task AnalyseAllAsyncForAction(TextAnalyticAnalysisResults apiResults, ApiActionType apiAction)
+        public override async Task AnalyseApiActionAsync(TextAnalyticAnalysisResults apiResults, ApiActionType apiAction)
         {
-            await base.AnalyseAllAsyncForAction(apiResults, apiAction, (actionData, commsResult) =>
+            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
               {
                   var textAnalyticActionData = actionData as TextAnalyticActionData;
                   switch (apiAction)
