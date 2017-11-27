@@ -9,7 +9,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
     {
         public override string Template => "vision/{0}/analyze";
 
-        public override string Version => "1.0";
+        public override string Version => "v1.0";
 
         public override ApiActionCategory ApiCategory => ApiActionCategory.ComputerVision;
     }
