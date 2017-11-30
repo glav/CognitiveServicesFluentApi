@@ -15,25 +15,29 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public override async Task<ComputerVisionAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new ComputerVisionAnalysisResults(AnalysisSettings);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionImageAnalysis);
+            await base.ExecuteApiActionAsync(apiResults, ApiActionType.ComputerVisionImageAnalysis, (actionData, commsResult) =>
+            {
+                apiResults.SetResult(new ImageAnalysisContext((actionData as ImageAnalysisActionData), new ImageAnalysisResult(commsResult)));
+
+            });
             return apiResults;
 
         }
 
-        public override async Task AnalyseApiActionAsync(ComputerVisionAnalysisResults apiResults, ApiActionType apiAction)
-        {
-            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
-              {
-                  switch (apiAction)
-                  {
-                      case ApiActionType.ComputerVisionImageAnalysis:
-                          apiResults.SetResult(new ImageAnalysisContext((actionData as ImageAnalysisActionData), new ImageAnalysisResult(commsResult)));
-                          break;
-                      default:
-                          throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
-                  }
+        //public override async Task AnalyseApiActionAsync(ComputerVisionAnalysisResults apiResults, ApiActionType apiAction)
+        //{
+        //    await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
+        //      {
+        //          switch (apiAction)
+        //          {
+        //              case ApiActionType.ComputerVisionImageAnalysis:
+        //                  apiResults.SetResult(new ImageAnalysisContext((actionData as ImageAnalysisActionData), new ImageAnalysisResult(commsResult)));
+        //                  break;
+        //              default:
+        //                  throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
+        //          }
 
-              });
-        }
+        //      });
+        //}
     }
 }

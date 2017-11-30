@@ -16,26 +16,13 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
         public override async Task<EmotionAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new EmotionAnalysisResults(AnalysisSettings);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.EmotionImageRecognition);
+            await base.ExecuteApiActionAsync(apiResults, ApiActionType.EmotionImageRecognition, (actionData, commsResult) =>
+            {
+                apiResults.SetResult(new ImageRecognitionAnalysisContext((actionData as EmotionActionData), new ImageRecognitionResult(commsResult)));
+
+            });
             return apiResults;
 
         }
-
-        public override async Task AnalyseApiActionAsync(EmotionAnalysisResults apiResults, ApiActionType apiAction)
-        {
-            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
-            {
-                switch (apiAction)
-                {
-                    case ApiActionType.EmotionImageRecognition:
-                        apiResults.SetResult(new ImageRecognitionAnalysisContext((actionData as EmotionActionData), new ImageRecognitionResult(commsResult)));
-                        break;
-                    default:
-                        throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
-                }
-
-            });
-        }
-
     }
 }
