@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
             }
         }
 
-        public void ValidateEnsureScoreLevelList()
+        public void ValidateScoreLevelList()
         {
             if (_scoreLevels.ElementAt(0).Value.LowerBound != 0 || _scoreLevels.ElementAt(_scoreLevels.Count - 1).Value.UpperBound != 1)
             {
