@@ -14,7 +14,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
             _scoreLevelBoundsCollection = scoreLevelBoundsCollection;
         }
 
-        public ScoreLevelBoundsDefinition EvaluateScore(long score)
+        public ScoreLevelBoundsDefinition EvaluateScore(double score)
         {
             _scoreLevelBoundsCollection.ValidateScoreLevelList();
             var result = _scoreLevelBoundsCollection.ScoreLevels.FirstOrDefault(s => s.LowerBound <= score && s.UpperBound > score);
