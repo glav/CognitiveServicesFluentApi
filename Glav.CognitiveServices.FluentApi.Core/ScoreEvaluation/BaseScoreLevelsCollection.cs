@@ -90,7 +90,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
                     var nextScoreItem = _scoreLevels.ElementAt(itemCnt+1).Value;
                     if (currentScoreItem.UpperBound != nextScoreItem.LowerBound)
                     {
-                        throw new CognitiveServicesArgumentException("Previous score level upper bound value must match next score level lower bound value.");
+                        throw new CognitiveServicesException("Previous score level upper bound value must match next score level lower bound value.");
                     }
                 }
             }

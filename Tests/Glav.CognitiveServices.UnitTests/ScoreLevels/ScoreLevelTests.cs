@@ -36,5 +36,39 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
 
         }
 
+        [Fact]
+        public void InvalidScoreLevelCollectionWithNoEndLevelShouldNotValidate()
+        {
+            var scoreLevels = new InvalidScoreLevelCollectionNoEnd();
+            var scoreEngine = new DefaultScoreEvaluationEngine(scoreLevels);
+            Assert.Throws(typeof(CognitiveServicesException),() =>
+            {
+                scoreEngine.EvaluateScore(0.4);
+            });
+        }
+
+        [Fact]
+        public void InvalidScoreLevelCollectionWithNoStartLevelShouldNotValidate()
+        {
+            var scoreLevels = new InvalidScoreLevelCollectionNoStart();
+            var scoreEngine = new DefaultScoreEvaluationEngine(scoreLevels);
+            Assert.Throws(typeof(CognitiveServicesException), () =>
+            {
+                scoreEngine.EvaluateScore(0.4);
+            });
+        }
+
+        [Fact]
+        public void InvalidScoreLevelCollectionWithGapInSequenceLevelShouldNotValidate()
+        {
+            var scoreLevels = new InvalidScoreLevelCollectionHasGap();
+            var scoreEngine = new DefaultScoreEvaluationEngine(scoreLevels);
+            Assert.Throws(typeof(CognitiveServicesException), () =>
+            {
+                scoreEngine.EvaluateScore(0.4);
+            });
+        }
+
+
     }
 }
