@@ -23,7 +23,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
-                throw new ArgumentException("APIKey cannot be empty");
+                throw new CognitiveServicesArgumentException("APIKey cannot be empty");
             }
             LocationKey = locationKey;
             _apiKeys.Add(apiCategory, apiKey);

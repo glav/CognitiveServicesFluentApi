@@ -2,6 +2,7 @@ using Xunit;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 using System;
 using System.Linq;
+using Glav.CognitiveServices.FluentApi.Core;
 
 namespace Glav.CognitiveServices.UnitTests.Emotion
 {
@@ -11,7 +12,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
         public void EmptyScoreLevelsShouldNotValidate()
         {
             var scoreEngine = new DefaultScoreEvaluationEngine(new EmptyScoreLevelCollection());
-            Assert.Throws(typeof(ArgumentException), () =>
+            Assert.Throws(typeof(CognitiveServicesArgumentException), () =>
              {
                  scoreEngine.EvaluateScore(1);
              });

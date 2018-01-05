@@ -18,16 +18,16 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
         {
             if (lowerBound < 0 || lowerBound >= 1)
             {
-                throw new ArgumentException("Lowerbound value cannot be less than zero or equal to 1.");
+                throw new CognitiveServicesArgumentException("Lowerbound value cannot be less than zero or equal to 1.");
             }
             if (upperBound <= 0 || upperBound > 1)
             {
-                throw new ArgumentException("Upperbound value cannot be <= 0 or greater than 1");
+                throw new CognitiveServicesArgumentException("Upperbound value cannot be <= 0 or greater than 1");
             }
 
             if (lowerBound >= upperBound)
             {
-                throw new ArgumentException("Lowerbound value must be less than the Upperbound value.");
+                throw new CognitiveServicesArgumentException("Lowerbound value must be less than the Upperbound value.");
             }
         }
 

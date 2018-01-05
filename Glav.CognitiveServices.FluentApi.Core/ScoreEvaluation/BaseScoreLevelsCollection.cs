@@ -65,7 +65,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
             var areBoundsAlreadyUsed = _scoreLevels.Any(s => s.Value.LowerBound == scoreLevel.LowerBound || s.Value.UpperBound == scoreLevel.UpperBound);
             if (areBoundsAlreadyUsed)
             {
-                throw new ArgumentException("The Lower or Upper bounds value are already defined.");
+                throw new CognitiveServicesArgumentException("The Lower or Upper bounds value are already defined.");
             }
         }
 
@@ -73,13 +73,13 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
         {
             if (_scoreLevels.Count == 0)
             {
-                throw new ArgumentException("No score levels defined.");
+                throw new CognitiveServicesArgumentException("No score levels defined.");
             }
 
             // Ensure we have the full range of values covered (ie. from 0 to 1) by start and end elements
             if (_scoreLevels.ElementAt(0).Value.LowerBound != 0 || _scoreLevels.ElementAt(_scoreLevels.Count - 1).Value.UpperBound != 1)
             {
-                throw new Exception("List is not valid. Does not cover all values between 0 and 1");
+                throw new CognitiveServicesException("List is not valid. Does not cover all values between 0 and 1");
             }
 
             if (_scoreLevels.Count > 1)
@@ -90,7 +90,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
                     var nextScoreItem = _scoreLevels.ElementAt(itemCnt+1).Value;
                     if (currentScoreItem.UpperBound != nextScoreItem.LowerBound)
                     {
-                        throw new ArgumentException("Previous score level upper bound value must match next score level lower bound value.");
+                        throw new CognitiveServicesArgumentException("Previous score level upper bound value must match next score level lower bound value.");
                     }
                 }
             }
