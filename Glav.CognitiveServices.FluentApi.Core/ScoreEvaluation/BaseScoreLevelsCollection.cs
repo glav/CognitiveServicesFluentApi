@@ -10,10 +10,54 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
 
         public IEnumerable<ScoreLevelBoundsDefinition> ScoreLevels { get { return _scoreLevels.Values; }  }
 
-        public void AddScoreLevelDefinition(ScoreLevelBoundsDefinition scoreLevel)
+        protected void AddScoreLevelDefinition(ScoreLevelBoundsDefinition scoreLevel)
         {
             ValidateLevel(scoreLevel);
             _scoreLevels.Add(scoreLevel.LowerBound, scoreLevel);
+        }
+
+        protected void AddScoreLevelDefinition(double lowerBound, double upperBound, string name)
+        {
+            var scoreLevel = new ScoreLevelBoundsDefinition(lowerBound, upperBound, name);
+            AddScoreLevelDefinition(scoreLevel);
+        }
+
+        /// <summary>
+        /// Adds a score level at the very beginning of the sequence of score, with a lowerbound of 0
+        /// </summary>
+        /// <param name="upperBound"></param>
+        /// <param name="name"></param>
+        protected void AddStartingScoreLevel(double upperBound, string name)
+        {
+            var scoreLevelDefinition = new ScoreLevelBoundsDefinition(0, upperBound, name);
+            AddScoreLevelDefinition(scoreLevelDefinition);
+        }
+
+        /// <summary>
+        /// Adds a final score level to the sequence, with an upper bound of 1.
+        /// </summary>
+        /// <param name="name"></param>
+        protected void AddFinalScoreLevel(string name)
+        {
+            AddNextScoreLevelDefinitionInList(1, name);
+        }
+
+        /// <summary>
+        /// Adds a score level into the list based on the score level "before it" such that the lower bounds of
+        /// this added entry is the same as the upper bounds of the last item in the list. The lower bounds are 0 
+        /// if no items are in the list.
+        /// </summary>
+        /// <param name="upperBound"></param>
+        /// <param name="name"></param>
+        protected void AddNextScoreLevelDefinitionInList(double upperBound, string name)
+        {
+            double lowerBound = 0;
+            if (_scoreLevels.Count > 0)
+            {
+                lowerBound = _scoreLevels.Last().Value.UpperBound;
+            }
+            var scoreLevelDefinition = new ScoreLevelBoundsDefinition(lowerBound, upperBound, name);
+            AddScoreLevelDefinition(scoreLevelDefinition);
         }
 
         private void ValidateLevel(ScoreLevelBoundsDefinition scoreLevel)
