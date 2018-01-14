@@ -1,15 +1,10 @@
 ﻿using Xunit;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
-using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core;
-using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 
 namespace Glav.CognitiveServices.UnitTests.Diagnostics
 {
-    public class LoggingClass
+    public class LoggingClassTests
     {
         [Fact]
         public void InformationalLoggingMessageShouldNotBePerformed()
@@ -20,6 +15,7 @@ namespace Glav.CognitiveServices.UnitTests.Diagnostics
             var result = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddCustomDiagnosticLogging(logger)
+                .UsingDefaultScoringEngineAndScoreLevels()
                 .UsingCustomCommunication(mockCommsEngine)
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("this should not log some informational messages")

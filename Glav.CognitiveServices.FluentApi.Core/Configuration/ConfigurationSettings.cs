@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
+using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         private IDiagnosticLogger _diagnosticLogger;
         private LoggingLevel _logLevel = LoggingLevel.None;
 
-        protected ConfigurationSettings()
-        {
-
-        }
-
         public ConfigurationSettings(ApiActionCategory apiCategory, string apiKey, LocationKeyIdentifier locationKey,
                     ApiServiceUriCollectionBase serviceUris)
         {
@@ -29,6 +25,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             _apiKeys.Add(apiCategory, apiKey);
             ServiceUris = serviceUris;
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, _logLevel);
+            ScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
         public ConfigurationSettings(ConfigurationSettings settings)
@@ -37,8 +34,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             this.LocationKey = settings.LocationKey;
             this.ServiceUris = settings.ServiceUris;
             this.LogLevel = settings.LogLevel;
+            this.ScoringEngine = settings.ScoringEngine;
             this.RegisteredDiagnosticTraceLoggers = settings.RegisteredDiagnosticTraceLoggers;
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, _logLevel);
+            ScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
         public void RegisterDiagnosticLogger(IDiagnosticLogger logger)
@@ -47,34 +46,32 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers,_logLevel);
         }
 
+        public void SetScoringEngine(IScoreEvaluationEngine scoringEngine)
+        {
+            if (scoringEngine == null)
+            {
+                throw new CognitiveServicesArgumentException("ScoringEngine cannot be NULL");
+            }
+
+            this.ScoringEngine = scoringEngine;
+        }
+
         public LoggingLevel LogLevel
         {
             get => _logLevel; set => _logLevel = value;
         }
-        public IDiagnosticLogger DiagnosticLogger
-        {
-            get
-            {
-                return _diagnosticLogger;
-            }
-        }
+        public IDiagnosticLogger DiagnosticLogger => _diagnosticLogger;
+
         public IEnumerable<IDiagnosticLogger> RegisteredDiagnosticTraceLoggers
         {
-            get
-            {
-                return _registeredDiagnosticLoggers;
-            }
+            get => _registeredDiagnosticLoggers;
             set => _registeredDiagnosticLoggers = value.ToList();
         }
         public Dictionary<ApiActionCategory, string> ApiKeys => _apiKeys;
         public LocationKeyIdentifier LocationKey { get; protected set; }
         public ApiServiceUriCollectionBase ServiceUris { get; protected set; }
-        public string BaseUrl
-        {
-            get
-            {
-                return string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, LocationKey.ToTextLocation());
-            }
-        }
+        public string BaseUrl =>  string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, LocationKey.ToTextLocation());
+
+        public IScoreEvaluationEngine ScoringEngine { get; protected set; }
     }
 }

@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
 {
-    public class DefaultScoreEvaluationEngine
+    public class DefaultScoreEvaluationEngine : IScoreEvaluationEngine
     {
-        private readonly BaseScoreLevelsCollection _scoreLevelBoundsCollection;
+        private readonly IScoreLevelBoundsCollection _scoreLevelBoundsCollection;
 
-        public DefaultScoreEvaluationEngine(BaseScoreLevelsCollection scoreLevelBoundsCollection)
+        public DefaultScoreEvaluationEngine(IScoreLevelBoundsCollection scoreLevelBoundsCollection)
         {
             _scoreLevelBoundsCollection = scoreLevelBoundsCollection;
         }

@@ -1,8 +1,7 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Communication;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
-using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
-using System.Threading.Tasks;
+using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
@@ -42,5 +41,24 @@ namespace Glav.CognitiveServices.FluentApi.Core
             configSettings.LogLevel = logLevel;
             return configSettings;
         }
+
+        public static ConfigurationSettings UsingDefaultScoringEngineAndScoreLevels(this ConfigurationSettings configSettings)
+        {
+            configSettings.SetScoringEngine(new DefaultScoreEvaluationEngine(new DefaultScoreLevels()));
+            return configSettings;
+        }
+
+        public static ConfigurationSettings UsingCustomScoringEngine(this ConfigurationSettings configSettings, IScoreEvaluationEngine scoringEngine)
+        {
+            configSettings.SetScoringEngine(scoringEngine);
+            return configSettings;
+        }
+
+        public static ConfigurationSettings UsingDefaultScoringEngineWithCustomScoreLevels(this ConfigurationSettings configSettings, IScoreLevelBoundsCollection scoreLevels)
+        {
+            configSettings.SetScoringEngine(new DefaultScoreEvaluationEngine(scoreLevels));
+            return configSettings;
+        }
+
     }
 }
