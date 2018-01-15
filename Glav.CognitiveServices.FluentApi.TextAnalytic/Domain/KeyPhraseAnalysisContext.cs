@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             AnalysisInput = actionData;
             AnalysisResult = analysisResult;
         }
-        public ApiActionType AnalysisType { get { return ApiActionType.TextAnalyticsSentiment; } }
+        public ApiActionType AnalysisType { get { return ApiActionType.TextAnalyticsKeyphrases; } }
 
         public TextAnalyticActionData AnalysisInput { get; private set; }
 

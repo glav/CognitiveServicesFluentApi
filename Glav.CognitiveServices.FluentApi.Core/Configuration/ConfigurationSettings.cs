@@ -12,7 +12,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         private Dictionary<ApiActionCategory, string> _apiKeys = new Dictionary<ApiActionCategory, string>();
         private List<IDiagnosticLogger> _registeredDiagnosticLoggers = new List<IDiagnosticLogger>();
         private IDiagnosticLogger _diagnosticLogger;
-        private LoggingLevel _logLevel = LoggingLevel.None;
 
         public ConfigurationSettings(ApiActionCategory apiCategory, string apiKey, LocationKeyIdentifier locationKey,
                     ApiServiceUriCollectionBase serviceUris)
@@ -24,7 +23,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             LocationKey = locationKey;
             _apiKeys.Add(apiCategory, apiKey);
             ServiceUris = serviceUris;
-            _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, _logLevel);
+            _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
             ScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
@@ -36,30 +35,22 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             this.LogLevel = settings.LogLevel;
             this.ScoringEngine = settings.ScoringEngine;
             this.RegisteredDiagnosticTraceLoggers = settings.RegisteredDiagnosticTraceLoggers;
-            _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, _logLevel);
+            _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
             ScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
         public void RegisterDiagnosticLogger(IDiagnosticLogger logger)
         {
             _registeredDiagnosticLoggers.Add(logger);
-            _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers,_logLevel);
+            _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers,LogLevel);
         }
 
         public void SetScoringEngine(IScoreEvaluationEngine scoringEngine)
         {
-            if (scoringEngine == null)
-            {
-                throw new CognitiveServicesArgumentException("ScoringEngine cannot be NULL");
-            }
-
-            this.ScoringEngine = scoringEngine;
+            this.ScoringEngine = scoringEngine ?? throw new CognitiveServicesArgumentException("ScoringEngine cannot be NULL");
         }
 
-        public LoggingLevel LogLevel
-        {
-            get => _logLevel; set => _logLevel = value;
-        }
+        public LoggingLevel LogLevel { get; set; }
         public IDiagnosticLogger DiagnosticLogger => _diagnosticLogger;
 
         public IEnumerable<IDiagnosticLogger> RegisteredDiagnosticTraceLoggers
