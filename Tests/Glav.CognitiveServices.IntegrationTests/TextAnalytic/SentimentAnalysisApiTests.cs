@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.SentimentAnalysis.AnalysisResult.ResponseData.documents);
 
-            Assert.Equal(SentimentClassification.Positive, result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].SentimentClassification);
+            Assert.Equal("Positive", result.AnalysisSettings.ConfigurationSettings.ScoringEngine.EvaluateScore(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
         }
 
         [Fact]
@@ -40,15 +40,15 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(SentimentClassification.Positive));
+            Assert.Equal(1, result.NumberOfResponses("positive"));
 
             // Get Original Id of input data
             var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
-            var resultById = result.SentimentAnalysis.GetResult(submittedId);
+            var resultById = result.GetResult(submittedId);
             Assert.NotNull(resultById);
-            Assert.Equal(SentimentClassification.Positive, resultById.SentimentClassification);
+            Assert.Equal("positive", result.AnalysisSettings.ConfigurationSettings.ScoringEngine.EvaluateScore(resultById.score).Name);
 
-            var collectedResults = result.SentimentAnalysis.GetResults(SentimentClassification.Positive);
+            var collectedResults = result.GetResults("positive");
             Assert.NotNull(collectedResults);
             Assert.Equal(1, collectedResults.Count());
         }
@@ -70,7 +70,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.SentimentAnalysis.AnalysisResult.ResponseData.documents);
 
-            Assert.Equal(SentimentClassification.Negative, result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].SentimentClassification);
+            Assert.Equal("Negative", result.AnalysisSettings.ConfigurationSettings.ScoringEngine.EvaluateScore(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
         }
 
         [Fact]
@@ -85,15 +85,15 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(SentimentClassification.Negative));
+            Assert.Equal(1, result.NumberOfResponses("Negative"));
 
             // Get Original Id of input data
             var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
-            var resultById = result.SentimentAnalysis.GetResult(submittedId);
+            var resultById = result.GetResult(submittedId);
             Assert.NotNull(resultById);
-            Assert.Equal(SentimentClassification.Negative, resultById.SentimentClassification);
+            Assert.Equal("negative", result.AnalysisSettings.ConfigurationSettings.ScoringEngine.EvaluateScore(resultById.score).Name);
 
-            var collectedResults = result.SentimentAnalysis.GetResults(SentimentClassification.Negative);
+            var collectedResults = result.GetResults("negative");
             Assert.NotNull(collectedResults);
             Assert.Equal(1, collectedResults.Count());
         }
