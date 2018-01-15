@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
     {
         public static ScoreLevelBoundsDefinition Score(this TextAnalyticAnalysisResults results, SentimentResultResponseItem responseItem)
         {
-            return results.AnalysisSettings.ConfigurationSettings.ScoringEngine.EvaluateScore(responseItem.score);
+            return results.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(responseItem.score);
         }
 
 

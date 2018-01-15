@@ -24,7 +24,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             _apiKeys.Add(apiCategory, apiKey);
             ServiceUris = serviceUris;
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
-            ScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
+            GlobalScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
         public ConfigurationSettings(ConfigurationSettings settings)
@@ -33,10 +33,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             this.LocationKey = settings.LocationKey;
             this.ServiceUris = settings.ServiceUris;
             this.LogLevel = settings.LogLevel;
-            this.ScoringEngine = settings.ScoringEngine;
+            this.GlobalScoringEngine = settings.GlobalScoringEngine;
             this.RegisteredDiagnosticTraceLoggers = settings.RegisteredDiagnosticTraceLoggers;
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
-            ScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
+            GlobalScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
         public void RegisterDiagnosticLogger(IDiagnosticLogger logger)
@@ -47,7 +47,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 
         public void SetScoringEngine(IScoreEvaluationEngine scoringEngine)
         {
-            this.ScoringEngine = scoringEngine ?? throw new CognitiveServicesArgumentException("ScoringEngine cannot be NULL");
+            this.GlobalScoringEngine = scoringEngine ?? throw new CognitiveServicesArgumentException("ScoringEngine cannot be NULL");
         }
 
         public LoggingLevel LogLevel { get; set; }
@@ -63,6 +63,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         public ApiServiceUriCollectionBase ServiceUris { get; protected set; }
         public string BaseUrl =>  string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, LocationKey.ToTextLocation());
 
-        public IScoreEvaluationEngine ScoringEngine { get; protected set; }
+        public IScoreEvaluationEngine GlobalScoringEngine { get; protected set; }
     }
 }

@@ -34,7 +34,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddDebugDiagnosticLogging()
-                .UsingDefaultScoringEngineAndScoreLevels()
+                .UsingDefaultGlobalScoringEngineAndScoreLevels()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
@@ -53,7 +53,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.SentimentAnalysis.AnalysisResult.ResponseData.documents);
             Assert.Equal("Negative", 
-                result.AnalysisSettings.ConfigurationSettings.ScoringEngine.EvaluateScore(
+                result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(
                     result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
         }
 

@@ -42,19 +42,19 @@ namespace Glav.CognitiveServices.FluentApi.Core
             return configSettings;
         }
 
-        public static ConfigurationSettings UsingDefaultScoringEngineAndScoreLevels(this ConfigurationSettings configSettings)
+        public static ConfigurationSettings UsingDefaultGlobalScoringEngineAndScoreLevels(this ConfigurationSettings configSettings)
         {
             configSettings.SetScoringEngine(new DefaultScoreEvaluationEngine(new DefaultScoreLevels()));
             return configSettings;
         }
 
-        public static ConfigurationSettings UsingCustomScoringEngine(this ConfigurationSettings configSettings, IScoreEvaluationEngine scoringEngine)
+        public static ConfigurationSettings UsingCustomGlobalScoringEngine(this ConfigurationSettings configSettings, IScoreEvaluationEngine scoringEngine)
         {
             configSettings.SetScoringEngine(scoringEngine);
             return configSettings;
         }
 
-        public static ConfigurationSettings UsingDefaultScoringEngineWithCustomScoreLevels(this ConfigurationSettings configSettings, IScoreLevelBoundsCollection scoreLevels)
+        public static ConfigurationSettings UsingDefaultGlobalScoringEngineWithCustomScoreLevels(this ConfigurationSettings configSettings, IScoreLevelBoundsCollection scoreLevels)
         {
             configSettings.SetScoringEngine(new DefaultScoreEvaluationEngine(scoreLevels));
             return configSettings;

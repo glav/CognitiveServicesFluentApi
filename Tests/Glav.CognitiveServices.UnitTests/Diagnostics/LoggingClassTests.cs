@@ -15,7 +15,7 @@ namespace Glav.CognitiveServices.UnitTests.Diagnostics
             var result = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddCustomDiagnosticLogging(logger)
-                .UsingDefaultScoringEngineAndScoreLevels()
+                .UsingDefaultGlobalScoringEngineAndScoreLevels()
                 .UsingCustomCommunication(mockCommsEngine)
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("this should not log some informational messages")
