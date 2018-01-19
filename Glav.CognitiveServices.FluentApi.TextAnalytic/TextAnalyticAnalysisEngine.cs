@@ -44,13 +44,13 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
                 switch (apiAction)
                 {
                     case ApiActionType.TextAnalyticsSentiment:
-                        apiResults.SetResult(new SentimentAnalysisContext((actions as TextAnalyticActionData), new SentimentResult(result)));
+                        apiResults.SetResult(new SentimentAnalysisContext((actions as TextAnalyticActionData), new SentimentResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                         break;
                     case ApiActionType.TextAnalyticsKeyphrases:
-                        apiResults.SetResult(new KeyPhraseAnalysisContext((actions as TextAnalyticActionData), new KeyPhraseResult(result)));
+                        apiResults.SetResult(new KeyPhraseAnalysisContext((actions as TextAnalyticActionData), new KeyPhraseResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                         break;
                     case ApiActionType.TextAnalyticsLanguages:
-                        apiResults.SetResult(new LanguageAnalysisContext((actions as TextAnalyticActionData), new LanguagesResult(result)));
+                        apiResults.SetResult(new LanguageAnalysisContext((actions as TextAnalyticActionData), new LanguagesResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                         break;
                     default:
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");

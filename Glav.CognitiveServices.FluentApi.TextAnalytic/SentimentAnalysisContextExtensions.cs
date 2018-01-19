@@ -8,30 +8,30 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public static class SentimentAnalysisContextExtensions
     {
-        public static ScoreLevelBoundsDefinition Score(this TextAnalyticAnalysisResults results, SentimentResultResponseItem responseItem)
+        public static ScoreLevelBoundsDefinition Score(this SentimentAnalysisContext context, SentimentResultResponseItem responseItem)
         {
-            return results.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(responseItem.score);
+            return context.ScoringEngine.EvaluateScore(responseItem.score);
         }
 
 
-        public static int NumberOfResponses(this TextAnalyticAnalysisResults results, string sentimentClassification)
+        public static int NumberOfResponses(this SentimentAnalysisContext context, string sentimentClassification)
         {
-            return results.SentimentAnalysis.AnalysisResult.ResponseData.documents.Count(d => Score(results, d).CanonicalName == sentimentClassification.ToLowerInvariant());   
+            return context.AnalysisResult.ResponseData.documents.Count(d => Score(context, d).CanonicalName == sentimentClassification.ToLowerInvariant());   
         }
 
-        public static SentimentResultResponseItem GetResult(this TextAnalyticAnalysisResults results, long id)
+        public static SentimentResultResponseItem GetResult(this SentimentAnalysisContext context, long id)
         {
-            return results.SentimentAnalysis.AnalysisResult.ResponseData.documents.FirstOrDefault(a => a.id == id);
+            return context.AnalysisResult.ResponseData.documents.FirstOrDefault(a => a.id == id);
         }
 
-        public static IEnumerable<SentimentResultResponseItem> GetResults(this TextAnalyticAnalysisResults results)
+        public static IEnumerable<SentimentResultResponseItem> GetResults(this SentimentAnalysisContext context)
         {
-            return results.SentimentAnalysis.AnalysisResult.ResponseData.documents.AsEnumerable();
+            return context.AnalysisResult.ResponseData.documents.AsEnumerable();
         }
 
-        public static IEnumerable<SentimentResultResponseItem> GetResults(this TextAnalyticAnalysisResults results, string sentimentClassification)
+        public static IEnumerable<SentimentResultResponseItem> GetResults(this SentimentAnalysisContext context, string sentimentClassification)
         {
-            return results.SentimentAnalysis.AnalysisResult.ResponseData.documents.Where(d => Score(results, d).CanonicalName == sentimentClassification.ToLowerInvariant());
+            return context.AnalysisResult.ResponseData.documents.Where(d => Score(context, d).CanonicalName == sentimentClassification.ToLowerInvariant());
         }
 
         private static bool IsContextResponseDataNull(SentimentAnalysisContext context)

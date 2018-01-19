@@ -40,15 +40,15 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.NumberOfResponses("positive"));
+            Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses("positive"));
 
             // Get Original Id of input data
             var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
-            var resultById = result.GetResult(submittedId);
+            var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
             Assert.Equal("positive", result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
 
-            var collectedResults = result.GetResults("positive");
+            var collectedResults = result.SentimentAnalysis.GetResults("positive");
             Assert.NotNull(collectedResults);
             Assert.Equal(1, collectedResults.Count());
         }
@@ -70,7 +70,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.SentimentAnalysis.AnalysisResult.ResponseData.documents);
 
-            Assert.Equal("Negative", result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
+            Assert.Equal("Negative", result.SentimentAnalysis.ScoringEngine.EvaluateScore(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
         }
 
         [Fact]
@@ -85,15 +85,15 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .AnalyseAllSentimentsAsync();
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.NumberOfResponses("Negative"));
+            Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses("Negative"));
 
             // Get Original Id of input data
             var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
-            var resultById = result.GetResult(submittedId);
+            var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
             Assert.Equal("negative", result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
 
-            var collectedResults = result.GetResults("negative");
+            var collectedResults = result.SentimentAnalysis.GetResults("negative");
             Assert.NotNull(collectedResults);
             Assert.Equal(1, collectedResults.Count());
         }

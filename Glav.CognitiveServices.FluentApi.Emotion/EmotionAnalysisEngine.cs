@@ -41,7 +41,7 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
                 switch (apiAction)
                 {
                     case ApiActionType.EmotionImageRecognition:
-                        apiResults.SetResult(new ImageRecognitionAnalysisContext((actions as EmotionActionData), new ImageRecognitionResult(result)));
+                        apiResults.SetResult(new ImageRecognitionAnalysisContext((actions as EmotionActionData), new ImageRecognitionResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                         break;
                     default:
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
