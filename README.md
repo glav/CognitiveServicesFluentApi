@@ -1,5 +1,38 @@
 # CognitiveServicesFluentApi
-A fluent API to use with Microsoft Cortana suite of cognitive services. Currently this API only supports TextAnalytics and Emotion services but more will come.
+A fluent API to use with the Microsoft Cortana suite of cognitive services. Currently this API only supports TextAnalytics and Emotion services but more will come. Computer Vision is currently a work in progress.
+
+The objective is to make the set of Cognitive service API's really easy to consume from .Net applications. In addition, a set of helper extension methods are available to try and make common functionality super easy to access.
+
+## How to get started.
+Easiest way is to install the nuget package for your specific analysis functionality. Note: packages are currentlt pre-release so you need the version specifier.
+#### For text analyitics (such as Sentiment analysis):
+
+```powershell
+Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic -Version 0.5.0-alpha
+```
+
+#### For Emotion (such as face and emotion detection in images)
+```powershell
+Install-Package Glav.CognitiveServices.FluentApi.Emotion -Version 0.5.0-alpha
+```
+
+#### Start coding
+In order to make use of Cognitive services, you need to have an instance of the cognitive service setup in your Azure subscription. ![This link](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account) shows you how to do this. You will then have two crucial pieces of information:
+1. An API Key
+2. A Location where your service is hosted.
+
+You will need these to supply to the fluent API to allow it to call the correct service.
+
+Create a new console project (or any type, but console is easiest to start).
+Depending on what cognitive service you are using, add the following using statement:
+``` c#
+// For TextAnalytics API
+using Glav.CognitiveServices.FluentApi.TextAnalytic;
+
+// For Emotion API
+using Glav.CognitiveServices.FluentApi.Emotion;
+```
+
 
 ## TextAnalytics Usage
 For example, to perform Sentiment Analysis on a piece of text, you can do:
