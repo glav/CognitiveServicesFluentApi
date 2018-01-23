@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Emotion.Domain;
 using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
 namespace Glav.CognitiveServices.FluentApi.Emotion
 {
@@ -47,6 +48,8 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
                 }
             }
+            // Set the emotion image recognition scoring levels to a more custom version
+            apiResults.ImageRecognitionAnalysis.SetScoringEngine(new DefaultScoreEvaluationEngine(new EmotionRangeScoreLevels()));
         }
 
     }

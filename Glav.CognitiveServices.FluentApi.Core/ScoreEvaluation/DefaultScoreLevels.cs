@@ -6,6 +6,12 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
 {
     public class DefaultScoreLevels : BaseScoreLevelsCollection
     {
+        public const string Negative = "Negative";
+        public const string SlightlyNegative = "Slightly Negative";
+        public const string Neutral = "Neutral";
+        public const string SlightlyPositive = "Slightly Positive";
+        public const string Positive = "Positive";
+
         public DefaultScoreLevels()
         {
             ConstructDefaultValues();
