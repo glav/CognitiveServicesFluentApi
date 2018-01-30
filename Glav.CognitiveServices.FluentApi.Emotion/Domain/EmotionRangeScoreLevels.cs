@@ -24,7 +24,7 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
             AddNextScoreLevelDefinitionInList(0.35, ProbablyNegative);
             AddNextScoreLevelDefinitionInList(0.49, PossiblyNegative);
             AddNextScoreLevelDefinitionInList(0.51, Neutral);
-            AddNextScoreLevelDefinitionInList(0.75, PossiblyPositive);
+            AddNextScoreLevelDefinitionInList(0.65, PossiblyPositive);
             AddNextScoreLevelDefinitionInList(0.85, ProbablyPositive);
             AddFinalScoreLevel(DefinitelyPositive);
         }
