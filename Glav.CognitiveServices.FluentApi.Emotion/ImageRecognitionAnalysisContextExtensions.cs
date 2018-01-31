@@ -9,6 +9,11 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
 {
     public static class ImageRecognitionAnalysisContextExtensions
     {
+        public static ScoreLevelBoundsDefinition Score(this ImageRecognitionAnalysisContext context, double scoreValue)
+        {
+            return context.ScoringEngine.EvaluateScore(scoreValue);
+        }
+
         public static IEnumerable<EmotionImageRecognitionResponseItem> GetFacesRecognised(this ImageRecognitionAnalysisContext imageRecognitionContext)
         {
             if (!imageRecognitionContext.AnalysisResult.ActionSubmittedSuccessfully)

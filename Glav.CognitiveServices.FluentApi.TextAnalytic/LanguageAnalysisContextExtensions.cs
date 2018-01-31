@@ -12,6 +12,10 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         {
             return context.ScoringEngine.EvaluateScore(languageResult.score);
         }
+        public static ScoreLevelBoundsDefinition Score(this LanguageAnalysisContext context, double scoreValue)
+        {
+            return context.ScoringEngine.EvaluateScore(scoreValue);
+        }
 
         public static int NumberOfResponses(this LanguageAnalysisContext context, string languageConfidence)
         {

@@ -122,6 +122,15 @@ TextAnalystics uses these scores by default. Emotion has a slightly different de
 * 0.65 - 0.85 : "Probably Positive"
 * 0.85 - 1 : "Definitely Positive"
 
+This is all well and good, but how do we use this?
+
+Each result set or context has a scoring engine with scoring levels attached to it. This can be used as shown in the following Sentiment analysis example:
+``` c#
+var items = result.SentimentAnalysis.GetResults();
+var actualItem = items.First();
+var score = result.SentimentAnalysis.Score(actualItem);
+Console.WriteLine($"Score level is: {score.Name}");
+```
 
 ## TextAnalytics Usage
 For example, to perform Sentiment Analysis on a piece of text, you can do:
