@@ -131,6 +131,21 @@ var actualItem = items.First();
 var score = result.SentimentAnalysis.Score(actualItem);
 Console.WriteLine($"Score level is: {score.Name}");
 ```
+Alternatively, you can also provide the confidence level directly:
+``` c#
+var score = result.SentimentAnalysis.Score(0.987);
+``` 
+Each API operates a little different in terms of scoring and the fluent API differs a little for the specific API to accomodate this. For example, for Sentiment analysis, you can find all the results with a negative sentiment with the following:
+``` c#
+var negativeResults = result.SentimentAnalysis.GetResults(DefaultScoreLevels.Negative);
+```
+However, for the Emotion API, you find all the angry faces or happy faces with:
+``` c#
+var angryFaces = result.ImageRecognitionAnalysis.GetAngryFaces();
+var happyFaces = result.ImageRecognitionAnalysis.GetHappyFaces();
+``` 
+
+This is just the beginning though. For full details on all the fluent API options available for each API set, please use the links for the detailed documentation around each fluent API. Similarly, for further details on usage and customisation of the scoring levels, please see the links on that section.
 
 ## TextAnalytics Usage
 For example, to perform Sentiment Analysis on a piece of text, you can do:
