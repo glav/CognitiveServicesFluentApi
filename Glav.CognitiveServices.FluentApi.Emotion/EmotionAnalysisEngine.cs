@@ -39,17 +39,17 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
 
                 apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseAll");
 
+                // Set the emotion image recognition scoring levels to a more custom version
+                var emotionDefaultScoringLevelsEngine = new DefaultScoreEvaluationEngine(new EmotionRangeScoreLevels());
                 switch (apiAction)
                 {
                     case ApiActionType.EmotionImageRecognition:
-                        apiResults.SetResult(new ImageRecognitionAnalysisContext((actions as EmotionActionData), new ImageRecognitionResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                        apiResults.SetResult(new ImageRecognitionAnalysisContext((actions as EmotionActionData), new ImageRecognitionResult(result), emotionDefaultScoringLevelsEngine));
                         break;
                     default:
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
                 }
             }
-            // Set the emotion image recognition scoring levels to a more custom version
-            apiResults.ImageRecognitionAnalysis.SetScoringEngine(new DefaultScoreEvaluationEngine(new EmotionRangeScoreLevels()));
         }
 
     }

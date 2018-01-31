@@ -42,17 +42,6 @@ namespace Glav.CognitiveServices.FluentApi.Core
             return configSettings;
         }
 
-        /// <summary>
-        /// Sets the global scoring engine to the default. This scoring engine is then propagated to all engine contexts unless a 
-        /// different scoring engine is specified for that context
-        /// </summary>
-        /// <param name="configSettings"></param>
-        /// <returns></returns>
-        public static ConfigurationSettings UsingDefaultGlobalScoringEngineAndScoreLevels(this ConfigurationSettings configSettings)
-        {
-            configSettings.SetScoringEngine(new DefaultScoreEvaluationEngine(new DefaultScoreLevels()));
-            return configSettings;
-        }
 
         /// <summary>
         /// Sets the global scoring engine to a custom implementation. This scoring engine is then propagated to all engine contexts unless a 

@@ -22,7 +22,6 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
 
             // Run the dummy comms result through the pipeline
             var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.EastUs2)
-                .UsingDefaultGlobalScoringEngineAndScoreLevels()
                 .UsingCustomCommunication(dummyEngine)
                 .WithEmotionAnalysisActions()
                 .AddImageRecognition("http://fakeurl.com/wont/get/called")
@@ -70,7 +69,6 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
 
             // Run the dummy comms result through the pipeline
             var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.EastUs2)
-                .UsingDefaultGlobalScoringEngineAndScoreLevels()
                 .UsingCustomCommunication(dummyEngine)
                 .WithEmotionAnalysisActions()
                 .AddImageRecognition("http://fakeurl.com/wont/get/called")

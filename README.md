@@ -33,6 +33,95 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using Glav.CognitiveServices.FluentApi.Emotion;
 ```
 
+Also add in these common using statements regardless of what service you are using:
+``` c#
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core;
+```
+Now we can begin by creating a configuration setting for a particular cognitive service using the API key and location of our service we created in Azure. Let's start with TextAnalytics:
+``` c#
+var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("YOUR-API-KEY", LocationKeyIdentifier.WestUs)
+```
+In the above statement, substitute your API key taken from the Azure portal, and also ensure the location is correct. Here we have assumed it is in West US.
+
+We can now continue to configure how the core components should work with the cognitive service API. We can typically specify what logging to use and the type of communication. 
+
+```c#
+var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("YOUR-API-KEY", LocationKeyIdentifier.WestUs)
+    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+    .AddDebugDiagnosticLogging()  // Using System.Diagnostics.Debug
+    .UsingHttpCommunication()
+```
+Now we can start to define what actions to take. For TextAnalytics, this takes the form of the extension method:
+``` c#
+.WithTextAnalyticAnalysisActions()
+```
+
+Now we can add in our actions to perform with the associated data. To add in sentiment analysis for some text:
+``` c#
+.AddSentimentAnalysis("This is great.")
+```
+For Keyphrase analysis:
+``` c#
+.AddKeyPhraseAnalysis("This is a snippet of text")
+```
+For Language analysis:
+``` c#
+.AddKeyLanguageAnalysis("I think I am in english")
+```
+Once our actions are added, we can invoke the processing of that data. For TextAnalytics, this is using:
+``` c#
+.AnalyseAllSentimentsAsync();
+```
+Many actions can be added, and the respective cognitive services API's will be called and the results provided into an object that can be easily examined, and has it's own extension methods. However, to continue to use TextAnalytics as the example, putting it all together:
+``` c#
+var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("YOUR-API-KEY", LocationKeyIdentifier.WestUs)
+    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+    .AddDebugDiagnosticLogging()  // Using System.Diagnostics.Debug
+    .UsingHttpCommunication()
+    .WithTextAnalyticAnalysisActions()
+    .AddSentimentAnalysis("This is great.")
+    .AddKeyPhraseAnalysis("This is a snippet of text")
+    .AddKeyLanguageAnalysis("I think I am in english")
+    .AnalyseAllSentimentsAsync();
+```
+
+#### Examining the results
+Each cognitive service API (such as TextAnalytics or Emotion) provides a different type of results since they are performing different actions. However there are some similarities or patterns. Each result will contain a property that houses all the input data and result data for any operations performed. Continuing with the TextAnalytic theme using the above example, the resultof the analyse call contains properties to hold the Sentiment analysis, keyprhase analysis, and language analysis.
+``` c#
+result.SentimentAnalysis();
+result.KeyPhraseAnalysis();
+result.LanguageAnalysis();
+``` 
+Each property has a GetResults() method to conveniently return the ist of results. Alternatively, you can drill down into properties of the analysis object but it can be quite verbose.
+``` c#
+result.SentimentAnalysis().GetResults();
+result.KeyPhraseAnalysis().GetResults();
+result.LanguageAnalysis().GetResults();
+``` 
+It is best to look at the specific documentation for each set of operations to further determine what actions can be performed against the result set. Often, specific methods are avlailable to extract or examine the results.
+
+#### The scoring system
+Common to almost all cognitive service operations is a confidence score for the returned result. This value is always in between 0 and 1 inclusive. 0 represents a negative, or low confidence score whereas 1 represents a positive, or high confidence score. A score of 0.5 is considered neutral. The values of the scores and the variation in the scores will mean different things to different actions. This fluent API provides a default set of score levels for each API set, that is, one for TextAnalytics, one for Emotion etc. These are the defaults but can be completely customised to suit.
+
+The default score levels are the following:
+* 0 - 0.35 : "Negative"
+* 0.35 - 0.45 : "Slightly Negative"
+* 0.45 - 0.55 : "Neutral"
+* 0.55 - 0.75 : "Slightly Positive"
+* 0.75 - 1 : "Positive"
+
+In the default scoring engine, the "upper bound" is not inclusive. For example, a value must be greater than or equal to 0 and less than 0.35 to be considered "Negative". All upper bounds are non inclusive, with the exception of 1.
+
+TextAnalystics uses these scores by default. Emotion has a slightly different default set of scores.
+* 0 - 0.15 : "Definitely Negative"
+* 0.15 - 0.35 : "Probably Negative"
+* 0.35 - 0.49 : "Possibly Negative"
+* 0.49 - 0.51 : "Neutral"
+* 0.51 - 0.65 : "Possibly Positive"
+* 0.65 - 0.85 : "Probably Positive"
+* 0.85 - 1 : "Definitely Positive"
+
 
 ## TextAnalytics Usage
 For example, to perform Sentiment Analysis on a piece of text, you can do:

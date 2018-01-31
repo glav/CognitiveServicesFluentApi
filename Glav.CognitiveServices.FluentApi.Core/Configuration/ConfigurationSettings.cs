@@ -20,11 +20,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             {
                 throw new CognitiveServicesArgumentException("APIKey cannot be empty");
             }
-            LocationKey = locationKey;
+            this.LocationKey = locationKey;
             _apiKeys.Add(apiCategory, apiKey);
-            ServiceUris = serviceUris;
+            this.ServiceUris = serviceUris;
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
-            GlobalScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
+            this.GlobalScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
         public ConfigurationSettings(ConfigurationSettings settings)
@@ -36,7 +36,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             this.GlobalScoringEngine = settings.GlobalScoringEngine;
             this.RegisteredDiagnosticTraceLoggers = settings.RegisteredDiagnosticTraceLoggers;
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
-            GlobalScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
         public void RegisterDiagnosticLogger(IDiagnosticLogger logger)

@@ -22,7 +22,6 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 
             // Run the dummy comms result through the pipeline
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.EastUs2)
-                .UsingDefaultGlobalScoringEngineAndScoreLevels()
                 .UsingCustomCommunication(dummyEngine)
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("this wont get analysed")
@@ -52,7 +51,6 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 
             // Run the dummy comms result through the pipeline
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.EastUs2)
-                .UsingDefaultGlobalScoringEngineAndScoreLevels()
                 .UsingCustomCommunication(dummyEngine)
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("this wont get analysed")

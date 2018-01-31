@@ -34,7 +34,6 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddDebugDiagnosticLogging()
-                .UsingDefaultGlobalScoringEngineAndScoreLevels()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
