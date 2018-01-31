@@ -16,7 +16,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 
         public static int NumberOfResponses(this SentimentAnalysisContext context, string sentimentClassification)
         {
-            return context.AnalysisResult.ResponseData.documents.Count(d => Score(context, d).CanonicalName == sentimentClassification.ToLowerInvariant());   
+            return context.AnalysisResult.ResponseData.documents.Count(d => Score(context, d).NormalisedName == sentimentClassification.ToLowerInvariant());   
         }
 
         public static SentimentResultResponseItem GetResult(this SentimentAnalysisContext context, long id)
@@ -31,7 +31,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 
         public static IEnumerable<SentimentResultResponseItem> GetResults(this SentimentAnalysisContext context, string sentimentClassification)
         {
-            return context.AnalysisResult.ResponseData.documents.Where(d => Score(context, d).CanonicalName == sentimentClassification.ToLowerInvariant());
+            return context.AnalysisResult.ResponseData.documents.Where(d => Score(context, d).NormalisedName == sentimentClassification.ToLowerInvariant());
         }
 
         private static bool IsContextResponseDataNull(SentimentAnalysisContext context)

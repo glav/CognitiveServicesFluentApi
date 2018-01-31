@@ -12,7 +12,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
             LowerBound = lowerBound;
             UpperBound = upperBound;
             Name = name;
-            CanonicalName = name.ToLowerInvariant();
+            NormalisedName = name.ToLowerInvariant();
         }
 
         private void Validate(double lowerBound, double upperBound, string name)
@@ -35,6 +35,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
         public double LowerBound { get; }
         public double UpperBound { get; }
         public string Name { get; }
-        public string CanonicalName { get; }
+        /// <summary>
+        /// This property is pre-calculated to a lower invariant version of the name and used for textual comparisons.b
+        /// </summary>
+        public string NormalisedName { get; }
     }
 }

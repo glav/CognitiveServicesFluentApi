@@ -36,7 +36,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var actual = result.SentimentAnalysis.GetResults();
             Assert.Equal(1, actual.Count());
             var actualItem = actual.First();
-            Assert.Equal(result.SentimentAnalysis.Score(actualItem).CanonicalName, expectedResult.CanonicalName);
+            Assert.Equal(result.SentimentAnalysis.Score(actualItem).NormalisedName, expectedResult.NormalisedName);
             Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(expectedResult.Name));
         }
 
@@ -68,7 +68,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.Equal(1, actual.Count());
 
             var actualItem = actual.First();
-            Assert.Equal(result.SentimentAnalysis.Score(actualItem).CanonicalName, expectedResult.CanonicalName);
+            Assert.Equal(result.SentimentAnalysis.Score(actualItem).NormalisedName, expectedResult.NormalisedName);
             Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(expectedResult.Name));
 
 

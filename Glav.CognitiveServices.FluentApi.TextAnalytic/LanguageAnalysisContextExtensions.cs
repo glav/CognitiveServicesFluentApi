@@ -34,7 +34,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             var results = new List<LanguagesResultResponseItem>();
             context.AnalysisResult.ResponseData.documents.ToList().ForEach((item) =>
             {
-                if (item.detectedLanguages.Any(i => Score(context,i).CanonicalName == languageConfidence)
+                if (item.detectedLanguages.Any(i => Score(context,i).NormalisedName == languageConfidence)
                     && !results.Any(i => i.id == item.id))
                 {
                     results.Add(item);
