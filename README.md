@@ -4,10 +4,10 @@ A fluent API to use with the Microsoft Cortana suite of cognitive services. Curr
 The objective is to make the set of Cognitive service API's really easy to consume from .Net applications. In addition, a set of helper extension methods are available to try and make common functionality super easy to access.
 
 If you are new to this project, please see the getting started section below. For those wanting detailed documentation, here you go:
-* ![Core Fluent API](Common.md)
-* ![TextAnalytics Fluent API](TextAnalytics.md)
-* ![Emotion Fluent API](Emotion.md)
-* ![Scoring system](Scoring.md)
+* [Core Fluent API](Common.md)
+* [TextAnalytics Fluent API](TextAnalytics.md)
+* [Emotion Fluent API](Emotion.md)
+* [Scoring system](Scoring.md)
 
 ## How to get started.
 Easiest way is to install the nuget package for your specific analysis functionality. Note: packages are currentlt pre-release so you need the version specifier.
@@ -24,7 +24,7 @@ Install-Package Glav.CognitiveServices.FluentApi.Emotion -Version 0.5.0-alpha
 ```
 
 #### Start coding
-In order to make use of Cognitive services, you need to have an instance of the cognitive service setup in your Azure subscription. ![This link](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account) shows you how to do this. You will then have two crucial pieces of information:
+In order to make use of Cognitive services, you need to have an instance of the cognitive service setup in your Azure subscription. [This link](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account) shows you how to do this. You will then have two crucial pieces of information:
 1. An API Key
 2. A Location where your service is hosted.
 
