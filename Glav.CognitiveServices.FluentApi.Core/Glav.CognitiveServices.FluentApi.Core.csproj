@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Glav.CognitiveServices.FluentApi.Core</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>0.6.1-alpha</Version>
+    <Version>0.7.0-alpha</Version>
     <Authors>Paul Glavich</Authors>
     <Company />
     <Product>Cognitive Services Fluent API</Product>
