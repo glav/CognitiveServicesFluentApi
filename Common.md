@@ -23,6 +23,7 @@ The 'CreateUsingConfigurationKeys' method returns an object of type 'Configurati
 The following extensions methods or fluent API operations are available from the 'ConfigurationSettings' object.
 
 #### .AddConsoleDiagnosticLogging()
+* Extends: ConfigurationSettings
 * Returns: ConfigurationSettings
 * Description: Adds diagnostic logging to the console.
 * Example usage:
@@ -31,6 +32,7 @@ TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKe
                 .AddConsoleDiagnosticLogging()
 ```
 #### .AddDebugDiagnosticLogging()
+* Extends: ConfigurationSettings
 * Returns: ConfigurationSettings
 * Description: Adds diagnostic logging using the System.Diagnostics.Debug writer.
 * Example usage:
@@ -42,12 +44,83 @@ TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKe
 #### .AddCustomDiagnosticLogging(IDiagnosticLogger)
 * Returns: ConfigurationSettings
 * Description: Adds diagnostic logging using a custom logging implementation that implements the 'IDiagnosticLogger' interface.
-* Example usage:
-``` c#
-```
+
 #### .SetDiagnosticLoggingLevel(LoggingLevel)
+* Extends: ConfigurationSettings
+* Returns: ConfigurationSettings
+* Description: Sets the diagnostic logging level.
+> Example usage:
+``` c#
+TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.WestUs)
+    .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors);
+```
+
+#### .UsingCustomGlobalScoringEngine(IScoreEvaluationEngine)
+* Extends: ConfigurationSettings
+* Returns: ConfigurationSettings
+* Description: Specifies a custom global scoring engine that implements the 'IScoreEvaluationEngine' interface. The global scoring engine is propagated to any fluent API engines that do not have specific implementations of their own such as TextAnalytics. This engine determines how an API result containing a confidence level result is calculated to have a particular meaning or score against a set of score level definitions.
+> Example usage:
+``` c#
+public class MyScoringEngine : IScoreEvaluationEngine
+{
+    // .... interface methods
+}
+
+TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.WestUs)
+    .UsingCustomGlobalScoringEngine(new MyScoringEngine(new DefaultScoreLevels()));
+```
+
+
+#### .UsingDefaultGlobalScoringEngineWithCustomScoreLevels(IScoreLevelBoundsCollection)
+* Extends: ConfigurationSettings
+* Returns: ConfigurationSettings
+* Description: Specifies a custom set of score level definitions using an implementation of the 'IScoreLevelBoundsCollection' interface (lower and upper bounds) to be used by the scoring engine when determining an API result confidence score. The global scoring engine and its associated scoring levels are propagated to any fluent API engines that do not have specific implementations of their own such as TextAnalytics. Note that the 'BaseScoreLevelsCollection' class is an abstract class that implements 'IScoreLevelBoundsCollection' but provides many convenience methods to allow easy score level definitions.
+> Example usage:
+``` c#
+public class MyCustomScoreLevels : BaseScoreLevelsCollection
+{
+        public CustomScoreLevels()
+        {
+            ConstructDefaultValues();
+        }
+
+        private void ConstructDefaultValues()
+        {
+            AddStartingScoreLevel(0.3, "Very Low");
+            AddNextScoreLevelDefinitionInList(0.4, "Somewhat low");
+            AddNextScoreLevelDefinitionInList(0.6, "Middle");
+            AddNextScoreLevelDefinitionInList(0.8, "High");
+            AddFinalScoreLevel("Really Highs");
+        }
+}
+
+TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.WestUs)
+    .UsingDefaultGlobalScoringEngineWithCustomScoreLevels(new MyCustomScoreLevels());
+```
+
 #### .UsingHttpCommunication()
-Specifies a regular HTTP communications pipeline to communicate with the cognitive service.
+* Extends: ConfigurationSettings
+* Returns: CoreAnalysisSettings
+* Desription: Specifies a regular HTTP communications pipeline to communicate with the cognitive service. Since this returns an implemention of the CoreAnalysisSettings object and -not- ConfigurationSettings you can not specify any more ConfigurationSettings object extensions such as '.AddDebugDiagnosticLogging()'
 > Example usage
 ``` c#
+TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.WestUs)
+    .AddDebugDiagnosticLogging()
+    .UsingHttpCommunication();
+```
+
+#### .UsingCustomCommunication(ICommunicationEngine)
+* Extends: ConfigurationSettings
+* Returns: CoreAnalysisSettings
+* Desription: Specifies a custom communications pipeline that implements the 'ICommunicationEngine' interface to communicate with the cognitive service. Since this returns an implemention of the CoreAnalysisSettings object and -not- ConfigurationSettings you can not specify any more ConfigurationSettings object extensions such as '.AddDebugDiagnosticLogging()'
+> Example usage
+``` c#
+public class MockCommsEngine :  ICommunicationEngine
+{
+   // ... interface methods
+}
+
+TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.WestUs)
+    .AddDebugDiagnosticLogging()
+    .UsingCustomCommunication(new MockCommsEngine());
 ```
