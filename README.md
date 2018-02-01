@@ -3,8 +3,15 @@ A fluent API to use with the Microsoft Cortana suite of cognitive services. Curr
 
 The objective is to make the set of Cognitive service API's really easy to consume from .Net applications. In addition, a set of helper extension methods are available to try and make common functionality super easy to access.
 
+If you are new to this project, please see the getting started section below. For those wanting detailed documentation, here you go:
+* ![Core Fluent API](Common.md)
+* ![TextAnalytics Fluent API](TextAnalytics.md)
+* ![Emotion Fluent API](Emotion.md)
+* ![Scoring system](Scoring.md)
+
 ## How to get started.
 Easiest way is to install the nuget package for your specific analysis functionality. Note: packages are currentlt pre-release so you need the version specifier.
+
 #### For text analyitics (such as Sentiment analysis):
 
 ```powershell
@@ -111,7 +118,7 @@ The default score levels are the following:
 * 0.55 - 0.75 : "Slightly Positive"
 * 0.75 - 1 : "Positive"
 
-In the default scoring engine, the "upper bound" is not inclusive. For example, a value must be greater than or equal to 0 and less than 0.35 to be considered "Negative". All upper bounds are non inclusive, with the exception of 1.
+In the default scoring engine, the "upper bound" is not inclusive (using the default/supplied scoring engine). For example, a value must be greater than or equal to 0 and less than 0.35 to be considered "Negative". All upper bounds are non inclusive, with the exception of 1.
 
 TextAnalystics uses these scores by default. Emotion has a slightly different default set of scores.
 * 0 - 0.15 : "Definitely Negative"
@@ -127,8 +134,8 @@ This is all well and good, but how do we use this?
 Each result set or context has a scoring engine with scoring levels attached to it. This can be used as shown in the following Sentiment analysis example:
 ``` c#
 var items = result.SentimentAnalysis.GetResults();
-var actualItem = items.First();
-var score = result.SentimentAnalysis.Score(actualItem);
+var firstItem = items.First();
+var score = result.SentimentAnalysis.Score(firstItem);
 Console.WriteLine($"Score level is: {score.Name}");
 ```
 Alternatively, you can also provide the confidence level directly:
@@ -147,58 +154,6 @@ var happyFaces = result.ImageRecognitionAnalysis.GetHappyFaces();
 
 This is just the beginning though. For full details on all the fluent API options available for each API set, please use the links for the detailed documentation around each fluent API. Similarly, for further details on usage and customisation of the scoring levels, please see the links on that section.
 
-## TextAnalytics Usage
-For example, to perform Sentiment Analysis on a piece of text, you can do:
-```c#
-var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-key", LocationKeyIdentifier.WestUs)
-    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-    .AddDebugDiagnosticLogging()
-    .UsingHttpCommunication()
-    .WithTextAnalyticAnalysisActions()
-    .AddSentimentAnalysis("I am having a fantastic time.")
-    .AnalyseAllSentimentsAsync();
-
-var collectedResults = result.TextAnalyticSentimentAnalysis.GetResults(SentimentClassification.Positive);
-Assert.NotNull(collectedResults);
-Assert.Equal(1, collectedResults.Count());
-```
-
-And for Keyphrase analysis:
-```c#
-var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-key", LocationKeyIdentifier.WestUs)
-    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-    .AddDebugDiagnosticLogging()
-    .UsingHttpCommunication()
-    .WithTextAnalyticAnalysisActions()
-    .AddKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-    .AnalyseAllSentimentsAsync();
-
-Assert.Equal<string>("basic sentence", result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents[0].keyPhrases[0]);
-```
-
-You can also chain operations:
-```c#
-var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-key", LocationKeyIdentifier.WestUs)
-    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-    .AddConsoleDiagnosticLogging()  // just log to the console
-    .UsingHttpCommunication()
-    .WithTextAnalyticAnalysisActions()
-    .AddSentimentAnalysis("I am having a terrible time.")
-    .AddKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-    .AnalyseAllSentimentsAsync();
-```
-
-## Emotion Usage
-To analyse the emotions of a static image, you can do the following:
-```c#
-var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.EmotionApiKey, LocationKeyIdentifier.WestUs)
-    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-    .AddDebugDiagnosticLogging()
-    .UsingHttpCommunication()
-    .WithEmotionAnalysisActions()
-    .AddImageRecognition("http://www.scface.org/examples/001_frontal.jpg")
-    .AnalyseAllEmotionsAsync();
-```
 
 ### Note
 This API is only in early stages and many refinements are yet to be applied.
