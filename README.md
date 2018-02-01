@@ -10,7 +10,7 @@ If you are new to this project, please see the getting started section below. Fo
 * [Scoring system](Scoring.md)
 
 ## How to get started.
-Easiest way is to install the nuget package for your specific analysis functionality. Note: packages are currentlt pre-release so you need the version specifier.
+Easiest way is to install the nuget package for your specific analysis functionality. Note: packages are currently pre-release so you need the version specifier.
 
 #### For text analyitics (such as Sentiment analysis):
 
@@ -51,7 +51,9 @@ Now we can begin by creating a configuration setting for a particular cognitive 
 ``` c#
 var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("YOUR-API-KEY", LocationKeyIdentifier.WestUs)
 ```
-In the above statement, substitute your API key taken from the Azure portal, and also ensure the location is correct. Here we have assumed it is in West US.
+Where:
+* '**YOUR-API-KEY**': String API key obtained from the Azure portal for your instance of the cognitive service to be used.
+* '**LocationKeyIdentifier**': The enumeration of type `Glav.CognitiveServices.FluentApi.Core.LocationKeyIdentifier` which specifies the location in which your cognitive service was provisioned. This is important as it dictates how the Url is formed when communicating with the service.
 
 We can now continue to configure how the core components should work with the cognitive service API. We can typically specify what logging to use and the type of communication. 
 
@@ -96,7 +98,7 @@ var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("YOUR-API
 ```
 
 #### Examining the results
-Each cognitive service API (such as TextAnalytics or Emotion) provides a different type of results since they are performing different actions. However there are some similarities or patterns. Each result will contain a property that houses all the input data and result data for any operations performed. Continuing with the TextAnalytic theme using the above example, the resultof the analyse call contains properties to hold the Sentiment analysis, keyprhase analysis, and language analysis.
+Each cognitive service API (such as TextAnalytics or Emotion) provides a different type of results since they are performing different actions. However there are some similarities or patterns. Each result will contain a property that houses all the input data and result data for any operations performed. Continuing with the TextAnalytic theme using the above example, the resultof the analyse call contains properties to hold the Sentiment analysis, keyphrase analysis, and language analysis.
 ``` c#
 result.SentimentAnalysis();
 result.KeyPhraseAnalysis();
