@@ -12,7 +12,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneralArtifacts", "GeneralArtifacts", "{86C79682-B240-4A42-BA88-F03E07832C2E}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
-		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.Core", "Glav.CognitiveServices.FluentApi.Core\Glav.CognitiveServices.FluentApi.Core.csproj", "{EAD5DFA0-15F8-498F-8D1A-9234603DD94E}"
