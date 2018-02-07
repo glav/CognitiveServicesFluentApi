@@ -1,3 +1,5 @@
+= [Home](../readme.md)/Emotion
+
 ## Emotion Usage
 To analyse the emotions of a static image, you can do the following:
 ```c#

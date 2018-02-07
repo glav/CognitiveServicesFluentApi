@@ -1,3 +1,4 @@
+= [Home](../readme.md)/TextAnalytics
 
 ## TextAnalytics Usage
 For example, to perform Sentiment Analysis on a piece of text, you can do:

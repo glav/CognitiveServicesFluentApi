@@ -1,3 +1,5 @@
+= [Home](../readme.md)/Common
+
 ## Cognitive Services Fluent API Common/Core Functionality
 Before we begin adding actions and data to operate with, there are many common or core fluent API methods for configuring cross cutting operations such as logging and communication menthods.
 
@@ -12,10 +14,6 @@ For Emotion, this is done by:
 ``` c#
 var config = EmotionConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier)
 ```
-
-Where:
-* 'API-KEY': String API key obtained from the Azure portal for your instance of the cognitive service to be used.
-* 'LocationKeyIdentifier': The enumeration of type `Glav.CognitiveServices.FluentApi.Core.LocationKeyIdentifier` which specifies the location in which your cognitive service was provisioned. This is important as it dictates how the Url is formed when communicating with the service.
 
 The `CreateUsingConfigurationKeys` method returns an object of type `ConfigurationSettings`. From this, we can then begin defining the common pipeline.
 
