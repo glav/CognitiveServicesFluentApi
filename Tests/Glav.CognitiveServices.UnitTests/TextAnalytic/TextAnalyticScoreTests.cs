@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .UsingCustomCommunication(dummyEngine)
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("this wont get analysed")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             // Calculate what we expect to get from our default score levels
             var defaultScoreLevels = new DefaultScoreLevels();  // this is the default set we are using.
@@ -54,7 +54,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .UsingCustomCommunication(dummyEngine)
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("this wont get analysed")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             // Calculate what we expect to get from our score levels
             var scoreLevels = new CustomScoreLevels();  

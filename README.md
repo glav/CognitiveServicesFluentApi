@@ -78,11 +78,11 @@ For Keyphrase analysis:
 ```
 For Language analysis:
 ``` c#
-.AddKeyLanguageAnalysis("I think I am in english")
+.AddLanguageAnalysis("I think I am in english")
 ```
 Once our actions are added, we can invoke the processing of that data. For TextAnalytics, this is using:
 ``` c#
-.AnalyseAllSentimentsAsync();
+.AnalyseAllAsync();
 ```
 Many actions can be added, and the respective cognitive services API's will be called and the results provided into an object that can be easily examined, and has it's own extension methods. However, to continue to use TextAnalytics as the example, putting it all together:
 ``` c#
@@ -93,8 +93,8 @@ var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("YOUR-API
     .WithTextAnalyticAnalysisActions()
     .AddSentimentAnalysis("This is great.")
     .AddKeyPhraseAnalysis("This is a snippet of text")
-    .AddKeyLanguageAnalysis("I think I am in english")
-    .AnalyseAllSentimentsAsync();
+    .AddLanguageAnalysis("I think I am in english")
+    .AnalyseAllAsync();
 ```
 
 #### Examining the results

@@ -18,14 +18,14 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
         [Fact]
         public void EmotionValueShouldEvaluateToPossiblyPositive()
         {
-            var result = _scoreEngine.EvaluateScore(0.74);
+            var result = _scoreEngine.EvaluateScore(0.64);
             Assert.Equal(result.Name, EmotionRangeScoreLevels.PossiblyPositive);
         }
 
         [Fact]
         public void EmotionValueShouldEvaluateToProbablyPositive()
         {
-            var result = _scoreEngine.EvaluateScore(0.8);
+            var result = _scoreEngine.EvaluateScore(0.81);
             Assert.Equal(result.Name, EmotionRangeScoreLevels.ProbablyPositive);
         }
 

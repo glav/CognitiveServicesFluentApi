@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Emotion
                 .WithEmotionAnalysisActions()
                 .AddImageRecognition("http://www.scface.org/examples/001_frontal.jpg")
                 //.WithImageRecognition("http://www.cse.oulu.fi/wsgi/CMV/Downloads/Pbfd?action=AttachFile&do=get&target=hh.jpg")
-                .AnalyseAllEmotionsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.ImageRecognitionAnalysis);

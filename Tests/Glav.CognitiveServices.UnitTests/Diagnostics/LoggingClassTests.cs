@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.UnitTests.Diagnostics
                 .UsingCustomCommunication(mockCommsEngine)
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("this should not log some informational messages")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.Equal<int>(0, logger.NumberOfLogInfoMessages);
                 
@@ -36,7 +36,7 @@ namespace Glav.CognitiveServices.UnitTests.Diagnostics
                 .UsingCustomCommunication(mockCommsEngine)
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("This should log some informational messages")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.True(logger.NumberOfLogInfoMessages > 0);
 

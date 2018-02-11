@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a fantastic time.")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.SentimentAnalysis);
@@ -37,7 +37,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a fantastic time.")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses("positive"));
@@ -62,7 +62,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.SentimentAnalysis);
@@ -82,7 +82,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses("Negative"));

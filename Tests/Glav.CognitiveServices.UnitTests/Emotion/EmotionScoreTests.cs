@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
                 .UsingCustomCommunication(dummyEngine)
                 .WithEmotionAnalysisActions()
                 .AddImageRecognition("http://fakeurl.com/wont/get/called")
-                .AnalyseAllEmotionsAsync();
+                .AnalyseAllAsync();
 
             // Check we got what we expect
             var actual = result.ImageRecognitionAnalysis.GetFacesRecognised();
@@ -72,7 +72,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
                 .UsingCustomCommunication(dummyEngine)
                 .WithEmotionAnalysisActions()
                 .AddImageRecognition("http://fakeurl.com/wont/get/called")
-                .AnalyseAllEmotionsAsync();
+                .AnalyseAllAsync();
 
             // Check we got what we expect
             var actuals = result.ImageRecognitionAnalysis.GetFacesRecognised();

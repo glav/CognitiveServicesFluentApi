@@ -21,7 +21,7 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
             return apiAnalysis;
         }
 
-        public static async Task<EmotionAnalysisResults> AnalyseAllEmotionsAsync(this EmotionAnalysisSettings apiAnalysisSettings)
+        public static async Task<EmotionAnalysisResults> AnalyseAllAsync(this EmotionAnalysisSettings apiAnalysisSettings)
         {
             var engine = new EmotionAnalysisEngine(apiAnalysisSettings);
             return await engine.AnalyseAllAsync();
