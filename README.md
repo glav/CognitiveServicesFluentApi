@@ -4,10 +4,10 @@ A fluent API to use with the Microsoft Cortana suite of cognitive services. Curr
 The objective is to make the set of Cognitive service API's really easy to consume from .Net applications. In addition, a set of helper extension methods are available to try and make common functionality super easy to access.
 
 If you are new to this project, please see the getting started section below. For those wanting detailed documentation, here you go:
-* [Common/Core Fluent API](Wiki/Common.md)
-* [TextAnalytics Fluent API](Wiki/TextAnalytics.md)
-* [Emotion Fluent API](Wiki/Emotion.md)
-* [Scoring system](Wiki/Scoring.md)
+* [Common/Core Fluent API](./Wiki/Common.md)
+* [TextAnalytics Fluent API](./Wiki/TextAnalytics.md)
+* [Emotion Fluent API](./Wiki/Emotion.md)
+* [Scoring system](./Wiki/Scoring.md)
 
 ## How to get started.
 Easiest way is to install the nuget package for your specific analysis functionality. Note: packages are currently pre-release so you need the version specifier.
