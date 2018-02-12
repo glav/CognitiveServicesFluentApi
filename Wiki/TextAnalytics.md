@@ -1,4 +1,4 @@
-= [Home](/readme.md)/TextAnalytics
+= [Home](/README.md)/TextAnalytics
 
 # TextAnalytics Cognitive Service
 The TextAnalytics cognitive service provides the ability to analyse text to determine what kind of sentiment is the text (such as positive or negative sentiment), what are the key phrases within that text, and what language is the text written in.

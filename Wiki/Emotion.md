@@ -1,4 +1,4 @@
-= [Home](/readme.md)/Emotion
+= [Home](/README.md)/Emotion
 
 # Emotion Cognitive Service
 The emotion cognitive service provides the ability to determine the emotional state of a person through the analysis of images and/or video.
