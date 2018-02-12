@@ -1,4 +1,4 @@
-= [Home](../readme.md)/Common
+= [Home](/readme.md)/Common
 
 ## Cognitive Services Fluent API Common/Core Functionality
 Before we begin adding actions and data to operate with, there are many common or core fluent API methods for configuring cross cutting operations such as logging and communication menthods.

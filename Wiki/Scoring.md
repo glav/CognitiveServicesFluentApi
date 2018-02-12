@@ -1,4 +1,4 @@
-= [Home](../readme.md)/Scoring
+= [Home](/readme.md)/Scoring
 
 ### Cognitive Services Fluent API Scoring System
 
