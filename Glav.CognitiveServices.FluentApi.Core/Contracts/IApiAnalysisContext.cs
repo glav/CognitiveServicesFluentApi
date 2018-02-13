@@ -36,11 +36,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
         public void SetScoringEngine(IScoreEvaluationEngine scoreEngine)
         {
-            if (scoreEngine == null)
-            {
-                throw new CognitiveServicesArgumentException("ScoreEvaluationEngine cannot be NULL");
-            }
-            ScoringEngine = scoreEngine;
+            ScoringEngine = scoreEngine ?? throw new CognitiveServicesArgumentException("ScoreEvaluationEngine cannot be NULL");
         }
     }
 }
