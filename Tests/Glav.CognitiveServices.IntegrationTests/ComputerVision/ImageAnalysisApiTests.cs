@@ -15,7 +15,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddImageAnalysis("https://www.planwallpaper.com/static/images/Child-Girl-with-Sunflowers-Images.jpg")
+                .AddImageAnalysis("http://www.scface.org/examples/001_frontal.jpg")
                 .AnalyseAllImagesAsync();
 
             Assert.NotNull(result);
@@ -24,7 +24,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.NotNull(result.ImageAnalysis.AnalysisResult.ApiCallResult);
             Assert.NotNull(result.ImageAnalysis.AnalysisResult.ResponseData);
             Assert.True(result.ImageAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
-            Assert.NotEmpty(result.ImageAnalysis.AnalysisResult.ResponseData.categories);
+            Assert.NotEmpty(result.ImageAnalysis.AnalysisResult.ResponseData.faces);
         }
 
 

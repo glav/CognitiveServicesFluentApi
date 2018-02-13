@@ -25,7 +25,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
         public abstract Task<TAnalysisResults> AnalyseAllAsync();
 
-        protected async Task ExecuteApiActionAsync(TAnalysisResults apiResults, ApiActionType apiAction, Action<IApiActionData, ICommunicationResult> apiActionHandler)
+        public abstract Task AnalyseApiActionAsync(TAnalysisResults apiResults, ApiActionType apiAction);
+
+        protected async Task AnalyseApiActionAsync(TAnalysisResults apiResults, ApiActionType apiAction, Action<IApiActionData, ICommunicationResult> apiActionHandler)
         {
             if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction))
             {

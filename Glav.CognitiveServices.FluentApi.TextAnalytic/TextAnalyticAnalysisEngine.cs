@@ -17,35 +17,34 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         public override async Task<TextAnalyticAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new TextAnalyticAnalysisResults(AnalysisSettings);
-            var actionsToAnalyse = new ApiActionType[]
-                {
-                    ApiActionType.TextAnalyticsSentiment,
-                    ApiActionType.TextAnalyticsKeyphrases,
-                    ApiActionType.TextAnalyticsLanguages
-                };
+            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsSentiment);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsKeyphrases);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsLanguages);
 
-            foreach (var apiAction in actionsToAnalyse)
-            {
-                await base.ExecuteApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
-                {
-                    var textAnalyticActionData = actionData as TextAnalyticActionData;
-                    switch (apiAction)
-                    {
-                        case ApiActionType.TextAnalyticsSentiment:
-                            apiResults.SetResult(new SentimentAnalysisContext(textAnalyticActionData, new SentimentResult(commsResult)));
-                            break;
-                        case ApiActionType.TextAnalyticsKeyphrases:
-                            apiResults.SetResult(new KeyPhraseAnalysisContext(textAnalyticActionData, new KeyPhraseResult(commsResult)));
-                            break;
-                        case ApiActionType.TextAnalyticsLanguages:
-                            apiResults.SetResult(new LanguageAnalysisContext(textAnalyticActionData, new LanguagesResult(commsResult)));
-                            break;
-                        default:
-                            throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
-                    }
-                });
-            }
             return apiResults;
+        }
+
+        public override async Task AnalyseApiActionAsync(TextAnalyticAnalysisResults apiResults, ApiActionType apiAction)
+        {
+            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
+              {
+                  var textAnalyticActionData = actionData as TextAnalyticActionData;
+                  switch (apiAction)
+                  {
+                      case ApiActionType.TextAnalyticsSentiment:
+                          apiResults.SetResult(new SentimentAnalysisContext(textAnalyticActionData, new SentimentResult(commsResult)));
+                          break;
+                      case ApiActionType.TextAnalyticsKeyphrases:
+                          apiResults.SetResult(new KeyPhraseAnalysisContext(textAnalyticActionData, new KeyPhraseResult(commsResult)));
+                          break;
+                      case ApiActionType.TextAnalyticsLanguages:
+                          apiResults.SetResult(new LanguageAnalysisContext(textAnalyticActionData, new LanguagesResult(commsResult)));
+                          break;
+                      default:
+                          throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
+                  }
+
+              });
         }
     }
 }
