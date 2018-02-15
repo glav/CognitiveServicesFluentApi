@@ -7,6 +7,7 @@ If you are new to this project, please see the getting started section below. Fo
 * [Common/Core Fluent API](./Wiki/Common.md)
 * [TextAnalytics Fluent API](./Wiki/TextAnalytics.md)
 * [Emotion Fluent API](./Wiki/Emotion.md)
+* [ComputerVision Fluent API](./Wiki/ComputerVision.md)
 * [Scoring system](./Wiki/Scoring.md)
 
 ## How to get started.
