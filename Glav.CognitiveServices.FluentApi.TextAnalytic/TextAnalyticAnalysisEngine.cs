@@ -7,44 +7,55 @@ using Glav.CognitiveServices.FluentApi.Core.Contracts;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
-    public sealed class TextAnalyticAnalysisEngine : BaseAnalysisEngine<TextAnalyticAnalysisResults, TextAnalyticActionData>
+    public sealed class TextAnalyticAnalysisEngine : IAnalysisEngine<TextAnalyticAnalysisResults>
     {
-        public TextAnalyticAnalysisEngine(CoreAnalysisSettings analysisSettings) : base(analysisSettings)
+        public TextAnalyticAnalysisEngine(CoreAnalysisSettings analysisSettings)
         {
+            AnalysisSettings = analysisSettings;
         }
 
+        public CoreAnalysisSettings AnalysisSettings { get; private set; }
 
-        public override async Task<TextAnalyticAnalysisResults> AnalyseAllAsync()
+        public async Task<TextAnalyticAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new TextAnalyticAnalysisResults(AnalysisSettings);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsSentiment);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsKeyphrases);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsLanguages);
+            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsSentiment);
+            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsKeyphrases);
+            await AnalyseAllAsyncForAction(apiResults, ApiActionType.TextAnalyticsLanguages);
 
             return apiResults;
         }
 
-        public override async Task AnalyseApiActionAsync(TextAnalyticAnalysisResults apiResults, ApiActionType apiAction)
-        {
-            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
-              {
-                  var textAnalyticActionData = actionData as TextAnalyticActionData;
-                  switch (apiAction)
-                  {
-                      case ApiActionType.TextAnalyticsSentiment:
-                          apiResults.SetResult(new SentimentAnalysisContext(textAnalyticActionData, new SentimentResult(commsResult)));
-                          break;
-                      case ApiActionType.TextAnalyticsKeyphrases:
-                          apiResults.SetResult(new KeyPhraseAnalysisContext(textAnalyticActionData, new KeyPhraseResult(commsResult)));
-                          break;
-                      case ApiActionType.TextAnalyticsLanguages:
-                          apiResults.SetResult(new LanguageAnalysisContext(textAnalyticActionData, new LanguagesResult(commsResult)));
-                          break;
-                      default:
-                          throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
-                  }
 
-              });
+        private async Task AnalyseAllAsyncForAction(TextAnalyticAnalysisResults apiResults, ApiActionType apiAction)
+        {
+            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction))
+            {
+                var actions = AnalysisSettings.ActionsToPerform[apiAction];
+                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseAll");
+                var payload = (actions as TextAnalyticActionData).ToString();
+
+                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
+
+                var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload);
+
+                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Processing results of service call for {apiAction.ToString()}", "AnalyseAll");
+
+                switch (apiAction)
+                {
+                    case ApiActionType.TextAnalyticsSentiment:
+                        apiResults.SetResult(new SentimentAnalysisContext((actions as TextAnalyticActionData), new SentimentResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                        break;
+                    case ApiActionType.TextAnalyticsKeyphrases:
+                        apiResults.SetResult(new KeyPhraseAnalysisContext((actions as TextAnalyticActionData), new KeyPhraseResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                        break;
+                    case ApiActionType.TextAnalyticsLanguages:
+                        apiResults.SetResult(new LanguageAnalysisContext((actions as TextAnalyticActionData), new LanguagesResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                        break;
+                    default:
+                        throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
+                }
+            }
         }
     }
 }

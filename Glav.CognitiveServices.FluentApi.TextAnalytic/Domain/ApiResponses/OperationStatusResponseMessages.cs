@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Glav.CognitiveServices.FluentApi.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -40,7 +41,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses
                 return _mappedStateTypes[normaliedMsg];
             }
 
-            throw new ArgumentException($"status of [{statusMessage}] not supported.");
+            throw new CognitiveServicesArgumentException($"status of [{statusMessage}] not supported.");
         }
     }
 }

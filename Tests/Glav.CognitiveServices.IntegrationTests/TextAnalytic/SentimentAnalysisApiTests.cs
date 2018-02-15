@@ -1,4 +1,5 @@
 using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a fantastic time.")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.SentimentAnalysis);
@@ -25,7 +26,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.SentimentAnalysis.AnalysisResult.ResponseData.documents);
 
-            Assert.Equal(SentimentClassification.Positive, result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].SentimentClassification);
+            Assert.Equal(DefaultScoreLevels.Positive, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
         }
 
         [Fact]
@@ -37,18 +38,18 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a fantastic time.")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(SentimentClassification.Positive));
+            Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Positive));
 
             // Get Original Id of input data
             var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
             var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
-            Assert.Equal(SentimentClassification.Positive, resultById.SentimentClassification);
+            Assert.Equal(DefaultScoreLevels.Positive, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
 
-            var collectedResults = result.SentimentAnalysis.GetResults(SentimentClassification.Positive);
+            var collectedResults = result.SentimentAnalysis.GetResults(DefaultScoreLevels.Positive);
             Assert.NotNull(collectedResults);
             Assert.Equal(1, collectedResults.Count());
         }
@@ -62,7 +63,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.SentimentAnalysis);
@@ -70,7 +71,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.SentimentAnalysis.AnalysisResult.ResponseData.documents);
 
-            Assert.Equal(SentimentClassification.Negative, result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].SentimentClassification);
+            Assert.Equal(DefaultScoreLevels.Negative, result.SentimentAnalysis.ScoringEngine.EvaluateScore(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
         }
 
         [Fact]
@@ -82,18 +83,18 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(SentimentClassification.Negative));
+            Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Negative));
 
             // Get Original Id of input data
             var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
             var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
-            Assert.Equal(SentimentClassification.Negative, resultById.SentimentClassification);
+            Assert.Equal(DefaultScoreLevels.Negative, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
 
-            var collectedResults = result.SentimentAnalysis.GetResults(SentimentClassification.Negative);
+            var collectedResults = result.SentimentAnalysis.GetResults(DefaultScoreLevels.Negative);
             Assert.NotNull(collectedResults);
             Assert.Equal(1, collectedResults.Count());
         }

@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public static class TextAnalyticFluentApiExtensions
     {
-        public static async Task<TextAnalyticAnalysisResults> AnalyseAllSentimentsAsync(this TextAnalyticAnalysisSettings apiAnalysisSettings)
+        public static async Task<TextAnalyticAnalysisResults> AnalyseAllAsync(this TextAnalyticAnalysisSettings apiAnalysisSettings)
         {
             var engine = new TextAnalyticAnalysisEngine(apiAnalysisSettings);
             return await engine.AnalyseAllAsync();
@@ -26,7 +26,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsKeyphrases);
         }
 
-        public static TextAnalyticAnalysisSettings AddKeyLanguageAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
+        public static TextAnalyticAnalysisSettings AddLanguageAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsLanguages);
         }

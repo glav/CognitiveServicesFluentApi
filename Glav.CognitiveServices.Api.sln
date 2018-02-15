@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{74E950BA-80F3-495D-B089-A0286FBD8DDC}"
 EndProject
@@ -12,7 +12,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneralArtifacts", "GeneralArtifacts", "{86C79682-B240-4A42-BA88-F03E07832C2E}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
-		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.Core", "Glav.CognitiveServices.FluentApi.Core\Glav.CognitiveServices.FluentApi.Core.csproj", "{EAD5DFA0-15F8-498F-8D1A-9234603DD94E}"
@@ -20,6 +19,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.TextAnalytic", "Glav.CognitiveServices.FluentApi.TextAnalytic\Glav.CognitiveServices.FluentApi.TextAnalytic.csproj", "{8A2C8924-E430-448F-9B33-095F5800EA2D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.Emotion", "Glav.CognitiveServices.FluentApi.Emotion\Glav.CognitiveServices.FluentApi.Emotion.csproj", "{78477446-4BE0-44FC-BE5B-0EBA35AB1276}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wiki", "Wiki", "{8DDD157F-2FD5-42DC-8AF3-5D6FA3BEF689}"
+	ProjectSection(SolutionItems) = preProject
+		Wiki\Common.md = Wiki\Common.md
+		Wiki\Emotion.md = Wiki\Emotion.md
+		README.md = README.md
+		Wiki\Scoring.md = Wiki\Scoring.md
+		Wiki\TextAnalytics.md = Wiki\TextAnalytics.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glav.CognitiveServices.FluentApi.ComputerVision", "Glav.CognitiveServices.FluentApi.ComputerVision\Glav.CognitiveServices.FluentApi.ComputerVision.csproj", "{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}"
 EndProject
@@ -114,6 +122,6 @@ Global
 		{0049C04C-35EB-4261-9ADE-A808D793F20B} = {74E950BA-80F3-495D-B089-A0286FBD8DDC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6C139EAE-B6AD-475C-857D-7458AAD8710D}
+		SolutionGuid = {0BFC44EA-8668-4141-B51B-8ABA808EF0F3}
 	EndGlobalSection
 EndGlobal

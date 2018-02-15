@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
                 .AddKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.KeyPhraseAnalysis);
@@ -38,7 +38,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
                 .AddKeyPhraseAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-                .AnalyseAllSentimentsAsync();
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.KeyPhraseAnalysis);
@@ -51,7 +51,9 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult);
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.SentimentAnalysis.AnalysisResult.ResponseData.documents);
-            Assert.Equal(SentimentClassification.Negative, result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].SentimentClassification);
+            Assert.Equal("Negative", 
+                result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(
+                    result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
         }
 
         [Fact]
@@ -62,8 +64,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithTextAnalyticAnalysisActions()
-                .AddKeyLanguageAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
-                .AnalyseAllSentimentsAsync();
+                .AddLanguageAnalysis("This is a basic sentence. I have absolutely nothing to assert here.")
+                .AnalyseAllAsync();
 
             Assert.NotNull(result);
             Assert.NotNull(result.LanguageAnalysis);

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>0.6.1-alpha</Version>
+    <Version>0.7.0-alpha</Version>
     <Authors>Paul Glavich</Authors>
     <Company />
     <Product>Cognitive Services Fluent API - Text Analytics</Product>
@@ -13,6 +13,7 @@
     <PackageTags>Cognitive services, .net core, azure</PackageTags>
     <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
     <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
+    <PackageReleaseNotes>Significant changes to Fluent API interfaces. Naming consolidation, new flexible scoring system implemented throughout all API's, removal of redundant API's, documentation additions.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

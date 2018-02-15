@@ -1,8 +1,7 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Communication;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
-using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
-using System.Threading.Tasks;
+using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
@@ -42,5 +41,33 @@ namespace Glav.CognitiveServices.FluentApi.Core
             configSettings.LogLevel = logLevel;
             return configSettings;
         }
+
+
+        /// <summary>
+        /// Sets the global scoring engine to a custom implementation. This scoring engine is then propagated to all engine contexts unless a 
+        /// different scoring engine is specified for that context
+        /// </summary>
+        /// <param name="configSettings"></param>
+        /// <param name="scoringEngine"></param>
+        /// <returns></returns>
+        public static ConfigurationSettings UsingCustomGlobalScoringEngine(this ConfigurationSettings configSettings, IScoreEvaluationEngine scoringEngine)
+        {
+            configSettings.SetScoringEngine(scoringEngine);
+            return configSettings;
+        }
+
+        /// <summary>
+        /// Sets the global scoring engine to the default engine but with custom score levels specified. This scoring engine is then 
+        /// propagated to all engine contexts unless a different scoring engine is specified for that context
+        /// </summary>
+        /// <param name="configSettings"></param>
+        /// <param name="scoreLevels"></param>
+        /// <returns></returns>
+        public static ConfigurationSettings UsingDefaultGlobalScoringEngineWithCustomScoreLevels(this ConfigurationSettings configSettings, IScoreLevelBoundsCollection scoreLevels)
+        {
+            configSettings.SetScoringEngine(new DefaultScoreEvaluationEngine(scoreLevels));
+            return configSettings;
+        }
+
     }
 }

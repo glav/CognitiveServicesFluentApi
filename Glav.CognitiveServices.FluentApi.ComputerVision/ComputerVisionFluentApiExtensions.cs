@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
     public static class ComputerVisionFluentApiExtensions
     {
-        public static async Task<ComputerVisionAnalysisResults> AnalyseAllImagesAsync(this ImageAnalysisSettings apiAnalysisSettings)
+        public static async Task<ComputerVisionAnalysisResults> AnalyseAllAsync(this ImageAnalysisSettings apiAnalysisSettings)
         {
             var engine = new ComputerVisionAnalysisEngine(apiAnalysisSettings);
             return await engine.AnalyseAllAsync();

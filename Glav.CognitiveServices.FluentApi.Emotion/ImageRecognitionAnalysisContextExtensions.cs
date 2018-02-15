@@ -1,4 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.Emotion.Domain;
+﻿using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
+using Glav.CognitiveServices.FluentApi.Emotion.Domain;
 using Glav.CognitiveServices.FluentApi.Emotion.Domain.ApiResponses;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,11 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
 {
     public static class ImageRecognitionAnalysisContextExtensions
     {
+        public static ScoreLevelBoundsDefinition Score(this ImageRecognitionAnalysisContext context, double scoreValue)
+        {
+            return context.ScoringEngine.EvaluateScore(scoreValue);
+        }
+
         public static IEnumerable<EmotionImageRecognitionResponseItem> GetFacesRecognised(this ImageRecognitionAnalysisContext imageRecognitionContext)
         {
             if (!imageRecognitionContext.AnalysisResult.ActionSubmittedSuccessfully)
@@ -16,5 +22,17 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
             }
             return imageRecognitionContext.AnalysisResult.ResponseData.faces;
         }
+
+        public static ImageRecognitionAnalysisContext UseCustomScoreLevelsAndDefaultScoringEngine(this ImageRecognitionAnalysisContext analysisContext, IScoreLevelBoundsCollection scoreLevels)
+        {
+            analysisContext.SetScoringEngine(new DefaultScoreEvaluationEngine(scoreLevels));
+            return analysisContext;
+        }
+        public static ImageRecognitionAnalysisContext UseCustomScoringEngine(this ImageRecognitionAnalysisContext analysisContext, IScoreEvaluationEngine scoreEngine)
+        {
+            analysisContext.SetScoringEngine(scoreEngine);
+            return analysisContext;
+        }
+
     }
 }

@@ -9,5 +9,7 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
         {
             return new EmotionAnalysisSettings(analysisSettings);
         }
+
+
     }
 }

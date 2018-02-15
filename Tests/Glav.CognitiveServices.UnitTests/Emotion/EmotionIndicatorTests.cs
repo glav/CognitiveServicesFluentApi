@@ -1,61 +1,53 @@
 using Xunit;
-using System.Reflection;
-using System.Threading.Tasks;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
-using Glav.CognitiveServices.FluentApi.Core;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using Glav.CognitiveServices.FluentApi.Emotion.Domain;
+using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
 namespace Glav.CognitiveServices.UnitTests.Emotion
 {
     public class EmotionIndicatorTests
     {
+        private static DefaultScoreEvaluationEngine _scoreEngine = new DefaultScoreEvaluationEngine(new EmotionRangeScoreLevels());
+
         [Fact]
         public void EmotionValueShouldEvaluateToDefinitelyPositive()
         {
-            var tolerance = new EmotionLevelTolerance();
-            var result = tolerance.EmotionValueIndicates(0.99);
-            Assert.Equal(result, EmotionRange.DefinitelyPositive);
+            var result = _scoreEngine.EvaluateScore(0.99);
+            Assert.Equal(result.Name, EmotionRangeScoreLevels.DefinitelyPositive);
         }
 
         [Fact]
         public void EmotionValueShouldEvaluateToPossiblyPositive()
         {
-            var tolerance = new EmotionLevelTolerance();
-            var result = tolerance.EmotionValueIndicates(0.35);
-            Assert.Equal(result, EmotionRange.PossiblyPositive);
+            var result = _scoreEngine.EvaluateScore(0.64);
+            Assert.Equal(result.Name, EmotionRangeScoreLevels.PossiblyPositive);
         }
 
         [Fact]
         public void EmotionValueShouldEvaluateToProbablyPositive()
         {
-            var tolerance = new EmotionLevelTolerance();
-            var result = tolerance.EmotionValueIndicates(0.75);
-            Assert.Equal(result, EmotionRange.ProbablyPositive);
+            var result = _scoreEngine.EvaluateScore(0.81);
+            Assert.Equal(result.Name, EmotionRangeScoreLevels.ProbablyPositive);
         }
 
         [Fact]
         public void EmotionValueShouldEvaluateToDefinitelyNegative()
         {
-            var tolerance = new EmotionLevelTolerance();
-            var result = tolerance.EmotionValueIndicates(-0.99);
-            Assert.Equal(result, EmotionRange.DefinitelyNegative);
+            var result = _scoreEngine.EvaluateScore(0.1);
+            Assert.Equal(result.Name, EmotionRangeScoreLevels.DefinitelyNegative);
         }
 
         [Fact]
         public void EmotionValueShouldEvaluateToPossiblyNegative()
         {
-            var tolerance = new EmotionLevelTolerance();
-            var result = tolerance.EmotionValueIndicates(-0.35);
-            Assert.Equal(result, EmotionRange.PossiblyNegative);
+            var result = _scoreEngine.EvaluateScore(0.4);
+            Assert.Equal(result.Name, EmotionRangeScoreLevels.PossiblyNegative);
         }
 
         [Fact]
         public void EmotionValueShouldEvaluateToProbablyNegative()
         {
-            var tolerance = new EmotionLevelTolerance();
-            var result = tolerance.EmotionValueIndicates(-0.75);
-            Assert.Equal(result, EmotionRange.ProbablyNegative);
+            var result = _scoreEngine.EvaluateScore(0.2);
+            Assert.Equal(result.Name, EmotionRangeScoreLevels.ProbablyNegative);
         }
     }
 }

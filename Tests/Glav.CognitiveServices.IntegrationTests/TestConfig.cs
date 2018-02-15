@@ -38,7 +38,7 @@ namespace Glav.CognitiveServices.IntegrationTests
 
                         Configuration = builder.Build();
                         
-                    } catch (Exception ex)
+                    } catch
                     {
                         Debug.WriteLine("No appsettings.json file or it was invalid.");
                     }
