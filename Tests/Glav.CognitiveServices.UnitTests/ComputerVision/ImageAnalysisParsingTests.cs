@@ -3,18 +3,25 @@ using Glav.CognitiveServices.FluentApi.Emotion.Domain;
 using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
 using Glav.CognitiveServices.UnitTests.Helpers;
 using System.Linq;
+using Glav.CognitiveServices.FluentApi.ComputerVision;
+using Glav.CognitiveServices.FluentApi.Core;
 
 namespace Glav.CognitiveServices.UnitTests.Emotion
 {
     public class ImageAnalysisParsingTests
     {
         private TestDataHelper _testHelper = new TestDataHelper();
+        private readonly string _visionImageAnalysisResponse;
+
+        public ImageAnalysisParsingTests()
+        {
+            _visionImageAnalysisResponse = _testHelper.GetFileDataEmbeddedInAssembly("ComputerVisionImageAnalysisResponse.json");
+        }
 
         [Fact]
         public void ImageAnalysisResultDataShouldParseSuccessfully()
         {
-            var responseFromApi = _testHelper.GetFileDataEmbeddedInAssembly("ComputerVisionImageAnalysisResponse.json");
-            var result = new ImageAnalysisResult(new MockCommsResult(responseFromApi));
+            var result = new ImageAnalysisResult(new MockCommsResult(_visionImageAnalysisResponse));
 
             Assert.NotNull(result);
             Assert.NotNull(result.ApiCallResult);
@@ -80,6 +87,26 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
             Assert.NotNull(result.ResponseData.imageType);
             Assert.Equal(0, result.ResponseData.imageType.clipArtType);
             Assert.Equal(0, result.ResponseData.imageType.lineDrawingType);
+        }
+
+        [Fact]
+        public async void ShouldRetrieveDescriptiveCaptionsSucessfully()
+        {
+            var commsResult = new MockCommsResult(_visionImageAnalysisResponse);
+            var commsEngine = new MockCommsEngine(commsResult);
+            const string expected = "Satya Nadella sitting on a bench";
+
+            var analysisResult = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.AustraliaEast)
+                .UsingCustomCommunication(commsEngine)
+                .WithComputerVisionAnalysisActions()
+                .AddImageAnalysis("http://someurl/that/wont/get/called")
+                .AnalyseAllAsync();
+
+            var result = analysisResult.ImageAnalysis.GetDescriptiveCaptions(0.1);
+            Assert.NotNull(result);
+            Assert.NotEmpty(result);
+            Assert.Equal(1, result.Length);
+            Assert.Equal(expected, result[0]);
         }
     }
 }
