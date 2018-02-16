@@ -4,14 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Glav.CognitiveServices.FluentApi.Core</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>0.7.0-alpha</Version>
+    <Version>0.8.0-alpha</Version>
     <Authors>Paul Glavich</Authors>
     <Company />
     <Product>Cognitive Services Fluent API</Product>
     <Description>This package represents a set of common core components to be used with the various cognitive services fluent API packages.</Description>
     <Copyright>Paul Glavich 2017</Copyright>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>Cognitive services, .net core, azure</PackageTags>
+    <PackageTags>Cognitive services, .net, azure</PackageTags>
     <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
     <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
     <PackageReleaseNotes>Significant changes to Fluent API interfaces. Naming consolidation, new flexible scoring system implemented throughout all API's, removal of redundant API's, documentation additions.</PackageReleaseNotes>
