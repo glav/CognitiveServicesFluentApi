@@ -30,12 +30,14 @@ namespace Glav.CognitiveServices.FluentApi.Core
         }
         public static void BuildSupportedLanguagesList()
         {
-            _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.English, "en", new ApiActionType[] { ApiActionType.TextAnalyticsSentiment, ApiActionType.TextAnalyticsKeyphrases }));
+            _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.Unspecified, string.Empty, new ApiActionType[] { ApiActionType.TextAnalyticsKeyphrases }));
+            _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.English, "en", new ApiActionType[] { ApiActionType.TextAnalyticsSentiment, ApiActionType.TextAnalyticsKeyphrases, ApiActionType.ComputerVisionImageAnalysis }));
             _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.Spanish, "es", new ApiActionType[] { ApiActionType.TextAnalyticsSentiment, ApiActionType.TextAnalyticsKeyphrases }));
             _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.French, "fr", new ApiActionType[] { ApiActionType.TextAnalyticsSentiment}));
             _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.Portuguese, "pt", new ApiActionType[] { ApiActionType.TextAnalyticsSentiment}));
             _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.German, "de", new ApiActionType[] { ApiActionType.TextAnalyticsKeyphrases }));
             _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.Japanese, "ja", new ApiActionType[] { ApiActionType.TextAnalyticsKeyphrases }));
+            _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.SimplifiedChinese, "zh", new ApiActionType[] { ApiActionType.ComputerVisionImageAnalysis }));
         }
 
         public static string ToCode(this SupportedLanguageType languageType)
@@ -51,11 +53,13 @@ namespace Glav.CognitiveServices.FluentApi.Core
 
     public enum SupportedLanguageType
     {
+        Unspecified,
         English,
         Spanish,
         French,
         Portuguese,
         German,
-        Japanese
+        Japanese,
+        SimplifiedChinese
     }
 }
