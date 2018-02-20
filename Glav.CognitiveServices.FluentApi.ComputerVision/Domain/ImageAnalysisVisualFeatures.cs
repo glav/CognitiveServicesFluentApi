@@ -16,4 +16,25 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         Color = 32,// - determines the accent color, dominant color, and whether an image is black&white.
         Adult = 64
     }
+
+    public static class ImageAnalysisVisualFeaturesExtensions
+    {
+        public static string ToUrlArguments(this ImageAnalysisVisualFeatures visualFeatures)
+        {
+            if (visualFeatures == 0)
+            {
+                return string.Empty;
+            }
+
+            var urlArgs = new List<string>();
+            foreach (ImageAnalysisVisualFeatures item in Enum.GetValues(typeof(ImageAnalysisVisualFeatures)))
+            {
+                if ((visualFeatures & item) == item && item != ImageAnalysisVisualFeatures.Default)
+                {
+                    urlArgs.Add(item.ToString());
+                }
+            }
+            return string.Join(",", urlArgs.ToArray());
+        }
+    }
 }
