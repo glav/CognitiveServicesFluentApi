@@ -3,5 +3,7 @@
     public interface IScoreEvaluationEngine
     {
         ScoreLevelBoundsDefinition EvaluateScore(double score);
+
+        IScoreLevelBoundsCollection ScoreLevels { get; }
     }
 }

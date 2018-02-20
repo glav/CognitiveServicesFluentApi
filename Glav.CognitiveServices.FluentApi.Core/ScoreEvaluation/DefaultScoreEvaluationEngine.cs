@@ -5,23 +5,19 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
 {
-    public class DefaultScoreEvaluationEngine : IScoreEvaluationEngine
+    public class DefaultScoreEvaluationEngine : BaseScoreEvaluationEngine
     {
-        private readonly IScoreLevelBoundsCollection _scoreLevelBoundsCollection;
-
-        public DefaultScoreEvaluationEngine(IScoreLevelBoundsCollection scoreLevelBoundsCollection)
+        public DefaultScoreEvaluationEngine(IScoreLevelBoundsCollection scoreLevelBoundsCollection) : base(scoreLevelBoundsCollection)
         {
-            _scoreLevelBoundsCollection = scoreLevelBoundsCollection;
         }
 
-        public ScoreLevelBoundsDefinition EvaluateScore(double score)
+        protected override ScoreLevelBoundsDefinition EvaluateScoreValue(double score)
         {
-            _scoreLevelBoundsCollection.ValidateScoreLevelList();
             if (score == 1)
             {
-                return _scoreLevelBoundsCollection.ScoreLevels.Last();
+                return ScoreLevels.ScoreLevels.Last();
             }
-            var result = _scoreLevelBoundsCollection.ScoreLevels.FirstOrDefault(s => s.LowerBound <= score && s.UpperBound > score);
+            var result = ScoreLevels.ScoreLevels.FirstOrDefault(s => s.LowerBound <= score && s.UpperBound > score);
             return result;
         }
     }

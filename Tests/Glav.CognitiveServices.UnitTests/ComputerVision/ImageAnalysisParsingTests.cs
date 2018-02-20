@@ -107,6 +107,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
             Assert.NotEmpty(result);
             Assert.Equal(1, result.Length);
             Assert.Equal(expected, result[0]);
+
         }
     }
 }

@@ -7,12 +7,14 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
     public class ImageAnalysisActionData : IApiActionData
     {
-        public ImageAnalysisActionData(Uri imageUri)
+        public ImageAnalysisActionData(Uri imageUri, ImageAnalysisVisualFeatures visualFeatures)
         {
             ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("ImageUri is required");
+            VisualFeatures = visualFeatures;
         }
 
         public Uri ImageUriToAnalyse { get; private set; }
+        public ImageAnalysisVisualFeatures VisualFeatures { get; private set; }
 
         public override string ToString()
         {
