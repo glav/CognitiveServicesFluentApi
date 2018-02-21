@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Glav.CognitiveServices.FluentApi.ComputerVision.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,7 +20,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 
     public static class ImageAnalysisVisualFeaturesExtensions
     {
-        public static string ToUrlArguments(this ImageAnalysisVisualFeatures visualFeatures)
+        public static string ToUrlQueryParameters(this ImageAnalysisVisualFeatures visualFeatures)
         {
             if (visualFeatures == 0)
             {
@@ -34,7 +35,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                     urlArgs.Add(item.ToString());
                 }
             }
-            return string.Join(",", urlArgs.ToArray());
+            return string.Format("{0}={1}",ApiConstants.ImageAnalysisVisualFeaturesUrlParameterName,string.Join(",", urlArgs.ToArray()));
         }
     }
 }

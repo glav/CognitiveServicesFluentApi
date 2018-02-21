@@ -15,6 +15,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         {
             ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("ImageUri is required");
             VisualFeatures = visualFeatures;
+            ImageDetails = imageDetails;
+            Language = language;
         }
 
         public Uri ImageUriToAnalyse { get; private set; }
@@ -25,6 +27,11 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         public override string ToString()
         {
             return string.Format("{{\"url\":\"{0}\"}}", ImageUriToAnalyse.AbsoluteUri);
+        }
+
+        public string ToUrlQueryParameters()
+        {
+            return VisualFeatures.ToUrlQueryParameters();
         }
     }
 }

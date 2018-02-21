@@ -22,12 +22,14 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             return client;
         }
 
-        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload)
+        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
         {
             _configurationSettings.DiagnosticLogger.LogInfo($"Performing async service call for {apiActionType}", "HttpCommunicationEngine");
 
             var svcConfig = _configurationSettings.ServiceUris.GetServiceConfig(apiActionType);
-            var uri = string.Format("{0}{1}", _configurationSettings.BaseUrl,svcConfig.ServiceUri);
+            var uri = string.Format("{0}{1}{2}", _configurationSettings.BaseUrl,svcConfig.ServiceUri, 
+                            string.IsNullOrWhiteSpace(urlQueryParameters) ? string.Empty : $"?{urlQueryParameters}" );
+
             var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
             try
             {

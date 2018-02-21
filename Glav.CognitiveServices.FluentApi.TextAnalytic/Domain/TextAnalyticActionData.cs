@@ -37,6 +37,11 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         {
             return _itemList.ToArray();
         }
+
+        public string ToUrlQueryParameters()
+        {
+            return null;
+        }
     }
 
     public sealed class TextAnalyticActionDataItem : IActionDataItem

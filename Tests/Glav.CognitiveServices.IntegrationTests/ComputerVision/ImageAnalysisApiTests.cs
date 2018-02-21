@@ -15,7 +15,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddImageAnalysis("http://www.scface.org/examples/001_frontal.jpg")
+                .AddImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);

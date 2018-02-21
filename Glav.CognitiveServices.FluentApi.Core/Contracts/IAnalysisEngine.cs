@@ -35,10 +35,12 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
                 apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseAll");
 
-                var payload = (actions as TActionData).ToString();
+                var concreteAction = (actions as TActionData);
+                var urlQueryParams = concreteAction.ToUrlQueryParameters();
+                var payload = concreteAction.ToString();
 
                 apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
-                var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload);
+                var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParams);
 
                 apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseAll");
 
