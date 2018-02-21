@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.FluentApi.ComputerVision.Configuration;
+using Glav.CognitiveServices.FluentApi.Core.Communication;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,20 +23,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
     {
         public static string ToUrlQueryParameters(this ImageAnalysisVisualFeatures visualFeatures)
         {
-            if (visualFeatures == 0)
-            {
-                return string.Empty;
-            }
-
-            var urlArgs = new List<string>();
-            foreach (ImageAnalysisVisualFeatures item in Enum.GetValues(typeof(ImageAnalysisVisualFeatures)))
-            {
-                if ((visualFeatures & item) == item && item != ImageAnalysisVisualFeatures.Default)
-                {
-                    urlArgs.Add(item.ToString());
-                }
-            }
-            return string.Format("{0}={1}",ApiConstants.ImageAnalysisVisualFeaturesUrlParameterName,string.Join(",", urlArgs.ToArray()));
+            return UrlQueryParameterFromEnumFormatter.ToUrlQueryParameters<ImageAnalysisVisualFeatures>(visualFeatures, ApiConstants.ImageAnalysisVisualFeaturesUrlParameterName);
         }
+       
     }
 }

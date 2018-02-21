@@ -12,6 +12,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
             var features = ImageAnalysisVisualFeatures.Adult | ImageAnalysisVisualFeatures.Faces;
             var expected = $"{FluentApi.ComputerVision.Configuration.ApiConstants.ImageAnalysisVisualFeaturesUrlParameterName}=Faces,Adult";
             var actual = features.ToUrlQueryParameters();
+
             Assert.Equal(expected, actual);
 
             features = ImageAnalysisVisualFeatures.Default;
