@@ -31,7 +31,24 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 
         public string ToUrlQueryParameters()
         {
-            return VisualFeatures.ToUrlQueryParameters();
+            var url = new StringBuilder();
+            var visualFeaturesUrlParameters = VisualFeatures.ToUrlQueryParameters();
+            var detailsUrlparams = ImageDetails.ToUrlQueryParameters();
+            var languageUrlParams = Language.ToUrlQueryParameter();
+
+            if (!string.IsNullOrWhiteSpace(visualFeaturesUrlParameters))
+            {
+                url.AppendFormat("?{0}", visualFeaturesUrlParameters);
+            }
+            if (!string.IsNullOrWhiteSpace(detailsUrlparams))
+            {
+                url.AppendFormat("{0}{1}", url.Length > 0 ? "&" : "?", detailsUrlparams);
+            }
+            if (!string.IsNullOrWhiteSpace(languageUrlParams))
+            {
+                url.AppendFormat("{0}{1}", url.Length > 0 ? "&" : "?", languageUrlParams);
+            }
+            return url.ToString();
         }
     }
 }

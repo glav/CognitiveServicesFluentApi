@@ -8,6 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
     {
         public const string COMPUTER_VISION_VERSION = "v2.0";
         public const string ImageAnalysisVisualFeaturesUrlParameterName = "visualFeatures";
+        public const string ImageAnalysisDetailsUrlParameterName = "details";
 
     }
 }

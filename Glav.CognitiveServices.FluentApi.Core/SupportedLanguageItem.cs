@@ -49,6 +49,13 @@ namespace Glav.CognitiveServices.FluentApi.Core
             }
             return item.Code;
         }
+
+        public static string ToUrlQueryParameter(this SupportedLanguageType languageType)
+        {
+            var code = languageType.ToCode();
+            return code == string.Empty ? string.Empty : $"{ApiConstants.LanguageUrlParameterName}={code}";
+        }
+
     }
 
     public enum SupportedLanguageType
