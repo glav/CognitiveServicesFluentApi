@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
     public class ImageAnalysisApiTests
     {
         [Fact]
-        public async Task SimplePositiveTextShouldAnalyseAsPositive()
+        public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysis()
         {
             var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
