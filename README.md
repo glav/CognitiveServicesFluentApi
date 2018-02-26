@@ -46,6 +46,10 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic;
 
 // For Emotion API
 using Glav.CognitiveServices.FluentApi.Emotion;
+
+// For ComputerVision API
+using Glav.CognitiveServices.FluentApi.ComputerVision;
+
 ```
 
 Also add in these common using statements regardless of what service you are using:

@@ -14,6 +14,10 @@ For Emotion, this is done by:
 ``` c#
 var config = EmotionConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier)
 ```
+For ComputerVision, this is done by:
+``` c#
+var config = ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier)
+```
 
 The `CreateUsingConfigurationKeys` method returns an object of type `ConfigurationSettings`. From this, we can then begin defining the common pipeline.
 
