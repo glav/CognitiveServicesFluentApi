@@ -27,7 +27,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                   switch (apiAction)
                   {
                       case ApiActionType.ComputerVisionImageAnalysis:
-                          apiResults.SetResult(new ImageAnalysisContext((actionData as ImageAnalysisActionData), new ImageAnalysisResult(commsResult),AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                          apiResults.SetResult(new ImageAnalysisContext((actionData as ImageAnalysisActionData), new ImageAnalysisResult(commsResult)
+                                                    ,AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                           break;
                       default:
                           throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
