@@ -27,7 +27,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                 ErrorMessage = "No Data/Response";
             }
 
-            Data = await _httpResponse.Content.ReadAsStringAsync();
+            Data = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
             StatusCode = _httpResponse.StatusCode;
             Successfull = _httpResponse.IsSuccessStatusCode;
             if (_httpResponse.Headers.Contains("x-aml-ta-request-id"))

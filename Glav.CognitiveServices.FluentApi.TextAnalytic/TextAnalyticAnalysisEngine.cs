@@ -17,9 +17,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         public override async Task<TextAnalyticAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new TextAnalyticAnalysisResults(AnalysisSettings);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsSentiment);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsKeyphrases);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsLanguages);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsSentiment).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsKeyphrases).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsLanguages).ConfigureAwait(continueOnCapturedContext: false);
 
             return apiResults;
         }
@@ -44,35 +44,8 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
                 }
 
-            });
+            }).ConfigureAwait(continueOnCapturedContext: false);
 
-            //if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction))
-            //{
-            //    var actions = AnalysisSettings.ActionsToPerform[apiAction];
-            //    apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseAll");
-            //    var payload = (actions as TextAnalyticActionData).ToString();
-
-            //    apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
-
-            //    var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload);
-
-            //    apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Processing results of service call for {apiAction.ToString()}", "AnalyseAll");
-
-            //    switch (apiAction)
-            //    {
-            //        case ApiActionType.TextAnalyticsSentiment:
-            //            apiResults.SetResult(new SentimentAnalysisContext((actions as TextAnalyticActionData), new SentimentResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
-            //            break;
-            //        case ApiActionType.TextAnalyticsKeyphrases:
-            //            apiResults.SetResult(new KeyPhraseAnalysisContext((actions as TextAnalyticActionData), new KeyPhraseResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
-            //            break;
-            //        case ApiActionType.TextAnalyticsLanguages:
-            //            apiResults.SetResult(new LanguageAnalysisContext((actions as TextAnalyticActionData), new LanguagesResult(result), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
-            //            break;
-            //        default:
-            //            throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
-            //    }
-            //}
         }
     }
 }

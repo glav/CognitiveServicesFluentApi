@@ -13,7 +13,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         public static async Task<TextAnalyticAnalysisResults> AnalyseAllAsync(this TextAnalyticAnalysisSettings apiAnalysisSettings)
         {
             var engine = new TextAnalyticAnalysisEngine(apiAnalysisSettings);
-            return await engine.AnalyseAllAsync();
+            return await engine.AnalyseAllAsync().ConfigureAwait(continueOnCapturedContext: false);
         }
 
         public static TextAnalyticAnalysisSettings AddSentimentAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)

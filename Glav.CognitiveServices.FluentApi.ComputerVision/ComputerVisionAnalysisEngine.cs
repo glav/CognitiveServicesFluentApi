@@ -15,7 +15,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public override async Task<ComputerVisionAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new ComputerVisionAnalysisResults(AnalysisSettings);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionImageAnalysis);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionImageAnalysis).ConfigureAwait(continueOnCapturedContext: false);
             return apiResults;
 
         }
@@ -34,7 +34,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                           throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
                   }
 
-              });
+              }).ConfigureAwait(continueOnCapturedContext: false);
         }
     }
 }

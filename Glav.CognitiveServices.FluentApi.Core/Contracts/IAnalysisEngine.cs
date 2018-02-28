@@ -40,7 +40,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                 var payload = concreteAction.ToString();
 
                 apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
-                var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParams);
+                var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParams).ConfigureAwait(continueOnCapturedContext: false);
 
                 apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseAll");
 

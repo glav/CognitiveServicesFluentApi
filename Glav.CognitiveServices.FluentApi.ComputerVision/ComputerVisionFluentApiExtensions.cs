@@ -11,7 +11,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public static async Task<ComputerVisionAnalysisResults> AnalyseAllAsync(this ImageAnalysisSettings apiAnalysisSettings)
         {
             var engine = new ComputerVisionAnalysisEngine(apiAnalysisSettings);
-            return await engine.AnalyseAllAsync();
+            return await engine.AnalyseAllAsync().ConfigureAwait(continueOnCapturedContext: false);
         }
     }
 }
