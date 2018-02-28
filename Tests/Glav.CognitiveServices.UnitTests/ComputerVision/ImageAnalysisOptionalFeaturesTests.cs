@@ -27,12 +27,12 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
         {
             var actionData = new ImageAnalysisActionData(new System.Uri("https://localhost"), ImageAnalysisVisualFeatures.Categories | ImageAnalysisVisualFeatures.Faces, ImageAnalysisDetails.Celebrities, FluentApi.Core.SupportedLanguageType.English);
             var actual = actionData.ToUrlQueryParameters();
-            var expected = "?visualFeatures=Categories,Faces&details=Celebrities&language=en";
+            var expected = "visualFeatures=Categories,Faces&details=Celebrities&language=en";
             Assert.Equal(expected, actual);
 
             actionData = new ImageAnalysisActionData(new System.Uri("https://localhost"),ImageAnalysisVisualFeatures.Default, ImageAnalysisDetails.Landmarks,FluentApi.Core.SupportedLanguageType.Unspecified);
             actual = actionData.ToUrlQueryParameters();
-            expected = "?details=Landmarks";
+            expected = "details=Landmarks";
             Assert.Equal(expected, actual);
 
         }

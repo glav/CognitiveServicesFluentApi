@@ -38,15 +38,15 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 
             if (!string.IsNullOrWhiteSpace(visualFeaturesUrlParameters))
             {
-                url.AppendFormat("?{0}", visualFeaturesUrlParameters);
+                url.AppendFormat("{0}", visualFeaturesUrlParameters);
             }
             if (!string.IsNullOrWhiteSpace(detailsUrlparams))
             {
-                url.AppendFormat("{0}{1}", url.Length > 0 ? "&" : "?", detailsUrlparams);
+                url.AppendFormat("{0}{1}", url.Length > 0 ? "&" : string.Empty, detailsUrlparams);
             }
             if (!string.IsNullOrWhiteSpace(languageUrlParams))
             {
-                url.AppendFormat("{0}{1}", url.Length > 0 ? "&" : "?", languageUrlParams);
+                url.AppendFormat("{0}{1}", url.Length > 0 ? "&" : string.Empty, languageUrlParams);
             }
             return url.ToString();
         }
