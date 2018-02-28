@@ -16,17 +16,17 @@ Easiest way is to install the nuget package for your specific analysis functiona
 #### For text analyitics (such as Sentiment analysis):
 
 ```powershell
-Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic -Version 0.7.0-alpha
+Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic
 ```
 
 #### For Emotion (such as face and emotion detection in images)
 ```powershell
-Install-Package Glav.CognitiveServices.FluentApi.Emotion -Version 0.7.0-alpha
+Install-Package Glav.CognitiveServices.FluentApi.Emotion 
 ```
 
 #### For ComputerVision (such as face and emotion detection in images)
 ```powershell
-Install-Package Glav.CognitiveServices.FluentApi.ComputerVision -Version 0.7.0-alpha
+Install-Package Glav.CognitiveServices.FluentApi.ComputerVision
 ```
 
 #### Azure Cognitive Services Setup
