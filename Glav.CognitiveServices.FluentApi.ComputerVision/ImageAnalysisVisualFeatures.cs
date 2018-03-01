@@ -1,8 +1,4 @@
-﻿using Glav.CognitiveServices.FluentApi.ComputerVision.Configuration;
-using Glav.CognitiveServices.FluentApi.Core.Communication;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
@@ -17,14 +13,5 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         ImageType = 16,// - detects if image is clipart or a line drawing.
         Color = 32,// - determines the accent color, dominant color, and whether an image is black&white.
         Adult = 64
-    }
-
-    public static class ImageAnalysisVisualFeaturesExtensions
-    {
-        public static string ToUrlQueryParameters(this ImageAnalysisVisualFeatures visualFeatures)
-        {
-            return UrlQueryParameterFromEnumFormatter.ToUrlQueryParameters<ImageAnalysisVisualFeatures>(visualFeatures, ApiConstants.ImageAnalysisVisualFeaturesUrlParameterName);
-        }
-       
     }
 }
