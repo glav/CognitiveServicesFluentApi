@@ -2,6 +2,7 @@ using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.ComputerVision;
 using System.Threading.Tasks;
 using Xunit;
+using Microsoft.Extensions.Configuration;
 
 namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 {

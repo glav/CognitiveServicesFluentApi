@@ -6,7 +6,7 @@
 
   <PropertyGroup>    
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <UserSecretsId>e4ddcccf-0cb3-423a-b302-e3e92e95c128</UserSecretsId>
+    <UserSecretsId>CognitiveServicesSecrets-1A67183E-3B7F-409D-86A8-9CDEDEFE9F5F</UserSecretsId>
     <OutputPath></OutputPath>
     <ApplicationIcon />
     <StartupObject />
@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0-preview-20170810-02" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />

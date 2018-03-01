@@ -17,48 +17,14 @@ namespace Glav.CognitiveServices.IntegrationTests
 
         static TestConfig()
         {
-            EnsureSetup();
-        }
-        private static void EnsureSetup()
-        {
-            if (Configuration == null)
-            {
-                lock(_lockObject)
-                {
-                    try
-                    {
-                        var builder = new ConfigurationBuilder()
-                        .AddJsonFile("appsettings.json")
-                        .AddEnvironmentVariables();
+            var builder = new ConfigurationBuilder()
+               .AddUserSecrets<ComputerVision.ImageAnalysisApiTests>();
 
-                        if (Environment.GetEnvironmentVariable("BuildConfiguration") == "development")
-                        {
-                            //TODO: User secrets - perhaps load in apikeys from environ vars
-                        }
-
-                        Configuration = builder.Build();
-                        
-                    } catch
-                    {
-                        Debug.WriteLine("No appsettings.json file or it was invalid.");
-                    }
-                }
-            }
+            Configuration = builder.Build();
         }
 
         public static string TextAnalyticsApiKey => Configuration["ApiKeys:TextAnalytics"];
         public static string EmotionApiKey => Configuration["ApiKeys:Emotion"];
         public static string ComputerVisionApiKey => Configuration["ApiKeys:ComputerVision"];
-
-        public static IConfigurationRoot GetIConfigurationRoot(string outputPath)
-        {
-            return new ConfigurationBuilder()
-                .SetBasePath(outputPath)
-                .AddJsonFile("appsettings.json", optional: true)
-                .AddUserSecrets("e3dfcccf-0cb3-423a-b302-e3e92e95c128")
-                .AddEnvironmentVariables()
-                .Build();
-        }
-
     }
 }
