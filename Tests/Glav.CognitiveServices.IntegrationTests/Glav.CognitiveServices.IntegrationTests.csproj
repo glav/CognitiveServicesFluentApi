@@ -6,6 +6,7 @@
 
   <PropertyGroup>    
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>e4ddcccf-0cb3-423a-b302-e3e92e95c128</UserSecretsId>
     <OutputPath></OutputPath>
     <ApplicationIcon />
     <StartupObject />
@@ -34,6 +35,9 @@
 
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
