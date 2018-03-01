@@ -17,8 +17,10 @@ namespace Glav.CognitiveServices.IntegrationTests
 
         static TestConfig()
         {
-            var builder = new ConfigurationBuilder();
-            if (Environment.GetEnvironmentVariable("BuildConfiguration") == "development")
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables();
+            if (Environment.GetEnvironmentVariable("BuildConfiguration") == "developmentz")
             {
                 builder.AddUserSecrets<ComputerVision.ImageAnalysisApiTests>();
             }

@@ -3,7 +3,7 @@
     "Glav.CognitiveServices.IntegrationTests": {
       "commandName": "Project",
       "environmentVariables": {
-        "BuildConfiguration": "development"
+        "BuildConfiguration": "developmentx"
       }
     }
   }
