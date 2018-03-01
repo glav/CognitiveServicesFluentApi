@@ -17,8 +17,11 @@ namespace Glav.CognitiveServices.IntegrationTests
 
         static TestConfig()
         {
-            var builder = new ConfigurationBuilder()
-               .AddUserSecrets<ComputerVision.ImageAnalysisApiTests>();
+            var builder = new ConfigurationBuilder();
+            if (Environment.GetEnvironmentVariable("BuildConfiguration") == "development")
+            {
+                builder.AddUserSecrets<ComputerVision.ImageAnalysisApiTests>();
+            }
 
             Configuration = builder.Build();
         }
