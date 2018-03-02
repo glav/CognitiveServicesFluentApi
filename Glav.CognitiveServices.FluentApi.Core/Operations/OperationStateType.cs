@@ -13,6 +13,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
         CompletedSuccessfully,
         Failed,
         TimedOut,
-        Cancelled
+        Cancelled,
+        Uploaded
     }
 }

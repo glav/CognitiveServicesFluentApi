@@ -11,5 +11,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
         public const string StatusSubmitted = "submitted";
         public const string StatusNotStarted = "notstarted";
         public const string StatusRunning = "running";
+        public const string StatusUploading = "uploading ";
     }
 }

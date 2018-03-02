@@ -14,6 +14,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusSubmitted, OperationStateType.Submitted);
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusNotStarted, OperationStateType.NotStarted);
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusRunning, OperationStateType.Running);
+            _mappedStateTypes.Add(OperationStatusResponseMessages.StatusUploading, OperationStateType.Uploaded);
         }
         public static OperationStateType ToOperationStatus(this string statusMessage)
         {
@@ -22,10 +23,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
                 return OperationStateType.BadRequest;
             }
 
-            var normaliedMsg = statusMessage.ToLowerInvariant();
-            if (_mappedStateTypes.ContainsKey(normaliedMsg))
+            var normalisedMsg = statusMessage.ToLowerInvariant();
+            if (_mappedStateTypes.ContainsKey(normalisedMsg))
             {
-                return _mappedStateTypes[normaliedMsg];
+                return _mappedStateTypes[normalisedMsg];
             }
 
             throw new CognitiveServicesArgumentException($"status of [{statusMessage}] not supported.");
