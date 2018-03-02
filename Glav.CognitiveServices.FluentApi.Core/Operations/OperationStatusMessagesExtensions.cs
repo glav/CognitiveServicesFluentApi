@@ -1,8 +1,6 @@
-﻿using Glav.CognitiveServices.FluentApi.Core;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
+namespace Glav.CognitiveServices.FluentApi.Core.Operations
 {
     internal static class OperationStatusMessagesExtensions
     {

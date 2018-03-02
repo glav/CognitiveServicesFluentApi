@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses
+namespace Glav.CognitiveServices.FluentApi.Core.Operations
 {
     internal static class OperationStatusResponseMessages
     {

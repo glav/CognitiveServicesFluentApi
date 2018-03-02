@@ -1,9 +1,8 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
-using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
 using System;
 
-namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
+namespace Glav.CognitiveServices.FluentApi.Core.Operations
 {
     public sealed class OperationStatusResult : BaseResponseResult<OperationStatusResultResponseRoot>
     {
