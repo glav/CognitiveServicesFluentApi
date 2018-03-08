@@ -16,7 +16,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
         private readonly IDiagnosticLogger _logger;
         private readonly CoreAnalysisSettings _analysisSettings;
         private readonly Uri _operationStatusLocationUri;
-        private readonly ConfigurationSettings _configurationSettings;
         private readonly ApiActionCategory _apiCategory;
 
         public const int DefaultOperationStateQueryDelayInMilliseconds = 3000;
