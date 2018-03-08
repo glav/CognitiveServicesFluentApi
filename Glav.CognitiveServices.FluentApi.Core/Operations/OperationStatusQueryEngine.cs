@@ -52,7 +52,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
                 return result;
             }
 
-            _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("Waiting for operation status to complete...", "OperationStatus");
+            _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("Waiting for operation status to complete...", LoggingTopic);
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
