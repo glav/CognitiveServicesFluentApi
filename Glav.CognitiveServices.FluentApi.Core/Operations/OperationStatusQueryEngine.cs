@@ -1,10 +1,7 @@
-﻿using Glav.CognitiveServices.FluentApi.Core.Communication;
-using Glav.CognitiveServices.FluentApi.Core.Configuration;
+﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
