@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
         {
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusBadRequest, OperationStateType.BadRequest);
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusFailed, OperationStateType.Failed);
-            _mappedStateTypes.Add(OperationStatusResponseMessages.StatusFinished, OperationStateType.CompletedSuccessfully);
+            _mappedStateTypes.Add(OperationStatusResponseMessages.StatusSucceeded, OperationStateType.CompletedSuccessfully);
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusSubmitted, OperationStateType.Submitted);
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusNotStarted, OperationStateType.NotStarted);
             _mappedStateTypes.Add(OperationStatusResponseMessages.StatusRunning, OperationStateType.Running);
