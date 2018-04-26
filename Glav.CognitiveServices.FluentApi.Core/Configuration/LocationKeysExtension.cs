@@ -20,6 +20,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             _locationKeyText.Add(LocationKeyIdentifier.EastAsia, "eastasia");
             _locationKeyText.Add(LocationKeyIdentifier.NorthEurope, "northeurope");
             _locationKeyText.Add(LocationKeyIdentifier.WestEurope, "westeurope");
+            _locationKeyText.Add(LocationKeyIdentifier.Global, string.Empty);
         }
 
         public static string ToTextLocation(this LocationKeyIdentifier locationKey)

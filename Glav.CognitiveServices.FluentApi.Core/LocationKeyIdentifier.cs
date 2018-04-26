@@ -15,7 +15,8 @@ namespace Glav.CognitiveServices.FluentApi.Core
         EastAsia,
         SouthEastAsia,
         NorthEurope,
-        WestEurope
+        WestEurope,
+        Global
     }
    
 }

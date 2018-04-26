@@ -60,7 +60,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         public Dictionary<ApiActionCategory, string> ApiKeys => _apiKeys;
         public LocationKeyIdentifier LocationKey { get; protected set; }
         public ApiServiceUriCollectionBase ServiceUris { get; protected set; }
-        public string BaseUrl =>  string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, LocationKey.ToTextLocation());
+        public string BaseUrl => LocationKey != LocationKeyIdentifier.Global ? string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, $"{LocationKey.ToTextLocation()}.") : string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, string.Empty);
 
         public IScoreEvaluationEngine GlobalScoringEngine { get; protected set; }
     }
