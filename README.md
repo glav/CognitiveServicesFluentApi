@@ -110,15 +110,15 @@ var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("YOUR-API
 #### Examining the results
 Each cognitive service API (such as TextAnalytics or Emotion) provides a different type of results since they are performing different actions. However there are some similarities or patterns. Each result will contain a property that houses all the input data and result data for any operations performed. Continuing with the TextAnalytic theme using the above example, the resultof the analyse call contains properties to hold the Sentiment analysis, keyphrase analysis, and language analysis.
 ``` c#
-result.SentimentAnalysis();
-result.KeyPhraseAnalysis();
-result.LanguageAnalysis();
+result.SentimentAnalysis;
+result.KeyPhraseAnalysis;
+result.LanguageAnalysis;
 ``` 
 Each property has a GetResults() method to conveniently return the ist of results. Alternatively, you can drill down into properties of the analysis object but it can be quite verbose.
 ``` c#
-result.SentimentAnalysis().GetResults();
-result.KeyPhraseAnalysis().GetResults();
-result.LanguageAnalysis().GetResults();
+result.SentimentAnalysis.GetResults();
+result.KeyPhraseAnalysis.GetResults();
+result.LanguageAnalysis.GetResults();
 ``` 
 It is best to look at the specific documentation for each set of operations to further determine what actions can be performed against the result set. Often, specific methods are avlailable to extract or examine the results.
 
