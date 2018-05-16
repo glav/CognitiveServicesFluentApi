@@ -99,6 +99,33 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.Equal(1, collectedResults.Count());
         }
 
+        [Fact]
+        public async Task ShouldHandleMultipleAnalysisItemsOfSameType()
+        {
+            var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.TextAnalyticsApiKey, LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
+                .UsingHttpCommunication()
+                .WithTextAnalyticAnalysisActions()
+                .AddSentimentAnalysis("I am having a terrible time.")
+                .AddSentimentAnalysis("This is really good")
+                .AddSentimentAnalysis("This is absolutely fantastic")
+                .AnalyseAllAsync();
+
+            Assert.NotNull(result);
+            Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Negative));
+            Assert.Equal(2, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Positive));
+
+            // Get Original Id of input data
+            var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
+            var resultById = result.SentimentAnalysis.GetResult(submittedId);
+            Assert.NotNull(resultById);
+            Assert.Equal(DefaultScoreLevels.Negative, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
+
+            var collectedResults = result.SentimentAnalysis.GetResults(DefaultScoreLevels.Negative);
+            Assert.NotNull(collectedResults);
+            Assert.Equal(1, collectedResults.Count());
+        }
     }
 }
  

@@ -22,6 +22,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             builder.Append("{ \"documents\": [");
             _itemList.ForEach(i =>
             {
+                if (i.Id > 1) { builder.Append(","); }
                 builder.Append(i.ToString());
             });
             builder.Append("] }");
