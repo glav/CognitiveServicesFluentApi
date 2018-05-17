@@ -5,7 +5,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
     public static class SentenceExtensions
     {
         // Pretty simplistic sentence separation with no idea of different languages but its a start.
-        public static readonly char[] DefaultSentenceSplitCharacters = { '!', '.', '?' };
+        private static readonly char[] DefaultSentenceSplitCharacters = { '!', '.', '?' };
 
         public static IEnumerable<string> SplitTextIntoSentences(this string blobOfText, char[] charactersToSplitSentences = null)
         {

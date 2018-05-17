@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Communication
 {
@@ -13,18 +14,18 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         {
 
         }
-        public CommunicationResult(HttpResponseMessage httpResponse)
+        private CommunicationResult(HttpResponseMessage httpResponse)
         {
             _httpResponse = httpResponse;
-            AnalyseResponse();
         }
 
-        private async void AnalyseResponse()
+        private async Task AnalyseResponse()
         {
             if (_httpResponse == null)
             {
                 Successfull = false;
                 ErrorMessage = "No Data/Response";
+                return;
             }
 
             Data = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
@@ -59,6 +60,13 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         public static CommunicationResult Fail(string errorMessage)
         {
             return new CommunicationResult { Successfull = false, ErrorMessage = errorMessage };
+        }
+
+        public static async Task<CommunicationResult> ParseResult(HttpResponseMessage httpResponse)
+        {
+            var result = new CommunicationResult(httpResponse);
+            await result.AnalyseResponse();
+            return result;
         }
 
     }
