@@ -37,7 +37,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                 {
                     var httpResult = await httpClient.PostAsync(uri, content).ConfigureAwait(continueOnCapturedContext: false);
                     _configurationSettings.DiagnosticLogger.LogInfo($"Async service call for {apiActionType} completed ok.", "HttpCommunicationEngine");
-                    return new CommunicationResult(httpResult);
+                    return await CommunicationResult.ParseResult(httpResult);
                 }
             }
             catch (Exception ex)
@@ -53,7 +53,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                 using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory]))
                 {
                     var httpResult = await httpClient.GetAsync(uri).ConfigureAwait(continueOnCapturedContext: false);
-                    return new CommunicationResult(httpResult);
+                    return await CommunicationResult.ParseResult(httpResult);
                 }
             }
             catch (Exception ex)
