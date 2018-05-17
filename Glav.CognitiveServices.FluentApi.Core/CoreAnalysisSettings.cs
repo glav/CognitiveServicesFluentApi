@@ -43,6 +43,18 @@ namespace Glav.CognitiveServices.FluentApi.Core
         public ConfigurationSettings ConfigurationSettings { get; private set; }
         public Dictionary<ApiActionType, IApiActionData> ActionsToPerform { get; private set; }
         public ICommunicationEngine CommunicationEngine { get; private set; }
+
+        public T GetOrCreateActionDataInstance<T>(ApiActionType actionType) where T : class, IApiActionData, new()
+        {
+            if (!ActionsToPerform.ContainsKey(actionType))
+            {
+                var data = new T();
+                ActionsToPerform.Add(actionType, data);
+            }
+
+            return ActionsToPerform[actionType] as T;
+        }
+
     }
 
 }

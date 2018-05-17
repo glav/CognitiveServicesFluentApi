@@ -13,8 +13,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                 ImageAnalysisDetails imageDetails = ImageAnalysisDetails.Default,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
-            apiAnalysis.ActionsToPerform.Add(ApiActionType.ComputerVisionImageAnalysis, new ImageAnalysisActionData(new Uri(url),
-                                                                                                visualFeatures, imageDetails,language));
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<ImageAnalysisActionData>(ApiActionType.ComputerVisionImageAnalysis);
+            actionData.Add(new Uri(url),visualFeatures, imageDetails,language);
             return apiAnalysis;
         }
     }

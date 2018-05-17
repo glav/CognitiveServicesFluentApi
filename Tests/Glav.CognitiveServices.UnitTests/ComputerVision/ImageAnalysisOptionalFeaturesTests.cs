@@ -25,12 +25,12 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
         [Fact]
         public void UrlArgumentsForAllOptionsShouldBeValidQueryParameters()
         {
-            var actionData = new ImageAnalysisActionData(new System.Uri("https://localhost"), ImageAnalysisVisualFeatures.Categories | ImageAnalysisVisualFeatures.Faces, ImageAnalysisDetails.Celebrities, FluentApi.Core.SupportedLanguageType.English);
+            var actionData = new ImageAnalysisActionDataItem(new System.Uri("https://localhost"), ImageAnalysisVisualFeatures.Categories | ImageAnalysisVisualFeatures.Faces, ImageAnalysisDetails.Celebrities, FluentApi.Core.SupportedLanguageType.English);
             var actual = actionData.ToUrlQueryParameters();
             var expected = "visualFeatures=Categories,Faces&details=Celebrities&language=en";
             Assert.Equal(expected, actual);
 
-            actionData = new ImageAnalysisActionData(new System.Uri("https://localhost"),ImageAnalysisVisualFeatures.Default, ImageAnalysisDetails.Landmarks,FluentApi.Core.SupportedLanguageType.Unspecified);
+            actionData = new ImageAnalysisActionDataItem(new System.Uri("https://localhost"),ImageAnalysisVisualFeatures.Default, ImageAnalysisDetails.Landmarks,FluentApi.Core.SupportedLanguageType.Unspecified);
             actual = actionData.ToUrlQueryParameters();
             expected = "details=Landmarks";
             Assert.Equal(expected, actual);

@@ -31,21 +31,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsLanguages);
         }
 
-        private static T GetOrCreateActionInstance<T>(TextAnalyticAnalysisSettings apiAnalysis, ApiActionType actionType) where T : class, IApiActionData, new()
-        {
-            if (apiAnalysis.ActionsToPerform.ContainsKey(actionType))
-            {
-                return apiAnalysis.ActionsToPerform[actionType] as T;
-            }
-
-            var data = new T();
-            apiAnalysis.ActionsToPerform.Add(actionType, data);
-            return data;
-
-        }
         private static TextAnalyticAnalysisSettings AddTextForAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse, ApiActionType actionType)
         {
-            var actionData = GetOrCreateActionInstance<TextAnalyticActionData>(apiAnalysis, actionType);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<TextAnalyticActionData>(actionType);
             actionData.Add(actionType, textToAnalyse);
             return apiAnalysis;
         }
