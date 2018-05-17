@@ -8,19 +8,18 @@ using Glav.CognitiveServices.FluentApi.Core;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public sealed class TextAnalyticActionData: IApiActionData
+    public sealed class TextAnalyticActionData: ApiActionDataCollection<TextAnalyticActionDataItem>, IApiActionData
     {
-        private List<TextAnalyticActionDataItem> _itemList = new List<TextAnalyticActionDataItem>();
         public void Add(ApiActionType apiType, string textToAnalyse, SupportedLanguageType language = SupportedLanguageType.English)
         {
-            _itemList.Add(new TextAnalyticActionDataItem(_itemList.Count + 1, textToAnalyse, language, apiType));
+            ItemList.Add(new TextAnalyticActionDataItem(ItemList.Count + 1, textToAnalyse, language, apiType));
         }
  
         public override string ToString()
         {
             var builder = new StringBuilder();
             builder.Append("{ \"documents\": [");
-            _itemList.ForEach(i =>
+            ItemList.ForEach(i =>
             {
                 if (i.Id > 1) { builder.Append(","); }
                 builder.Append(i.ToString());
@@ -31,12 +30,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 
         public TextAnalyticActionDataItem GetItemById(long id)
         {
-            return _itemList.FirstOrDefault(i => i.Id == id);
-        }
-
-        public TextAnalyticActionDataItem[] GetAllItems()
-        {
-            return _itemList.ToArray();
+            return ItemList.FirstOrDefault(i => i.Id == id);
         }
 
         public string ToUrlQueryParameters()

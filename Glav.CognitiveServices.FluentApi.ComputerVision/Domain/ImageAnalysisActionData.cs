@@ -7,15 +7,13 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class ImageAnalysisActionData : IApiActionData
+    public class ImageAnalysisActionData : ApiActionDataCollection<ImageAnalysisActionDataItem>, IApiActionData
     {
-        private List<ImageAnalysisActionDataItem> _itemList = new List<ImageAnalysisActionDataItem>();
-
         public void Add(Uri imageUri,
                 ImageAnalysisVisualFeatures visualFeatures,
                 ImageAnalysisDetails imageDetails, SupportedLanguageType language = SupportedLanguageType.English)
         {
-            _itemList.Add(new ImageAnalysisActionDataItem(imageUri, visualFeatures, imageDetails,language));
+            ItemList.Add(new ImageAnalysisActionDataItem(imageUri, visualFeatures, imageDetails,language));
         }
 
         /// <summary>
@@ -29,7 +27,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         }
     }
 
-    public class ImageAnalysisActionDataItem : IApiActionData, IActionDataItem
+    public class ImageAnalysisActionDataItem : IActionDataItem
     {
         public ImageAnalysisActionDataItem(Uri imageUri, 
                 ImageAnalysisVisualFeatures visualFeatures, 
