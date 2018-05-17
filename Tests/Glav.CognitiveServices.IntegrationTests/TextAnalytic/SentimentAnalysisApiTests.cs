@@ -116,15 +116,12 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Negative));
             Assert.Equal(2, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Positive));
 
-            // Get Original Id of input data
-            var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
+            // Get Original Id of one item of input data
+            var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[1].Id;
             var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
-            Assert.Equal(DefaultScoreLevels.Negative, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
+            Assert.Equal(DefaultScoreLevels.Positive, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
 
-            var collectedResults = result.SentimentAnalysis.GetResults(DefaultScoreLevels.Negative);
-            Assert.NotNull(collectedResults);
-            Assert.Equal(1, collectedResults.Count());
         }
     }
 }

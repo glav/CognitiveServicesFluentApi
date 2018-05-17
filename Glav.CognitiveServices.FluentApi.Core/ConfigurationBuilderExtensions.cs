@@ -26,16 +26,36 @@ namespace Glav.CognitiveServices.FluentApi.Core
             configSettings.RegisterDiagnosticLogger(new ConsoleLogger());
             return configSettings;
         }
+
+        /// <summary>
+        /// Registers a custom diagnostic logger that implements the <see cref="IDiagnosticLogger"/> interface
+        /// </summary>
+        /// <param name="configSettings"></param>
+        /// <param name="diagnosticLogger"></param>
+        /// <returns></returns>
         public static ConfigurationSettings AddCustomDiagnosticLogging(this ConfigurationSettings configSettings, IDiagnosticLogger diagnosticLogger)
         {
             configSettings.RegisterDiagnosticLogger(diagnosticLogger);
             return configSettings;
         }
+
+        /// <summary>
+        /// Registers a System.Diagnostics.Debug diagnostic logger.
+        /// </summary>
+        /// <param name="configSettings"></param>
+        /// <returns></returns>
         public static ConfigurationSettings AddDebugDiagnosticLogging(this ConfigurationSettings configSettings)
         {
             configSettings.RegisterDiagnosticLogger(new DebugLogger());
             return configSettings;
         }
+
+        /// <summary>
+        /// Sets the level of diagnostic logging
+        /// </summary>
+        /// <param name="configSettings"></param>
+        /// <param name="logLevel"></param>
+        /// <returns></returns>
         public static ConfigurationSettings SetDiagnosticLoggingLevel(this ConfigurationSettings configSettings, LoggingLevel logLevel)
         {
             configSettings.LogLevel = logLevel;
