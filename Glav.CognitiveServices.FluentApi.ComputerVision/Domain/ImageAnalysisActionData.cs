@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,29 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
     public class ImageAnalysisActionData : IApiActionData
     {
-        public ImageAnalysisActionData(Uri imageUri, 
+        private List<ImageAnalysisActionDataItem> _itemList = new List<ImageAnalysisActionDataItem>();
+
+        public void Add(Uri imageUri,
+                ImageAnalysisVisualFeatures visualFeatures,
+                ImageAnalysisDetails imageDetails, SupportedLanguageType language = SupportedLanguageType.English)
+        {
+            _itemList.Add(new ImageAnalysisActionDataItem(imageUri, visualFeatures, imageDetails,language));
+        }
+
+        /// <summary>
+        /// Since ComputerVision does not support batching, and requires separate calls for action item
+        /// this method is not relevant
+        /// </summary>
+        /// <returns></returns>
+        public string ToUrlQueryParameters()
+        {
+            return null;
+        }
+    }
+
+    public class ImageAnalysisActionDataItem : IApiActionData, IActionDataItem
+    {
+        public ImageAnalysisActionDataItem(Uri imageUri, 
                 ImageAnalysisVisualFeatures visualFeatures, 
                 ImageAnalysisDetails imageDetails, 
                 SupportedLanguageType language)
@@ -23,6 +46,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         public ImageAnalysisVisualFeatures VisualFeatures { get; private set; }
         public ImageAnalysisDetails ImageDetails { get; private set; }
         public SupportedLanguageType Language { get; private set; }
+
+        public ApiActionType ApiType => ApiActionType.ComputerVisionImageAnalysis;
 
         public override string ToString()
         {
