@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
 {
     public class ImageAnalysisParsingTests
     {
-        private TestDataHelper _testHelper = new TestDataHelper();
+        private readonly TestDataHelper _testHelper = new TestDataHelper();
         private readonly string _visionImageAnalysisResponse;
 
         public ImageAnalysisParsingTests()
