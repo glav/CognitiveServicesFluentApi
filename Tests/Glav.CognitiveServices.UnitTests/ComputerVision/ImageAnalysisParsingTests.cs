@@ -5,6 +5,7 @@ using Glav.CognitiveServices.UnitTests.Helpers;
 using System.Linq;
 using Glav.CognitiveServices.FluentApi.ComputerVision;
 using Glav.CognitiveServices.FluentApi.Core;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.UnitTests.Emotion
 {
@@ -90,7 +91,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
         }
 
         [Fact]
-        public async void ShouldRetrieveDescriptiveCaptionsSucessfully()
+        public async Task ShouldRetrieveDescriptiveCaptionsSucessfully()
         {
             var commsResult = new MockCommsResult(_visionImageAnalysisResponse);
             var commsEngine = new MockCommsEngine(commsResult);
