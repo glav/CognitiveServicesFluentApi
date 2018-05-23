@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
-    public interface IApiAnalysisContext<TData, TResult> where TData : IApiActionData
+    public interface IApiAnalysisContext<TData, TResult> where TData : IApiActionDataCollection
                                                     where TResult : IApiCallResult
     {
         ApiActionType AnalysisType { get; }
@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
         IScoreEvaluationEngine ScoringEngine { get; }
     }
 
-    public abstract class BaseApiAnalysisContext<TData, TResult> where TData : IApiActionData
+    public abstract class BaseApiAnalysisContext<TData, TResult> where TData : IApiActionDataCollection
                                                     where TResult : IApiCallResult
     {
         public BaseApiAnalysisContext(TData actionData, TResult analysisResult, IScoreEvaluationEngine scoringEngine)
