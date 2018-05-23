@@ -7,8 +7,10 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class ImageAnalysisActionData : ApiActionDataCollection<ImageAnalysisActionDataItem>, IApiActionData
+    public class ImageAnalysisActionData : ApiActionDataCollection<ImageAnalysisActionDataItem>, IApiActionDataCollection
     {
+        public bool SupportsBatchingMultipleItems => false;
+
         public void Add(Uri imageUri,
                 ImageAnalysisVisualFeatures visualFeatures,
                 ImageAnalysisDetails imageDetails, SupportedLanguageType language = SupportedLanguageType.English)

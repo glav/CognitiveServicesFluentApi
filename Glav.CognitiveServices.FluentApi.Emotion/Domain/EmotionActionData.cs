@@ -6,8 +6,9 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
 {
-    public class EmotionActionData : ApiActionDataCollection<EmotionActionDataItem>, IApiActionData
+    public class EmotionActionData : ApiActionDataCollection<EmotionActionDataItem>, IApiActionDataCollection
     {
+        public bool SupportsBatchingMultipleItems => false;
 
         public void Add(Uri imageUri)
         {

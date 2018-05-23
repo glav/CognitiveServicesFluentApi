@@ -8,8 +8,10 @@ using Glav.CognitiveServices.FluentApi.Core;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public sealed class TextAnalyticActionData: ApiActionDataCollection<TextAnalyticActionDataItem>, IApiActionData
+    public sealed class TextAnalyticActionData: ApiActionDataCollection<TextAnalyticActionDataItem>, IApiActionDataCollection
     {
+        public bool SupportsBatchingMultipleItems => true;
+
         public void Add(ApiActionType apiType, string textToAnalyse, SupportedLanguageType language = SupportedLanguageType.English)
         {
             ItemList.Add(new TextAnalyticActionDataItem(ItemList.Count + 1, textToAnalyse, language, apiType));
