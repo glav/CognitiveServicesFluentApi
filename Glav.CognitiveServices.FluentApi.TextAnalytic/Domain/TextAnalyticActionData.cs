@@ -68,5 +68,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             return $"{{\"language\":\"{Language.ToCode()}\", \"id\":\"{Id.ToString()}\", \"text\":\"{TextToAnalyse}\"}}";
         }
 
+        public string ToUrlQueryParameters()
+        {
+            return null;
+        }
     }
 }

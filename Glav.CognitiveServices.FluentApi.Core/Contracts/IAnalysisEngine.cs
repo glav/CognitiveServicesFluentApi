@@ -44,9 +44,12 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                 } else
                 {
                     var allItems = actions.GetAllItems();
+
+                    if (allItems.Count() > 1) { throw new NotSupportedException("Currently, multiple return results are not supported in non batch operations"); }
+
                     foreach(var item in allItems)
                     {
-                        var urlQueryParams = string.Empty;  //TODO: Need to implement on individual data item
+                        var urlQueryParams = item.ToUrlQueryParameters();
                         var payload = item.ToString();
                         await ExecuteApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, "", payload);
                     }
