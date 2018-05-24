@@ -44,7 +44,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Positive));
 
             // Get Original Id of input data
-            var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
+            var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems().First().Id;
             var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
             Assert.Equal(DefaultScoreLevels.Positive, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
@@ -89,7 +89,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Negative));
 
             // Get Original Id of input data
-            var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[0].Id;
+            var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems().First().Id;
             var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
             Assert.Equal(DefaultScoreLevels.Negative, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
@@ -117,7 +117,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.Equal(2, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Positive));
 
             // Get Original Id of one item of input data
-            var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems()[1].Id;
+            var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems().ToArray()[1].Id;
             var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
             Assert.Equal(DefaultScoreLevels.Positive, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);

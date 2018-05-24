@@ -7,6 +7,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
     public interface IActionDataItem
     {
+        long Id { get;  }
         ApiActionType ApiType { get; }
     }
 }

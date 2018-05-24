@@ -8,7 +8,7 @@ using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
 namespace Glav.CognitiveServices.FluentApi.Emotion
 {
-    public class EmotionAnalysisEngine : BaseAnalysisEngine<EmotionAnalysisResults, EmotionActionData>
+    public class EmotionAnalysisEngine : BaseAnalysisEngine<EmotionAnalysisResults>
     {
         public EmotionAnalysisEngine(CoreAnalysisSettings analysisSettings) : base (analysisSettings)
         {
@@ -31,7 +31,7 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
                 switch (apiAction)
                 {
                     case ApiActionType.EmotionImageRecognition:
-                        apiResults.SetResult(new ImageRecognitionAnalysisContext((actionData as EmotionActionData), new ImageRecognitionResult(commsResult), emotionDefaultScoringLevelsEngine));
+                        apiResults.SetResult(new ImageRecognitionAnalysisContext(actionData, new ImageRecognitionResult(commsResult), emotionDefaultScoringLevelsEngine));
                         break;
                     default:
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");

@@ -6,16 +6,16 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
 {
-    public class EmotionActionData : ApiActionDataCollection<EmotionActionDataItem>, IApiActionDataCollection
+    public class EmotionActionData : ApiActionDataCollection
     {
-        public bool SupportsBatchingMultipleItems => false;
+        public override bool SupportsBatchingMultipleItems => false;
 
         public void Add(Uri imageUri)
         {
-            ItemList.Add(new EmotionActionDataItem(imageUri));
+            ItemList.Add(new EmotionActionDataItem(ItemList.Count + 1,imageUri));
         }
 
-        public string ToUrlQueryParameters()
+        public override string ToUrlQueryParameters()
         {
             return null;
         }
@@ -25,12 +25,15 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
     {
         public ApiActionType ApiType => ApiActionType.EmotionImageRecognition;
 
-        public EmotionActionDataItem(Uri imageUri)
+        public EmotionActionDataItem(long id, Uri imageUri)
         {
+            Id = id;
             ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("ImageUri is required");
         }
 
         public Uri ImageUriToAnalyse { get; private set; }
+
+        public long Id { get; private set; }
 
         public override string ToString()
         {

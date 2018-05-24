@@ -8,9 +8,9 @@ using Glav.CognitiveServices.FluentApi.Core;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public sealed class TextAnalyticActionData: ApiActionDataCollection<TextAnalyticActionDataItem>, IApiActionDataCollection
+    public sealed class TextAnalyticActionData: ApiActionDataCollection
     {
-        public bool SupportsBatchingMultipleItems => true;
+        public override bool SupportsBatchingMultipleItems => true;
 
         public void Add(ApiActionType apiType, string textToAnalyse, SupportedLanguageType language = SupportedLanguageType.English)
         {
@@ -23,7 +23,8 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             builder.Append("{ \"documents\": [");
             ItemList.ForEach(i =>
             {
-                if (i.Id > 1) { builder.Append(","); }
+                var item = i as TextAnalyticActionDataItem;
+                if (item.Id > 1) { builder.Append(","); }
                 builder.Append(i.ToString());
             });
             builder.Append("] }");
@@ -32,10 +33,10 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 
         public TextAnalyticActionDataItem GetItemById(long id)
         {
-            return ItemList.FirstOrDefault(i => i.Id == id);
+            return ItemList.FirstOrDefault(i => i.Id == id) as TextAnalyticActionDataItem;
         }
 
-        public string ToUrlQueryParameters()
+        public override string ToUrlQueryParameters()
         {
             return null;
         }

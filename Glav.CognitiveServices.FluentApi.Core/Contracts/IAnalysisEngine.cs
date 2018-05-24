@@ -1,8 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.Core;
+using System.Linq;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using System;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
+using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
@@ -13,9 +15,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
         Task<T> AnalyseAllAsync();
     }
 
-    public abstract class BaseAnalysisEngine<TAnalysisResults, TActionData> : IAnalysisEngine<TAnalysisResults>
+    public abstract class BaseAnalysisEngine<TAnalysisResults> : IAnalysisEngine<TAnalysisResults>
                 where TAnalysisResults : class, IAnalysisResults
-                where TActionData : class, IApiActionDataCollection
     {
         public BaseAnalysisEngine(CoreAnalysisSettings analysisSettings)
         {
@@ -27,31 +28,42 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
         public abstract Task AnalyseApiActionAsync(TAnalysisResults apiResults, ApiActionType apiAction);
 
-        protected async Task AnalyseApiActionAsync(TAnalysisResults apiResults, ApiActionType apiAction, Action<IApiActionDataCollection, ICommunicationResult> apiActionHandler)
+        protected async Task AnalyseApiActionAsync(TAnalysisResults apiResults, ApiActionType apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler)
         {
             if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction))
             {
+                // Get the collection of actions to perform for an API call
                 var actions = AnalysisSettings.ActionsToPerform[apiAction];
 
                 apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseAll");
-
-                var concreteAction = (actions as TActionData);
-                if (concreteAction.SupportsBatchingMultipleItems && concreteAction.ItemCount == 1)
+                if (actions.SupportsBatchingMultipleItems)
                 {
-                    var urlQueryParams = concreteAction.ToUrlQueryParameters();
-                    var payload = concreteAction.ToString();
-
-                    apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
-                    var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParams).ConfigureAwait(continueOnCapturedContext: false);
-                    apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseAll");
-
-                    apiActionHandler(actions, result);
+                    var urlQueryParams = actions.ToUrlQueryParameters();
+                    var payload = actions.ToString();
+                    await ExecuteApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, urlQueryParams, payload);
                 } else
                 {
-                    //TODO: Need to add in support for multiple result line items
-                    throw new NotSupportedException("separate multiple result items not supported just yet.");
+                    var allItems = actions.GetAllItems();
+                    foreach(var item in allItems)
+                    {
+                        var urlQueryParams = string.Empty;  //TODO: Need to implement on individual data item
+                        var payload = item.ToString();
+                        await ExecuteApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, "", payload);
+                    }
                 }
             }
+        }
+
+        private async Task ExecuteApiActionAsync(IDiagnosticLogger logger,
+                ApiActionDataCollection apiActions,
+                ApiActionType apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler, 
+                string urlQueryParameters, string payload)
+        {
+            logger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
+            var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParameters).ConfigureAwait(continueOnCapturedContext: false);
+            logger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseAll");
+
+            apiActionHandler(apiActions, result);
         }
 
     }

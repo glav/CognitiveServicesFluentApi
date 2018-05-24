@@ -7,35 +7,26 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class ImageAnalysisActionData : ApiActionDataCollection<ImageAnalysisActionDataItem>, IApiActionDataCollection
+    public class ImageAnalysisActionData : ApiActionDataCollection
     {
-        public bool SupportsBatchingMultipleItems => false;
+        public override bool SupportsBatchingMultipleItems => false;
 
         public void Add(Uri imageUri,
                 ImageAnalysisVisualFeatures visualFeatures,
                 ImageAnalysisDetails imageDetails, SupportedLanguageType language = SupportedLanguageType.English)
         {
-            ItemList.Add(new ImageAnalysisActionDataItem(imageUri, visualFeatures, imageDetails,language));
-        }
-
-        /// <summary>
-        /// Since ComputerVision does not support batching, and requires separate calls for action item
-        /// this method is not relevant
-        /// </summary>
-        /// <returns></returns>
-        public string ToUrlQueryParameters()
-        {
-            return null;
+            ItemList.Add(new ImageAnalysisActionDataItem(ItemList.Count+1, imageUri, visualFeatures, imageDetails,language));
         }
     }
 
     public class ImageAnalysisActionDataItem : IActionDataItem
     {
-        public ImageAnalysisActionDataItem(Uri imageUri, 
+        public ImageAnalysisActionDataItem(long id,Uri imageUri, 
                 ImageAnalysisVisualFeatures visualFeatures, 
                 ImageAnalysisDetails imageDetails, 
                 SupportedLanguageType language)
         {
+            Id = id;
             ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("ImageUri is required");
             VisualFeatures = visualFeatures;
             ImageDetails = imageDetails;
@@ -48,6 +39,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         public SupportedLanguageType Language { get; private set; }
 
         public ApiActionType ApiType => ApiActionType.ComputerVisionImageAnalysis;
+
+        public long Id { get; private set; }
 
         public override string ToString()
         {
