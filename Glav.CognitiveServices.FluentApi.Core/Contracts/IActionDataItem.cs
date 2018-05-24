@@ -9,5 +9,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
     {
         long Id { get;  }
         ApiActionType ApiType { get; }
+        string ToUrlQueryParameters();
     }
 }

@@ -39,6 +39,10 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
         {
             return string.Format("{{\"url\":\"{0}\"}}", ImageUriToAnalyse.AbsoluteUri);
         }
+        public string ToUrlQueryParameters()
+        {
+            return null;
+        }
 
     }
 }
