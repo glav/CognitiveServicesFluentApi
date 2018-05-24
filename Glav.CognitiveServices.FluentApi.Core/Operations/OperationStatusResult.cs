@@ -62,14 +62,18 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
 
         public static OperationStatusResult CreateTimeoutOperation(ICommunicationResult apiCallResult)
         {
-            var result = new OperationStatusResult(apiCallResult);
-            result.OperationState = OperationStateType.TimedOut;
+            var result = new OperationStatusResult(apiCallResult)
+            {
+                OperationState = OperationStateType.TimedOut
+            };
             return result;
         }
         public static OperationStatusResult CreateCancelledOperation(ICommunicationResult apiCallResult)
         {
-            var result = new OperationStatusResult(apiCallResult);
-            result.OperationState = OperationStateType.Cancelled;
+            var result = new OperationStatusResult(apiCallResult)
+            {
+                OperationState = OperationStateType.Cancelled
+            };
             return result;
         }
     }

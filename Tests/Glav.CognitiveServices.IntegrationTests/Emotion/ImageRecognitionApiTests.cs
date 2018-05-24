@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVsion
     public class ImageRecognitionApiTests
     {
         [Fact]
-        public async Task SimplePositiveTextShouldAnalyseAsPositive()
+        public async Task ShouldDetectFaces()
         {
             var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.EmotionApiKey, LocationKeyIdentifier.WestUs)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)

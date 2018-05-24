@@ -4,9 +4,9 @@ using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public class KeyPhraseAnalysisContext : BaseApiAnalysisContext<TextAnalyticActionData, KeyPhraseResult>
+    public class KeyPhraseAnalysisContext : BaseApiAnalysisContext<KeyPhraseResult>
     {
-        public KeyPhraseAnalysisContext(TextAnalyticActionData actionData, KeyPhraseResult analysisResult, IScoreEvaluationEngine scoringEngine)
+        public KeyPhraseAnalysisContext(ApiActionDataCollection actionData, KeyPhraseResult analysisResult, IScoreEvaluationEngine scoringEngine)
             :base(actionData, analysisResult, scoringEngine)
         {
         }

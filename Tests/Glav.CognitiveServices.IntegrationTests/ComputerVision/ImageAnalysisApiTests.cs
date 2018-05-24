@@ -51,7 +51,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.NotEmpty(result.ImageAnalysis.AnalysisResult.ResponseData.tags);
         }
 
-        [Fact]
+        //[Fact]
         public async Task ShouldSupportMultipleImagesForAnalysis()
         {
             var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)

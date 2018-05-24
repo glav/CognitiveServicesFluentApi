@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
     public interface IAnalysisSettings
     {
-        Dictionary<ApiActionType, IApiActionDataCollection> ActionsToPerform { get; }
+        Dictionary<ApiActionType, ApiActionDataCollection> ActionsToPerform { get; }
         ICommunicationEngine CommunicationEngine { get; }
         ConfigurationSettings ConfigurationSettings { get; }
 

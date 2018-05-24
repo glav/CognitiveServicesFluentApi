@@ -7,7 +7,7 @@ using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
-    public class ComputerVisionAnalysisEngine : BaseAnalysisEngine<ComputerVisionAnalysisResults, ImageAnalysisActionData>
+    public class ComputerVisionAnalysisEngine : BaseAnalysisEngine<ComputerVisionAnalysisResults>
     {
         public ComputerVisionAnalysisEngine(CoreAnalysisSettings analysisSettings) : base(analysisSettings)
         { }
@@ -27,7 +27,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                   switch (apiAction)
                   {
                       case ApiActionType.ComputerVisionImageAnalysis:
-                          apiResults.SetResult(new ImageAnalysisContext((actionData as ImageAnalysisActionData), new ImageAnalysisResult(commsResult)
+                          apiResults.SetResult(new ImageAnalysisContext(actionData, new ImageAnalysisResult(commsResult)
                                                     ,AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                           break;
                       default:

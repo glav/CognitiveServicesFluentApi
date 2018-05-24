@@ -6,21 +6,20 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
-    public interface IApiAnalysisContext<TData, TResult> where TData : IApiActionDataCollection
-                                                    where TResult : IApiCallResult
+    //public interface IApiAnalysisContext<TData, TResult> where TData : IApiActionDataCollection
+    //                                                where TResult : IApiCallResult
+    //{
+    //    ApiActionType AnalysisType { get; }
+    //    TData AnalysisInput { get; }
+
+    //    TResult AnalysisResult { get; }
+
+    //    IScoreEvaluationEngine ScoringEngine { get; }
+    //}
+
+    public abstract class BaseApiAnalysisContext<TResult> where TResult : IApiCallResult
     {
-        ApiActionType AnalysisType { get; }
-        TData AnalysisInput { get; }
-
-        TResult AnalysisResult { get; }
-
-        IScoreEvaluationEngine ScoringEngine { get; }
-    }
-
-    public abstract class BaseApiAnalysisContext<TData, TResult> where TData : IApiActionDataCollection
-                                                    where TResult : IApiCallResult
-    {
-        public BaseApiAnalysisContext(TData actionData, TResult analysisResult, IScoreEvaluationEngine scoringEngine)
+        public BaseApiAnalysisContext(ApiActionDataCollection actionData, TResult analysisResult, IScoreEvaluationEngine scoringEngine)
         {
             AnalysisInput = actionData;
             AnalysisResult = analysisResult;
@@ -28,7 +27,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
         }
 
         public abstract ApiActionType AnalysisType { get; }
-        public virtual TData AnalysisInput { get; protected set; }
+        public virtual ApiActionDataCollection AnalysisInput { get; protected set; }
 
         public virtual TResult AnalysisResult { get; protected set; }
 

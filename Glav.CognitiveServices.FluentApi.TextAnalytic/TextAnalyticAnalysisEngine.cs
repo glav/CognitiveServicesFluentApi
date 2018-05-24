@@ -7,7 +7,7 @@ using Glav.CognitiveServices.FluentApi.Core.Contracts;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
-    public sealed class TextAnalyticAnalysisEngine : BaseAnalysisEngine<TextAnalyticAnalysisResults, TextAnalyticActionData>
+    public sealed class TextAnalyticAnalysisEngine : BaseAnalysisEngine<TextAnalyticAnalysisResults>
     {
         public TextAnalyticAnalysisEngine(CoreAnalysisSettings analysisSettings) : base(analysisSettings)
         {
@@ -32,13 +32,13 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
                 switch (apiAction)
                 {
                     case ApiActionType.TextAnalyticsSentiment:
-                        apiResults.SetResult(new SentimentAnalysisContext((actionData as TextAnalyticActionData), new SentimentResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                        apiResults.SetResult(new SentimentAnalysisContext(actionData, new SentimentResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                         break;
                     case ApiActionType.TextAnalyticsKeyphrases:
-                        apiResults.SetResult(new KeyPhraseAnalysisContext((actionData as TextAnalyticActionData), new KeyPhraseResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                        apiResults.SetResult(new KeyPhraseAnalysisContext(actionData, new KeyPhraseResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                         break;
                     case ApiActionType.TextAnalyticsLanguages:
-                        apiResults.SetResult(new LanguageAnalysisContext((actionData as TextAnalyticActionData), new LanguagesResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                        apiResults.SetResult(new LanguageAnalysisContext(actionData, new LanguagesResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                         break;
                     default:
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");

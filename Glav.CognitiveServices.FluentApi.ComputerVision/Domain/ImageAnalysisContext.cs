@@ -4,9 +4,9 @@ using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class ImageAnalysisContext : BaseApiAnalysisContext<ImageAnalysisActionData, ImageAnalysisResult>
+    public class ImageAnalysisContext : BaseApiAnalysisContext<ImageAnalysisResult> 
     {
-        public ImageAnalysisContext(ImageAnalysisActionData actionData, ImageAnalysisResult analysisResult, IScoreEvaluationEngine scoringEngine)
+        public ImageAnalysisContext(ApiActionDataCollection actionData, ImageAnalysisResult analysisResult, IScoreEvaluationEngine scoringEngine)
             : base(actionData, analysisResult, scoringEngine)
         {
         }

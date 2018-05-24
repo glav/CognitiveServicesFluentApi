@@ -4,9 +4,9 @@ using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public class SentimentAnalysisContext : BaseApiAnalysisContext<TextAnalyticActionData, SentimentResult>
+    public class SentimentAnalysisContext : BaseApiAnalysisContext<SentimentResult>
     {
-        public SentimentAnalysisContext(TextAnalyticActionData actionData, SentimentResult analysisResult, IScoreEvaluationEngine scoringEngine)
+        public SentimentAnalysisContext(ApiActionDataCollection actionData, SentimentResult analysisResult, IScoreEvaluationEngine scoringEngine)
             : base(actionData, analysisResult, scoringEngine)
         {
         }
