@@ -21,5 +21,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             ImageAnalysis = imageAnalysis;
         }
 
+        //public void AddResult(new ImageAnalysisResult(commsResult))
+
     }
 }
