@@ -35,11 +35,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                 // Get the collection of actions to perform for an API call
                 var actions = AnalysisSettings.ActionsToPerform[apiAction];
 
-                apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseAll");
                 if (actions.SupportsBatchingMultipleItems)
                 {
                     var urlQueryParams = actions.ToUrlQueryParameters();
                     var payload = actions.ToString();
+                    apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseApiAction");
                     await ExecuteApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, urlQueryParams, payload);
                 } else
                 {
@@ -51,6 +51,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                     {
                         var urlQueryParams = item.ToUrlQueryParameters();
                         var payload = item.ToString();
+                        apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseApiAction");
                         await ExecuteApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, "", payload);
                     }
                 }
@@ -62,9 +63,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                 ApiActionType apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler, 
                 string urlQueryParameters, string payload)
         {
-            logger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseAll");
+            logger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseApiAction");
             var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParameters).ConfigureAwait(continueOnCapturedContext: false);
-            logger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseAll");
+            logger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseApiAction");
 
             apiActionHandler(apiActions, result);
         }
