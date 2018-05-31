@@ -6,6 +6,7 @@ using System.Linq;
 using Glav.CognitiveServices.FluentApi.ComputerVision;
 using Glav.CognitiveServices.FluentApi.Core;
 using System.Threading.Tasks;
+using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
 namespace Glav.CognitiveServices.UnitTests.Emotion
 {
@@ -108,6 +109,44 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
             Assert.NotEmpty(result);
             Assert.Equal(1, result.Length);
             Assert.Equal(expected, result[0]);
+
+        }
+
+        [Fact]
+        public async Task ShouldRetrieveTagsSuccessfullyOfParticularScoreLevel()
+        {
+            var commsResult = new MockCommsResult(_visionImageAnalysisResponse);
+            var commsEngine = new MockCommsEngine(commsResult);
+
+            var analysisResult = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.AustraliaEast)
+                .UsingCustomCommunication(commsEngine)
+                .WithComputerVisionAnalysisActions()
+                .AddImageAnalysis("http://someurl/that/wont/get/called")
+                .AnalyseAllAsync();
+
+            var result = analysisResult.ImageAnalysis.GetTags(DefaultScoreLevels.Positive);
+            Assert.NotNull(result);
+            Assert.NotEmpty(result);
+            Assert.Equal(4, result.Length);
+
+        }
+
+        [Fact]
+        public async Task ShouldRetrieveTagsSuccessfullyAboveAParticularScoreLevel()
+        {
+            var commsResult = new MockCommsResult(_visionImageAnalysisResponse);
+            var commsEngine = new MockCommsEngine(commsResult);
+
+            var analysisResult = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.AustraliaEast)
+                .UsingCustomCommunication(commsEngine)
+                .WithComputerVisionAnalysisActions()
+                .AddImageAnalysis("http://someurl/that/wont/get/called")
+                .AnalyseAllAsync();
+
+            var result = analysisResult.ImageAnalysis.GetTagsEqualToOrAboveAConfidenceLevel(DefaultScoreLevels.SlightlyPositive);
+            Assert.NotNull(result);
+            Assert.NotEmpty(result);
+            Assert.Equal(4, result.Length);
 
         }
     }
