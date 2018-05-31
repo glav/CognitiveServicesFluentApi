@@ -31,7 +31,7 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
                 switch (apiAction)
                 {
                     case ApiActionType.EmotionImageRecognition:
-                        apiResults.SetResult(new ImageRecognitionAnalysisContext(actionData, new ImageRecognitionResult(commsResult), emotionDefaultScoringLevelsEngine));
+                        apiResults.AddResult(new ImageRecognitionResult(commsResult));
                         break;
                     default:
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
@@ -40,6 +40,17 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
             }).ConfigureAwait(continueOnCapturedContext: false);
 
         }
+
+        private void InitialiseContextForAction(ApiActionType apiAction, EmotionAnalysisResults apiResults)
+        {
+            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction) && apiResults.ImageRecognitionAnalysis == null && apiAction == ApiActionType.EmotionImageRecognition)
+            {
+                // Get the collection of actions to perform for an API call
+                var actions = AnalysisSettings.ActionsToPerform[apiAction];
+                apiResults.SetEmotionResultContext(new ImageRecognitionAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+            }
+        }
+
 
     }
 }

@@ -22,19 +22,30 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 
         public override async Task AnalyseApiActionAsync(ComputerVisionAnalysisResults apiResults, ApiActionType apiAction)
         {
+            InitialiseContextForAction(apiAction, apiResults);
+
             await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
               {
                   switch (apiAction)
                   {
                       case ApiActionType.ComputerVisionImageAnalysis:
-                          apiResults.SetResult(new ImageAnalysisContext(actionData, new ImageAnalysisResult(commsResult)
-                                                    ,AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                          apiResults.AddResult(new ImageAnalysisResult(commsResult));
                           break;
                       default:
                           throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
                   }
 
               }).ConfigureAwait(continueOnCapturedContext: false);
+        }
+
+        private void InitialiseContextForAction(ApiActionType apiAction, ComputerVisionAnalysisResults apiResults)
+        {
+            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction) && apiResults.ImageAnalysis == null && apiAction == ApiActionType.ComputerVisionImageAnalysis)
+            {
+                // Get the collection of actions to perform for an API call
+                var actions = AnalysisSettings.ActionsToPerform[apiAction];
+                apiResults.SetImageResultContext(new ImageAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+            }
         }
     }
 }

@@ -16,12 +16,19 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public CoreAnalysisSettings AnalysisSettings { get; private set; }
 
         public ImageAnalysisContext ImageAnalysis { get; private set; }
-        public void SetResult(ImageAnalysisContext imageAnalysis)
+        public void SetImageResultContext(ImageAnalysisContext imageAnalysisCtxt)
         {
-            ImageAnalysis = imageAnalysis;
+            ImageAnalysis = imageAnalysisCtxt ?? throw new ArgumentNullException("ImageAnalysisContext");
         }
 
-        //public void AddResult(new ImageAnalysisResult(commsResult))
+        public void AddResult(ImageAnalysisResult result)
+        {
+            if (ImageAnalysis == null)
+            {
+                throw new NullReferenceException("Cannot add a result without first setting the result context");
+            }
+            ImageAnalysis.AnalysisResults.Add(result);
+        }
 
     }
 }

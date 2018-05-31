@@ -10,6 +10,10 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             : base(actionData, analysisResult, scoringEngine)
         {
         }
+        public ImageAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
+            : base(actionData, scoringEngine)
+        {
+        }
         public override ApiActionType AnalysisType => ApiActionType.ComputerVisionImageAnalysis;
 
     }

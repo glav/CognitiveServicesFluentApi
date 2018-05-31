@@ -10,6 +10,10 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
             : base(actionData, analysisResult, scoringEngine)
         {
         }
+        public ImageRecognitionAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
+            : base(actionData, scoringEngine)
+        {
+        }
 
         public override ApiActionType AnalysisType => ApiActionType.EmotionImageRecognition;
     }

@@ -16,10 +16,16 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
         public CoreAnalysisSettings AnalysisSettings { get; private set; }
 
         public ImageRecognitionAnalysisContext ImageRecognitionAnalysis { get; private set; }
-        public void SetResult(ImageRecognitionAnalysisContext imageRecognitionAnalysis)
+        public void AddResult(ImageRecognitionResult imageRecognitionResult)
         {
-            ImageRecognitionAnalysis = imageRecognitionAnalysis;
+            ImageRecognitionAnalysis.AnalysisResults.Add(imageRecognitionResult);
         }
+
+        public void SetEmotionResultContext(ImageRecognitionAnalysisContext imageRecognitionAnalysisCtxt)
+        {
+            ImageRecognitionAnalysis = imageRecognitionAnalysisCtxt ?? throw new ArgumentNullException("ImageRecognitionAnalysisContext");
+        }
+
 
     }
 }

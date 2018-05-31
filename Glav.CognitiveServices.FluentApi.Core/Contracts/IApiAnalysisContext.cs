@@ -26,6 +26,12 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
             AnalysisResults = new List<TResult> { analysisResult };
             ScoringEngine = scoringEngine;
         }
+        public BaseApiAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
+        {
+            AnalysisInput = actionData;
+            AnalysisResults = new List<TResult>();
+            ScoringEngine = scoringEngine;
+        }
 
         public abstract ApiActionType AnalysisType { get; }
         public virtual ApiActionDataCollection AnalysisInput { get; protected set; }
@@ -38,10 +44,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
         /// will translate into how many API calls are actually made. Each call is then stored here as a separate item with
         /// separate API call results. ComputerVision is an example where a separate API call is made per action.
         /// </summary>
-        public virtual IEnumerable<TResult> AnalysisResults { get; protected set; }
+        public virtual List<TResult> AnalysisResults { get; protected set; }
 
         /// <summary>
-        /// A convenience property that returns the first, singular result from the <see cref="AnalysisResults" property./>
+        /// A convenience property that returns the first, singular result from the <see cref="AnalysisResults" /> property.
         /// </summary>
         public virtual TResult AnalysisResult { get { return AnalysisResults.FirstOrDefault(); }  }
 
