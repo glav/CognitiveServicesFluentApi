@@ -12,9 +12,9 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Cognitive services, .net, azure, ComputerVision</PackageTags>
     <PackageReleaseNotes>Addition of ComputerVision Fluent API support.</PackageReleaseNotes>
-    <AssemblyVersion>0.8.0.0</AssemblyVersion>
-    <FileVersion>0.8.0.0</FileVersion>
-    <Version>0.8.0</Version>
+    <AssemblyVersion>0.8.2.0</AssemblyVersion>
+    <FileVersion>0.8.2.0</FileVersion>
+    <Version>0.8.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
