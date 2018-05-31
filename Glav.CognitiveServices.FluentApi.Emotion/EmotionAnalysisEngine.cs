@@ -24,6 +24,7 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
 
         public override async Task AnalyseApiActionAsync(EmotionAnalysisResults apiResults, ApiActionType apiAction)
         {
+            InitialiseContextForAction(apiAction, apiResults);
             await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
             {
                 // Set the emotion image recognition scoring levels to a more custom version

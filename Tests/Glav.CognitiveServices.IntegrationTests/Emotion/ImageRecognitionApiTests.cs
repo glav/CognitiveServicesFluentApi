@@ -48,6 +48,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVsion
             Assert.True(result.ImageRecognitionAnalysis.AnalysisResults.All(i => i.ResponseData != null));
             Assert.True(result.ImageRecognitionAnalysis.AnalysisResults.All(i => i.ActionSubmittedSuccessfully));
             Assert.True(result.ImageRecognitionAnalysis.AnalysisResults.All(i => i.ResponseData.faces != null));
+            Assert.True(result.ImageRecognitionAnalysis.AnalysisResults.All(i => i.ResponseData.faces.Length > 0));
         }
 
     }
