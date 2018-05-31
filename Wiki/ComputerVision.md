@@ -19,3 +19,18 @@ var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationK
     .AddImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
     .AnalyseAllAsync();
 ```
+
+You can also specify multiple images to process. Each image specified results in a separate call to the API. Unlike TextAnalytics which supports 
+batching each input into a single call, ComputerVision requires a separate API call per image. The results are then returned in a single
+collection. You can specify multiple images easily as shown in the following example:
+
+```c#
+var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("YOUR-API-KEY", LocationKeyIdentifier.SouthEastAsia)
+    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+    .AddDebugDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithComputerVisionAnalysisActions()
+    .AddImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
+    .AddImageAnalysis("http://recognitionmemory.org/files/2016/04/C2_032.jpg",ImageAnalysisVisualFeatures.Categories)
+    .AnalyseAllAsync();
+```
