@@ -3,6 +3,7 @@ using Glav.CognitiveServices.FluentApi.Emotion.Domain.ApiResponses;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.Emotion
 {
@@ -44,7 +45,8 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
         private static IEnumerable<EmotionImageRecognitionResponseItem> FindResultsWithScoreDefinitelyOrPossiblyPositive(ImageRecognitionAnalysisContext context, ImageRecognitionFaceEmotion emotionType)
         {
             var results = new List<EmotionImageRecognitionResponseItem>();
-            foreach (var item in context.AnalysisResult.ResponseData.faces)
+            var allFaces = context.AnalysisResults.SelectMany(i => i.ResponseData.faces);
+            foreach (var item in allFaces)
             {
                 var score = context.ScoringEngine.EvaluateScore(GetScoreToEvaluate(item,emotionType));
                 if (score.Name == EmotionRangeScoreLevels.DefinitelyPositive || score.Name == EmotionRangeScoreLevels.ProbablyPositive)

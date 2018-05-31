@@ -28,7 +28,6 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
             await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
             {
                 // Set the emotion image recognition scoring levels to a more custom version
-                var emotionDefaultScoringLevelsEngine = new DefaultScoreEvaluationEngine(new EmotionRangeScoreLevels());
                 switch (apiAction)
                 {
                     case ApiActionType.EmotionImageRecognition:
@@ -48,7 +47,8 @@ namespace Glav.CognitiveServices.FluentApi.Emotion
             {
                 // Get the collection of actions to perform for an API call
                 var actions = AnalysisSettings.ActionsToPerform[apiAction];
-                apiResults.SetEmotionResultContext(new ImageRecognitionAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                var emotionDefaultScoringLevelsEngine = new DefaultScoreEvaluationEngine(new EmotionRangeScoreLevels());
+                apiResults.SetEmotionResultContext(new ImageRecognitionAnalysisContext(actions, emotionDefaultScoringLevelsEngine));
             }
         }
 
