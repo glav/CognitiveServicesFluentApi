@@ -30,5 +30,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             ImageAnalysis.AnalysisResults.Add(result);
         }
 
+        //public void AddResult(new ImageAnalysisResult(commsResult))
+
     }
 }
