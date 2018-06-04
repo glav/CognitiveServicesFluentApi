@@ -33,7 +33,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
         public async Task<OperationStatusResult> CheckOperationStatusAsync()
         {
             _logger.LogInfo("About to query operation status", "OperationStatusQuery");
-            var serviceResult = await _analysisSettings.CommunicationEngine.CallServiceAsync(_operationStatusLocationUri.AbsoluteUri, _apiCategory);
+            var serviceResult = await _analysisSettings.CommunicationEngine.CallServiceAsync(_operationStatusLocationUri.AbsoluteUri, _apiCategory, false);
             var result = new OperationStatusResult(serviceResult);
             _logger.LogInfo("Completed query operation status", "OperationStatusQuery");
             return result;

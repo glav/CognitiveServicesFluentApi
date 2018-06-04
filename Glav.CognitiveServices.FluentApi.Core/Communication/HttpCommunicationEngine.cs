@@ -14,15 +14,22 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         {
             _configurationSettings = configurationSettings;
         }
-        private static HttpClient CreateHttpClient(string apiKey)
+        private static HttpClient CreateHttpClient(string apiKey, bool isBinaryPayload)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            if (isBinaryPayload)
+            {
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/octet-stream"));
+            }
+            else
+            {
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }
             return client;
         }
 
-        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
+        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null, bool isBinaryPayload = false)
         {
             _configurationSettings.DiagnosticLogger.LogInfo($"Performing async service call for {apiActionType}", "HttpCommunicationEngine");
 
@@ -33,7 +40,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
             try
             {
-                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[svcConfig.ApiCategory]))
+                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[svcConfig.ApiCategory],isBinaryPayload))
                 {
                     var httpResult = await httpClient.PostAsync(uri, content).ConfigureAwait(continueOnCapturedContext: false);
                     _configurationSettings.DiagnosticLogger.LogInfo($"Async service call for {apiActionType} completed ok.", "HttpCommunicationEngine");
@@ -46,11 +53,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                 return CommunicationResult.Fail(ex.Message);
             }
         }
-        public async Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory)
+        public async Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory, bool isBinaryPayload)
         {
             try
             {
-                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory]))
+                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory], isBinaryPayload))
                 {
                     var httpResult = await httpClient.GetAsync(uri).ConfigureAwait(continueOnCapturedContext: false);
                     return await CommunicationResult.ParseResult(httpResult);

@@ -63,6 +63,8 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         public ApiActionType ApiType { get; private set; }
         public string TextToAnalyse { get; private set; }
 
+        public bool IsBinaryData => false;
+
         public override string ToString()
         {
             return $"{{\"language\":\"{Language.ToCode()}\", \"id\":\"{Id.ToString()}\", \"text\":\"{TextToAnalyse}\"}}";

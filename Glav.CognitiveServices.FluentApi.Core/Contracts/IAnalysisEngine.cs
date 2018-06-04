@@ -61,10 +61,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
         private async Task ExecuteApiActionAsync(IDiagnosticLogger logger,
                 ApiActionDataCollection apiActions,
                 ApiActionType apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler, 
-                string urlQueryParameters, string payload)
+                string urlQueryParameters, string payload, bool isBinaryPayload = false)
         {
             logger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseApiAction");
-            var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParameters).ConfigureAwait(continueOnCapturedContext: false);
+            var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParameters, isBinaryPayload).ConfigureAwait(continueOnCapturedContext: false);
             logger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseApiAction");
 
             apiActionHandler(apiActions, result);

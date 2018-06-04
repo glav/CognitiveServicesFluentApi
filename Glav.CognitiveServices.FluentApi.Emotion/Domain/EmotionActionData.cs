@@ -35,6 +35,8 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
 
         public long Id { get; private set; }
 
+        public bool IsBinaryData => false;  // right now this is false as we only support URL's
+
         public override string ToString()
         {
             return string.Format("{{\"url\":\"{0}\"}}", ImageUriToAnalyse.AbsoluteUri);

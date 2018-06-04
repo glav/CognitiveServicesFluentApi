@@ -12,12 +12,12 @@ namespace Glav.CognitiveServices.UnitTests
             _mockResult = mockResult;
         }
 
-        public Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters)
+        public Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters, bool isBinaryPayload)
         {
             return Task.FromResult<ICommunicationResult>(_mockResult);
         }
 
-        public Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory)
+        public Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory, bool isBinaryPayload)
         {
             return Task.FromResult<ICommunicationResult>(_mockResult);
         }

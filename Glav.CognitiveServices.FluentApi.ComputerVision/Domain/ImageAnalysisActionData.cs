@@ -3,6 +3,7 @@ using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
@@ -17,6 +18,14 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         {
             ItemList.Add(new ImageAnalysisActionDataItem(ItemList.Count+1, imageUri, visualFeatures, imageDetails,language));
         }
+
+        public void Add(byte[] imageData,
+        ImageAnalysisVisualFeatures visualFeatures,
+        ImageAnalysisDetails imageDetails, SupportedLanguageType language = SupportedLanguageType.English)
+        {
+            ItemList.Add(new ImageAnalysisActionDataItem(ItemList.Count + 1, imageData, visualFeatures, imageDetails, language));
+        }
+
     }
 
     public class ImageAnalysisActionDataItem : IActionDataItem
@@ -33,6 +42,21 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             Language = language;
         }
 
+        public ImageAnalysisActionDataItem(long id, byte[] imageData,
+        ImageAnalysisVisualFeatures visualFeatures,
+        ImageAnalysisDetails imageDetails,
+        SupportedLanguageType language)
+        {
+            Id = id;
+            ImageDataToAnalyse = imageData ?? throw new ArgumentNullException("ImageData is required");
+            VisualFeatures = visualFeatures;
+            ImageDetails = imageDetails;
+            Language = language;
+        }
+
+        public bool IsBinaryData => ImageUriToAnalyse == null && ImageDataToAnalyse != null;
+
+        public byte[] ImageDataToAnalyse { get; private set; }
         public Uri ImageUriToAnalyse { get; private set; }
         public ImageAnalysisVisualFeatures VisualFeatures { get; private set; }
         public ImageAnalysisDetails ImageDetails { get; private set; }
@@ -44,6 +68,10 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 
         public override string ToString()
         {
+            if (ImageUriToAnalyse == null)
+            {
+                return Convert.ToBase64String(ImageDataToAnalyse);
+            }
             return string.Format("{{\"url\":\"{0}\"}}", ImageUriToAnalyse.AbsoluteUri);
         }
 
