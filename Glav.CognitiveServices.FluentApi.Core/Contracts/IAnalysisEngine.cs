@@ -52,7 +52,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                         var urlQueryParams = item.ToUrlQueryParameters();
                         var payload = item.ToString();
                         apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseApiAction");
-                        await ExecuteApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, urlQueryParams, payload);
+                        await ExecuteApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, urlQueryParams, payload,item.IsBinaryData);
                     }
                 }
             }
