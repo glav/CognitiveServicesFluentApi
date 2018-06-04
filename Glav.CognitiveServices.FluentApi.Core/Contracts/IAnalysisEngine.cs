@@ -40,7 +40,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                     var urlQueryParams = actions.ToUrlQueryParameters();
                     var payload = actions.ToString();
                     apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseApiAction");
-                    await ExecuteApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, urlQueryParams, payload);
+                    // Note that the payload we are passing along is always a string. At this ApiActionCollection level, we do not support binary here, only for individual
+                    // Api action items.
+                    await ExecuteApiActionForActionCollectionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, urlQueryParams, payload);
                 } else
                 {
                     var allItems = actions.GetAllItems();
@@ -49,26 +51,44 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
                     foreach(var item in allItems)
                     {
-                        var urlQueryParams = item.ToUrlQueryParameters();
-                        var payload = item.ToString();
                         apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseApiAction");
-                        await ExecuteApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, urlQueryParams, payload,item.IsBinaryData);
+                        await ExecuteApiActionForSingleApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, item);
                     }
                 }
             }
         }
 
-        private async Task ExecuteApiActionAsync(IDiagnosticLogger logger,
+        private async Task ExecuteApiActionForActionCollectionAsync(IDiagnosticLogger logger,
                 ApiActionDataCollection apiActions,
                 ApiActionType apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler, 
-                string urlQueryParameters, string payload, bool isBinaryPayload = false)
+                string urlQueryParameters, string payload)
         {
-            logger.LogInfo($"Calling service for {apiAction.ToString()}", "AnalyseApiAction");
-            var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParameters, isBinaryPayload).ConfigureAwait(continueOnCapturedContext: false);
-            logger.LogInfo($"Processing results for {apiAction.ToString()}", "AnalyseApiAction");
+            logger.LogInfo($"Calling service for {apiAction.ToString()}", "ExecuteApiActionForActionCollectionAsync");
+            var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParameters).ConfigureAwait(continueOnCapturedContext: false);
+            logger.LogInfo($"Processing results for {apiAction.ToString()}", "ExecuteApiActionForActionCollectionAsync");
 
             apiActionHandler(apiActions, result);
         }
 
+        private async Task ExecuteApiActionForSingleApiActionAsync(IDiagnosticLogger logger,
+                ApiActionDataCollection apiActions,
+                ApiActionType apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler,
+                IActionDataItem actionItem)
+        {
+            logger.LogInfo($"Calling service for {apiAction.ToString()}", "ExecuteApiActionForSingleApiActionAsync");
+            var urlQueryParams = actionItem.ToUrlQueryParameters();
+            ICommunicationResult commsResult;
+            if (actionItem.IsBinaryData)
+            {
+                commsResult = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, actionItem.ToBinary(), urlQueryParams).ConfigureAwait(continueOnCapturedContext: false);
+            }
+            else
+            {
+                commsResult = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, actionItem.ToString(), urlQueryParams).ConfigureAwait(continueOnCapturedContext: false);
+            }
+            logger.LogInfo($"Processing results for {apiAction.ToString()}", "ExecuteApiActionForSingleApiActionAsync");
+
+            apiActionHandler(apiActions, commsResult);
+        }
     }
 }

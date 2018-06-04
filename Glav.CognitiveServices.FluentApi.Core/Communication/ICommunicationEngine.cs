@@ -5,7 +5,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
 {
     public interface ICommunicationEngine
     {
-        Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null, bool isBinaryPayload = false);
-        Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory, bool isBinaryPayload);
+        Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null);
+        Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null);
+        Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory);
     }
 }

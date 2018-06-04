@@ -11,5 +11,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
         ApiActionType ApiType { get; }
         string ToUrlQueryParameters();
         bool IsBinaryData { get;  }
+        byte[] ToBinary();
     }
 }

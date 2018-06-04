@@ -14,33 +14,40 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         {
             _configurationSettings = configurationSettings;
         }
-        private static HttpClient CreateHttpClient(string apiKey, bool isBinaryPayload)
+        private static HttpClient CreateHttpClient(string apiKey)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey);
-            if (isBinaryPayload)
-            {
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/octet-stream"));
-            }
-            else
-            {
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            }
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //if (isBinaryPayload)
+            //{
+            //    client.DefaultRequestHeaders.Add("Content-Type", "application/octet-stream");
+            //}
             return client;
         }
 
-        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null, bool isBinaryPayload = false)
+        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null)
+        {
+            var content = new ByteArrayContent(payload);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            return await PostToServiceAsync(apiActionType, content, true, urlQueryParameters);
+        }
+        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
+        {
+            var content = new StringContent(payload,System.Text.Encoding.UTF8,"application/json");
+            return await PostToServiceAsync(apiActionType, content, false,urlQueryParameters);
+        }
+        private async Task<ICommunicationResult> PostToServiceAsync(ApiActionType apiActionType, ByteArrayContent content, bool isBinaryPayload, string urlQueryParameters)
         {
             _configurationSettings.DiagnosticLogger.LogInfo($"Performing async service call for {apiActionType}", "HttpCommunicationEngine");
 
             var svcConfig = _configurationSettings.ServiceUris.GetServiceConfig(apiActionType);
-            var uri = string.Format("{0}{1}{2}", _configurationSettings.BaseUrl,svcConfig.ServiceUri, 
-                            string.IsNullOrWhiteSpace(urlQueryParameters) ? string.Empty : $"?{urlQueryParameters}" );
+            var uri = string.Format("{0}{1}{2}", _configurationSettings.BaseUrl, svcConfig.ServiceUri,
+                            string.IsNullOrWhiteSpace(urlQueryParameters) ? string.Empty : $"?{urlQueryParameters}");
 
-            var content = new ByteArrayContent(System.Text.UTF8Encoding.UTF8.GetBytes(payload));
             try
             {
-                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[svcConfig.ApiCategory],isBinaryPayload))
+                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[svcConfig.ApiCategory]))
                 {
                     var httpResult = await httpClient.PostAsync(uri, content).ConfigureAwait(continueOnCapturedContext: false);
                     _configurationSettings.DiagnosticLogger.LogInfo($"Async service call for {apiActionType} completed ok.", "HttpCommunicationEngine");
@@ -52,12 +59,13 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                 _configurationSettings.DiagnosticLogger.LogError(ex, "HttpCommunicationEngine");
                 return CommunicationResult.Fail(ex.Message);
             }
+
         }
-        public async Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory, bool isBinaryPayload)
+        public async Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory)
         {
             try
             {
-                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory], isBinaryPayload))
+                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory]))
                 {
                     var httpResult = await httpClient.GetAsync(uri).ConfigureAwait(continueOnCapturedContext: false);
                     return await CommunicationResult.ParseResult(httpResult);

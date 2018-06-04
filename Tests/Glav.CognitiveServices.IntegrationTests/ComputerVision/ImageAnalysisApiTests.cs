@@ -86,7 +86,22 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.NotNull(secondResult.ResponseData.categories);
         }
 
+        [Fact]
+        public async Task ShouldBeAbleToAnalyseImageFromBinaryData()
+        {
+            var fileData = System.IO.File.ReadAllBytes("c:\\temp\\yeti-car.jpg");
 
+            var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddDebugDiagnosticLogging()
+                .UsingHttpCommunication()
+                .WithComputerVisionAnalysisActions()
+                .AddImageAnalysisForFile(fileData, ImageAnalysisVisualFeatures.Tags)
+                .AnalyseAllAsync();
+
+            Assert.NotNull(result);
+        }
+
+        }
     }
-}
  

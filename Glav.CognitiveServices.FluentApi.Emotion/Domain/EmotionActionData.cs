@@ -46,5 +46,9 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
             return null;
         }
 
+        public byte[] ToBinary()
+        {
+            return System.Text.UTF8Encoding.UTF8.GetBytes(ToString());
+        }
     }
 }

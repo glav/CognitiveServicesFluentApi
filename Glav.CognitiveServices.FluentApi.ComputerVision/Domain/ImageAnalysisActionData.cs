@@ -66,6 +66,11 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 
         public long Id { get; private set; }
 
+        public byte[] ToBinary()
+        {
+            return ImageDataToAnalyse;
+        }
+
         public override string ToString()
         {
             if (ImageUriToAnalyse == null)
