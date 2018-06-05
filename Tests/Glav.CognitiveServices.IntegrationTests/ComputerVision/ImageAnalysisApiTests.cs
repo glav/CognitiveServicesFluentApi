@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using Xunit;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
+using Glav.CognitiveServices.IntegrationTests.Helpers;
 
 namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 {
     public class ImageAnalysisApiTests
     {
+        private TestDataHelper _testDataHelper = new TestDataHelper();
         [Fact]
         public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysis()
         {
@@ -89,7 +91,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         [Fact]
         public async Task ShouldBeAbleToAnalyseImageFromBinaryData()
         {
-            var fileData = System.IO.File.ReadAllBytes("c:\\temp\\yeti-car.jpg");
+            var fileData = _testDataHelper.GetFileDataEmbeddedInAssembly("yeti-car.jpg");
 
             var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)

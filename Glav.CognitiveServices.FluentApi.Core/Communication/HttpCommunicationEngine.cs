@@ -17,24 +17,20 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         private static HttpClient CreateHttpClient(string apiKey)
         {
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apiKey);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //if (isBinaryPayload)
-            //{
-            //    client.DefaultRequestHeaders.Add("Content-Type", "application/octet-stream");
-            //}
+            client.DefaultRequestHeaders.Add(HttpHeaders.SubscriptionKey, apiKey);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(HttpHeaders.MediaTypeApplicationJson));
             return client;
         }
 
         public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null)
         {
             var content = new ByteArrayContent(payload);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
             return await PostToServiceAsync(apiActionType, content, true, urlQueryParameters);
         }
         public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
         {
-            var content = new StringContent(payload,System.Text.Encoding.UTF8,"application/json");
+            var content = new StringContent(payload,System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
             return await PostToServiceAsync(apiActionType, content, false,urlQueryParameters);
         }
         private async Task<ICommunicationResult> PostToServiceAsync(ApiActionType apiActionType, ByteArrayContent content, bool isBinaryPayload, string urlQueryParameters)
