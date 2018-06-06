@@ -102,6 +102,11 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
+            Assert.NotNull(result.ImageAnalysis);
+            Assert.NotNull(result.ImageAnalysis.AnalysisResult);
+            Assert.True(result.ImageAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            Assert.NotNull(result.ImageAnalysis.AnalysisResult.ResponseData);
+            Assert.NotNull(result.ImageAnalysis.AnalysisResult.ResponseData.tags);
         }
 
         }
