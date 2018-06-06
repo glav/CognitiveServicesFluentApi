@@ -57,3 +57,22 @@ var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationK
     .AddUrlForImageAnalysis("http://recognitionmemory.org/files/2016/04/C2_032.jpg",ImageAnalysisVisualFeatures.Categories)
     .AnalyseAllAsync();
 ```
+
+You can also mix and match the types of images being processed. That is, you can specify a Url and an actual binary file as
+part of the pipeline and they all get processed via separate API calls as expected, with the results populated as you would expect.
+
+```c#
+var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)
+    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+    .AddDebugDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithComputerVisionAnalysisActions()
+    .AddFileForImageAnalysis(fileData, ImageAnalysisVisualFeatures.Tags)
+    .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
+    .AnalyseAllAsync();
+
+// Our first image analysis only requested tags so we check we have some
+Assert.NotEmpty(result.ImageAnalysis.AnalysisResults[0].ResponseData.tags);
+// Our second image anlysis only requested faces so we check we have some
+Assert.NotEmpty(result.ImageAnalysis.AnalysisResults[1].ResponseData.faces);
+```
