@@ -19,7 +19,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)  // or http://recognitionmemory.org/files/2016/04/C2_032.jpg
+                .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)  // or http://recognitionmemory.org/files/2016/04/C2_032.jpg
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
@@ -39,7 +39,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddImageAnalysis("http://www.scface.org/examples/001_frontal.jpg", ImageAnalysisVisualFeatures.Adult | ImageAnalysisVisualFeatures.Tags
+                .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg", ImageAnalysisVisualFeatures.Adult | ImageAnalysisVisualFeatures.Tags
                                         ,ImageAnalysisDetails.Celebrities,SupportedLanguageType.English)
                 .AnalyseAllAsync();
 
@@ -62,9 +62,9 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddImageAnalysis("http://www.scface.org/examples/001_frontal.jpg", ImageAnalysisVisualFeatures.Tags | ImageAnalysisVisualFeatures.Categories
+                .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg", ImageAnalysisVisualFeatures.Tags | ImageAnalysisVisualFeatures.Categories
                                         , ImageAnalysisDetails.Celebrities, SupportedLanguageType.English)
-                .AddImageAnalysis("http://recognitionmemory.org/files/2016/04/C2_032.jpg",ImageAnalysisVisualFeatures.Categories)
+                .AddUrlForImageAnalysis("http://recognitionmemory.org/files/2016/04/C2_032.jpg",ImageAnalysisVisualFeatures.Categories)
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
@@ -98,7 +98,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddImageAnalysisForFile(fileData, ImageAnalysisVisualFeatures.Tags)
+                .AddFileForImageAnalysis(fileData, ImageAnalysisVisualFeatures.Tags)
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);

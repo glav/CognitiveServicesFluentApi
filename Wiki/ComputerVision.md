@@ -4,19 +4,42 @@
 
 # ComputerVision Cognitive Service
 The ComputerVision cognitive service provides the ability to analysis an image or video to provide descriptive details such 
-as descritpive tags, is there racy or adult content present, are there any celebrities identified as well as face recognition.
+as descritpive tags, is there racy or adult content present, are there any celebrities identified as well as facial recognition.
 
 Currently, only image analysis option is supported with more to come.
 
 ## ComputerVision Usage
-To analyse a static image, you can do the following:
+To analyse a static image that is specified via a Url, you can do the following:
 ```c#
 var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("YOUR-API-KEY", LocationKeyIdentifier.SouthEastAsia)
     .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
     .AddDebugDiagnosticLogging()
     .UsingHttpCommunication()
     .WithComputerVisionAnalysisActions()
-    .AddImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
+    .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
+    .AnalyseAllAsync();
+```
+
+To analyse a static image that is specified via a filename, you can do the following:
+```c#
+var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("YOUR-API-KEY", LocationKeyIdentifier.SouthEastAsia)
+    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+    .AddDebugDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithComputerVisionAnalysisActions()
+    .AddFileForImageAnalysis("c:\\SomeDirectory\\my-image.jpg",ImageAnalysisVisualFeatures.Faces)
+    .AnalyseAllAsync();
+```
+
+Alternatively, you can specify the raw binary data for the image in the form of a byte array using the following:
+```c#
+var fileData = File.ReadAllBytes("c:\\SomeDirectory\\my-image.jpg");
+var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("YOUR-API-KEY", LocationKeyIdentifier.SouthEastAsia)
+    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+    .AddDebugDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithComputerVisionAnalysisActions()
+    .AddFileForImageAnalysis(fileData,ImageAnalysisVisualFeatures.Faces)
     .AnalyseAllAsync();
 ```
 
@@ -30,7 +53,7 @@ var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationK
     .AddDebugDiagnosticLogging()
     .UsingHttpCommunication()
     .WithComputerVisionAnalysisActions()
-    .AddImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
-    .AddImageAnalysis("http://recognitionmemory.org/files/2016/04/C2_032.jpg",ImageAnalysisVisualFeatures.Categories)
+    .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
+    .AddUrlForImageAnalysis("http://recognitionmemory.org/files/2016/04/C2_032.jpg",ImageAnalysisVisualFeatures.Categories)
     .AnalyseAllAsync();
 ```

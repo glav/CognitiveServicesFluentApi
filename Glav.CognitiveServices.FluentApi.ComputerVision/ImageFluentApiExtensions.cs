@@ -9,7 +9,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
     public static class ImageFluentApiExtensions
     {
-        public static ImageAnalysisSettings AddImageAnalysis(this ImageAnalysisSettings apiAnalysis, string url, 
+        public static ImageAnalysisSettings AddUrlForImageAnalysis(this ImageAnalysisSettings apiAnalysis, string url, 
                 ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.Default, 
                 ImageAnalysisDetails imageDetails = ImageAnalysisDetails.Default,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
@@ -19,16 +19,16 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             return apiAnalysis;
         }
 
-        public static ImageAnalysisSettings AddImageAnalysisForFile(this ImageAnalysisSettings apiAnalysis, string filename,
+        public static ImageAnalysisSettings AddFileForImageAnalysis(this ImageAnalysisSettings apiAnalysis, string filename,
                 ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.Default,
                 ImageAnalysisDetails imageDetails = ImageAnalysisDetails.Default,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
             var bytes = File.ReadAllBytes(filename);
-            return AddImageAnalysisForFile(apiAnalysis, bytes, visualFeatures, imageDetails, language);
+            return AddFileForImageAnalysis(apiAnalysis, bytes, visualFeatures, imageDetails, language);
         }
 
-        public static ImageAnalysisSettings AddImageAnalysisForFile(this ImageAnalysisSettings apiAnalysis, byte[] imageData,
+        public static ImageAnalysisSettings AddFileForImageAnalysis(this ImageAnalysisSettings apiAnalysis, byte[] imageData,
         ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.Default,
         ImageAnalysisDetails imageDetails = ImageAnalysisDetails.Default,
         SupportedLanguageType language = SupportedLanguageType.Unspecified)

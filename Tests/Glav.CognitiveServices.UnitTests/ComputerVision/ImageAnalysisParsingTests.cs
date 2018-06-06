@@ -101,7 +101,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
             var analysisResult = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.AustraliaEast)
                 .UsingCustomCommunication(commsEngine)
                 .WithComputerVisionAnalysisActions()
-                .AddImageAnalysis("http://someurl/that/wont/get/called")
+                .AddUrlForImageAnalysis("http://someurl/that/wont/get/called")
                 .AnalyseAllAsync();
 
             var result = analysisResult.ImageAnalysis.GetDescriptiveCaptions(0.1);
@@ -121,7 +121,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
             var analysisResult = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.AustraliaEast)
                 .UsingCustomCommunication(commsEngine)
                 .WithComputerVisionAnalysisActions()
-                .AddImageAnalysis("http://someurl/that/wont/get/called")
+                .AddUrlForImageAnalysis("http://someurl/that/wont/get/called")
                 .AnalyseAllAsync();
 
             var result = analysisResult.ImageAnalysis.GetTags(DefaultScoreLevels.Positive);
@@ -140,7 +140,7 @@ namespace Glav.CognitiveServices.UnitTests.Emotion
             var analysisResult = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.AustraliaEast)
                 .UsingCustomCommunication(commsEngine)
                 .WithComputerVisionAnalysisActions()
-                .AddImageAnalysis("http://someurl/that/wont/get/called")
+                .AddUrlForImageAnalysis("http://someurl/that/wont/get/called")
                 .AnalyseAllAsync();
 
             var result = analysisResult.ImageAnalysis.GetTagsEqualToOrAboveAConfidenceLevel(DefaultScoreLevels.SlightlyPositive);
