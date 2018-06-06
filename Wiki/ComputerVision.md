@@ -67,7 +67,7 @@ var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationK
     .AddDebugDiagnosticLogging()
     .UsingHttpCommunication()
     .WithComputerVisionAnalysisActions()
-    .AddFileForImageAnalysis(fileData, ImageAnalysisVisualFeatures.Tags)
+    .AddFileForImageAnalysis("c:\\SomeDirectory\\my-image.jpg", ImageAnalysisVisualFeatures.Tags)
     .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
     .AnalyseAllAsync();
 
