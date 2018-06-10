@@ -16,9 +16,14 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public CoreAnalysisSettings AnalysisSettings { get; private set; }
 
         public ImageAnalysisContext ImageAnalysis { get; private set; }
+        public OcrAnalysisContext OcrAnalysis { get; private set; }
         public void SetImageResultContext(ImageAnalysisContext imageAnalysisCtxt)
         {
             ImageAnalysis = imageAnalysisCtxt ?? throw new ArgumentNullException("imageAnalysisCtxt");
+        }
+        public void SetOcrResultContext(OcrAnalysisContext ocrAnalysisCtxt)
+        {
+            OcrAnalysis = ocrAnalysisCtxt ?? throw new ArgumentNullException("ocrAnalysisCtxt");
         }
 
         public void AddResult(ImageAnalysisResult result)
@@ -28,6 +33,15 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                 throw new ArgumentNullException("Cannot add a result without first setting the result context");
             }
             ImageAnalysis.AnalysisResults.Add(result);
+        }
+
+        public void AddResult(OcrAnalysisResult result)
+        {
+            if (OcrAnalysis == null)
+            {
+                throw new ArgumentNullException("Cannot add a result without first setting the result context");
+            }
+            OcrAnalysis.AnalysisResults.Add(result);
         }
 
     }

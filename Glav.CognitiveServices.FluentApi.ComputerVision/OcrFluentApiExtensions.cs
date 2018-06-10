@@ -7,30 +7,33 @@ using System.IO;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
-    public static class OcrFluentApiExtensions
+    public static class ImageFluentApiExtensions
     {
         public static ImageAnalysisSettings AddUrlForImageAnalysis(this ImageAnalysisSettings apiAnalysis, string url, 
-                bool detectOrientation,
+                ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.Default, 
+                ImageAnalysisDetails imageDetails = ImageAnalysisDetails.Default,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<OcrAnalysisActionData>(ApiActionType.ComputerVisionOcrAnalysis);
-            actionData.Add(new Uri(url),detectOrientation,language);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<ImageAnalysisActionData>(ApiActionType.ComputerVisionImageAnalysis);
+            actionData.Add(new Uri(url),visualFeatures, imageDetails,language);
             return apiAnalysis;
         }
 
         public static ImageAnalysisSettings AddFileForImageAnalysis(this ImageAnalysisSettings apiAnalysis, string filename,
-                bool detectOrientation,
+                ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.Default,
+                ImageAnalysisDetails imageDetails = ImageAnalysisDetails.Default,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
             var bytes = File.ReadAllBytes(filename);
-            return AddFileForImageAnalysis(apiAnalysis, bytes, detectOrientation, language);
+            return AddFileForImageAnalysis(apiAnalysis, bytes, visualFeatures, imageDetails, language);
         }
 
         public static ImageAnalysisSettings AddFileForImageAnalysis(this ImageAnalysisSettings apiAnalysis, byte[] imageData,
-                bool detectOrientation,
-                SupportedLanguageType language = SupportedLanguageType.Unspecified)
+        ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.Default,
+        ImageAnalysisDetails imageDetails = ImageAnalysisDetails.Default,
+        SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<OcrAnalysisActionData>(ApiActionType.ComputerVisionOcrAnalysis);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<ImageAnalysisActionData>(ApiActionType.ComputerVisionImageAnalysis);
             actionData.Add(imageData, visualFeatures, imageDetails, language);
             return apiAnalysis;
         }

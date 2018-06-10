@@ -16,6 +16,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         {
             var apiResults = new ComputerVisionAnalysisResults(AnalysisSettings);
             await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionImageAnalysis).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionOcrAnalysis).ConfigureAwait(continueOnCapturedContext: false);
             return apiResults;
 
         }
@@ -31,6 +32,9 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                       case ApiActionType.ComputerVisionImageAnalysis:
                           apiResults.AddResult(new ImageAnalysisResult(commsResult));
                           break;
+                      case ApiActionType.ComputerVisionOcrAnalysis:
+                          apiResults.AddResult(new OcrAnalysisResult(commsResult));
+                          break;
                       default:
                           throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
                   }
@@ -45,6 +49,12 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                 // Get the collection of actions to perform for an API call
                 var actions = AnalysisSettings.ActionsToPerform[apiAction];
                 apiResults.SetImageResultContext(new ImageAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+            }
+            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction) && apiResults.OcrAnalysis == null && apiAction == ApiActionType.ComputerVisionOcrAnalysis)
+            {
+                // Get the collection of actions to perform for an API call
+                var actions = AnalysisSettings.ActionsToPerform[apiAction];
+                apiResults.SetOcrResultContext(new OcrAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
             }
         }
     }
