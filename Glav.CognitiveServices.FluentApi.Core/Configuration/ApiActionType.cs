@@ -11,7 +11,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         TextAnalyticsKeyphrases,
         TextAnalyticsOperationStatus,
         EmotionImageRecognition,
-        ComputerVisionImageAnalysis
+        ComputerVisionImageAnalysis,
+        ComputerVisionOcrAnalysis
     }
 
 }
