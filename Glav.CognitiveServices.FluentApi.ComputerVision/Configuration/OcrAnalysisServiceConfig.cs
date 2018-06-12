@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
 {
-    public class ImageAnalysisServiceConfig : ApiServiceUriFragment
+    public class OcrAnalysisServiceConfig : ApiServiceUriFragment
     {
-        public override string Template => "vision/{0}/analyze";
+        public override string Template => "vision/{0}/ocr";
 
         public override string Version => ApiConstants.ComputerVisionVersion;
 

@@ -31,7 +31,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
             var actionData = apiAnalysis.GetOrCreateActionDataInstance<OcrAnalysisActionData>(ApiActionType.ComputerVisionOcrAnalysis);
-            actionData.Add(imageData, visualFeatures, imageDetails, language);
+            actionData.Add(imageData,detectOrientation, language);
             return apiAnalysis;
         }
 
