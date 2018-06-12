@@ -80,7 +80,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             }
             if (DetectOrientation)
             {
-                url.AppendFormat("{0}detectOrientation=true", url.Length > 0 ? "&" : "?");
+                url.AppendFormat("{0}{1}=true", url.Length > 0 ? "&" : "?", Glav.CognitiveServices.FluentApi.ComputerVision.Configuration.ApiConstants.DetectOrientation);
             }
             return url.ToString();
         }
