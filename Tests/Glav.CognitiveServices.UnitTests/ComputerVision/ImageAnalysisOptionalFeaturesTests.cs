@@ -2,7 +2,7 @@ using Xunit;
 using Glav.CognitiveServices.FluentApi.ComputerVision;
 using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
 
-namespace Glav.CognitiveServices.UnitTests.Emotion
+namespace Glav.CognitiveServices.UnitTests.ComputerVision
 {
     public class ImageAnalysisOptionalFeaturesTests
     {

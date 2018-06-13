@@ -1,5 +1,4 @@
 using Xunit;
-using Glav.CognitiveServices.FluentApi.Emotion.Domain;
 using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
 using Glav.CognitiveServices.UnitTests.Helpers;
 using System.Linq;
@@ -8,7 +7,7 @@ using Glav.CognitiveServices.FluentApi.Core;
 using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
-namespace Glav.CognitiveServices.UnitTests.Emotion
+namespace Glav.CognitiveServices.UnitTests.ComputerVision
 {
     public class ImageAnalysisParsingTests
     {
