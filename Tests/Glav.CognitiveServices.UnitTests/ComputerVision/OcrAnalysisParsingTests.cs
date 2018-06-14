@@ -29,6 +29,21 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
             Assert.Equal(1, result.ResponseData.regions.Length);
             Assert.NotEmpty(result.ResponseData.regions[0].lines);
             Assert.Equal(3, result.ResponseData.regions[0].lines.Length);
+            Assert.Equal("462,379,497,74", result.ResponseData.regions[0].lines[0].boundingBox);
+            Assert.Equal("565,471,289,74", result.ResponseData.regions[0].lines[1].boundingBox);
+            Assert.Equal("519,563,375,74", result.ResponseData.regions[0].lines[2].boundingBox);
+            Assert.NotEmpty(result.ResponseData.regions[0].lines[0].words);
+            Assert.Equal(3, result.ResponseData.regions[0].lines[0].words.Length);
+            Assert.NotEmpty(result.ResponseData.regions[0].lines[1].words);
+            Assert.Equal(3, result.ResponseData.regions[0].lines[1].words.Length);
+            Assert.NotEmpty(result.ResponseData.regions[0].lines[2].words);
+            Assert.Equal(3, result.ResponseData.regions[0].lines[2].words.Length);
+            Assert.Equal("A", result.ResponseData.regions[0].lines[0].words[0].text);
+            Assert.Equal("462,379,41,73", result.ResponseData.regions[0].lines[0].words[0].boundingBox);
+            Assert.Equal("GOAL", result.ResponseData.regions[0].lines[0].words[1].text);
+            Assert.Equal("523,379,153,73", result.ResponseData.regions[0].lines[0].words[1].boundingBox);
+            Assert.Equal("WITHOUT", result.ResponseData.regions[0].lines[0].words[2].text);
+            Assert.Equal("694,379,265,74", result.ResponseData.regions[0].lines[0].words[2].boundingBox);
 
         }
 
