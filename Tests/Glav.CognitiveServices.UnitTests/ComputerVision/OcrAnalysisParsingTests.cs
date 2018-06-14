@@ -38,12 +38,30 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
             Assert.Equal(3, result.ResponseData.regions[0].lines[1].words.Length);
             Assert.NotEmpty(result.ResponseData.regions[0].lines[2].words);
             Assert.Equal(3, result.ResponseData.regions[0].lines[2].words.Length);
-            Assert.Equal("A", result.ResponseData.regions[0].lines[0].words[0].text);
-            Assert.Equal("462,379,41,73", result.ResponseData.regions[0].lines[0].words[0].boundingBox);
-            Assert.Equal("GOAL", result.ResponseData.regions[0].lines[0].words[1].text);
-            Assert.Equal("523,379,153,73", result.ResponseData.regions[0].lines[0].words[1].boundingBox);
-            Assert.Equal("WITHOUT", result.ResponseData.regions[0].lines[0].words[2].text);
-            Assert.Equal("694,379,265,74", result.ResponseData.regions[0].lines[0].words[2].boundingBox);
+
+            var line1 = result.ResponseData.regions[0].lines[0];
+            Assert.Equal("A", line1.words[0].text);
+            Assert.Equal("462,379,41,73", line1.words[0].boundingBox);
+            Assert.Equal("GOAL", line1.words[1].text);
+            Assert.Equal("523,379,153,73", line1.words[1].boundingBox);
+            Assert.Equal("WITHOUT", line1.words[2].text);
+            Assert.Equal("694,379,265,74", line1.words[2].boundingBox);
+
+            var line2 = result.ResponseData.regions[0].lines[1];
+            Assert.Equal("A", line2.words[0].text);
+            Assert.Equal("565,471,41,73", line2.words[0].boundingBox);
+            Assert.Equal("PLAN", line2.words[1].text);
+            Assert.Equal("626,471,150,73", line2.words[1].boundingBox);
+            Assert.Equal("IS", line2.words[2].text);
+            Assert.Equal("801,472,53,73", line2.words[2].boundingBox);
+
+            var line3 = result.ResponseData.regions[0].lines[2];
+            Assert.Equal("JUST", line3.words[0].text);
+            Assert.Equal("519,563,149,74", line3.words[0].boundingBox);
+            Assert.Equal("A", line3.words[1].text);
+            Assert.Equal("683,564,41,72", line3.words[1].boundingBox);
+            Assert.Equal("WISH", line3.words[2].text);
+            Assert.Equal("741,564,153,73", line3.words[2].boundingBox);
 
         }
 
