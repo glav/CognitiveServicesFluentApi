@@ -18,6 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="TestData\abbey_road.png" />
+    <None Remove="TestData\printed-text.JPG" />
     <None Remove="TestData\yeti-car.jpg" />
   </ItemGroup>
 
@@ -45,6 +47,8 @@
     
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="TestData\abbey_road.png" />
+    <EmbeddedResource Include="TestData\printed-text.JPG" />
     <EmbeddedResource Include="TestData\yeti-car.jpg" />
   </ItemGroup>
 
