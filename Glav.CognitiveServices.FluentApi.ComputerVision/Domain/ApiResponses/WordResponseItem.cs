@@ -1,6 +1,6 @@
 ﻿namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
 {
-    public class WordResponseItem
+    public class WordResponseItem : IBoundingBox
     {
         public string boundingBox { get; set; }
 
