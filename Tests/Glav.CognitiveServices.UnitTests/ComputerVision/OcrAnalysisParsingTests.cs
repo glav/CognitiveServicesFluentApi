@@ -91,6 +91,23 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
         }
 
         [Fact]
+        public async Task ExtensionMethodReturnsStronglyTypedOrientation()
+        {
+            var mockCommsEngine = new MockCommsEngine(new MockCommsResult(_visionOcrAnalysisResponse));
+            var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.SouthEastAsia)
+                .UsingCustomCommunication(mockCommsEngine)
+                .WithComputerVisionAnalysisActions()
+                .AddUrlForOcrAnalysis("http://thegovernment.com/lochness_monster.jpg", false)
+                .AnalyseAllAsync();
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.OcrAnalysis);
+            Assert.NotNull(result.OcrAnalysis.AnalysisResult);
+
+            Assert.Equal(OcrTextOrientation.Up, result.OcrAnalysis.AnalysisResult.GetOrientation());
+        }
+
+        [Fact]
         public async Task ExtensionMethodCanReturnBoundingBoxForItem()
         {
             var expected = new string[] { "A", "GOAL", "WITHOUT", "A", "PLAN", "IS", "JUST", "A", "WISH" };

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
+namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
     public interface IBoundingBox
     {
