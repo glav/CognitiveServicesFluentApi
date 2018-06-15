@@ -2,6 +2,9 @@ using Xunit;
 using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
 using Glav.CognitiveServices.UnitTests.Helpers;
 using Glav.CognitiveServices.FluentApi.Core;
+using System.Threading.Tasks;
+using Glav.CognitiveServices.FluentApi.ComputerVision;
+using System.Linq;
 
 namespace Glav.CognitiveServices.UnitTests.ComputerVision
 {
@@ -66,6 +69,28 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
         }
 
         [Fact]
+        public async Task ExtensionMethodCanReturnJustAllWords()
+        {
+            var expected = new string[] { "A", "GOAL", "WITHOUT", "A", "PLAN", "IS", "JUST", "A", "WISH" };
+            var mockCommsEngine = new MockCommsEngine(new MockCommsResult(_visionOcrAnalysisResponse));
+            var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.SouthEastAsia)
+                .UsingCustomCommunication(mockCommsEngine)
+                .WithComputerVisionAnalysisActions()
+                .AddUrlForOcrAnalysis("http://thegovernment.com/your_mum.jpg", false)
+                .AnalyseAllAsync();
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.OcrAnalysis);
+            var words = result.OcrAnalysis.GetAllWords();
+
+            Assert.Equal(9, words.Count());
+            for (var wordCnt=0; wordCnt < words.Count(); wordCnt++)
+            {
+                Assert.Equal(expected[wordCnt], words.ElementAt(wordCnt));
+            }
+        }
+
+        [Fact]
         public void BoundingBoxResponseShouldParseIntoCoordinates()
         {
             string[] inputs = new[] { "462,379,497,258", "565,471,289,74" };
@@ -91,7 +116,7 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
         [Fact]
         public void BoundingBoxCoordinatesShouldTolerateBadData()
         {
-            string[] inputs = new[] { "x,379,,258", "","   ","whatevs" };
+            string[] inputs = new[] { "x,379,,258", "", "   ", "whatevs" };
             BoundingBoxCoordinates[] expectedResults = new[]
             {
                 new BoundingBoxCoordinates{ XTopLeft= 0, YTopLeft= 379, Width=0,Height= 258 },

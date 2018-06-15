@@ -9,6 +9,12 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
     public static class OcrAnalysisContextExtensions
     {
+        public static IEnumerable<string> GetAllWords(this OcrAnalysisContext context)
+        {
+            return context.AnalysisResults.SelectMany(r => r.ResponseData.regions)
+                            .SelectMany(g => g.lines)
+                            .SelectMany(l => l.words.Select(w => w.text));
+        }
 
     }
 }
