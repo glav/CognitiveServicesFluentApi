@@ -91,6 +91,34 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
         }
 
         [Fact]
+        public async Task ExtensionMethodCanReturnBoundingBoxForItem()
+        {
+            var expected = new string[] { "A", "GOAL", "WITHOUT", "A", "PLAN", "IS", "JUST", "A", "WISH" };
+            var mockCommsEngine = new MockCommsEngine(new MockCommsResult(_visionOcrAnalysisResponse));
+            var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.SouthEastAsia)
+                .UsingCustomCommunication(mockCommsEngine)
+                .WithComputerVisionAnalysisActions()
+                .AddUrlForOcrAnalysis("http://thegovernment.com/your_loungeroom.jpg", false)
+                .AnalyseAllAsync();
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.OcrAnalysis);
+            Assert.NotNull(result.OcrAnalysis.AnalysisResults);
+            Assert.NotNull(result.OcrAnalysis.AnalysisResult.ResponseData);
+            Assert.NotEmpty(result.OcrAnalysis.AnalysisResult.ResponseData.regions);
+
+            var regionResult = result.OcrAnalysis.AnalysisResult.ResponseData.regions[0];
+
+            var regionBoundingBox = regionResult.GetBoundingBoxCoordinates();
+            Assert.Equal(462, regionBoundingBox.XTopLeft);
+            Assert.Equal(379, regionBoundingBox.YTopLeft);
+            Assert.Equal(497, regionBoundingBox.Width);
+            Assert.Equal(258, regionBoundingBox.Height);
+
+
+        }
+
+        [Fact]
         public void BoundingBoxResponseShouldParseIntoCoordinates()
         {
             string[] inputs = new[] { "462,379,497,258", "565,471,289,74" };

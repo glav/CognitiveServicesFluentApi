@@ -1,5 +1,6 @@
 ﻿using Glav.CognitiveServices.FluentApi.ComputerVision.Configuration;
 using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
+using Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using System;
@@ -36,6 +37,11 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             var actionData = apiAnalysis.GetOrCreateActionDataInstance<ImageAnalysisActionData>(ApiActionType.ComputerVisionImageAnalysis);
             actionData.Add(imageData, visualFeatures, imageDetails, language);
             return apiAnalysis;
+        }
+
+        public static BoundingBoxCoordinates GetBoundingBoxCoordinates(this IBoundingBox boundingBoxObject)
+        {
+            return BoundingBoxCoordinates.Parse(boundingBoxObject.boundingBox);
         }
 
     }
