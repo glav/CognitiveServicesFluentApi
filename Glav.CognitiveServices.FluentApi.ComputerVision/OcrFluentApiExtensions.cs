@@ -44,5 +44,10 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             return BoundingBoxCoordinates.Parse(boundingBoxObject.boundingBox);
         }
 
+        public static OcrTextOrientation GetOrientation(this OcrAnalysisResult result)
+        {
+            return OcrTextrientationExtensions.ParseOrientation(result.ResponseData.orientation);
+        }
+
     }
 }
