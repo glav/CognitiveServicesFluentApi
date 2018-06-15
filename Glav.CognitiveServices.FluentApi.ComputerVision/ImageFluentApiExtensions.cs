@@ -9,7 +9,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
     public static class OcrFluentApiExtensions
     {
-        public static ImageAnalysisSettings AddUrlForImageAnalysis(this ImageAnalysisSettings apiAnalysis, string url, 
+        public static ImageAnalysisSettings AddUrlForOcrAnalysis(this ImageAnalysisSettings apiAnalysis, string url, 
                 bool detectOrientation,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
@@ -18,15 +18,15 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             return apiAnalysis;
         }
 
-        public static ImageAnalysisSettings AddFileForImageAnalysis(this ImageAnalysisSettings apiAnalysis, string filename,
+        public static ImageAnalysisSettings AddFileForOcrAnalysis(this ImageAnalysisSettings apiAnalysis, string filename,
                 bool detectOrientation,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
             var bytes = File.ReadAllBytes(filename);
-            return AddFileForImageAnalysis(apiAnalysis, bytes, detectOrientation, language);
+            return AddFileForOcrAnalysis(apiAnalysis, bytes, detectOrientation, language);
         }
 
-        public static ImageAnalysisSettings AddFileForImageAnalysis(this ImageAnalysisSettings apiAnalysis, byte[] imageData,
+        public static ImageAnalysisSettings AddFileForOcrAnalysis(this ImageAnalysisSettings apiAnalysis, byte[] imageData,
                 bool detectOrientation,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {

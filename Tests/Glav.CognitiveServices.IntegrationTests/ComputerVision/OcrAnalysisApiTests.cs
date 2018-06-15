@@ -11,6 +11,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
     public class OcrAnalysisApiTests
     {
         private TestDataHelper _testDataHelper = new TestDataHelper();
+
         [Fact]
         public async Task TextInPhotohHouldBeRecognised_Mostly()
         {
@@ -20,7 +21,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddFileForImageAnalysis(imageData, false)
+                .AddFileForOcrAnalysis(imageData, false)
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
@@ -55,7 +56,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddFileForImageAnalysis(imageData, false)
+                .AddFileForOcrAnalysis(imageData, false)
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
