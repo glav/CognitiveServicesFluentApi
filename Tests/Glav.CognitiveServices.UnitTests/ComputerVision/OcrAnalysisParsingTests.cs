@@ -183,5 +183,15 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
 
         }
 
+        [Fact]
+        public void LanguageParsingShouldReturnCorrectResult()
+        {
+            var allLangs = LanguageListBuilder.GetAllSupportedLanguages();
+            foreach (var lang in allLangs)
+            {
+                Assert.Equal(lang.LanguageType, LanguageCodeParser.Parse(lang.Code).LanguageType);
+            }
+        }
+
     }
 }
