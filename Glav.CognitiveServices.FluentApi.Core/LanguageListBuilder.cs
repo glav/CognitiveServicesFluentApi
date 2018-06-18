@@ -1,5 +1,6 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
@@ -10,7 +11,7 @@ namespace Glav.CognitiveServices.FluentApi.Core
         {
             BuildSupportedLanguagesList();
         }
-        public static void BuildSupportedLanguagesList()
+        private static void BuildSupportedLanguagesList()
         {
             _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.Unspecified, string.Empty, new ApiActionType[] { ApiActionType.TextAnalyticsKeyphrases }));
             _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.English, "en", new ApiActionType[] { ApiActionType.TextAnalyticsSentiment, ApiActionType.TextAnalyticsKeyphrases, ApiActionType.ComputerVisionImageAnalysis }));
@@ -20,6 +21,11 @@ namespace Glav.CognitiveServices.FluentApi.Core
             _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.German, "de", new ApiActionType[] { ApiActionType.TextAnalyticsKeyphrases }));
             _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.Japanese, "ja", new ApiActionType[] { ApiActionType.TextAnalyticsKeyphrases }));
             _languageList.Add(new SupportedLanguageItem(SupportedLanguageType.SimplifiedChinese, "zh", new ApiActionType[] { ApiActionType.ComputerVisionImageAnalysis }));
+        }
+
+        public static SupportedLanguageItem[] GetAllSupportedLanguages()
+        {
+            return _languageList.ToArray();
         }
 
         public static string ToCode(this SupportedLanguageType languageType)
