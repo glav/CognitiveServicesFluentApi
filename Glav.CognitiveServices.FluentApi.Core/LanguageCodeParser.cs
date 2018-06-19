@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.FluentApi.Core
         public static SupportedLanguageItem Parse(string code)
         {
             var list = LanguageListBuilder.GetAllSupportedLanguages();
-            return list.FirstOrDefault(l => l.Code == code.ToLowerInvariant());
+            return list.FirstOrDefault(l => l.Code.ToLowerInvariant() == code.ToLowerInvariant());
         }
     }
 }

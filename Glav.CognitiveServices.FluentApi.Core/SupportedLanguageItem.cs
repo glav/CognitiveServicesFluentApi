@@ -30,6 +30,26 @@ namespace Glav.CognitiveServices.FluentApi.Core
         Portuguese,
         German,
         Japanese,
-        SimplifiedChinese
+        SimplifiedChinese,
+        ChineseTraditional,
+        Czech,
+        Danish,
+        Dutch,
+        Finnish,
+        Greek,
+        Hungarian,
+        Italian,
+        Korean,
+        Norwegian,
+        Polish,
+        Russian,
+        Swedish,
+        Turkish,
+        Arabic,
+        Romanian,
+        SerbianCyrillic,
+        SerbianLatin,
+        Slovak
+
     }
 }
