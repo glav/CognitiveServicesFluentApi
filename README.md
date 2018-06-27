@@ -168,6 +168,8 @@ var happyFaces = result.ImageRecognitionAnalysis.GetHappyFaces();
 
 This is just the beginning though. For full details on all the fluent API options available for each API set, please use the links for the detailed documentation around each fluent API. Similarly, for further details on usage and customisation of the scoring levels, please see the links on that section.
 
+### Change/Modification Log
+* [Detailed change log](./Wiki/ReleaseNotes.md)
 
 ### Note
 This API is only in early stages and many refinements are yet to be applied.
