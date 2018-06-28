@@ -1,4 +1,40 @@
 
+## Version: 0.8.3 [06/28/2018 17:32:20]
+### Full change list
+* be1c12d Merge branch 'glav/OCRSupport' of https://github.com/glav/CognitiveServicesFluentApi into glav/OCRSupport
+* cde1450 Fixed stupid typo in release notes script
+* febd95b Amended the release notes script to commit updated release notes and tag repo
+* 9613753 Adding in custom build script to generate change list and tag repository
+* 07475b2 Empty ItemGroup project file cleanup
+* 8f6993d Added in full language list support for OCR
+* 11e4576 Added language parsing for OCR results and added test
+* a8c2e9f Moved out language classes for cleaner code
+* aaab0df Added extension method for strongly typed OcrTextOrientation and added test
+* e5f22e2 Added interface and extension method to extract boundingBox co-ordinates from an item as integers
+* e30e12f Added more tests and changed name of OCR extension methods to not conflict
+* 8ca0ac4 Added some integration tests for OCR
+* 84cc8f3 Finished asserting values for parsing test
+* 3b7bf1b Updating tests
+* ae819bb Added BoundingBoxCoordinates type and tests
+* e3d0c3c Adding core configuration elements for OCR support
+* c820274 Ading OCR support o computer vision. WIP
+* f8fdf5a Empty ItemGroup project file cleanup
+* efae4eb Merge branch 'master' into glav/OCRSupport
+* 91ae89b Added support for full debugging info for code coverage support and enabled .Net Core 2.1.3 support
+* 16c9be6 Merge branch 'master' into glav/OCRSupport
+* c820543 Added in full language list support for OCR
+* e91701c Added language parsing for OCR results and added test
+* de9d4f2 Moved out language classes for cleaner code
+* bb330c2 Added extension method for strongly typed OcrTextOrientation and added test
+* 4cc4cb9 Added interface and extension method to extract boundingBox co-ordinates from an item as integers
+* 29f2b1e Added more tests and changed name of OCR extension methods to not conflict
+* 6e24414 Added some integration tests for OCR
+* 50bca55 Finished asserting values for parsing test
+* 576a0a7 Updating tests
+* bab26fe Added BoundingBoxCoordinates type and tests
+* 230ab2e Adding core configuration elements for OCR support
+* bbaa786 Ading OCR support o computer vision. WIP
+
 ## Version: 0.8.2 [06/27/2018 16:41:07]
 ### Full change list
 * 2462f41 Probably line friggen endings

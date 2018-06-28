@@ -26,11 +26,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wiki", "Wiki", "{8DDD157F-2
 		Wiki\ComputerVision.md = Wiki\ComputerVision.md
 		Wiki\Emotion.md = Wiki\Emotion.md
 		README.md = README.md
+		Wiki\ReleaseNotes.md = Wiki\ReleaseNotes.md
 		Wiki\Scoring.md = Wiki\Scoring.md
 		Wiki\TextAnalytics.md = Wiki\TextAnalytics.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.ComputerVision", "Glav.CognitiveServices.FluentApi.ComputerVision\Glav.CognitiveServices.FluentApi.ComputerVision.csproj", "{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildRelease", "BuildRelease", "{1998D8E9-E8A1-462A-9A56-6C2B7A9CCAC8}"
+	ProjectSection(SolutionItems) = preProject
+		BuildRelease\update-release-notes.ps1 = BuildRelease\update-release-notes.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
