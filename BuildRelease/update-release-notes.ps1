@@ -66,7 +66,7 @@ $releaseTag = "Release_$newVersion"
 
 #Now stage the changes (primarily ReleaseNotes), update the repo
 git add -A
-got commit -m "Updated release notes for $releaseTag"
+git commit -m "Updated release notes for $releaseTag"
 
 ## finish up by tagging the git repo and push it
 git tag -a "$releaseTag" -m "Release $newVersion"
