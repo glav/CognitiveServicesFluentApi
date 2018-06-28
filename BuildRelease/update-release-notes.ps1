@@ -62,6 +62,15 @@ addToFile "Full change list" $releaseNotes
 #Write the existing set of release notes
 Add-Content -Path $filePath -Value $priorReleaseNotes
 
-## finish up by tagging the git repo
-#git tag -a "Release_$newVersion" -m "Release $newVersion"
+$releaseTag = "Release_$newVersion"
+
+#Now stage the changes (primarily ReleaseNotes), update the repo
+git add -A
+got commit -m "Updated release notes for $releaseTag"
+
+## finish up by tagging the git repo and push it
+git tag -a "$releaseTag" -m "Release $newVersion"
+git push
+
+
 
