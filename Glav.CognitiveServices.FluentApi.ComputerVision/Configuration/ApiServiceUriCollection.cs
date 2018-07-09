@@ -8,6 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
         {
             Services.Add(ApiActionType.ComputerVisionImageAnalysis, new ImageAnalysisServiceConfig());
             Services.Add(ApiActionType.ComputerVisionOcrAnalysis, new OcrAnalysisServiceConfig());
+            Services.Add(ApiActionType.ComputerVisionRecognizeText, new RecognizeTextAnalysisServiceConfig());
         }
     }
 }

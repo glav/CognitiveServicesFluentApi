@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
+﻿namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
 {
     public static class ApiConstants
     {
@@ -10,6 +6,6 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
         public const string ImageAnalysisVisualFeaturesUrlParameterName = "visualFeatures";
         public const string ImageAnalysisDetailsUrlParameterName = "details";
         public const string DetectOrientation = "detectOrientation";
-
+        public const string RecognizeTextMode = "mode";
     }
 }
