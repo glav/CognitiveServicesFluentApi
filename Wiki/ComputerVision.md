@@ -6,7 +6,7 @@
 The ComputerVision cognitive service provides the ability to analysis an image or video to provide descriptive details such 
 as descritpive tags, is there racy or adult content present, are there any celebrities identified as well as facial recognition.
 
-Currently, only image analysis option is supported with more to come.
+Currently, only image analysis and OCR API's are supported with more to come.
 
 ## ComputerVision Usage
 To analyse a static image that is specified via a Url, you can do the following:
@@ -19,6 +19,16 @@ var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationK
     .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
     .AnalyseAllAsync();
 ```
+To perform OCR on a static image that is specified via a Url, you can do the following:
+```c#
+var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("YOUR-API-KEY", LocationKeyIdentifier.SouthEastAsia)
+    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+    .AddDebugDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithComputerVisionAnalysisActions()
+    .AddUrlForOcrAnalysis("http://www.scface.org/examples/001_frontal.jpg",false)
+    .AnalyseAllAsync();
+```
 
 To analyse a static image that is specified via a filename, you can do the following:
 ```c#
@@ -28,6 +38,17 @@ var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationK
     .UsingHttpCommunication()
     .WithComputerVisionAnalysisActions()
     .AddFileForImageAnalysis("c:\\SomeDirectory\\my-image.jpg",ImageAnalysisVisualFeatures.Faces)
+    .AnalyseAllAsync();
+```
+
+Similarly, to perform OCR on a static image that is specified via a filename, you can do the following:
+```c#
+var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("YOUR-API-KEY", LocationKeyIdentifier.SouthEastAsia)
+    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+    .AddDebugDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithComputerVisionAnalysisActions()
+    .AddFileForOcrAnalysis("c:\\SomeDirectory\\my-image.jpg",false)
     .AnalyseAllAsync();
 ```
 
