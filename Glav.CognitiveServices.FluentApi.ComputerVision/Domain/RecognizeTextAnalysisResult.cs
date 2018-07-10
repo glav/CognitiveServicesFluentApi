@@ -5,9 +5,9 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class OcrAnalysisResult : BaseResponseResult<VisionOCRAnalysisResponseRoot>
+    public class RecognizeTextAnalysisResult : BaseResponseResult<VisionRecognizeTextAnalysisResponseRoot>
     {
-        public OcrAnalysisResult(ICommunicationResult apiCallResult)
+        public RecognizeTextAnalysisResult(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             ParseResponseData();
@@ -17,9 +17,9 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         {
             if (ApiCallResult == null)
             {
-                ResponseData = new VisionOCRAnalysisResponseRoot
+                ResponseData = new VisionRecognizeTextAnalysisResponseRoot
                 {
-                    error = ApiErrorResponse.CreateResponse(StandardResponseCodes.NoDataReturned,"No data returned.")
+                    error = ApiErrorResponse.CreateResponse(StandardResponseCodes.NoDataReturned, "No data returned.")
                 };
                 ActionSubmittedSuccessfully = false;
                 return;
@@ -30,12 +30,12 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
                 if ((int)ApiCallResult.StatusCode >= 400)
                 {
                     var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
-                    ResponseData = new VisionOCRAnalysisResponseRoot { error = errorResponse };
+                    ResponseData = new VisionRecognizeTextAnalysisResponseRoot { error = errorResponse };
                     ActionSubmittedSuccessfully = false;
                     return;
                 }
 
-                ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<VisionOCRAnalysisResponseRoot>(ApiCallResult.Data);
+                ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<VisionRecognizeTextAnalysisResponseRoot>(ApiCallResult.Data);
                 if (ResponseData == null)
                 {
                     ActionSubmittedSuccessfully = false;
@@ -45,7 +45,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             }
             catch (Exception ex)
             {
-                ResponseData = new VisionOCRAnalysisResponseRoot
+                ResponseData = new VisionRecognizeTextAnalysisResponseRoot
                 {
                     error = ApiErrorResponse.CreateResponse(StandardResponseCodes.ServerError,$"Error parsing results: {ex.Message}")
                 };

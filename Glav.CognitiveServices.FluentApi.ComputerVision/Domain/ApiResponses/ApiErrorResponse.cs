@@ -9,5 +9,15 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
         public string code { get; set; }
         public string requestId { get; set; }
         public string message { get; set; }
+
+        public static ApiErrorResponse CreateResponse(string code, string message, string requestId = null)
+        {
+            return new ApiErrorResponse
+            {
+                code = code,
+                message = message,
+                requestId = requestId
+            };
+        }
     }
 }

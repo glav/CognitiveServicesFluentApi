@@ -17,6 +17,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             var apiResults = new ComputerVisionAnalysisResults(AnalysisSettings);
             await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionImageAnalysis).ConfigureAwait(continueOnCapturedContext: false);
             await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionOcrAnalysis).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionRecognizeText).ConfigureAwait(continueOnCapturedContext: false);
             return apiResults;
 
         }
@@ -35,6 +36,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                       case ApiActionType.ComputerVisionOcrAnalysis:
                           apiResults.AddResult(new OcrAnalysisResult(commsResult));
                           break;
+                      case ApiActionType.ComputerVisionRecognizeText:
+                          throw new NotImplementedException("RecognizeText API not fully supported yet");
                       default:
                           throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
                   }
@@ -55,6 +58,12 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                 // Get the collection of actions to perform for an API call
                 var actions = AnalysisSettings.ActionsToPerform[apiAction];
                 apiResults.SetOcrResultContext(new OcrAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+            }
+            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction) && apiResults.RecognizeTextAnalysis == null && apiAction == ApiActionType.ComputerVisionRecognizeText)
+            {
+                // Get the collection of actions to perform for an API call
+                var actions = AnalysisSettings.ActionsToPerform[apiAction];
+                apiResults.SetRecognizeTextResultContext(new RecognizeTextAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
             }
         }
     }

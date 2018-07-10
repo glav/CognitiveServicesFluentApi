@@ -17,6 +17,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 
         public ImageAnalysisContext ImageAnalysis { get; private set; }
         public OcrAnalysisContext OcrAnalysis { get; private set; }
+        public RecognizeTextAnalysisContext RecognizeTextAnalysis { get; private set; }
+
         public void SetImageResultContext(ImageAnalysisContext imageAnalysisCtxt)
         {
             ImageAnalysis = imageAnalysisCtxt ?? throw new ArgumentNullException("imageAnalysisCtxt");
@@ -24,6 +26,12 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public void SetOcrResultContext(OcrAnalysisContext ocrAnalysisCtxt)
         {
             OcrAnalysis = ocrAnalysisCtxt ?? throw new ArgumentNullException("ocrAnalysisCtxt");
+        }
+
+        public void SetRecognizeTextResultContext(RecognizeTextAnalysisContext recognizeTxtCtxt)
+        {
+            RecognizeTextAnalysis = recognizeTxtCtxt ?? throw new ArgumentNullException("recognizeTxtCtxt");
+
         }
 
         public void AddResult(ImageAnalysisResult result)
@@ -42,6 +50,15 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                 throw new ArgumentNullException("Cannot add a result without first setting the result context");
             }
             OcrAnalysis.AnalysisResults.Add(result);
+        }
+
+        public void AddResult(RecognizeTextAnalysisResult result)
+        {
+            if (RecognizeTextAnalysis == null)
+            {
+                throw new ArgumentNullException("Cannot add a result without first setting the result context");
+            }
+            RecognizeTextAnalysis.AnalysisResults.Add(result);
         }
 
     }
