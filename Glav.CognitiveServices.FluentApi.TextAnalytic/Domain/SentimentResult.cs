@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             try
             {
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<SentimentResultResponseRoot>(ApiCallResult.Data);
-                if (ResponseData == null || ResponseData.documents == null || ResponseData.errors != null && ResponseData.errors.Length > 0)
+                if (ResponseData == null || ResponseData.documents == null || (ResponseData.errors != null && ResponseData.errors.Length > 0))
                 {
                     ActionSubmittedSuccessfully = false;
                     return;
