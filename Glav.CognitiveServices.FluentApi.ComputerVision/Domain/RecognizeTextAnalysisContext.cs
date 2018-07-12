@@ -1,6 +1,9 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
+using Glav.CognitiveServices.FluentApi.Core.Operations;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {

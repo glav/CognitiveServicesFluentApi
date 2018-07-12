@@ -1,6 +1,7 @@
 ﻿using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
+using Glav.CognitiveServices.FluentApi.Core.Operations;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -60,6 +61,5 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             }
             RecognizeTextAnalysis.AnalysisResults.Add(result);
         }
-
     }
 }

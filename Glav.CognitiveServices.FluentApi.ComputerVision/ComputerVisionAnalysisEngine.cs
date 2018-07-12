@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
+using Glav.CognitiveServices.FluentApi.Core.Operations;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
@@ -37,7 +38,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                           apiResults.AddResult(new OcrAnalysisResult(commsResult));
                           break;
                       case ApiActionType.ComputerVisionRecognizeText:
-                          throw new NotImplementedException("RecognizeText API not fully supported yet");
+                          apiResults.AddResult(new RecognizeTextAnalysisResult(commsResult));
+                          break;
                       default:
                           throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
                   }

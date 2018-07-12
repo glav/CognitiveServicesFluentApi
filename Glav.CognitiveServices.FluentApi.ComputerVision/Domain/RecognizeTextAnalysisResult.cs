@@ -35,6 +35,12 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
                     return;
                 }
 
+                if (ApiCallResult.StatusCode == System.Net.HttpStatusCode.Accepted && ApiCallResult.OperationLocationUri != null)
+                {
+                    ActionSubmittedSuccessfully = true;
+                    return;
+                }
+
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<VisionRecognizeTextAnalysisResponseRoot>(ApiCallResult.Data);
                 if (ResponseData == null)
                 {
@@ -47,7 +53,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             {
                 ResponseData = new VisionRecognizeTextAnalysisResponseRoot
                 {
-                    error = ApiErrorResponse.CreateResponse(StandardResponseCodes.ServerError,$"Error parsing results: {ex.Message}")
+                    error = ApiErrorResponse.CreateResponse(StandardResponseCodes.ServerError, $"Error parsing results: {ex.Message}")
                 };
                 ActionSubmittedSuccessfully = false;
             }
