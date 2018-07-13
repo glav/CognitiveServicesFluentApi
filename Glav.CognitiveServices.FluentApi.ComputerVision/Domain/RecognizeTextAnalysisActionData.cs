@@ -66,7 +66,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 
         public string ToUrlQueryParameters()
         {
-            return $"?mode={Mode.ToUrlQueryArgument()}";
+            return $"mode={Mode.ToUrlQueryArgument()}";
         }
     }
 }
