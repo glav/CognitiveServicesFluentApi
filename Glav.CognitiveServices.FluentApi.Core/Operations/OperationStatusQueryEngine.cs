@@ -10,39 +10,33 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
 
     public sealed class OperationStatusQueryEngine
     {
-        private readonly IDiagnosticLogger _logger;
         private readonly CoreAnalysisSettings _analysisSettings;
-        private readonly Uri _operationStatusLocationUri;
-        private readonly ApiActionCategory _apiCategory;
 
         public const int DefaultOperationStateQueryDelayInMilliseconds = 3000;
         public const int DefaultOperationStateQueryTimeoutInMilliseconds = 300000;
         private const string LoggingTopic = "OperationStatus";
 
 
-        public OperationStatusQueryEngine(CoreAnalysisSettings analysisSettings, Uri operationStatusLocationUri, 
-                                            ApiActionCategory apiCategory, IDiagnosticLogger logger)
+        public OperationStatusQueryEngine(CoreAnalysisSettings analysisSettings)
         {
             _analysisSettings = analysisSettings;
-            _operationStatusLocationUri = operationStatusLocationUri;
-            _apiCategory = apiCategory;
-            _logger = logger;
 
         }
 
-        public async Task<OperationStatusResult> CheckOperationStatusAsync()
+        public async Task<OperationStatusResult> CheckOperationStatusAsync(Uri operationStatusLocationUri)
         {
-            _logger.LogInfo("About to query operation status", "OperationStatusQuery");
-            var serviceResult = await _analysisSettings.CommunicationEngine.CallServiceAsync(_operationStatusLocationUri.AbsoluteUri, _apiCategory);
+            _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("About to query operation status", "OperationStatusQuery");
+            var serviceResult = await _analysisSettings.CommunicationEngine.CallServiceAsync(operationStatusLocationUri.AbsoluteUri, _analysisSettings.ConfigurationSettings.ApiCategory);
             var result = new OperationStatusResult(serviceResult);
-            _logger.LogInfo("Completed query operation status", "OperationStatusQuery");
+            _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("Completed query operation status", "OperationStatusQuery");
             return result;
         }
 
-        public async Task<OperationStatusResult> WaitForTopicOperationToCompleteAsync(CancellationToken cancelToken,
+        public async Task<OperationStatusResult> WaitForOperationToCompleteAsync(Uri operationStatusLocationUri,
+            CancellationToken cancelToken,
             int timeoutInMilliseconds = DefaultOperationStateQueryTimeoutInMilliseconds)
         {
-            var result = await CheckOperationStatusAsync();
+            var result = await CheckOperationStatusAsync(operationStatusLocationUri);
             if (HasOperationEnded(result.OperationState))
             {
                 return result;
@@ -61,7 +55,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
                         _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("Querying operation status was cancelled", LoggingTopic);
                         return OperationStatusResult.CreateCancelledOperation(result.ApiCallResult);
                     }
-                    result = await CheckOperationStatusAsync();
+                    result = await CheckOperationStatusAsync(operationStatusLocationUri);
                     if (HasOperationEnded(result.OperationState))
                     {
                         _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Querying for operation status " +

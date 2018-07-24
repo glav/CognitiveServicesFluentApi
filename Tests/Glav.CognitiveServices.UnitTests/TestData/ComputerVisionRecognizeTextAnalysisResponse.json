@@ -1,0 +1,17 @@
+{
+  "status": "Succeeded",
+  "recognitionResult": {
+    "lines": [
+      {
+        "boundingBox": [ 283, 130, 299, 50, 315, 53, 299, 133 ],
+        "text": "test",
+        "words": [
+          {
+            "boundingBox": [ 266, 51, 330, 51, 307, 131, 243, 131 ],
+            "text": "test"
+          }
+        ]
+      }
+    ]
+  }
+}

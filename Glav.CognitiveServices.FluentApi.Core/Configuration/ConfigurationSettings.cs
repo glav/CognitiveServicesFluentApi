@@ -20,6 +20,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             {
                 throw new CognitiveServicesArgumentException("APIKey cannot be empty");
             }
+            this.ApiCategory = apiCategory;
             this.LocationKey = locationKey;
             _apiKeys.Add(apiCategory, apiKey);
             this.ServiceUris = serviceUris;
@@ -44,6 +45,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers,LogLevel);
         }
 
+        public ApiActionCategory ApiCategory { get; private set; }
         public void SetScoringEngine(IScoreEvaluationEngine scoringEngine)
         {
             this.GlobalScoringEngine = scoringEngine ?? throw new CognitiveServicesArgumentException("ScoringEngine cannot be NULL");

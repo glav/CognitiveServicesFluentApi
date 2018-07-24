@@ -1,11 +1,9 @@
-using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.ComputerVision;
-using System.Threading.Tasks;
-using Xunit;
-using System.Linq;
-using Microsoft.Extensions.Configuration;
+using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.IntegrationTests.Helpers;
 using System.Net;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 {
@@ -31,6 +29,9 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.NotNull(result.RecognizeTextAnalysis.AnalysisResult.ApiCallResult);
             Assert.NotNull(result.RecognizeTextAnalysis.AnalysisResult.ApiCallResult.OperationLocationUri);
             Assert.Equal(HttpStatusCode.Accepted,result.RecognizeTextAnalysis.AnalysisResult.ApiCallResult.StatusCode);
+
+            var analysisResult = await result.WaitForOperationToCompleteAsync();
+            Assert.NotNull(analysisResult);
 
         }
     }
