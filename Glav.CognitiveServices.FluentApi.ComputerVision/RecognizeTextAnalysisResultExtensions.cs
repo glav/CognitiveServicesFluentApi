@@ -13,7 +13,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
     {
         public static IEnumerable<string> GetAllRecognisedText(this RecognizeTextAnalysisResult analysisResult)
         {
-            var lines = analysisResult?.ResponseData?.recognitionResult?.lines.Select(l => l.text);
+            var lines = analysisResult?.ResponseData?.recognitionResult?.lines?.SelectMany(l => l.words.Select(w => w.text));
             return lines;
         }
 
