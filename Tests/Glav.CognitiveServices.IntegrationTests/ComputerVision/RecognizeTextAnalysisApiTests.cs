@@ -1,6 +1,7 @@
 using Glav.CognitiveServices.FluentApi.ComputerVision;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.IntegrationTests.Helpers;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
@@ -32,6 +33,19 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 
             var analysisResult = await result.WaitForOperationToCompleteAsync();
             Assert.NotNull(analysisResult);
+            Assert.Equal(1, analysisResult.Count());
+            var firstResult = analysisResult.First();
+            Assert.NotNull(firstResult.ResponseData);
+            Assert.NotNull(firstResult.ResponseData.recognitionResult);
+
+            Assert.NotNull(firstResult.ResponseData.recognitionResult.lines);
+            Assert.NotNull(firstResult.ResponseData.recognitionResult.lines[0].words);
+            Assert.Equal("test", firstResult.ResponseData.recognitionResult.lines[0].text);
+            Assert.Equal("test", firstResult.ResponseData.recognitionResult.lines[0].words[0].text);
+
+            Assert.Equal(1, firstResult.GetAllRecognisedText().Count());
+            Assert.Equal("test", firstResult.GetAllRecognisedText().First());
+
 
         }
     }
