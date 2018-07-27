@@ -45,8 +45,6 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 
             Assert.Equal(1, firstResult.GetAllRecognisedText().Count());
             Assert.Equal("test", firstResult.GetAllRecognisedText().First());
-
-
         }
     }
 }
