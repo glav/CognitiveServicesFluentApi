@@ -14,7 +14,7 @@
     <PackageTags>Cognitive services, .net, azure, TextAnalytic</PackageTags>
     <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
     <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
-    <PackageReleaseNotes>Significant changes to Fluent API interfaces. Naming consolidation, new flexible scoring system implemented throughout all API's, removal of redundant API's, documentation additions.</PackageReleaseNotes>
+    <PackageReleaseNotes>Minor bug fixes/refinements.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

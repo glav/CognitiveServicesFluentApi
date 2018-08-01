@@ -1,4 +1,24 @@
 
+## Version: 0.8.4 [08/01/2018 17:45:39]
+### New Items
+* 67e7aab -Added support got RecognizeText operation in ComputerVision
+### Full change list
+* b18438c Aligning version numbers during this pre-release phase to all match
+* b3b4ae9 Updated Wiki documentation and added some more flexibility in RecognizeText extension API
+* aee2477 Simple cleanup
+* 59b54db Slight modification of extension method logic
+* a0df844 Added  unit test for parsing results
+* 0503e68 Added more assertions to test and added extra extension for RecogniseTextResult
+* d088a0f Actually got the first full integration test working with RecognizeText
+* d87fd32 Fixed bug in UrlQueryArguments for RecognizeText submission and also added test for OperationStatus component
+* 6782075 Fixing minor parsing logic in TextAnalytics
+* 90ebf69 Finalising input pipeline and a basic test
+* 59ce6ea Added scaffolding for RecognizeTex ComputerVision API result parsing
+* 766dab7 Support ability to add input action data for RecognizeText API
+* 6839043 BUG:Added missing example documetation to Wiki for Ocr anaysis actions
+* e6581c4 Bumped up minor version for ComputerVision and Core
+* 67e7aab NEW:Added support got RecognizeText operation in ComputerVision
+
 ## Version: 0.8.3 [06/28/2018 17:32:20]
 ### Full change list
 * be1c12d Merge branch 'glav/OCRSupport' of https://github.com/glav/CognitiveServicesFluentApi into glav/OCRSupport
