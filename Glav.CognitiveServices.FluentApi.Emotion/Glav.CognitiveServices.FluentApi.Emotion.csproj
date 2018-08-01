@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <DebugType>full</DebugType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>0.8.2</Version>
+    <Version>0.8.4</Version>
     <Authors>Paul Glavich</Authors>
     <Company />
     <Product>Cognitive Services Fluent API - Emotion</Product>
@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
     <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
     <PackageReleaseNotes>Significant changes to Fluent API interfaces. Naming consolidation, new flexible scoring system implemented throughout all API's, removal of redundant API's, documentation additions.</PackageReleaseNotes>
-    <AssemblyVersion>0.8.2.0</AssemblyVersion>
+    <AssemblyVersion>0.8.4.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
