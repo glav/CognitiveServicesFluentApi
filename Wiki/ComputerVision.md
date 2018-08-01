@@ -97,3 +97,50 @@ Assert.NotEmpty(result.ImageAnalysis.AnalysisResults[0].ResponseData.tags);
 // Our second image anlysis only requested faces so we check we have some
 Assert.NotEmpty(result.ImageAnalysis.AnalysisResults[1].ResponseData.faces);
 ```
+
+The Recognize text API is currently in preview at the time of this writing and provides recognition of handwritten or printed text. Thus API requires that a job
+be submitted, and then queried to see when it has completed. To submit a job for processing, use the following:
+
+```c#
+var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)
+    .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+    .AddDebugDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithComputerVisionAnalysisActions()
+    .AddFileForRecognizeTextAnalysis("c:\\Images\\your_image.jpg",FluentApi.ComputerVision.Domain.RecognizeTextMode.Handwritten)
+    .AnalyseAllAsync();
+```
+
+Like other APIs, this supports both a URL location for images, a physical location on disk, or an array of byte data representing the image.
+Given the previous example, the status of the operation can be queried like:
+
+```c#
+var status = await result.CheckOperationStatusAsync();
+var isFirstOpFinished = status.First().OperationState == FluentApi.Core.Operations.OperationStateType.CompletedSuccessfully;
+```
+
+This queries the operation status endpoint once for each RecognizeText action to retrieve the status of the operations. That status object will contain 
+an OperationState property which can be one of the following values:
+* NotStarted
+* BadRequest
+* Submitted
+* Running
+* CompletedSuccessfully
+* Failed
+* TimedOut
+* Cancelled
+* Uploaded
+
+However, rather than calling that operation continually until the operation has completed, a convenience method is provided that waits for the operation
+to complete. Given the example above, you do use the following:
+
+```c#
+var analysisResult = await result.WaitForOperationToCompleteAsync();
+```
+or for a little more control, you can specify a CancellationToken, total time to wait and time to wait between each query operation:
+```c#
+var token = new CancellationToken();
+var analysisResult = await result.WaitForOperationToCompleteAsync(token, 30000, 2000);
+```
+where 30000 represents the total time in milliseconds to wait for this operation to complete (timeout) and 2000 represents the time in milliseconds to wait between each
+status query operation.

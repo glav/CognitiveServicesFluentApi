@@ -34,7 +34,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
 
         public async Task<OperationStatusResult> WaitForOperationToCompleteAsync(Uri operationStatusLocationUri,
             CancellationToken cancelToken,
-            int timeoutInMilliseconds = DefaultOperationStateQueryTimeoutInMilliseconds)
+            int timeoutInMilliseconds = DefaultOperationStateQueryTimeoutInMilliseconds,
+            int queryDelayInMilliseconds = DefaultOperationStateQueryDelayInMilliseconds)
         {
             var result = await CheckOperationStatusAsync(operationStatusLocationUri);
             if (HasOperationEnded(result.OperationState))
@@ -64,7 +65,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
                         return result;
                     }
 
-                    await System.Threading.Tasks.Task.Delay(DefaultOperationStateQueryDelayInMilliseconds);
+                    await System.Threading.Tasks.Task.Delay(queryDelayInMilliseconds);
 
                     if (stopWatch.ElapsedMilliseconds > timeoutInMilliseconds)
                     {

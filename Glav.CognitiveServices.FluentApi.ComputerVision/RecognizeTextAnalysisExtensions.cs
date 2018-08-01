@@ -13,6 +13,12 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
     public static class RecognizeTextAnalysisExtensions
     {
+        /// <summary>
+        /// Queries the result of a RecognizeText API call.
+        /// </summary>
+        /// <param name="results"></param>
+        /// <returns>An enumerated list of <see cref="OperationStatusResult"/>. This contains the following possible statu: NotStarted, BadRequest,
+        /// Submitted,Running,CompletedSuccessfully,Failed,TimedOut,Cancelled,Uploaded</returns>
         public static async Task<IEnumerable<OperationStatusResult>> CheckOperationStatusAsync(this ComputerVisionAnalysisResults results)
         {
             var operationStatusToQuery = results.RecognizeTextAnalysis.AnalysisResults.Select(s => s.ApiCallResult.OperationLocationUri).ToList();
@@ -25,18 +31,38 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             return statusResponses;
         }
 
-        public static async Task<IEnumerable<RecognizeTextAnalysisResult>> WaitForOperationToCompleteAsync(this ComputerVisionAnalysisResults results, int timeoutInMillseconds = 300000)
+        /// <summary>
+        /// Will poll the operation status service until the RecognizeText operation has completed processing.
+        /// </summary>
+        /// <param name="results">The RecognizeText analysis results</param>
+        /// <param name="cancelToken">Cancellation token for the task</param>
+        /// <param name="timeoutInMillseconds">The total timeout period in milliseconds for the wait operation. 
+        /// This wait operation will efectively poll the operation status endpoint until the total time taken exceeds this value.</param>
+        /// <param name="queryDelayInMilliseconds">The delay between each query operation to the API.</param>
+        /// <returns>An enumerable list of <see cref="RecognizeTextAnalysisResult"/></returns>
+        public static async Task<IEnumerable<RecognizeTextAnalysisResult>> WaitForOperationToCompleteAsync(this ComputerVisionAnalysisResults results, CancellationToken cancelToken, int timeoutInMillseconds, int queryDelayInMilliseconds)
         {
             var operationStatusToQuery = results.RecognizeTextAnalysis.AnalysisResults.Select(s => s.ApiCallResult.OperationLocationUri).ToList();
             var analysisResponses = new List<RecognizeTextAnalysisResult>(operationStatusToQuery.Count);
             var queryEngine = new OperationStatusQueryEngine(results.AnalysisSettings);
-            var cancelToken = new CancellationToken();
             foreach (var statusUri in operationStatusToQuery)
             {
-                var callResult = await queryEngine.WaitForOperationToCompleteAsync(statusUri, cancelToken, timeoutInMillseconds);
+                var callResult = await queryEngine.WaitForOperationToCompleteAsync(statusUri, cancelToken, timeoutInMillseconds,queryDelayInMilliseconds);
                 analysisResponses.Add(new RecognizeTextAnalysisResult(callResult.ApiCallResult));
             }
             return analysisResponses;
+        }
+
+        /// <summary>
+        /// Will poll the operation status service until the RecognizeText operation has completed processing. The total timeout period for this operation
+        /// (or effectively the maximum time to wait) defaults to 30 seconds with a 3 second delay between  each query of the operation status endpoint.
+        /// </summary>
+        /// <param name="results">The RecognizeText analysis results</param>
+        /// <returns>An enumerable list of <see cref="RecognizeTextAnalysisResult"/></returns>
+        public static async Task<IEnumerable<RecognizeTextAnalysisResult>> WaitForOperationToCompleteAsync(this ComputerVisionAnalysisResults results)
+        {
+            var cancelToken = new CancellationToken();
+            return await WaitForOperationToCompleteAsync(results, cancelToken, OperationStatusQueryEngine.DefaultOperationStateQueryTimeoutInMilliseconds, OperationStatusQueryEngine.DefaultOperationStateQueryDelayInMilliseconds);
         }
     }
 }
