@@ -143,7 +143,7 @@ var token = new CancellationToken();
 var analysisResult = await result.WaitForOperationToCompleteAsync(token, 30000, 2000);
 
 var firstResult = analysisResult.First();
-Assert.Equal("some recognized text", firstResult.GetAllRecognisedText().First());
+Assert.Equal("sometext", firstResult.GetAllRecognisedText().First());
 ```
 where 30000 represents the total time in milliseconds to wait for this operation to complete (timeout) and 2000 represents the time in milliseconds to wait between each
 status query operation.
