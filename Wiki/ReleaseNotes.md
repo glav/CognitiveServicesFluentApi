@@ -1,4 +1,12 @@
 
+## Version: 0.8.5 [12/05/2018 08:31:47]
+### Full change list
+* 90bdf66 BUG: Updated TextAnalytics error parsing
+* 010aa50 Removed global.json
+* 45404a4 Modified global.json for latest runtime after machine rebuid and latest .Net core runtime
+* 8b6170d More very minor documentation update
+* e6a8ff5 Minor docuemtnation update
+
 ## Version: 0.8.4 [08/01/2018 17:45:39]
 ### New Items
 * 67e7aab -Added support got RecognizeText operation in ComputerVision
