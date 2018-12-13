@@ -1,4 +1,14 @@
 
+## Version: Release_0.8.6 [12/14/2018 07:19:20]
+### New Items
+* d8edefe -Added support for splitting text into sentences for sentiment analysis
+### Full change list
+* 743c236 Added better failed call detection where a call can partially succeed
+* d8edefe NEW:Added support for splitting text into sentences for sentiment analysis
+* 417901a Merge branch 'master' of https://github.com/glav/CognitiveServicesFluentApi
+* a0eb898 Updated release notes for Release_0.8.5
+* 90bdf66 BUG: Updated TextAnalytics error parsing
+
 ## Version: 0.8.5 [12/05/2018 08:31:47]
 ### Full change list
 * 90bdf66 BUG: Updated TextAnalytics error parsing
