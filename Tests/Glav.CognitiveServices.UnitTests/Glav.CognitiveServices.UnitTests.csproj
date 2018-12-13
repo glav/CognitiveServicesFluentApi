@@ -13,12 +13,14 @@
     <None Remove="TestData\ComputerVisionImageAnalysisResponse.json" />
     <None Remove="TestData\ComputerVisionOcrAnalysisResponse.json" />
     <None Remove="TestData\ComputerVisionRecognizeTextAnalysisResponse.json" />
+    <None Remove="TestData\SanitisedHtmlEmail.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="TestData\ComputerVisionImageAnalysisResponse.json" />
     <EmbeddedResource Include="TestData\ComputerVisionRecognizeTextAnalysisResponse.json" />
     <EmbeddedResource Include="TestData\ComputerVisionOcrAnalysisResponse.json" />
+    <EmbeddedResource Include="TestData\SanitisedHtmlEmail.txt" />
   </ItemGroup>
 
   <ItemGroup>

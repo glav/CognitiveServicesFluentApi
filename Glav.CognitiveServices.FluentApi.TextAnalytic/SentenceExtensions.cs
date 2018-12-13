@@ -1,7 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
+    /// <summary>
+    /// Text analytic analysis can often work better in smaller chunks of text such as sentences so have provided this convenience menthod
+    /// to do just that.
+    /// </summary>
     public static class SentenceExtensions
     {
         // Pretty simplistic sentence separation with no idea of different languages but its a start.
@@ -17,7 +22,18 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             {
                 charactersToSplitSentences = DefaultSentenceSplitCharacters;
             }
-            return blobOfText.Split(charactersToSplitSentences);
+            var splitText = blobOfText.Split(charactersToSplitSentences);
+
+            // We may have elements that are either empty, whitespace or just junk so lets remove them.
+            var splitTextRemovedCrLf = splitText
+                .Select(s =>
+                    s.Replace("\n", string.Empty)
+                    .Replace("\r", string.Empty));
+
+            var splitTextNonEmpty = splitTextRemovedCrLf
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Where(s => s.Length > 2);
+            return splitTextNonEmpty;
         }
 
     }

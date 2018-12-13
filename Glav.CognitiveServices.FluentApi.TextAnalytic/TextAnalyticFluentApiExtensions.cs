@@ -5,6 +5,7 @@ using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
+using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
@@ -21,6 +22,16 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsSentiment);
         }
 
+        public static TextAnalyticAnalysisSettings AddSentimentAnalysisSplitIntoSentences(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
+        {
+            var sentences = textToAnalyse.SplitTextIntoSentences();
+            sentences.ToList().ForEach(s =>
+            {
+                apiAnalysis.AddTextForAnalysis(s, ApiActionType.TextAnalyticsSentiment);
+            });
+            return apiAnalysis;
+        }
+
         public static TextAnalyticAnalysisSettings AddKeyPhraseAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsKeyphrases);
@@ -30,6 +41,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsLanguages);
         }
+
 
         private static TextAnalyticAnalysisSettings AddTextForAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse, ApiActionType actionType)
         {

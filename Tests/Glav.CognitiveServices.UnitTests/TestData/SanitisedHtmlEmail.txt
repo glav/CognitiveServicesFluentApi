@@ -1,0 +1,117 @@
+﻿
+
+ 
+Issues
+
+
+
+[Resolved] [Medium]
+[16/11/18] MainLine build quality
+
+
+
+
+[10/12/18] This is part of the larger development experience piece of work. Closing as it doesn't currently directly affect us.
+[30/11/18] This is an on-going issue. Something needs to be done here, but it's a hard one to solve.
+[16/11/18] The quality of the builds in MainLine is very problematic to us; they're quite frequently broken for weeks at a time. We've been holding off merging from MainLine to our branch for ~4 weeks. The
+ other crews are actively working on this, however if they don't get it green soon, it may mean that we'll need to merge to MainLine while it's still red.
+
+
+
+[Possible] [Medium]
+[30/11/18] Upcoming work value prioritisation
+
+
+
+
+[10/12/18] This is definitely still active. All we can do it provide our experiences and recommendations.
+[30/11/18] It's unclear at times how the value is being calculated for upcoming work. We'll keep an eye on this and provide as much insight as we can from our side to ensure that the most valuable work is being
+ done first.
+
+
+
+[Possible] [Medium]
+[30/7/18] EF Core performance
+
+
+
+
+[30/11/18] Client-eval has been disabled for all Business Layer queries. We've also compared BL/PL test execution times for ~17000 tests, with very minimal variance. We looked into using the existing
+ load tests, however unfortunately they offered very little value to us.
+[16/11/18] We've got some good ideas on how implement a  pit of success  for ARL.
+[9/11/18] We've now turned on warnings-as-errors for client eval. Changing this to Possible.
+[26/10/18] Some performance issues have been identified while analysing the EF Core warnings. We're looking into these.
+[19/10/18] We'll be doing limited automated performance testing around this area; in general, we'll be relying on the QAs to identify performance regressions. We may also be able to work with Scott B in this
+ area.
+[27/9/18] We're now kicking off non-functional testing around this area.
+[21/9/18] Most of the performance concerns are related to the Presentation Layer. As this is now tentatively targeting 2019.3, it's less of an immediate issue. We'll work with the Microsoft EF team where possible
+ to get them to prioritise the issues that are affecting us.
+[31/8/18] We're now seeing cases where LINQ where clauses are being ignored and executed through client evaluation, which is scary. The plan is still to focus on getting things functional, then fast.
+[30/7/18] There are a number of cases where EF Core is falling back to client evaluation of queries where we'd hope it shouldn't be. In particular, when using GROUP BY, which received significant improvements
+ in the 2.1 release (https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-2.1). Considering the complexity of some of the reporting queries, further analysis will need to be done around this area. We've been discussing with Microsoft around how to submit
+ (obfuscated) queries for improvement.
+
+
+This Week
+We merged the EF Core-backed Business Layer and VS2017 work to Mainline! A huge thanks to Avinash, Roshan, Malik, the MYOB Quantum Discovery crew, and everybody else that has helped us
+ over the last 6 months. It's been hard work but we got there in the end!
+Around the merge we continued with the vertical slice investigations, disabled
+throw client eval warnings as errors for final release builds, and continued with
+planning for 2019.
+Next Week
+
+
+Continue with vertical slice investigations.
+Preliminary CE 4.0 investigations.
+EF Core workshop with MYOB developers on Tuesday.
+Avinash's last week before taking leave until mid-Jan.
+Celebratory lunch :)
+
+MYOB (Information Technology)
+
+
+
+
+
+MYOB, Mind Your Own Business, is an Australian multinational corporation that provides tax, accounting and other business services software to small and medium businesses.
+
+Project Background
+The product that we're working on, AccountRight Live (ARL), is described by their marketing page as  ... giving the freedom to seamlessly switch between working on your business data locally (offline) and in the cloud (online). It’s your choice. It also
+ eliminates much of the time consuming data entry work from your bookkeeping, replacing it with automated daily bank feeds, delivered securely from your bank. This means you don’t have to enter spend money transaction details, they appear from your bank and
+ you simply allocate them to the right account. Similarly receipting money is automated and bank reconciliations are so much easier .
+Readify have been brought in to help with two main areas:
+
+
+Replacing LINQ to SQL, which is no longer supported
+Upgrading from SQL CE 3.5, which is no longer supported
+The work that we're doing is being funded through Microsoft.
+Team
+Readify
+
+
+Alex Mackey (PC)
+Avinash Phaniraj (SC)
+Malik Hassan Albarghouthi (SD)
+Michael Chandler (LC)
+Paul Apos (AM)
+Roshan Jeewantha (D)
+MYOB
+
+
+Brian Hodgman (Developer)
+Dan Lazner (Senior Developer)
+Evan Stamatopoulos (Development lead)
+Idan Mano (Development manager)
+Peter Birch (ARL architect)
+Sam Zhou (Developer)
+Som Puttivara (Developer)
+Microsoft
+
+
+Richard Quan
+ 
+Powered by 
+ReadiUpdates (change
+ your subscription settings)
+
+
