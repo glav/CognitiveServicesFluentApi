@@ -25,7 +25,13 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             try
             {
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<SentimentResultResponseRoot>(ApiCallResult.Data);
-                if (ResponseData != null && ResponseData.errors != null && ResponseData.errors.Length > 0)
+                // If we only have errors, then the call was not successfull. However we can have a situation where multiple
+                // documents are submitted and some were processed ok but some were not. This indicates the action was successful
+                // but some some documents were not processed or valid.
+                if (ResponseData != null 
+                        && ResponseData.errors != null 
+                        && ResponseData.errors.Length > 0 
+                        && (ResponseData.documents == null || ResponseData.documents.Length == 0))
                 {
                     // If all that failed, we try just parsing into the error structure
                     ActionSubmittedSuccessfully = false;
