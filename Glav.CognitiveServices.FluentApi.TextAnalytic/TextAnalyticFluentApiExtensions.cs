@@ -37,6 +37,16 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsKeyphrases);
         }
 
+        public static TextAnalyticAnalysisSettings AddKeyPhraseAnalysisSplitIntoSentences(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
+        {
+            var sentences = textToAnalyse.SplitTextIntoSentences();
+            sentences.ToList().ForEach(s =>
+            {
+                apiAnalysis.AddTextForAnalysis(s, ApiActionType.TextAnalyticsKeyphrases);
+            });
+            return apiAnalysis;
+        }
+
         public static TextAnalyticAnalysisSettings AddLanguageAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsLanguages);
