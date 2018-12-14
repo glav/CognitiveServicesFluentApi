@@ -1,4 +1,10 @@
 
+## Version: 0.8.7 [12/14/2018 13:25:06]
+### New Items
+* 7c7850f -Add SplitIntoSentences analysis to keyphrase fluent API
+### Full change list
+* 7c7850f NEW:Add SplitIntoSentences analysis to keyphrase fluent API
+
 ## Version: Release_0.8.6 [12/14/2018 07:19:20]
 ### New Items
 * d8edefe -Added support for splitting text into sentences for sentiment analysis
