@@ -64,3 +64,19 @@ var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("my-api-k
     .AnalyseAllAsync();
 ```
 This will call each api with the specified in an asynchronous manner and present the results once both operations are complete.
+
+##Getting The Results
+As in previous examples, obtaining the results of operations is performed by accessing ``` ResponseData``` property of the respective AnalysisResultContext, and the specific properties relating to the result item which are different for each type of analysis. As in:
+```c#
+var keyphrases = result.TextAnalyticKeyPhraseAnalysis.AnalysisResult.ResponseData.documents[0].keyPhrases[0]);
+```
+However, this can be somewhat long-handed or verbose so some simple utility extension methods are available such as the ```GetResults``` method. For example:
+```c#
+var results = result.TextAnalyticKeyPhraseAnalysis.GetResults();
+var result1 = results[0].keyPhrases[0];
+```
+This applies for all TextAnalytics results. However, for KeyPhrase analysis you can also use the ```GetAllKeyPhrases``` method to simply get an array of all returned keyphrases for the entire document set. For example:
+```c#
+var allPhrases = result.TextAnalyticKeyPhraseAnalysis.GetAllKeyPhrases().ToArray();
+var result1 = allPhrases[0];
+```
