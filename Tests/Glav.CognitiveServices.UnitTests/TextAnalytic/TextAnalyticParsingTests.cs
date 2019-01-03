@@ -7,7 +7,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
     public class TextAnalyticParsingTests
     {
         [Fact]
-        public void ShouldParseResultSuccessfully()
+        public void ShouldParseSentimentResultSuccessfully()
         {
             var input = "{\"documents\":[{\"score\":0.7988085,\"id\":\"1\"}],\"errors\":[]}";
             var result = new SentimentResult(new MockCommsResult(input));
@@ -39,6 +39,25 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.NotNull(result.ResponseData.errors[0].InnerError);
             Assert.Equal("InvalidRequestBodyFormat", result.ResponseData.errors[0].InnerError.code);
             Assert.Equal("Request body format is wrong.Make sure the json request is serialized correctly and there are no null members.", result.ResponseData.errors[0].InnerError.message);
+        }
+
+        [Fact]
+        public void ShouldParseKeyPhraseResultSuccessfully()
+        {
+            var input = "{\"documents\":[{\"keyPhrases\":[\"phrase1\",\"phrase2\"],\"id\":\"1\"}],\"errors\":[]}";
+            var result = new KeyPhraseResult(new MockCommsResult(input));
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.ApiCallResult);
+            Assert.True(result.ActionSubmittedSuccessfully);
+            Assert.NotNull(result.ResponseData);
+            Assert.NotEmpty(result.ResponseData.documents);
+            Assert.NotEmpty(result.ResponseData.documents[0].keyPhrases);
+            Assert.Equal<int>(2, result.ResponseData.documents[0].keyPhrases.Length);
+            Assert.Equal<string>("phrase1", result.ResponseData.documents[0].keyPhrases[0]);
+            Assert.Equal<string>("phrase2", result.ResponseData.documents[0].keyPhrases[1]);
+
+            Assert.Empty(result.ResponseData.errors);
         }
 
     }
