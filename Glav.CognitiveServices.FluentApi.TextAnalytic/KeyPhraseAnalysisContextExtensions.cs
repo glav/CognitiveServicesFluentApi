@@ -23,5 +23,10 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return context.AnalysisResult.ResponseData.documents.AsEnumerable();
         }
 
+        public static IEnumerable<string> GetAllKeyPhrases(this KeyPhraseAnalysisContext context)
+        {
+            return context.GetResults().SelectMany(r => r.keyPhrases);
+        }
+
     }
 }

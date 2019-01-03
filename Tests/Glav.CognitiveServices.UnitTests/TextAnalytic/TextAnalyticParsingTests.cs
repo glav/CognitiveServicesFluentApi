@@ -1,6 +1,11 @@
 using Xunit;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using Glav.CognitiveServices.UnitTests.Helpers;
+using Glav.CognitiveServices.FluentApi.TextAnalytic;
+using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.UnitTests.Diagnostics;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
@@ -58,6 +63,37 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.Equal<string>("phrase2", result.ResponseData.documents[0].keyPhrases[1]);
 
             Assert.Empty(result.ResponseData.errors);
+        }
+
+        [Fact]
+        public async Task ShouldFlattenAllKeyPhraseResultsSuccessfully()
+        {
+            var input = "{\"documents\":[{\"keyPhrases\":[\"phrase1\",\"phrase2\"],\"id\":\"1\"},{\"keyPhrases\":[\"phrase3\",\"phrase4\"],\"id\":\"2\"}],\"errors\":[]}";
+            var commsEngine = new MockCommsEngine(new MockCommsResult(input));
+            var logger = new TestLogger();
+
+            var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                .AddCustomDiagnosticLogging(logger)
+                .UsingCustomCommunication(commsEngine)
+                .WithTextAnalyticAnalysisActions()
+                .AddKeyPhraseAnalysis("Can be anything here")
+                .AnalyseAllAsync();
+
+            Assert.NotEmpty(result.KeyPhraseAnalysis.AnalysisResults);
+            var phraseResults = result.KeyPhraseAnalysis.GetResults();
+            Assert.NotEmpty(phraseResults);
+            Assert.Equal(2, phraseResults.Count());
+
+            var allKeyphrases = result.KeyPhraseAnalysis.GetAllKeyPhrases().ToArray();
+            Assert.NotEmpty(allKeyphrases);
+            Assert.Equal(4, allKeyphrases.Length);
+            Assert.Equal("phrase1", allKeyphrases[0]);
+            Assert.Equal("phrase2", allKeyphrases[1]);
+            Assert.Equal("phrase3", allKeyphrases[2]);
+            Assert.Equal("phrase4", allKeyphrases[3]);
+
+
         }
 
     }
