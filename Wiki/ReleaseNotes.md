@@ -1,4 +1,10 @@
 
+## Version: 0.8.9 [01/04/2019 15:38:48]
+### New Items
+* d2be580 -Added support for Nuget LicenceExpression for each package
+### Full change list
+* d2be580 NEW:Added support for Nuget LicenceExpression for each package
+
 ## Version: 0.8.8 [01/04/2019 15:18:27]
 ### New Items
 * 8130eac -Added GetAllKeyPhrases extension method and test
