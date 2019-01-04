@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
-    public class StandardResponseCodes
+    public static class StandardResponseCodes
     {
         public const string NoDataReturned = "NoData";
         public const string ServerError = "ServerError";

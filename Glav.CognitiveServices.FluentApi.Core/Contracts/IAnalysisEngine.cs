@@ -47,8 +47,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                 {
                     var allItems = actions.GetAllItems();
 
-                    //if (allItems.Count() > 1) { throw new NotSupportedException("Currently, multiple return results are not supported in non batch operations"); }
-
                     foreach(var item in allItems)
                     {
                         apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseApiAction");

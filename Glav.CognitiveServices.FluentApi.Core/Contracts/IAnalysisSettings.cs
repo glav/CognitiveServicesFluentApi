@@ -11,7 +11,5 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
         Dictionary<ApiActionType, ApiActionDataCollection> ActionsToPerform { get; }
         ICommunicationEngine CommunicationEngine { get; }
         ConfigurationSettings ConfigurationSettings { get; }
-
-        //IScoreEvaluationEngine ScoringEngine { get;  }
     }
 }

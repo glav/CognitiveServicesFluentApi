@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
     {
         private readonly IScoreLevelBoundsCollection _scoreLevelBoundsCollection;
 
-        public BaseScoreEvaluationEngine(IScoreLevelBoundsCollection scoreLevelBoundsCollection)
+        protected BaseScoreEvaluationEngine(IScoreLevelBoundsCollection scoreLevelBoundsCollection)
         {
             _scoreLevelBoundsCollection = scoreLevelBoundsCollection;
         }

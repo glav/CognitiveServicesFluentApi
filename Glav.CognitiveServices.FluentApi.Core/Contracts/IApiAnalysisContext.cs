@@ -7,17 +7,6 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
-    //public interface IApiAnalysisContext<TData, TResult> where TData : IApiActionDataCollection
-    //                                                where TResult : IApiCallResult
-    //{
-    //    ApiActionType AnalysisType { get; }
-    //    TData AnalysisInput { get; }
-
-    //    TResult AnalysisResult { get; }
-
-    //    IScoreEvaluationEngine ScoringEngine { get; }
-    //}
-
     public abstract class BaseApiAnalysisContext<TResult> where TResult : IApiCallResult
     {
         public BaseApiAnalysisContext(ApiActionDataCollection actionData, TResult analysisResult, IScoreEvaluationEngine scoringEngine)

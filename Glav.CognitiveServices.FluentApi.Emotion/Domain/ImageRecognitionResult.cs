@@ -47,7 +47,6 @@ namespace Glav.CognitiveServices.FluentApi.Emotion.Domain
                     return;
                 }
 
-                //TODO: Need to double check this logic. On revisiting, it does not look right.
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<EmotionImageRecognitionResponseRoot>(ApiCallResult.Data);
                 ActionSubmittedSuccessfully = false;
 
