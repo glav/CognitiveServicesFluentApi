@@ -13,7 +13,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Cognitive services, .net, azure, ComputerVision</PackageTags>
     <PackageReleaseNotes>Added support and documentation for the RecognizeText ComputerVision API.</PackageReleaseNotes>
-    <Version>0.8.5</Version>
+    <Version>0.8.6</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
