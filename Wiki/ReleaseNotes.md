@@ -1,4 +1,20 @@
 
+## Version: 0.8.8 [01/04/2019 15:18:27]
+### New Items
+* 8130eac -Added GetAllKeyPhrases extension method and test
+### Full change list
+* 021781b Updated the documentation with new extension methods
+* 8130eac NEW:Added GetAllKeyPhrases extension method and test
+* 8a472a4 Upped version, added GetResults extension to KeyPhrase and added some tests
+
+## Version: 0.8.8 [01/04/2019 13:58:30]
+### New Items
+* 8130eac -Added GetAllKeyPhrases extension method and test
+### Full change list
+* 021781b Updated the documentation with new extension methods
+* 8130eac NEW:Added GetAllKeyPhrases extension method and test
+* 8a472a4 Upped version, added GetResults extension to KeyPhrase and added some tests
+
 ## Version: 0.8.7 [12/14/2018 13:25:06]
 ### New Items
 * 7c7850f -Add SplitIntoSentences analysis to keyphrase fluent API

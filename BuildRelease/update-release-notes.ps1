@@ -12,10 +12,20 @@ $priorReleaseNotes = ""
 
 #Get the last tag
 $lastTag = git describe --tags --abbrev=0
-"Last tag in history from HEAD is [$lastTag]"
 
 #Get the commits from HEAD up until the last tag
 $releaseNotes = git log "$lastTag..HEAD" --pretty=format:"%h %s"
+
+$releaseTag = "Release_$newVersion"
+
+
+Write-Host ""
+Write-Host "Last tag in history from HEAD is [$lastTag]" -ForegroundColor Yellow
+Write-Host "Preparing to update repository notes for version: $newVersion  (New tag will be [$releaseTag])" -ForegroundColor Yellow
+Write-Host ">> Release notes will be:" -ForegroundColor Green
+$releaseNotes | ForEach-Object { Write-Host $_ -ForegroundColor Green }
+Write-Host ""
+Read-Host -Prompt "Press any key to continue or CTRL+C to quit" 
 
 function createIfNotExist
 {
@@ -61,8 +71,6 @@ addToFile "Full change list" $releaseNotes
 
 #Write the existing set of release notes
 Add-Content -Path $filePath -Value $priorReleaseNotes
-
-$releaseTag = "Release_$newVersion"
 
 #Now stage the changes (primarily ReleaseNotes), update the repo
 git add -A
