@@ -23,5 +23,14 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             return LanguageCodeParser.Parse(result.ResponseData.language);
         }
 
+        public static string GetInitialErrorMessage(this OcrAnalysisContext context)
+        {
+            var message = context.AnalysisResult.ResponseData.error != null ?
+                context.AnalysisResult.ResponseData.error.message :
+                context.AnalysisResult.ApiCallResult.Data;
+            return message;
+
+        }
+
     }
 }

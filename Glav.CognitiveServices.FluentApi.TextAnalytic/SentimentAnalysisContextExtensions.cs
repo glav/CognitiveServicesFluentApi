@@ -38,5 +38,13 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return context.AnalysisResult.ResponseData.documents.Where(d => Score(context, d).NormalisedName == sentimentClassification.ToLowerInvariant());
         }
 
+        public static string GetInitialErrorMessage(this SentimentAnalysisContext context)
+        {
+            var message = context.AnalysisResult.ResponseData.errors != null ? 
+                context.AnalysisResult.ResponseData.errors.First().message : 
+                context.AnalysisResult.ApiCallResult.Data;
+            return message;
+        }
+
     }
 }
