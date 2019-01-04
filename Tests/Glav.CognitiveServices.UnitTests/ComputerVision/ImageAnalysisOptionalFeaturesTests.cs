@@ -16,7 +16,7 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
 
             Assert.Equal(expected, actual);
 
-            features = ImageAnalysisVisualFeatures.Default;
+            features = ImageAnalysisVisualFeatures.None;
             expected = string.Empty;
             actual = features.ToUrlQueryParameters();
             Assert.Equal(expected, actual);
@@ -30,7 +30,7 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
             var expected = "visualFeatures=Categories,Faces&details=Celebrities&language=en";
             Assert.Equal(expected, actual);
 
-            actionData = new ImageAnalysisActionDataItem(2, new System.Uri("https://localhost"),ImageAnalysisVisualFeatures.Default, ImageAnalysisDetails.Landmarks,FluentApi.Core.SupportedLanguageType.Unspecified);
+            actionData = new ImageAnalysisActionDataItem(2, new System.Uri("https://localhost"),ImageAnalysisVisualFeatures.None, ImageAnalysisDetails.Landmarks,FluentApi.Core.SupportedLanguageType.Unspecified);
             actual = actionData.ToUrlQueryParameters();
             expected = "details=Landmarks";
             Assert.Equal(expected, actual);

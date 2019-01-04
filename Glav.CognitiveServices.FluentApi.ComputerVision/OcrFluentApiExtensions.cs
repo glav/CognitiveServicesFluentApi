@@ -11,8 +11,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
     public static class ImageFluentApiExtensions
     {
         public static ImageAnalysisSettings AddUrlForImageAnalysis(this ImageAnalysisSettings apiAnalysis, string url, 
-                ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.Default, 
-                ImageAnalysisDetails imageDetails = ImageAnalysisDetails.Default,
+                ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.None, 
+                ImageAnalysisDetails imageDetails = ImageAnalysisDetails.None,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
             var actionData = apiAnalysis.GetOrCreateActionDataInstance<ImageAnalysisActionData>(ApiActionType.ComputerVisionImageAnalysis);
@@ -21,8 +21,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         }
 
         public static ImageAnalysisSettings AddFileForImageAnalysis(this ImageAnalysisSettings apiAnalysis, string filename,
-                ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.Default,
-                ImageAnalysisDetails imageDetails = ImageAnalysisDetails.Default,
+                ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.None,
+                ImageAnalysisDetails imageDetails = ImageAnalysisDetails.None,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
             var bytes = File.ReadAllBytes(filename);
@@ -30,8 +30,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         }
 
         public static ImageAnalysisSettings AddFileForImageAnalysis(this ImageAnalysisSettings apiAnalysis, byte[] imageData,
-        ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.Default,
-        ImageAnalysisDetails imageDetails = ImageAnalysisDetails.Default,
+        ImageAnalysisVisualFeatures visualFeatures = ImageAnalysisVisualFeatures.None,
+        ImageAnalysisDetails imageDetails = ImageAnalysisDetails.None,
         SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
             var actionData = apiAnalysis.GetOrCreateActionDataInstance<ImageAnalysisActionData>(ApiActionType.ComputerVisionImageAnalysis);

@@ -5,7 +5,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
     [Flags]
     public enum ImageAnalysisVisualFeatures
     {
-        Default = 0,   // Specify no features explicitly and just ask for a default analysis
+        None = 0,   // Specify no features explicitly and just ask for a default analysis
         Categories = 1,//categorizes image content according to a taxonomy defined in documentation.
         Tags = 2,// - tags the image with a detailed list of words related to the image content.
         Description = 4,// - describes the image content with a complete English sentence.

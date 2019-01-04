@@ -47,10 +47,5 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return results;
         }
 
-        private static bool IsContextResponseDataNull(LanguageAnalysisContext context)
-        {
-            return (context == null || context.AnalysisResult == null || context.AnalysisResult.ResponseData == null || context.AnalysisResult.ResponseData.documents == null);
-
-        }
     }
 }
