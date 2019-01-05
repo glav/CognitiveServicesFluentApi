@@ -21,7 +21,6 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
                 throw new ArgumentNullException("value");
             }
             var normalised = value.ToLowerInvariant();
-            var enumValues = Enum.GetNames(typeof(OcrTextOrientation));
             switch (normalised)
             {
                 case "up":
