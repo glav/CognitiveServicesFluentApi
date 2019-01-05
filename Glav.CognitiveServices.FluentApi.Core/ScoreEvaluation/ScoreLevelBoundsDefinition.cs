@@ -30,13 +30,18 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
             {
                 throw new CognitiveServicesArgumentException("Lowerbound value must be less than the Upperbound value.");
             }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new CognitiveServicesArgumentException("Name must be non empty.");
+            }
         }
 
         public double LowerBound { get; }
         public double UpperBound { get; }
         public string Name { get; }
         /// <summary>
-        /// This property is pre-calculated to a lower invariant version of the name and used for textual comparisons.b
+        /// This property is pre-calculated to a lower invariant version of the name and used for textual comparisons.
         /// </summary>
         public string NormalisedName { get; }
     }
