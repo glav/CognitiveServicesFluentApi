@@ -92,9 +92,28 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.Equal("phrase2", allKeyphrases[1]);
             Assert.Equal("phrase3", allKeyphrases[2]);
             Assert.Equal("phrase4", allKeyphrases[3]);
+        }
 
+        [Fact]
+        public async Task ShouldGetinitialErrorSuccessfully()
+        {
+            var input = "{\"code\":\"BadRequest\",\"message\":\"Invalid request\",\"innerError\":{\"code\":\"InvalidRequestBodyFormat\",\"message\":\"Request body format is wrong.Make sure the json request is serialized correctly and there are no null members.\"}}";
+            var commsEngine = new MockCommsEngine(new MockCommsResult(input));
+            var logger = new TestLogger();
+
+            var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                .AddCustomDiagnosticLogging(logger)
+                .UsingCustomCommunication(commsEngine)
+                .WithTextAnalyticAnalysisActions()
+                .AddKeyPhraseAnalysis("Can be anything here")
+                .AnalyseAllAsync();
+
+            Assert.NotEmpty(result.KeyPhraseAnalysis.AnalysisResults);
+            var phraseResults = result.KeyPhraseAnalysis.GetInitialErrorMessage();
 
         }
+
 
     }
 }

@@ -47,5 +47,13 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return results;
         }
 
+        public static string GetInitialErrorMessage(this LanguageAnalysisContext context)
+        {
+            var message = context.AnalysisResult.ResponseData.errors != null ?
+                context.AnalysisResult.ResponseData.errors.First().message :
+                context.AnalysisResult.ApiCallResult.Data;
+            return message;
+        }
+
     }
 }

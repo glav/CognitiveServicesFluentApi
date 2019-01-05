@@ -42,6 +42,11 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<VisionImageAnalysisResponseRoot>(ApiCallResult.Data);
                 if (ResponseData == null)
                 {
+                    var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
+                    if (apiError != null)
+                    {
+                        ResponseData = new VisionImageAnalysisResponseRoot { error =  apiError };
+                    }
                     ActionSubmittedSuccessfully = false;
                     return;
                 }

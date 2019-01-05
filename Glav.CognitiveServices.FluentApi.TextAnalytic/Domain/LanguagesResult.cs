@@ -25,8 +25,13 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             try
             {
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LanguagesResultResponseRoot>(ApiCallResult.Data);
-                if (ResponseData == null || ResponseData.documents == null || ResponseData.errors != null && ResponseData.errors.Length > 0)
+                if (ResponseData == null || ResponseData.documents == null)
                 {
+                    var errors = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
+                    if (errors != null)
+                    {
+                        ResponseData = new LanguagesResultResponseRoot { errors = new ApiErrorResponse[] { errors } };
+                    }
                     ActionSubmittedSuccessfully = false;
                     return;
                 }

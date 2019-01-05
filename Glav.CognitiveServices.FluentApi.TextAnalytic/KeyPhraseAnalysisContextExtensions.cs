@@ -28,5 +28,14 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return context.GetResults().SelectMany(r => r.keyPhrases);
         }
 
+        public static string GetInitialErrorMessage(this KeyPhraseAnalysisContext context)
+        {
+            var message = context.AnalysisResult.ResponseData.errors != null ?
+                context.AnalysisResult.ResponseData.errors.First().message :
+                context.AnalysisResult.ApiCallResult.Data;
+            return message;
+        }
+
+
     }
 }
