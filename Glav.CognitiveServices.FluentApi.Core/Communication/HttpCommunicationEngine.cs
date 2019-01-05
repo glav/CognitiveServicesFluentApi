@@ -26,14 +26,14 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         {
             var content = new ByteArrayContent(payload);
             content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
-            return await PostToServiceAsync(apiActionType, content, true, urlQueryParameters);
+            return await PostToServiceAsync(apiActionType, content, urlQueryParameters);
         }
         public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
         {
             var content = new StringContent(payload,System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
-            return await PostToServiceAsync(apiActionType, content, false,urlQueryParameters);
+            return await PostToServiceAsync(apiActionType, content, urlQueryParameters);
         }
-        private async Task<ICommunicationResult> PostToServiceAsync(ApiActionType apiActionType, ByteArrayContent content, bool isBinaryPayload, string urlQueryParameters)
+        private async Task<ICommunicationResult> PostToServiceAsync(ApiActionType apiActionType, ByteArrayContent content, string urlQueryParameters)
         {
             _configurationSettings.DiagnosticLogger.LogInfo($"Performing async service call for {apiActionType}", "HttpCommunicationEngine");
 
