@@ -28,7 +28,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         }
 
         [Fact]
-        public void ShouldParseErrorResultSuccessfully()
+        public void ShouldParseErrorResultResponseSuccessfully()
         {
             var input = "{\"code\":\"BadRequest\",\"message\":\"Invalid request\",\"innerError\":{\"code\":\"InvalidRequestBodyFormat\",\"message\":\"Request body format is wrong.Make sure the json request is serialized correctly and there are no null members.\"}}";
             var result = new SentimentResult(new MockCommsResult(input,System.Net.HttpStatusCode.BadRequest));
@@ -44,6 +44,25 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.NotNull(result.ResponseData.errors[0].InnerError);
             Assert.Equal("InvalidRequestBodyFormat", result.ResponseData.errors[0].InnerError.code);
             Assert.Equal("Request body format is wrong.Make sure the json request is serialized correctly and there are no null members.", result.ResponseData.errors[0].InnerError.message);
+        }
+
+        [Fact]
+        public async Task ShouldParseErrorResultViaPipelineSuccessfully()
+        {
+            var input = "{\"code\":\"BadRequest\",\"message\":\"Invalid request\",\"innerError\":{\"code\":\"InvalidRequestBodyFormat\",\"message\":\"Request body format is wrong.Make sure the json request is serialized correctly and there are no null members.\"}}";
+            var mockCommsEngine = new MockCommsEngine(new MockCommsResult(input));
+            var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
+                .AddConsoleDiagnosticLogging()
+                .UsingCustomCommunication(mockCommsEngine)
+                .WithTextAnalyticAnalysisActions()
+                .AddLanguageAnalysis("some rubbish")
+                .AnalyseAllAsync();
+
+            Assert.NotNull(result);
+            Assert.False(result.LanguageAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            var errMsg = result.LanguageAnalysis.GetInitialErrorMessage();
+            Assert.NotNull(errMsg);
+            Assert.Equal("Invalid request", errMsg);
         }
 
         [Fact]
