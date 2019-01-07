@@ -6,6 +6,7 @@ using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.UnitTests.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
+using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
@@ -153,6 +154,36 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.NotEmpty(result.LanguageAnalysis.AnalysisResults);
 
             var results = result.LanguageAnalysis.GetResults();
+            Assert.NotNull(results);
+            Assert.Equal(1, results.Count());
+            Assert.NotEmpty(results.First().detectedLanguages);
+            Assert.Equal(1, results.First().detectedLanguages.Length);
+            Assert.Equal("English", results.First().detectedLanguages[0].name);
+            Assert.Equal("en", results.First().detectedLanguages[0].iso6391name);
+            Assert.Equal(1.0, results.First().detectedLanguages[0].score);
+            Assert.Equal(1, results.First().detectedLanguages.Length);
+        }
+
+        [Fact]
+        public async Task ShouldReturnResultsMatchingAConfidenceLevelDescriptor()
+        {
+            var langResult = "{\"documents\":[{\"id\":\"1\",\"detectedLanguages\":[{\"name\":\"English\",\"iso6391Name\":\"en\",\"score\":1.0}]}],\"errors\":[]}";
+            var commsEngine = new MockCommsEngine(new MockCommsResult(langResult));
+            var logger = new TestLogger();
+
+            var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
+                .SetDiagnosticLoggingLevel(LoggingLevel.None)
+                .AddCustomDiagnosticLogging(logger)
+                .UsingCustomCommunication(commsEngine)
+                .WithTextAnalyticAnalysisActions()
+                .AddLanguageAnalysis("Can be anything here")
+                .AnalyseAllAsync();
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.LanguageAnalysis);
+            Assert.NotEmpty(result.LanguageAnalysis.AnalysisResults);
+
+            var results = result.LanguageAnalysis.GetResultsThatContainConfidenceLevel(DefaultScoreLevels.Positive);
             Assert.NotNull(results);
             Assert.Equal(1, results.Count());
             Assert.NotEmpty(results.First().detectedLanguages);

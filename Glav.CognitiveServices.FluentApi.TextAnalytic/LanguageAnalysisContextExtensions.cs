@@ -33,12 +33,24 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return context.AnalysisResult.ResponseData.documents.AsEnumerable();
         }
 
-        public static IEnumerable<LanguagesResultResponseItem> GetResultsThatContainConfidenceLevel(this LanguageAnalysisContext context, string languageConfidence)
+        /// <summary>
+        /// Find any results that match the textual descriptor of the Score level. eg. Find all results matching have a score of 'Positive'
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="languageConfidenceDescriptor"></param>
+        /// <returns></returns>
+        public static IEnumerable<LanguagesResultResponseItem> GetResultsThatContainConfidenceLevel(this LanguageAnalysisContext context, string languageConfidenceDescriptor)
         {
             var results = new List<LanguagesResultResponseItem>();
+            if (string.IsNullOrWhiteSpace(languageConfidenceDescriptor))
+            {
+                return results;
+            }
+
+            var normalisedLevel = languageConfidenceDescriptor.ToLowerInvariant();
             context.AnalysisResult.ResponseData.documents.ToList().ForEach((item) =>
             {
-                if (item.detectedLanguages.Any(i => Score(context,i).NormalisedName == languageConfidence)
+                if (item.detectedLanguages.Any(i => Score(context,i).NormalisedName == normalisedLevel)
                     && !results.Any(i => i.id == item.id))
                 {
                     results.Add(item);
