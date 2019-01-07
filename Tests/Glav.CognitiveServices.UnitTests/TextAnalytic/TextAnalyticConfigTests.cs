@@ -2,6 +2,7 @@ using Xunit;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using System;
 using System.Collections.Generic;
+using Glav.CognitiveServices.FluentApi.ComputerVision.Configuration;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
@@ -24,6 +25,34 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("12345", i.Item1);
                 var url = config.BaseUrl;
                 Assert.Equal(i.Item2, url);
+            });
+        }
+
+        [Fact]
+        public void ShouldHaveDefinedUrisForTextAnalyticActions()
+        {
+            // Get our text analytic config
+            var uriLocations = new Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration.ApiServiceUriCollection();
+
+            Assert.NotNull(uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.TextAnalyticsKeyphrases));
+            Assert.NotNull(uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.TextAnalyticsLanguages));
+            Assert.NotNull(uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.TextAnalyticsOperationStatus));
+            Assert.NotNull(uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.TextAnalyticsSentiment));
+        }
+
+        [Fact]
+        public void ShouldNotHaveDefinedUrisForTextAnalyticForNonTetyticActions()
+        {
+            // Get our text analytic config
+            var uriLocations = new Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration.ApiServiceUriCollection();
+
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.ComputerVisionImageAnalysis);
+            });
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.EmotionImageRecognition);
             });
         }
 
