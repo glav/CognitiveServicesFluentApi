@@ -4,15 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <DebugType>full</DebugType>
     <Authors>Paul Glavich</Authors>
-    <Company>Paul Glavich</Company>
+    <Company></Company>
     <Product>Cognitive Services Fluent API</Product>
-    <Description>This package represents a set of common core components to be used with the various cognitive services fluent API packages.</Description>
+    <Description>A fluent API for using the ComputerVision set of cognitive services</Description>
     <Copyright>Paul Glavich 2017</Copyright>
     <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
     <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Cognitive services, .net, azure, ComputerVision</PackageTags>
-    <PackageReleaseNotes>Added support and documentation for the RecognizeText ComputerVision API.</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <Version>0.8.6</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

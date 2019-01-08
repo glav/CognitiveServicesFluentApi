@@ -14,7 +14,7 @@
     <PackageTags>Cognitive services, .net, azure, TextAnalytic</PackageTags>
     <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
     <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
-    <PackageReleaseNotes>Minor bug fixes/refinements.</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
