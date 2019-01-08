@@ -1,4 +1,28 @@
 
+## Version: 0.8.9.1 [01/08/2019 12:22:03]
+### New Items
+* ac1c9f6 -Validating name value for Score definitions to be non empty
+* 33d0594 -Added GetInitialErrorMessage to all other context results
+* 788b56e -Added GetInitialErrorMessage extension method for easir parsing when errors occur and bumped version
+### Full change list
+* 54be62f Changing version to path bump only
+* fcbced6 Aded tests for custom score levels
+* d7be714 BUG:Added language test for confidence level result extension and fixed normalisation bug
+* 2003916 Added a LanguageAnalysis test to ensure end to end parsing
+* 0b59e1f Removed unused response root for old Topic analysis fuctionality
+* 59888dc Adding an extra test around LanguageContext extensions and parsing
+* 3f83409 Adding some basic tests around Uri config
+* adf6017 Updating to latest .Net Test SDK
+* ac1c9f6 NEW:Validating name value for Score definitions to be non empty
+* fc9f403 Removing unused parameter from HTTP call
+* 5775448 Fixing code smell
+* 33d0594 NEW:Added GetInitialErrorMessage to all other context results
+* 75d0c60 Version bump of computer vision
+* 178b5e3 Cleanup of unused usings
+* 788b56e NEW:Added GetInitialErrorMessage extension method for easir parsing when errors occur and bumped version
+* 065110b More cleanup via code recommendations
+* 2810ba9 Code cleanup via recommendatins from SonarQube
+
 ## Version: 0.8.9 [01/04/2019 15:38:48]
 ### New Items
 * d2be580 -Added support for Nuget LicenceExpression for each package
