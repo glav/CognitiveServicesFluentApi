@@ -1,5 +1,5 @@
 # CognitiveServicesFluentApi
-A fluent API to use with the Microsoft Cortana suite of cognitive services. Currently this API only supports TextAnalytics and Emotion services but more will come. Computer Vision is currently a work in progress.
+A fluent API to use with the Microsoft Cortana suite of cognitive services. Currently this API only supports TextAnalytics, ComputerVision and Face services but more will come. 
 
 The objective is to make the set of Cognitive service API's really easy to consume from .Net applications. In addition, a set of helper extension methods are available to try and make common functionality super easy to access.
 
@@ -8,6 +8,7 @@ If you are new to this project, please see the getting started section below. Fo
 * [TextAnalytics Fluent API](./Wiki/TextAnalytics.md)
 * [Emotion Fluent API](./Wiki/Emotion.md)
 * [ComputerVision Fluent API](./Wiki/ComputerVision.md)
+* [Face Fluent API](./Wiki/Face.md)
 * [Scoring system](./Wiki/Scoring.md)
 
 ## How to get started.
@@ -19,14 +20,13 @@ Easiest way is to install the nuget package for your specific analysis functiona
 Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic
 ```
 
-#### For Emotion (such as face and emotion detection in images)
-```powershell
-Install-Package Glav.CognitiveServices.FluentApi.Emotion 
-```
-
-#### For ComputerVision (such as face and emotion detection in images)
+#### For ComputerVision (such as image description or adult content detection in images)
 ```powershell
 Install-Package Glav.CognitiveServices.FluentApi.ComputerVision
+```
+#### For Face 
+```powershell
+Install-Package Glav.CognitiveServices.FluentApi.Face
 ```
 
 #### Azure Cognitive Services Setup
@@ -44,8 +44,8 @@ Depending on what cognitive service you are using, add the following using state
 // For TextAnalytics API
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
 
-// For Emotion API
-using Glav.CognitiveServices.FluentApi.Emotion;
+// For Face API
+using Glav.CognitiveServices.FluentApi.Face;
 
 // For ComputerVision API
 using Glav.CognitiveServices.FluentApi.ComputerVision;
@@ -108,7 +108,7 @@ var result = await TextAnalyticConfigurationSettings.CreateUsingApiKey("YOUR-API
 ```
 
 #### Examining the results
-Each cognitive service API (such as TextAnalytics or Emotion) provides a different type of results since they are performing different actions. However there are some similarities or patterns. Each result will contain a property that houses all the input data and result data for any operations performed. Continuing with the TextAnalytic theme using the above example, the resultof the analyse call contains properties to hold the Sentiment analysis, keyphrase analysis, and language analysis.
+Each cognitive service API (such as TextAnalytics or Face) provides a different type of results since they are performing different actions. However there are some similarities or patterns. Each result will contain a property that houses all the input data and result data for any operations performed. Continuing with the TextAnalytic theme using the above example, the resultof the analyse call contains properties to hold the Sentiment analysis, keyphrase analysis, and language analysis.
 ``` c#
 result.SentimentAnalysis;
 result.KeyPhraseAnalysis;
@@ -123,7 +123,7 @@ result.LanguageAnalysis.GetResults();
 It is best to look at the specific documentation for each set of operations to further determine what actions can be performed against the result set. Often, specific methods are avlailable to extract or examine the results.
 
 #### The scoring system
-Common to almost all cognitive service operations is a confidence score for the returned result. This value is always in between 0 and 1 inclusive. 0 represents a negative, or low confidence score whereas 1 represents a positive, or high confidence score. A score of 0.5 is considered neutral. The values of the scores and the variation in the scores will mean different things to different actions. This fluent API provides a default set of score levels for each API set, that is, one for TextAnalytics, one for Emotion etc. These are the defaults but can be completely customised to suit.
+Common to almost all cognitive service operations is a confidence score for the returned result. This value is always in between 0 and 1 inclusive. 0 represents a negative, or low confidence score whereas 1 represents a positive, or high confidence score. A score of 0.5 is considered neutral. The values of the scores and the variation in the scores will mean different things to different actions. This fluent API provides a default set of score levels for each API set, that is, one for TextAnalytics, one for Face etc. These are the defaults but can be completely customised to suit.
 
 The default score levels are the following:
 * 0 - 0.35 : "Negative"
@@ -134,7 +134,7 @@ The default score levels are the following:
 
 In the default scoring engine, the "upper bound" is not inclusive (using the default/supplied scoring engine). For example, a value must be greater than or equal to 0 and less than 0.35 to be considered "Negative". All upper bounds are non inclusive, with the exception of 1.
 
-TextAnalystics uses these scores by default. Emotion has a slightly different default set of scores.
+TextAnalystics uses these scores by default. Face has a slightly different default set of scores.
 * 0 - 0.15 : "Definitely Negative"
 * 0.15 - 0.35 : "Probably Negative"
 * 0.35 - 0.49 : "Possibly Negative"
@@ -160,11 +160,6 @@ Each API operates a little different in terms of scoring and the fluent API diff
 ``` c#
 var negativeResults = result.SentimentAnalysis.GetResults(DefaultScoreLevels.Negative);
 ```
-However, for the Emotion API, you find all the angry faces or happy faces with:
-``` c#
-var angryFaces = result.ImageRecognitionAnalysis.GetAngryFaces();
-var happyFaces = result.ImageRecognitionAnalysis.GetHappyFaces();
-``` 
 
 This is just the beginning though. For full details on all the fluent API options available for each API set, please use the links for the detailed documentation around each fluent API. Similarly, for further details on usage and customisation of the scoring levels, please see the links on that section.
 
