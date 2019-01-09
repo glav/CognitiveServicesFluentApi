@@ -13,7 +13,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         EmotionImageRecognition,
         ComputerVisionImageAnalysis,
         ComputerVisionOcrAnalysis,
-        ComputerVisionRecognizeText
+        ComputerVisionRecognizeText,
+        FaceDetection
     }
 
 }

@@ -8,6 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
     {
         TextAnalytics,
         Emotion,
-        ComputerVision
+        ComputerVision,
+        Face
     }
 }
