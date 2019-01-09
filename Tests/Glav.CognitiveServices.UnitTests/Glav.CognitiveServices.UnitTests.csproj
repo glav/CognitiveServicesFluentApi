@@ -13,10 +13,12 @@
     <None Remove="TestData\ComputerVisionImageAnalysisResponse.json" />
     <None Remove="TestData\ComputerVisionOcrAnalysisResponse.json" />
     <None Remove="TestData\ComputerVisionRecognizeTextAnalysisResponse.json" />
+    <None Remove="TestData\FaceDetectionResponse.json" />
     <None Remove="TestData\SanitisedHtmlEmail.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="TestData\FaceDetectionResponse.json" />
     <EmbeddedResource Include="TestData\ComputerVisionImageAnalysisResponse.json" />
     <EmbeddedResource Include="TestData\ComputerVisionRecognizeTextAnalysisResponse.json" />
     <EmbeddedResource Include="TestData\ComputerVisionOcrAnalysisResponse.json" />
@@ -33,6 +35,7 @@
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.ComputerVision\Glav.CognitiveServices.FluentApi.ComputerVision.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Core\Glav.CognitiveServices.FluentApi.Core.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Emotion\Glav.CognitiveServices.FluentApi.Emotion.csproj" />
+    <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Face\Glav.CognitiveServices.FluentApi.Face.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.TextAnalytic\Glav.CognitiveServices.FluentApi.TextAnalytic.csproj" />
   </ItemGroup>
 
