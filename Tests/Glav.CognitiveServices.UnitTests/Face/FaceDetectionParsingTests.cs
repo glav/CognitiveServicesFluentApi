@@ -38,6 +38,16 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.Equal(GenderType.Female, "fEmAlE".ToGenderType());
             Assert.Equal(GenderType.Male, "mAlE".ToGenderType());
             Assert.Equal(GenderType.Genderless, "Gorilla".ToGenderType());
+            Assert.Equal(GenderType.Genderless, " ".ToGenderType());
+        }
+
+        [Fact]
+        public void ShouldParseGlassesIntoType()
+        {
+            Assert.Equal(GlassesType.ReadingGlasses, "ReadingglasseS".ToGlassesType());
+            Assert.Equal(GlassesType.NoGlasses, "blah".ToGlassesType());
+            Assert.Equal(GlassesType.Sunglasses, "sunGlasSes".ToGlassesType());
+            Assert.Equal(GlassesType.SwimmingGoggles, "SwiMminGGoggles".ToGlassesType());
         }
 
     }

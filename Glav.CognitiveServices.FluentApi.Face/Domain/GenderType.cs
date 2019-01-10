@@ -13,7 +13,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
     {
         public static GenderType ToGenderType(this string genderValue)
         {
-            return EnumParserExtensions.ToEnumType<GenderType>(genderValue);
+            return genderValue.ToEnumType<GenderType>();
         }
     }
 

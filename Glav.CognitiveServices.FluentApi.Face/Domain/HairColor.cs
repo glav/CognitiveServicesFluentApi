@@ -1,4 +1,6 @@
-﻿namespace Glav.CognitiveServices.FluentApi.Face.Domain
+﻿using Glav.CognitiveServices.FluentApi.Core;
+
+namespace Glav.CognitiveServices.FluentApi.Face.Domain
 {
     public enum HairColor
     {
@@ -10,6 +12,14 @@
         Other,
         Red,
         White
+    }
+
+    public static class HairColorExtensions
+    {
+        public static HairColor ToHairColor(this string hairColorValue)
+        {
+            return hairColorValue.ToEnumType<HairColor>();
+        }
     }
 
 }
