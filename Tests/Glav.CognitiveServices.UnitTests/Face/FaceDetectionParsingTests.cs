@@ -50,5 +50,12 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.Equal(GlassesType.SwimmingGoggles, "SwiMminGGoggles".ToGlassesType());
         }
 
+        [Fact]
+        public void ShouldParseHairColorIntoType()
+        {
+            Assert.Equal(HairColor.Brown, "brOwn".ToHairColor());
+            Assert.Equal(HairColor.Unknown, "blur and green".ToHairColor());
+        }
+
     }
 }
