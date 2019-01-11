@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
+using Glav.CognitiveServices.FluentApi.Face;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
@@ -17,7 +18,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         public void ShouldParseFaceDetectionResultSuccessfully()
         {
             var input = _helper.GetFileDataEmbeddedInAssembly("FaceDetectionResponse.json");
-            var result = new FaceDetectionAnalysisResult(new MockCommsResult(input));
+            var result = new FaceDetectionResult(new MockCommsResult(input));
 
             Assert.NotNull(result);
             Assert.NotNull(result.ApiCallResult);
@@ -30,6 +31,37 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var responseItem = result.ResponseData.detectedFaces[0];
             Assert.Equal("c5c24a82-6845-4031-9d5d-978df9175426", responseItem.faceId);
             
+        }
+
+        [Fact]
+        public async Task ShouldParseFaceDetectionResultThroughPipelineSuccessfully()
+        {
+            var input = _helper.GetFileDataEmbeddedInAssembly("FaceDetectionResponse.json");
+            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
+                    .AddConsoleDiagnosticLogging()
+                    .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(input)))
+                    .WithFaceAnalysisActions()
+                    .AddUrlForFaceDetection("http://whatever",FaceDetectionAttributes.Age)
+                    .AnalyseAllAsync();
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.FaceDetectionAnalysis);
+            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult);
+            Assert.True(result.FaceDetectionAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult.ResponseData);
+
+            var resultData = result.FaceDetectionAnalysis.AnalysisResult.ResponseData;
+            Assert.NotEmpty(resultData.detectedFaces);
+            Assert.Equal(1,resultData.detectedFaces.Length);
+
+            //Assert.NotNull(result.ResponseData);
+            //Assert.Null(result.ResponseData.error);
+            //Assert.NotEmpty(result.ResponseData.detectedFaces);
+            //Assert.Equal<long>(1, result.ResponseData.detectedFaces.Length);
+
+            //var responseItem = result.ResponseData.detectedFaces[0];
+            //Assert.Equal("c5c24a82-6845-4031-9d5d-978df9175426", responseItem.faceId);
+
         }
 
         [Fact]

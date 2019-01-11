@@ -5,9 +5,9 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain
 {
-    public class FaceDetectionAnalysisResult : BaseResponseResult<FaceDetectResponseRoot>
+    public class FaceDetectionResult : BaseResponseResult<FaceDetectResponseRoot>
     {
-        public FaceDetectionAnalysisResult(ICommunicationResult apiCallResult)
+        public FaceDetectionResult(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             ParseResponseData();
