@@ -6,7 +6,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
     {
         public ApiServiceUriCollection()
         {
-            Services.Add(ApiActionType.EmotionImageRecognition, new FaceDetectionServiceConfig());
+            Services.Add(ApiActionType.FaceDetection, new FaceDetectionServiceConfig());
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
     public class FaceConfigurationSettings : ConfigurationSettings
     {
         public FaceConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey) 
-                : base(ApiActionCategory.Emotion,apiKey,locationKey, new ApiServiceUriCollection())
+                : base(ApiActionCategory.Face,apiKey,locationKey, new ApiServiceUriCollection())
         {
         }
 
