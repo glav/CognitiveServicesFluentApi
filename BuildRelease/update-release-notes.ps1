@@ -51,7 +51,7 @@ createIfNotExist
 
 #Using the git commit history, extract out any commits with NEW: and BUGFIX: as the commit message
 $newChanges = extractLines "NEW:"
-$bugFixes = extractLines "BUGFIX:"
+$bugFixes = extractLines "BUG:"
 
 #Get any existing contents to write to the bottom of the file later as we want the latest changes at the top
 $priorReleaseNotes = Get-Content $filePath 
