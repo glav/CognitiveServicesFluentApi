@@ -53,15 +53,32 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var resultData = result.FaceDetectionAnalysis.AnalysisResult.ResponseData;
             Assert.NotEmpty(resultData.detectedFaces);
             Assert.Equal(1,resultData.detectedFaces.Length);
+        }
 
-            //Assert.NotNull(result.ResponseData);
-            //Assert.Null(result.ResponseData.error);
-            //Assert.NotEmpty(result.ResponseData.detectedFaces);
-            //Assert.Equal<long>(1, result.ResponseData.detectedFaces.Length);
+        [Fact]
+        public async Task ShouldParseFaceDetectionResultThroughPipelineForGenderFemaleAndAgeSuccessfully()
+        {
+            var input = _helper.GetFileDataEmbeddedInAssembly("FaceDetectionResponse-FemaleWithAge.json");
+            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
+                    .AddConsoleDiagnosticLogging()
+                    .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(input)))
+                    .WithFaceAnalysisActions()
+                    .AddUrlForFaceDetection("http://whatever", FaceDetectionAttributes.Age)
+                    .AnalyseAllAsync();
 
-            //var responseItem = result.ResponseData.detectedFaces[0];
-            //Assert.Equal("c5c24a82-6845-4031-9d5d-978df9175426", responseItem.faceId);
+            Assert.NotNull(result);
+            Assert.NotNull(result.FaceDetectionAnalysis);
+            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult);
+            Assert.True(result.FaceDetectionAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult.ResponseData);
 
+            var resultData = result.FaceDetectionAnalysis.AnalysisResult.ResponseData;
+            Assert.NotEmpty(resultData.detectedFaces);
+            Assert.Equal(1, resultData.detectedFaces.Length);
+            Assert.NotNull(resultData.detectedFaces[0].faceAttributes);
+            Assert.NotNull(resultData.detectedFaces[0].faceAttributes.gender);
+            Assert.Equal(GenderType.Female, resultData.detectedFaces[0].faceAttributes.gender.ToGenderType());
+            Assert.Equal(24.0, resultData.detectedFaces[0].faceAttributes.age);
         }
 
         [Fact]

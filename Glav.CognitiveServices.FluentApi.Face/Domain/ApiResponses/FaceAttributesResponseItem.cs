@@ -3,7 +3,7 @@
     public class FaceAttributesResponseItem
     {
         public AccessoryResponseItem[] accessories { get; set; }
-        public int age { get; set; }
+        public double age { get; set; }
         public BlurResponseItem blur { get; set; }
         public FaceEmotionResponseItem emotion { get; set; }
         public ExposureResponseItem exposure { get; set; }

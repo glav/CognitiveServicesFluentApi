@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <None Remove="TestData\abbey_road.png" />
+    <None Remove="TestData\female_face_image.jpeg" />
     <None Remove="TestData\Handwriting1.png" />
     <None Remove="TestData\printed-text.JPG" />
     <None Remove="TestData\yeti-car.jpg" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestData\abbey_road.png" />
+    <EmbeddedResource Include="TestData\female_face_image.jpeg" />
     <EmbeddedResource Include="TestData\Handwriting1.png" />
     <EmbeddedResource Include="TestData\printed-text.JPG" />
     <EmbeddedResource Include="TestData\yeti-car.jpg" />

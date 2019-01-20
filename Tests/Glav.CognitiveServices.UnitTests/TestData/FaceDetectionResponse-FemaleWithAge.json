@@ -1,0 +1,15 @@
+[
+  {
+    "faceId": "917bd6f3-9566-4fb2-aad9-3314500e7731",
+    "faceRectangle": {
+      "top": 355,
+      "left": 527,
+      "width": 541,
+      "height": 541
+    },
+    "faceAttributes": {
+      "gender": "female",
+      "age": 24.0
+    }
+  }
+]
