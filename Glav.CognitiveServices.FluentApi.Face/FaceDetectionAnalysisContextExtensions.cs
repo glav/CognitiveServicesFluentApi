@@ -23,5 +23,29 @@ namespace Glav.CognitiveServices.FluentApi.Face
         {
             return responseItem.faceAttributes?.gender.ToGenderType() == gender;
         }
+
+        public static bool IsGlassesType(this FaceDetectResponseItem responseItem, GlassesType glasses)
+        {
+            return responseItem.faceAttributes?.glasses.ToGlassesType() == glasses;
+        }
+
+        public static bool HasEyeMakeup(this FaceDetectResponseItem responseItem)
+        {
+            return responseItem.faceAttributes != null ? responseItem.faceAttributes.makeup.eyeMakeup : false;
+        }
+
+        public static bool HasLipMakeup(this FaceDetectResponseItem responseItem)
+        {
+            return responseItem.faceAttributes != null ? responseItem.faceAttributes.makeup.lipMakeup : false;
+        }
+
+        public static bool IsNoiseLevel(this FaceDetectResponseItem responseItem, NoiseLevel level)
+        {
+            return responseItem.faceAttributes.noise?.noiseLevel.ToNoiseLevel() == level;
+        }
+        public static bool IsExposureLevel(this FaceDetectResponseItem responseItem, ExposureLevel level)
+        {
+            return responseItem.faceAttributes.exposure?.exposureLevel.ToExposureLevel() == level;
+        }
     }
 }

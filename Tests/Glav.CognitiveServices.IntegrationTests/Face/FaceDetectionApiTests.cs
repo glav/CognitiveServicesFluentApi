@@ -37,7 +37,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         }
 
         [Fact]
-        public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysisForImageFileAnalysis()
+        public async Task FaceDataShouldBeProvidedForGenderAgeImageFileAnalysis()
         {
             var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
@@ -61,6 +61,50 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.True(firstResult.faceAttributes.age > 0);
             Assert.NotNull(firstResult.faceId);
         }
+
+        [Fact]
+        public async Task FaceAttributesShouldBeProvidedForCommonAttributesImageFileAnalysis()
+        {
+            var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
+            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                .AddDebugDiagnosticLogging()
+                .UsingHttpCommunication()
+                .WithFaceAnalysisActions()
+                .AddFileForFaceDetection(imageData, FaceDetectionAttributes.HeadPose | FaceDetectionAttributes.FacialHair |
+                                                    FaceDetectionAttributes.Glasses | FaceDetectionAttributes.Emotion | 
+                                                    FaceDetectionAttributes.Smile)
+                .AnalyseAllAsync();
+
+            var firstResult = result.FaceDetectionAnalysis.GetResults().First();
+
+            Assert.NotNull(firstResult.faceId);
+            Assert.NotNull(firstResult.faceAttributes);
+            Assert.True(firstResult.IsGlassesType(GlassesType.NoGlasses));
+            Assert.NotNull(firstResult.faceAttributes.headPose);
+            Assert.NotNull(firstResult.faceAttributes.emotion);
+        }
+
+        [Fact]
+        public async Task FaceAttributesShouldBeProvidedForUnCommonAttributesImageFileAnalysis()
+        {
+            var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
+            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                .AddDebugDiagnosticLogging()
+                .UsingHttpCommunication()
+                .WithFaceAnalysisActions()
+                .AddFileForFaceDetection(imageData, FaceDetectionAttributes.Hair | FaceDetectionAttributes.MakeUp |
+                                                    FaceDetectionAttributes.Occlusion | FaceDetectionAttributes.Accessories |
+                                                    FaceDetectionAttributes.Blur | FaceDetectionAttributes.Exposure | FaceDetectionAttributes.Noise)
+                .AnalyseAllAsync();
+
+            var firstResult = result.FaceDetectionAnalysis.GetResults().First();
+
+            Assert.NotNull(firstResult.faceId);
+            Assert.NotNull(firstResult.faceAttributes);
+            Assert.True(firstResult.IsNoiseLevel(NoiseLevel.Low));
+            Assert.True(firstResult.IsExposureLevel(ExposureLevel.GoodExposure));
+        }
+
 
     }
 }
