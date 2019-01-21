@@ -8,7 +8,7 @@ The Face cognitive service provides the ability to perform face detection, verif
 ## Face Usage
 To detect a face in an image at a particular Url, then determine its gender and age, you can do the following:
 ```c#
-var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys("YOUR-API-KEY", LocationKeyIdentifier.WestUs)
+var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("YOUR-API-KEY", LocationKeyIdentifier.WestUs)
     .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
     .AddDebugDiagnosticLogging()
     .UsingHttpCommunication()
@@ -19,7 +19,7 @@ var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys("YO
 
 Similarly, for an image that is specified via a filename, you can do the following:
 ```c#
-var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys("YOUR-API-KEY", LocationKeyIdentifier.WestUs)
+var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("YOUR-API-KEY", LocationKeyIdentifier.WestUs)
     .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
     .AddDebugDiagnosticLogging()
     .UsingHttpCommunication()

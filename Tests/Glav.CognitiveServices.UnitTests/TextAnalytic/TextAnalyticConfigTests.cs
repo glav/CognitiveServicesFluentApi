@@ -50,10 +50,6 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             {
                 uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.ComputerVisionImageAnalysis);
             });
-            Assert.Throws<KeyNotFoundException>(() =>
-            {
-                uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.EmotionImageRecognition);
-            });
         }
 
     }

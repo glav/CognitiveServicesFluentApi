@@ -1,6 +1,6 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
-namespace Glav.CognitiveServices.UnitTests.Emotion
+namespace Glav.CognitiveServices.UnitTests.ScoreLevels
 {
     public class CustomValidScoreLevelCollection : BaseScoreLevelsCollection
     {

@@ -10,9 +10,9 @@ For TextAnalytics, this is done by:
 ``` c#
 var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier)
 ```
-For Emotion, this is done by:
+For Face, this is done by:
 ``` c#
-var config = EmotionConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier)
+var config = FaceConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier)
 ```
 For ComputerVision, this is done by:
 ``` c#

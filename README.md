@@ -6,7 +6,6 @@ The objective is to make the set of Cognitive service API's really easy to consu
 If you are new to this project, please see the getting started section below. For those wanting detailed documentation, here you go:
 * [Common/Core Fluent API](./Wiki/Common.md)
 * [TextAnalytics Fluent API](./Wiki/TextAnalytics.md)
-* [Emotion Fluent API](./Wiki/Emotion.md)
 * [ComputerVision Fluent API](./Wiki/ComputerVision.md)
 * [Face Fluent API](./Wiki/Face.md)
 * [Scoring system](./Wiki/Scoring.md)

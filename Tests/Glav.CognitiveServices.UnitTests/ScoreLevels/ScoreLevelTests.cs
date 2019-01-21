@@ -6,7 +6,7 @@ using Glav.CognitiveServices.FluentApi.Core;
 using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
 
-namespace Glav.CognitiveServices.UnitTests.Emotion
+namespace Glav.CognitiveServices.UnitTests.ScoreLevels
 {
     public class ScoreLevelTests
     {

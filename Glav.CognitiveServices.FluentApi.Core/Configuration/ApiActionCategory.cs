@@ -7,7 +7,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
     public enum ApiActionCategory
     {
         TextAnalytics,
-        Emotion,
         ComputerVision,
         Face
     }

@@ -29,7 +29,6 @@ namespace Glav.CognitiveServices.IntegrationTests
         }
 
         public static string TextAnalyticsApiKey => Configuration["ApiKeys:TextAnalytics"];
-        public static string EmotionApiKey => Configuration["ApiKeys:Emotion"];
         public static string ComputerVisionApiKey => Configuration["ApiKeys:ComputerVision"];
         public static string FaceApiKey => Configuration["ApiKeys:Face"];
     }
