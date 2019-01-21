@@ -13,6 +13,6 @@ var result = await EmotionConfigurationSettings.CreateUsingConfigurationKeys("YO
     .AddDebugDiagnosticLogging()
     .UsingHttpCommunication()
     .WithFaceAnalysisActions()
-    .Add..............("http://www.scface.org/examples/001_frontal.jpg")
+    .AddUrlForFaceDetection("http://www.scface.org/examples/001_frontal.jpg",FaceDetectionAttributes.Gender | FaceDetectionAttributes.Age)
     .AnalyseAllAsync();
 ```
