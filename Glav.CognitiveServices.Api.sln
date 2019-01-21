@@ -18,8 +18,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.Flue
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.TextAnalytic", "Glav.CognitiveServices.FluentApi.TextAnalytic\Glav.CognitiveServices.FluentApi.TextAnalytic.csproj", "{8A2C8924-E430-448F-9B33-095F5800EA2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.Emotion", "Glav.CognitiveServices.FluentApi.Emotion\Glav.CognitiveServices.FluentApi.Emotion.csproj", "{78477446-4BE0-44FC-BE5B-0EBA35AB1276}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wiki", "Wiki", "{8DDD157F-2FD5-42DC-8AF3-5D6FA3BEF689}"
 	ProjectSection(SolutionItems) = preProject
 		Wiki\Common.md = Wiki\Common.md
@@ -99,18 +97,6 @@ Global
 		{8A2C8924-E430-448F-9B33-095F5800EA2D}.Release|x64.Build.0 = Release|Any CPU
 		{8A2C8924-E430-448F-9B33-095F5800EA2D}.Release|x86.ActiveCfg = Release|Any CPU
 		{8A2C8924-E430-448F-9B33-095F5800EA2D}.Release|x86.Build.0 = Release|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Debug|x64.Build.0 = Debug|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Debug|x86.Build.0 = Debug|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Release|x64.ActiveCfg = Release|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Release|x64.Build.0 = Release|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Release|x86.ActiveCfg = Release|Any CPU
-		{78477446-4BE0-44FC-BE5B-0EBA35AB1276}.Release|x86.Build.0 = Release|Any CPU
 		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6C258C8-5133-404C-A54E-E8BB1D0CB7E7}.Debug|x64.ActiveCfg = Debug|Any CPU
