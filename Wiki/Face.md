@@ -70,5 +70,5 @@ var isFemale = firstResult.IsGender(GenderType.Female));
 var age = firstResult.faceAttributes.age;
 var notWearingGlasses = firstResult.IsGlassesType(GlassesType.NoGlasses);
 var imageHasGoodExposure = firstResult.IsExposureLevel(ExposureLevel.GoodExposure);
-var faceId = firstResult.faceId);
+var faceId = firstResult.faceId;
 ```
