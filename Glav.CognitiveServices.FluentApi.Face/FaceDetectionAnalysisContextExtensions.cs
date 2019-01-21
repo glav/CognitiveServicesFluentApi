@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Face
 {
-    public static class FaceAnalysisContextExtensions
+    public static class FaceDetectionAnalysisContextExtensions
     {
         public static FaceDetectResponseItem GetResult(this FaceDetectionAnalysisContext context, string faceId)
         {
@@ -17,6 +17,11 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public static IEnumerable<FaceDetectResponseItem> GetResults(this FaceDetectionAnalysisContext context)
         {
             return context.AnalysisResult.ResponseData.detectedFaces.AsEnumerable();
+        }
+
+        public static bool IsGender(this FaceDetectResponseItem responseItem, GenderType gender)
+        {
+            return responseItem.faceAttributes?.gender.ToGenderType() == gender;
         }
     }
 }

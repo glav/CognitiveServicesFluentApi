@@ -57,6 +57,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.NotNull(firstResult.faceAttributes);
 
             Assert.NotNull(firstResult.faceAttributes.gender);
+            Assert.True(firstResult.IsGender(GenderType.Female));
             Assert.True(firstResult.faceAttributes.age > 0);
             Assert.NotNull(firstResult.faceId);
         }
