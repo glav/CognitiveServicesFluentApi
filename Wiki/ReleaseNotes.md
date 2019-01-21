@@ -1,4 +1,41 @@
 
+## Version: 0.9.0 [01/22/2019 09:38:47]
+### New Items
+* a5512c0 -Completely removing Emotion from Wiki, remaining enumerations and tests
+* e79dd0c -Removal of deprecated Emotion API and associated tests
+* ac88577 -Added end to end support for Face Detection API and a test - WIP
+* 634a990 -Added FaceDetection response structures and property elements
+* 6b7c56a -Added Empty Wiki elements for Face API support and custom score levels
+* 89053fc -Adding initial structure of Face API support
+### Bugfixes
+* aa7d7ad -Added test for age and gender, fixed bug in age parsing
+### Full change list
+* d258a7a Ensuring TextAnalytic has consistent version after Face API addition
+* 375f902 Minor typo in Wiki
+* a5512c0 NEW:Completely removing Emotion from Wiki, remaining enumerations and tests
+* e79dd0c NEW:Removal of deprecated Emotion API and associated tests
+* 0e62e44 Updated the Face Wiki
+* 09d4ae5 Updated the Face Wiki
+* cf3994a Added extra assertion for blur level
+* 63c9208 Added support for extra face attributes
+* 0bcf8c7 Added gender extension method and test
+* ab1bbf4 Updated versioning script to use BUG not BUGFIX as tag text for bugs
+* aa7d7ad BUG:Added test for age and gender, fixed bug in age parsing
+* a16a351 Split out response classes for face detection into separate files, added some common extension methods
+* 71aa8ae Bringing all versions to 0.9 to prep for Face API and subsequent 1.0 release
+* 0cfcb2a Actually committed the test this time
+* 83a79e2 Fixed bug with FaceAPI and made tests work
+* 81ec78b Added FaceApiKey config to integration tests
+* ac88577 NEW:Added end to end support for Face Detection API and a test - WIP
+* e8122a6 Added another test around enum parsing
+* 038db73 Added conversion functionality for enum values in FACE
+* 277c9c8 Added face enum parsing and tests
+* 685d0fc Added basic parsing test for FaceDetection - need to flesh out more
+* 634a990 NEW:Added FaceDetection response structures and property elements
+* d0d71d8 NSW:Adding Configuration classes to support Face API
+* 6b7c56a NEW:Added Empty Wiki elements for Face API support and custom score levels
+* 89053fc NEW:Adding initial structure of Face API support
+
 ## Version: 0.8.9.1 [01/08/2019 12:22:03]
 ### New Items
 * ac1c9f6 -Validating name value for Score definitions to be non empty
