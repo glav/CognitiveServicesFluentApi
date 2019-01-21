@@ -18,8 +18,6 @@ namespace Glav.CognitiveServices.FluentApi.Face
         {
             var apiResults = new FaceAnalysisResults(AnalysisSettings);
             await AnalyseApiActionAsync(apiResults, ApiActionType.FaceDetection).ConfigureAwait(continueOnCapturedContext: false);
-            //await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsKeyphrases).ConfigureAwait(continueOnCapturedContext: false);
-            //await AnalyseApiActionAsync(apiResults, ApiActionType.TextAnalyticsLanguages).ConfigureAwait(continueOnCapturedContext: false);
 
             return apiResults;
         }

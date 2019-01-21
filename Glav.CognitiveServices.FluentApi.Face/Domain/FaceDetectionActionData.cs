@@ -37,7 +37,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
                 bool? returnFaceId = null)
         {
             Id = id;
-            ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("ImageUri is required");
+            ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("imageUri");
             ReturnedAttributes = returnedAttributes;
             ReturnFaceId = returnFaceId;
             ReturnFaceLandmarks = returnFaceLandmarks;
@@ -49,7 +49,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
                 bool? returnFaceId = null)
         {
             Id = id;
-            ImageDataToAnalyse = imageData ?? throw new ArgumentNullException("ImageData is required");
+            ImageDataToAnalyse = imageData ?? throw new ArgumentNullException("imageData");
             ReturnedAttributes = returnedAttributes;
             ReturnFaceId = returnFaceId;
             ReturnFaceLandmarks = returnFaceLandmarks;

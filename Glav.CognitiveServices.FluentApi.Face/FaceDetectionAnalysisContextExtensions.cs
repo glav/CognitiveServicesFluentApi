@@ -31,12 +31,12 @@ namespace Glav.CognitiveServices.FluentApi.Face
 
         public static bool HasEyeMakeup(this FaceDetectResponseItem responseItem)
         {
-            return responseItem.faceAttributes != null ? responseItem.faceAttributes.makeup.eyeMakeup : false;
+            return responseItem.faceAttributes != null && responseItem.faceAttributes.makeup.eyeMakeup;
         }
 
         public static bool HasLipMakeup(this FaceDetectResponseItem responseItem)
         {
-            return responseItem.faceAttributes != null ? responseItem.faceAttributes.makeup.lipMakeup : false;
+            return responseItem.faceAttributes != null && responseItem.faceAttributes.makeup.lipMakeup;
         }
 
         public static bool IsNoiseLevel(this FaceDetectResponseItem responseItem, NoiseLevel level)
