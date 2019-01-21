@@ -103,6 +103,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.NotNull(firstResult.faceAttributes);
             Assert.True(firstResult.IsNoiseLevel(NoiseLevel.Low));
             Assert.True(firstResult.IsExposureLevel(ExposureLevel.GoodExposure));
+            Assert.True(firstResult.IsBlurLevel(BlurLevel.Low));
         }
 
 

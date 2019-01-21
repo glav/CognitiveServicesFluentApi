@@ -47,5 +47,9 @@ namespace Glav.CognitiveServices.FluentApi.Face
         {
             return responseItem.faceAttributes.exposure?.exposureLevel.ToExposureLevel() == level;
         }
+        public static bool IsBlurLevel(this FaceDetectResponseItem responseItem, BlurLevel level)
+        {
+            return responseItem.faceAttributes.blur?.blurLevel.ToBlurLevel() == level;
+        }
     }
 }
