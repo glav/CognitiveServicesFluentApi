@@ -13,7 +13,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         ComputerVisionImageAnalysis,
         ComputerVisionOcrAnalysis,
         ComputerVisionRecognizeText,
-        FaceDetection
+        FaceDetection,
+        FaceLargePersonGroups
     }
 
 }
