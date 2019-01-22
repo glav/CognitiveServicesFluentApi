@@ -22,18 +22,29 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             return client;
         }
 
-        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null)
+        public async Task<ICommunicationResult> ServicePostAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null)
         {
             var content = new ByteArrayContent(payload);
             content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
-            return await PostToServiceAsync(apiActionType, content, urlQueryParameters);
+            return await ServicePostAsync(apiActionType, HttpMethod.Post, content, urlQueryParameters);
         }
-        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
+        public async Task<ICommunicationResult> ServicePostAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
         {
             var content = new StringContent(payload,System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
-            return await PostToServiceAsync(apiActionType, content, urlQueryParameters);
+            return await ServicePostAsync(apiActionType, HttpMethod.Post, content, urlQueryParameters);
         }
-        private async Task<ICommunicationResult> PostToServiceAsync(ApiActionType apiActionType, ByteArrayContent content, string urlQueryParameters)
+        public async Task<ICommunicationResult> ServicePutAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null)
+        {
+            var content = new ByteArrayContent(payload);
+            content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
+            return await ServicePostAsync(apiActionType, HttpMethod.Put, content, urlQueryParameters);
+        }
+        public async Task<ICommunicationResult> ServicePutAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
+        {
+            var content = new StringContent(payload, System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
+            return await ServicePostAsync(apiActionType, HttpMethod.Put, content, urlQueryParameters);
+        }
+        private async Task<ICommunicationResult> ServicePostAsync(ApiActionType apiActionType, HttpMethod httpAction, ByteArrayContent content, string urlQueryParameters)
         {
             _configurationSettings.DiagnosticLogger.LogInfo($"Performing async service call for {apiActionType}", "HttpCommunicationEngine");
 
@@ -45,7 +56,17 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             {
                 using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[svcConfig.ApiCategory]))
                 {
-                    var httpResult = await httpClient.PostAsync(uri, content).ConfigureAwait(continueOnCapturedContext: false);
+                    HttpResponseMessage httpResult;
+                    if (httpAction == HttpMethod.Put)
+                    {
+                        httpResult = await httpClient.PutAsync(uri, content).ConfigureAwait(continueOnCapturedContext: false);
+
+                    }
+                    else
+                    {
+                        httpResult = await httpClient.PostAsync(uri, content).ConfigureAwait(continueOnCapturedContext: false);
+
+                    }
                     _configurationSettings.DiagnosticLogger.LogInfo($"Async service call for {apiActionType} completed ok.", "HttpCommunicationEngine");
                     return await CommunicationResult.ParseResult(httpResult);
                 }
@@ -57,7 +78,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             }
 
         }
-        public async Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory)
+        public async Task<ICommunicationResult> ServiceGetAsync(string uri, ApiActionCategory apiCategory)
         {
             try
             {
