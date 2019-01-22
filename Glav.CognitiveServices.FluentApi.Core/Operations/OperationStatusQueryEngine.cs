@@ -26,7 +26,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
         public async Task<OperationStatusResult> CheckOperationStatusAsync(Uri operationStatusLocationUri)
         {
             _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("About to query operation status", "OperationStatusQuery");
-            var serviceResult = await _analysisSettings.CommunicationEngine.CallServiceAsync(operationStatusLocationUri.AbsoluteUri, _analysisSettings.ConfigurationSettings.ApiCategory);
+            var serviceResult = await _analysisSettings.CommunicationEngine.ServiceGetAsync(operationStatusLocationUri.AbsoluteUri, _analysisSettings.ConfigurationSettings.ApiCategory);
             var result = new OperationStatusResult(serviceResult);
             _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("Completed query operation status", "OperationStatusQuery");
             return result;

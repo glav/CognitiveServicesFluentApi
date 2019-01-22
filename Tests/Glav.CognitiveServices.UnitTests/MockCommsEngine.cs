@@ -12,17 +12,27 @@ namespace Glav.CognitiveServices.UnitTests
             _mockResult = mockResult;
         }
 
-        public Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
+        public Task<ICommunicationResult> ServicePostAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
         {
             return Task.FromResult<ICommunicationResult>(_mockResult);
         }
 
-        public Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null)
+        public Task<ICommunicationResult> ServicePostAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null)
         {
             return Task.FromResult<ICommunicationResult>(_mockResult);
         }
 
-        public Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory)
+        public Task<ICommunicationResult> ServiceGetAsync(string uri, ApiActionCategory apiCategory)
+        {
+            return Task.FromResult<ICommunicationResult>(_mockResult);
+        }
+
+        public Task<ICommunicationResult> ServicePutAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
+        {
+            return Task.FromResult<ICommunicationResult>(_mockResult);
+        }
+
+        public Task<ICommunicationResult> ServicePutAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null)
         {
             return Task.FromResult<ICommunicationResult>(_mockResult);
         }
