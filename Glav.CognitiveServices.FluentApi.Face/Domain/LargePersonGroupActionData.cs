@@ -26,6 +26,14 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
                 string name,
                 string userData = null)
         {
+            if (string.IsNullOrWhiteSpace(groupId))
+            {
+                throw new ArgumentNullException("groupId");
+            }
+            if (groupId.Length > 64)
+            {
+                throw new ArgumentException("groupId cannot exceed 64 in length");
+            }
             Id = id;
             Name = name;
             GroupId = groupId;
