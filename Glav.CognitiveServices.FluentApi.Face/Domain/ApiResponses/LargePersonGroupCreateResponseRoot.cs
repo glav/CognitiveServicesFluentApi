@@ -2,7 +2,7 @@
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses
 {
-    public class LargePersonGroupResponseRoot : IActionResponseRoot
+    public class LargePersonGroupCreateResponseRoot : IActionResponseRoot
     {
         public ApiErrorResponse error { get; set; }
     }

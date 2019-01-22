@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
         {
             var apiResults = new FaceAnalysisResults(AnalysisSettings);
             await AnalyseApiActionAsync(apiResults, ApiActionType.FaceDetection).ConfigureAwait(continueOnCapturedContext: false);
-
+            await AnalyseApiActionAsync(apiResults, ApiActionType.FaceLargePersonGroups).ConfigureAwait(continueOnCapturedContext: false);
             return apiResults;
         }
 
@@ -31,6 +31,9 @@ namespace Glav.CognitiveServices.FluentApi.Face
                 {
                     case ApiActionType.FaceDetection:
                         apiResults.SetResult(new FaceDetectionAnalysisContext(actionData, new FaceDetectionResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                        break;
+                    case ApiActionType.FaceLargePersonGroups:
+                        apiResults.SetResult(new LargePersonGroupAnalysisContext(actionData, new LargePersonGroupCreateResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                         break;
                     default:
                         throw new NotSupportedException($"{apiAction.ToString()} not supported yet");

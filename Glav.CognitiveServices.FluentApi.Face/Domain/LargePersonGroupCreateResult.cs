@@ -5,9 +5,9 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain
 {
-    public class LargePersonGroupResult : BaseResponseResult<LargePersonGroupResponseRoot>
+    public class LargePersonGroupCreateResult : BaseResponseResult<LargePersonGroupCreateResponseRoot>
     {
-        public LargePersonGroupResult(ICommunicationResult apiCallResult)
+        public LargePersonGroupCreateResult(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
             ParseResponseData();
@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         {
             if (ApiCallResult == null)
             {
-                ResponseData = new LargePersonGroupResponseRoot
+                ResponseData = new LargePersonGroupCreateResponseRoot
                 {
                     error = new ApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = "No data returned." }
                 };
@@ -30,7 +30,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
                 if ((int)ApiCallResult.StatusCode >= 400)
                 {
                     var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
-                    ResponseData = new LargePersonGroupResponseRoot { error = errorResponse };
+                    ResponseData = new LargePersonGroupCreateResponseRoot { error = errorResponse };
                     ActionSubmittedSuccessfully = false;
                     return;
                 }
@@ -39,7 +39,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             }
             catch (Exception ex)
             {
-                ResponseData = new LargePersonGroupResponseRoot
+                ResponseData = new LargePersonGroupCreateResponseRoot
                 {
                     error = new ApiErrorResponse { code = StandardResponseCodes.ServerError, message = $"Error parsing results: {ex.Message}" }
                 };
