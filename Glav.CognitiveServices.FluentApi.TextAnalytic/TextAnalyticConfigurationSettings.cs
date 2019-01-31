@@ -18,6 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 
         public static TextAnalyticConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey)
         {
+            SupportedLanguages.Setup();
             return new TextAnalyticConfigurationSettings(apiKey,locationKey);
         }
     }

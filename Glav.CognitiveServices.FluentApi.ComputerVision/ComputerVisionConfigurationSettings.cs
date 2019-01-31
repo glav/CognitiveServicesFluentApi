@@ -18,6 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 
         public static ComputerVisionConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey)
         {
+            SupportedLanguages.Setup();
             return new ComputerVisionConfigurationSettings(apiKey, locationKey);
         }
     }
