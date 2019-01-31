@@ -1,4 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
+﻿using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,6 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
 
         public override string Version => ApiConstants.ComputerVisionVersion;
 
-        public override ApiActionCategory ApiCategory => ApiActionCategory.ComputerVision;
+        public override ApiActionDefinition ApiAction => ComputerVisionApiOperations.ImageAnalysis;
     }
 }

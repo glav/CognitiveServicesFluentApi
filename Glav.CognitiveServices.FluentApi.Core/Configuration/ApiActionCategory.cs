@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 {
-    public enum ApiActionCategory
-    {
-        TextAnalytics,
-        ComputerVision,
-        Face
-    }
+    //public enum ApiActionCategory
+    //{
+    //    TextAnalytics,
+    //    ComputerVision,
+    //    Face
+    //}
 }

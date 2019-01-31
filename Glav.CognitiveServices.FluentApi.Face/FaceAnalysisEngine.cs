@@ -1,9 +1,9 @@
-﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
-using System;
-using System.Threading.Tasks;
-using Glav.CognitiveServices.FluentApi.Core;
+﻿using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
+using System;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.Face
 {
@@ -17,28 +17,33 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public override async Task<FaceAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new FaceAnalysisResults(AnalysisSettings);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.FaceDetection).ConfigureAwait(continueOnCapturedContext: false);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.FaceLargePersonGroups).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, FaceApiOperations.FaceDetection).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupCreate).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupGet).ConfigureAwait(continueOnCapturedContext: false);
             return apiResults;
         }
 
 
-        public override async Task AnalyseApiActionAsync(FaceAnalysisResults apiResults, ApiActionType apiAction)
+        public override async Task AnalyseApiActionAsync(FaceAnalysisResults apiResults, ApiActionDefinition apiAction)
         {
             await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
             {
-                switch (apiAction)
+                if (apiAction == FaceApiOperations.FaceDetection)
                 {
-                    case ApiActionType.FaceDetection:
-                        apiResults.SetResult(new FaceDetectionAnalysisContext(actionData, new FaceDetectionResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
-                        break;
-                    case ApiActionType.FaceLargePersonGroups:
-                        apiResults.SetResult(new LargePersonGroupAnalysisContext(actionData, new LargePersonGroupCreateResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
-                        break;
-                    default:
-                        throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
+                    apiResults.SetResult(new FaceDetectionAnalysisContext(actionData, new FaceDetectionResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    return;
                 }
-
+                if (apiAction == FaceApiOperations.LargePersonGroupCreate)
+                {
+                    apiResults.SetResult(new LargePersonGroupCreateAnalysisContext(actionData, new LargePersonGroupCreateResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    return;
+                }
+                if (apiAction == FaceApiOperations.LargePersonGroupGet)
+                {
+                    apiResults.SetResult(new LargePersonGroupGetAnalysisContext(actionData, new LargePersonGroupGetResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    return;
+                }
+                throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
             }).ConfigureAwait(continueOnCapturedContext: false);
 
         }

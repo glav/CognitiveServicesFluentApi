@@ -7,11 +7,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
     public class ApiServiceUriCollectionBase
     {
         public const string BASE_URL_TEMPLATE = "https://{0}api.cognitive.microsoft.com/";
-        private readonly Dictionary<ApiActionType, ApiServiceUriFragment> _services = new Dictionary<ApiActionType, ApiServiceUriFragment>();
+        private readonly Dictionary<ApiActionDefinition, ApiServiceUriFragment> _services = new Dictionary<ApiActionDefinition, ApiServiceUriFragment>();
 
-        protected Dictionary<ApiActionType, ApiServiceUriFragment> Services => _services;
+        protected Dictionary<ApiActionDefinition, ApiServiceUriFragment> Services => _services;
 
-        public ApiServiceUriFragment GetServiceConfig(ApiActionType apiAction)
+        public ApiServiceUriFragment GetServiceConfig(ApiActionDefinition apiAction)
         {
             return Services[apiAction];
         }

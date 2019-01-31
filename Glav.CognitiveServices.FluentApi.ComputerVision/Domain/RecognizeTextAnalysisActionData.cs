@@ -45,7 +45,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         public byte[] ImageDataToAnalyse { get; private set; }
         public Uri ImageUriToAnalyse { get; private set; }
 
-        public ApiActionType ApiType => ApiActionType.ComputerVisionRecognizeText;
+        public ApiActionDefinition ApiType => ComputerVisionApiOperations.RecognizeText;
 
         public RecognizeTextMode Mode { get; private set; }
         public long Id { get; private set; }

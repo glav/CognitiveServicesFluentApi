@@ -11,7 +11,7 @@ namespace Glav.CognitiveServices.FluentApi.Core
     {
         public CoreAnalysisSettings(ConfigurationSettings settings, ICommunicationEngine communicationEngine)
         {
-            ActionsToPerform = new Dictionary<ApiActionType, ApiActionDataCollection>();
+            ActionsToPerform = new Dictionary<ApiActionDefinition, ApiActionDataCollection>();
             ConfigurationSettings = settings;
             CommunicationEngine = communicationEngine;
         }
@@ -41,10 +41,10 @@ namespace Glav.CognitiveServices.FluentApi.Core
         }
 
         public ConfigurationSettings ConfigurationSettings { get; private set; }
-        public Dictionary<ApiActionType, ApiActionDataCollection> ActionsToPerform { get; private set; }
+        public Dictionary<ApiActionDefinition, ApiActionDataCollection> ActionsToPerform { get; private set; }
         public ICommunicationEngine CommunicationEngine { get; private set; }
 
-        public T GetOrCreateActionDataInstance<T>(ApiActionType actionType) where T : ApiActionDataCollection, new()
+        public T GetOrCreateActionDataInstance<T>(ApiActionDefinition actionType) where T : ApiActionDataCollection, new()
         {
             if (!ActionsToPerform.ContainsKey(actionType))
             {

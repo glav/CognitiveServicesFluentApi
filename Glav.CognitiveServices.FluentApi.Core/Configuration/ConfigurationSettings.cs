@@ -9,11 +9,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 {
     public abstract class ConfigurationSettings
     {
-        private Dictionary<ApiActionCategory, string> _apiKeys = new Dictionary<ApiActionCategory, string>();
+        private Dictionary<string, string> _apiKeys = new Dictionary<string, string>();
         private List<IDiagnosticLogger> _registeredDiagnosticLoggers = new List<IDiagnosticLogger>();
         private IDiagnosticLogger _diagnosticLogger;
 
-        public ConfigurationSettings(ApiActionCategory apiCategory, string apiKey, LocationKeyIdentifier locationKey,
+        public ConfigurationSettings(string apiCategory, string apiKey, LocationKeyIdentifier locationKey,
                     ApiServiceUriCollectionBase serviceUris)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
@@ -45,7 +45,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers,LogLevel);
         }
 
-        public ApiActionCategory ApiCategory { get; private set; }
+        public string ApiCategory { get; private set; }
         public void SetScoringEngine(IScoreEvaluationEngine scoringEngine)
         {
             this.GlobalScoringEngine = scoringEngine ?? throw new CognitiveServicesArgumentException("ScoringEngine cannot be NULL");
@@ -59,7 +59,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             get => _registeredDiagnosticLoggers;
             set => _registeredDiagnosticLoggers = value.ToList();
         }
-        public Dictionary<ApiActionCategory, string> ApiKeys => _apiKeys;
+        public Dictionary<string, string> ApiKeys => _apiKeys;
         public LocationKeyIdentifier LocationKey { get; protected set; }
         public ApiServiceUriCollectionBase ServiceUris { get; protected set; }
         public string BaseUrl => 

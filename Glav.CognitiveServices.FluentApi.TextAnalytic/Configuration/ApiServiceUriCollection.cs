@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
 {
@@ -6,10 +7,10 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
     {
         public ApiServiceUriCollection()
         {
-            Services.Add(ApiActionType.TextAnalyticsSentiment, new SentimentServiceConfig());
-            Services.Add(ApiActionType.TextAnalyticsKeyphrases, new KeyPhraseServiceConfig());
-            Services.Add(ApiActionType.TextAnalyticsLanguages, new LanguageServiceConfig());
-            Services.Add(ApiActionType.TextAnalyticsOperationStatus, new OperationStatusServiceConfig());
+            Services.Add(TextAnalyticApiOperations.SentimentAnalysis, new SentimentServiceConfig());
+            Services.Add(TextAnalyticApiOperations.KeyPhraseAnalysis, new KeyPhraseServiceConfig());
+            Services.Add(TextAnalyticApiOperations.LanguageAnalysis, new LanguageServiceConfig());
+            Services.Add(TextAnalyticApiOperations.OperationStatus, new OperationStatusServiceConfig());
         }
     }
 }
