@@ -21,6 +21,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
 
         public static FaceConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey)
         {
+            SupportedLanguages.Setup();
             return new FaceConfigurationSettings(apiKey, locationKey);
         }
     }

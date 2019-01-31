@@ -22,29 +22,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             return client;
         }
 
-        public async Task<ICommunicationResult> ServicePostAsync(ApiActionDefinition apiActionType, byte[] payload, string urlQueryParameters = null)
-        {
-            var content = new ByteArrayContent(payload);
-            content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
-            return await CallServiceInternalAsync(apiActionType, HttpMethod.Post, content, urlQueryParameters);
-        }
-        public async Task<ICommunicationResult> ServicePostAsync(ApiActionDefinition apiActionType, string payload, string urlQueryParameters = null)
-        {
-            var content = new StringContent(payload, System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
-            return await CallServiceInternalAsync(apiActionType, HttpMethod.Post, content, urlQueryParameters);
-        }
-        public async Task<ICommunicationResult> ServicePutAsync(ApiActionDefinition apiActionType, byte[] payload, string urlQueryParameters = null)
-        {
-            var content = new ByteArrayContent(payload);
-            content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
-            return await CallServiceInternalAsync(apiActionType, HttpMethod.Put, content, urlQueryParameters);
-        }
-        public async Task<ICommunicationResult> ServicePutAsync(ApiActionDefinition apiActionType, string payload, string urlQueryParameters = null)
-        {
-            var content = new StringContent(payload, System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
-            return await CallServiceInternalAsync(apiActionType, HttpMethod.Put, content, urlQueryParameters);
-        }
-        private async Task<ICommunicationResult> CallServiceInternalAsync(ApiActionDefinition apiActionType, HttpMethod httpAction, ByteArrayContent content, string urlQueryParameters)
+        private async Task<ICommunicationResult> CallServiceInternalAsync(ApiActionDefinition apiActionType, ByteArrayContent content, string urlQueryParameters)
         {
             _configurationSettings.DiagnosticLogger.LogInfo($"Performing async service call for {apiActionType}", "HttpCommunicationEngine");
 
@@ -56,16 +34,23 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             {
                 using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[svcConfig.ApiAction.Category]))
                 {
-                    HttpResponseMessage httpResult;
-                    if (httpAction == HttpMethod.Put)
+                    HttpResponseMessage httpResult = null;
+                    if (apiActionType.Method == HttpMethod.Put)
                     {
                         httpResult = await httpClient.PutAsync(uri, content).ConfigureAwait(continueOnCapturedContext: false);
 
                     }
-                    else
+                    if (apiActionType.Method == HttpMethod.Post)
                     {
                         httpResult = await httpClient.PostAsync(uri, content).ConfigureAwait(continueOnCapturedContext: false);
-
+                    }
+                    if (apiActionType.Method == HttpMethod.Get)
+                    {
+                        httpResult = await httpClient.GetAsync(uri).ConfigureAwait(continueOnCapturedContext: false);
+                    }
+                    if (apiActionType.Method == HttpMethod.Options || apiActionType.Method == HttpMethod.Delete)
+                    {
+                        throw new MissingMethodException($"HTTP Method {apiActionType.Method.Method} not currently supported.");
                     }
                     _configurationSettings.DiagnosticLogger.LogInfo($"Async service call for {apiActionType} completed ok.", "HttpCommunicationEngine");
                     return await CommunicationResult.ParseResult(httpResult);
@@ -94,25 +79,17 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             }
         }
 
-        public Task<ICommunicationResult> CallServiceAsync(ApiActionDefinition apiActionType, string payload, string urlQueryParameters = null)
+        public async Task<ICommunicationResult> CallServiceAsync(ApiActionDefinition apiActionType, string payload, string urlQueryParameters = null)
         {
-            throw new NotImplementedException();
+            var content = new StringContent(payload, System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
+            return await CallServiceInternalAsync(apiActionType, content, urlQueryParameters);
         }
 
         public async Task<ICommunicationResult> CallServiceAsync(ApiActionDefinition apiActionType, byte[] payload, string urlQueryParameters = null)
         {
             var content = new ByteArrayContent(payload);
             content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
-
-            if (apiActionType.Method == HttpMethod.Post)
-            {
-                return await CallServiceInternalAsync(apiActionType,apiActionType.Method, content, urlQueryParameters);
-            }
-            if (apiActionType.Method == HttpMethod.Put)
-            {
-                return await CallServiceInternalAsync(apiActionType, apiActionType.Method, content, urlQueryParameters);
-            }
-            throw new NotImplementedException();
+            return await CallServiceInternalAsync(apiActionType, content, urlQueryParameters);
         }
     }
 }
