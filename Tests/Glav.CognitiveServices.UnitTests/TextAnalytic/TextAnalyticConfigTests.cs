@@ -3,6 +3,8 @@ using Glav.CognitiveServices.FluentApi.TextAnalytic;
 using System;
 using System.Collections.Generic;
 using Glav.CognitiveServices.FluentApi.ComputerVision.Configuration;
+using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
@@ -34,10 +36,10 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             // Get our text analytic config
             var uriLocations = new Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration.ApiServiceUriCollection();
 
-            Assert.NotNull(uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.TextAnalyticsKeyphrases));
-            Assert.NotNull(uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.TextAnalyticsLanguages));
-            Assert.NotNull(uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.TextAnalyticsOperationStatus));
-            Assert.NotNull(uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.TextAnalyticsSentiment));
+            Assert.NotNull(uriLocations.GetServiceConfig(TextAnalyticApiOperations.KeyPhraseAnalysis));
+            Assert.NotNull(uriLocations.GetServiceConfig(TextAnalyticApiOperations.LanguageAnalysis));
+            Assert.NotNull(uriLocations.GetServiceConfig(TextAnalyticApiOperations.OperationStatus));
+            Assert.NotNull(uriLocations.GetServiceConfig(TextAnalyticApiOperations.SentimentAnalysis));
         }
 
         [Fact]
@@ -48,7 +50,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 
             Assert.Throws<KeyNotFoundException>(() =>
             {
-                uriLocations.GetServiceConfig(FluentApi.Core.Configuration.ApiActionType.ComputerVisionImageAnalysis);
+                uriLocations.GetServiceConfig(ComputerVisionApiOperations.ImageAnalysis);
             });
         }
 

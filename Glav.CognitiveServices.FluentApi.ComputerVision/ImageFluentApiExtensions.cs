@@ -13,7 +13,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                 bool detectOrientation,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<OcrAnalysisActionData>(ApiActionType.ComputerVisionOcrAnalysis);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<OcrAnalysisActionData>(ComputerVisionApiOperations.OcrAnalysis);
             actionData.Add(new Uri(url),detectOrientation,language);
             return apiAnalysis;
         }
@@ -30,7 +30,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                 bool detectOrientation,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<OcrAnalysisActionData>(ApiActionType.ComputerVisionOcrAnalysis);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<OcrAnalysisActionData>(ComputerVisionApiOperations.OcrAnalysis);
             actionData.Add(imageData,detectOrientation, language);
             return apiAnalysis;
         }

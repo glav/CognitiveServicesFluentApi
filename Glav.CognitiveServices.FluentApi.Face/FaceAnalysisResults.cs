@@ -13,14 +13,20 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public CoreAnalysisSettings AnalysisSettings { get; private set;}
 
         public FaceDetectionAnalysisContext FaceDetectionAnalysis { get; private set; }
-        public LargePersonGroupAnalysisContext LargePersonGroupAnalysis { get; private set; }
+        public LargePersonGroupCreateAnalysisContext LargePersonGroupCreateAnalysis { get; private set; }
+        public LargePersonGroupGetAnalysisContext LargePersonGroupGetAnalysis { get; private set; }
         public void SetResult(FaceDetectionAnalysisContext faceDetectionAnalysis)
         {
             FaceDetectionAnalysis = faceDetectionAnalysis;
         }
-        public void SetResult(LargePersonGroupAnalysisContext largePersonGroupAnalysis)
+        public void SetResult(LargePersonGroupCreateAnalysisContext largePersonGroupCreateAnalysis)
         {
-            LargePersonGroupAnalysis = largePersonGroupAnalysis;
+            LargePersonGroupCreateAnalysis = largePersonGroupCreateAnalysis;
+        }
+
+        public void SetResult(LargePersonGroupGetAnalysisContext largePersonGroupGetAnalysis)
+        {
+            LargePersonGroupGetAnalysis = largePersonGroupGetAnalysis;
         }
 
     }

@@ -14,7 +14,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             : base(actionData, scoringEngine)
         {
         }
-        public override ApiActionType AnalysisType => ApiActionType.ComputerVisionOcrAnalysis;
+        public override ApiActionDefinition AnalysisType => ComputerVisionApiOperations.OcrAnalysis;
 
     }
 }

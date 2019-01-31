@@ -18,6 +18,11 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             ItemList.Add(new LargePersonGroupActionDataItem(ItemList.Count+1, groupId,name,userData));
         }
 
+        public void Add(string groupId)
+        {
+            ItemList.Add(new LargePersonGroupActionDataItem(ItemList.Count + 1, groupId));
+        }
+
     }
 
     public class LargePersonGroupActionDataItem : IActionDataItem
@@ -40,9 +45,23 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             UserData = userData;
         }
 
+        public LargePersonGroupActionDataItem(long id, string groupId)
+        {
+            if (string.IsNullOrWhiteSpace(groupId))
+            {
+                throw new ArgumentNullException("groupId");
+            }
+            if (groupId.Length > 64)
+            {
+                throw new ArgumentException("groupId cannot exceed 64 in length");
+            }
+            Id = id;
+            GroupId = groupId;
+        }
+
         public bool IsBinaryData => false;
 
-        public ApiActionType ApiType => ApiActionType.FaceLargePersonGroups;
+        public ApiActionType ApiType => ApiActionType.FaceLargePersonGroupCreate;
 
         public string GroupId { get; private set; }
         public string Name { get; private set; }

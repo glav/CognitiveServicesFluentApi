@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 
         public abstract string Version { get; }
 
-        public abstract ApiActionCategory ApiCategory { get; }
+        public abstract ApiActionDefinition ApiAction { get; }
 
         public string ServiceUri
         {

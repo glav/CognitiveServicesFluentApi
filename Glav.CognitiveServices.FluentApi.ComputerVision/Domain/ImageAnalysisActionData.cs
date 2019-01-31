@@ -62,7 +62,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         public ImageAnalysisDetails ImageDetails { get; private set; }
         public SupportedLanguageType Language { get; private set; }
 
-        public ApiActionType ApiType => ApiActionType.ComputerVisionImageAnalysis;
+        public ApiActionDefinition ApiType => ComputerVisionApiOperations.ImageAnalysis;
 
         public long Id { get; private set; }
 
