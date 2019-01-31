@@ -11,14 +11,14 @@ namespace Glav.CognitiveServices.FluentApi.Face
     {
         public static FaceAnalysisSettings CreateLargePersonGroup(this FaceAnalysisSettings apiAnalysis, string groupId, string name, string userData = null)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupActionData>(ApiActionType.FaceLargePersonGroupCreate);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupActionData>(FaceApiOperations.LargePersonGroupCreate);
             actionData.Add(groupId, name, userData);
             return apiAnalysis;
         }
 
         public static FaceAnalysisSettings GetLargePersonGroup(this FaceAnalysisSettings apiAnalysis, string groupId)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupActionData>(ApiActionType.FaceLargePersonGroupGet);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupActionData>(FaceApiOperations.LargePersonGroupGet);
             actionData.Add(groupId);
             return apiAnalysis;
         }
