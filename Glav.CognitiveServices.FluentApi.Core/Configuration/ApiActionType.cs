@@ -28,11 +28,18 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         protected ApiActionDefinition(HttpMethod httpMethod, string apiCategory)//, ApiActionType actionType)
         {
             Method = httpMethod;
-            apiCategory = Category;
+            Category = apiCategory;
             //ActionType = actionType;
         }
         public HttpMethod Method { get; private set; }
         public string Category { get; private set; }
+        public string Name
+        {
+            get
+            {
+                return this.GetType().Name;
+            }
+        }
 
         public override bool Equals(object obj)
         {

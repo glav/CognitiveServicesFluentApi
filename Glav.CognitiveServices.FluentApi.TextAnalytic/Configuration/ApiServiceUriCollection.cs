@@ -7,10 +7,10 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
     {
         public ApiServiceUriCollection()
         {
-            Services.Add(TextAnalyticApiOperations.SentimentAnalysis, new SentimentServiceConfig());
-            Services.Add(TextAnalyticApiOperations.KeyPhraseAnalysis, new KeyPhraseServiceConfig());
-            Services.Add(TextAnalyticApiOperations.LanguageAnalysis, new LanguageServiceConfig());
-            Services.Add(TextAnalyticApiOperations.OperationStatus, new OperationStatusServiceConfig());
+            Services.Add(TextAnalyticApiOperations.SentimentAnalysis.Name, new SentimentServiceConfig());
+            Services.Add(TextAnalyticApiOperations.KeyPhraseAnalysis.Name, new KeyPhraseServiceConfig());
+            Services.Add(TextAnalyticApiOperations.LanguageAnalysis.Name, new LanguageServiceConfig());
+            Services.Add(TextAnalyticApiOperations.OperationStatus.Name, new OperationStatusServiceConfig());
         }
     }
 }
