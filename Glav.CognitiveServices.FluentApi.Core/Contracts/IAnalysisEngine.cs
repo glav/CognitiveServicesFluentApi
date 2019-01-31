@@ -30,10 +30,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
         protected async Task AnalyseApiActionAsync(TAnalysisResults apiResults, ApiActionDefinition apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler)
         {
-            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction))
+            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction.Name))
             {
                 // Get the collection of actions to perform for an API call
-                var actions = AnalysisSettings.ActionsToPerform[apiAction];
+                var actions = AnalysisSettings.ActionsToPerform[apiAction.Name];
 
                 if (actions.SupportsBatchingMultipleItems)
                 {

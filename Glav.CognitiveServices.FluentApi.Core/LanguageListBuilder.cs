@@ -6,10 +6,37 @@ namespace Glav.CognitiveServices.FluentApi.Core
 {
     public static class LanguageListBuilder
     {
+        private static object _lockObject = new object();
         private static List<SupportedLanguageItem> _languageList = new List<SupportedLanguageItem>();
         static LanguageListBuilder()
         {
-            BuildSupportedLanguagesList();
+        }
+
+        public static void AddSupport(ILanguageApiSupportItem languageSupport)
+        {
+            lock (_lockObject)
+            {
+                AddSupport(languageSupport.GetLanguagesForApis());
+            }
+        }
+
+        private static void AddSupport(SupportedLanguageItem item)
+        {
+            var existingItem = _languageList.FirstOrDefault(i => i.LanguageType == item.LanguageType);
+            if (existingItem == null)
+            {
+                _languageList.Add(item);
+            } else
+            {
+                existingItem.ApiSupport.ToList().AddRange(item.ApiSupport);
+            }
+        }
+        private static void AddSupport(IEnumerable<SupportedLanguageItem> items)
+        {
+            foreach (var item in items)
+            {
+                AddSupport(item);
+            }
         }
         private static void BuildSupportedLanguagesList()
         {
@@ -127,5 +154,10 @@ namespace Glav.CognitiveServices.FluentApi.Core
             return code == string.Empty ? string.Empty : $"{ApiConstants.LanguageUrlParameterName}={code}";
         }
 
+    }
+
+    public interface ILanguageApiSupportItem
+    {
+        IEnumerable<SupportedLanguageItem> GetLanguagesForApis();
     }
 }

@@ -50,22 +50,22 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 
         private void InitialiseContextForAction(ApiActionDefinition apiAction, ComputerVisionAnalysisResults apiResults)
         {
-            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction) && apiResults.ImageAnalysis == null && apiAction == ComputerVisionApiOperations.ImageAnalysis)
+            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction.Name) && apiResults.ImageAnalysis == null && apiAction == ComputerVisionApiOperations.ImageAnalysis)
             {
                 // Get the collection of actions to perform for an API call
-                var actions = AnalysisSettings.ActionsToPerform[apiAction];
+                var actions = AnalysisSettings.ActionsToPerform[apiAction.Name];
                 apiResults.SetImageResultContext(new ImageAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
             }
-            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction) && apiResults.OcrAnalysis == null && apiAction == ComputerVisionApiOperations.OcrAnalysis)
+            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction.Name) && apiResults.OcrAnalysis == null && apiAction == ComputerVisionApiOperations.OcrAnalysis)
             {
                 // Get the collection of actions to perform for an API call
-                var actions = AnalysisSettings.ActionsToPerform[apiAction];
+                var actions = AnalysisSettings.ActionsToPerform[apiAction.Name];
                 apiResults.SetOcrResultContext(new OcrAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
             }
-            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction) && apiResults.RecognizeTextAnalysis == null && apiAction == ComputerVisionApiOperations.RecognizeText)
+            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction.Name) && apiResults.RecognizeTextAnalysis == null && apiAction == ComputerVisionApiOperations.RecognizeText)
             {
                 // Get the collection of actions to perform for an API call
-                var actions = AnalysisSettings.ActionsToPerform[apiAction];
+                var actions = AnalysisSettings.ActionsToPerform[apiAction.Name];
                 apiResults.SetRecognizeTextResultContext(new RecognizeTextAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
             }
         }

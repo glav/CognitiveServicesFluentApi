@@ -5,20 +5,6 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 {
-    //public enum ApiActionType
-    //{
-    //    TextAnalyticsLanguages,
-    //    TextAnalyticsSentiment,
-    //    TextAnalyticsKeyphrases,
-    //    TextAnalyticsOperationStatus,
-    //    ComputerVisionImageAnalysis,
-    //    ComputerVisionOcrAnalysis,
-    //    ComputerVisionRecognizeText,
-    //    FaceDetection,
-    //    FaceLargePersonGroupCreate,
-    //    FaceLargePersonGroupGet
-    //}
-
     public abstract class ApiActionDefinition
     {
         public ApiActionDefinition()
@@ -29,7 +15,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         {
             Method = httpMethod;
             Category = apiCategory;
-            //ActionType = actionType;
         }
         public HttpMethod Method { get; private set; }
         public string Category { get; private set; }
@@ -47,7 +32,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             return definition != null &&
                    EqualityComparer<HttpMethod>.Default.Equals(Method, definition.Method) &&
                    Category == definition.Category &&
-                   obj.GetType().Name == definition.GetType().Name;
+                   Name == definition.GetType().Name;
         }
 
         public override int GetHashCode()
@@ -67,7 +52,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         {
             return !(definition1 == definition2);
         }
-        //public ApiActionType ActionType { get; private set; }
 
     }
 
