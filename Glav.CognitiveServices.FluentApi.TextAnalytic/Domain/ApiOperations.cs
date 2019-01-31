@@ -11,7 +11,10 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         public const string Category = "TextAnalytic";
         static TextAnalyticApiOperations()
         {
+            LanguageAnalysis = new LanguageAnalysisApiOperation();
             SentimentAnalysis = new SentimentAnalysisApiOperation();
+            KeyPhraseAnalysis = new KeyPhraseAnalysisApiOperation();
+            OperationStatus = new OperationStatusApiOperation();
         }
         public static SentimentAnalysisApiOperation SentimentAnalysis { get; }
         public static LanguageAnalysisApiOperation LanguageAnalysis { get; }
