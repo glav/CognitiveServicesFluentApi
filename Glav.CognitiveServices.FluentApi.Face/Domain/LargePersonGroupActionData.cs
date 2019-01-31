@@ -61,7 +61,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
 
         public bool IsBinaryData => false;
 
-        public ApiActionType ApiType => ApiActionType.FaceLargePersonGroupCreate;
+        public ApiActionDefinition ApiType => FaceApiOperations.LargePersonGroupCreate;
 
         public string GroupId { get; private set; }
         public string Name { get; private set; }

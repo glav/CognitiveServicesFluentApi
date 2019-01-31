@@ -14,7 +14,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             : base(actionData, scoringEngine)
         {
         }
-        public override ApiActionType AnalysisType => ApiActionType.FaceLargePersonGroupCreate;
+        public override ApiActionDefinition AnalysisType => FaceApiOperations.LargePersonGroupCreate;
 
     }
 }

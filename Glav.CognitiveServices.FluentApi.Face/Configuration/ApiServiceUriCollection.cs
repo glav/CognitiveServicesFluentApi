@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Face.Domain;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 {
@@ -6,8 +7,9 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
     {
         public ApiServiceUriCollection()
         {
-            Services.Add(ApiActionType.FaceDetection, new FaceDetectionServiceConfig());
-            Services.Add(ApiActionType.FaceLargePersonGroupCreate, new LargePersonGroupServiceConfig());
+            Services.Add(FaceApiOperations.FaceDetection, new FaceDetectionServiceConfig());
+            Services.Add(FaceApiOperations.LargePersonGroupCreate, new LargePersonGroupServiceConfig());
+            Services.Add(FaceApiOperations.LargePersonGroupGet, new LargePersonGroupServiceConfig());
         }
     }
 }
