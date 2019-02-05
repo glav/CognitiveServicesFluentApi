@@ -71,6 +71,10 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         {
             return ImageDataToAnalyse;
         }
+        public string ToEndUriFragment()
+        {
+            return null;
+        }
 
         public override string ToString()
         {
