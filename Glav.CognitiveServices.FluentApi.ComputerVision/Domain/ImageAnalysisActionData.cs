@@ -71,6 +71,11 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             return ImageDataToAnalyse;
         }
 
+        public string ToEndUriFragment()
+        {
+            return null;
+        }
+
         public override string ToString()
         {
             if (ImageUriToAnalyse == null)

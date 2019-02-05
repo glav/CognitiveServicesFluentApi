@@ -69,6 +69,12 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             return string.Format("{{\"url\":\"{0}\"}}", ImageUriToAnalyse.AbsoluteUri);
         }
 
+        public string ToEndUriFragment()
+        {
+            return null;
+        }
+
+
         public string ToUrlQueryParameters()
         {
             var url = new StringBuilder();

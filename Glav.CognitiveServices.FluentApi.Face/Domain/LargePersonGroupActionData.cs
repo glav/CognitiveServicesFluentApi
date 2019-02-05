@@ -81,6 +81,10 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
 
         public string ToUrlQueryParameters()
         {
+            return null;
+        }
+        public string ToEndUriFragment()
+        {
             return $"/{GroupId}";
         }
 

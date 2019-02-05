@@ -79,5 +79,11 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         {
             return null;
         }
+
+        public string ToEndUriFragment()
+        {
+            return null;
+        }
+
     }
 }

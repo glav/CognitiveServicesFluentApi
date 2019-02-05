@@ -79,8 +79,12 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         {
             var svcConfig = ServiceUris.GetServiceConfig(actionItem.ApiDefintition);
             var queryParms = actionItem.ToUrlQueryParameters();
-            var url = string.Format("{0}{1}{2}", BaseUrl, svcConfig.ServiceUri,
-                string.IsNullOrWhiteSpace(queryParms) ? string.Empty : $"?{queryParms}");
+            var endUriFragment = actionItem.ToEndUriFragment();
+            var url = string.Format("{0}{1}{2}{3}",
+                    BaseUrl, 
+                    svcConfig.ServiceUri,
+                    string.IsNullOrWhiteSpace(endUriFragment) ? string.Empty : endUriFragment,
+                    string.IsNullOrWhiteSpace(queryParms) ? string.Empty : $"?{queryParms}");
 
             return url;
 
