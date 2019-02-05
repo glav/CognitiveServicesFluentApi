@@ -70,6 +70,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 
         public IScoreEvaluationEngine GlobalScoringEngine { get; protected set; }
 
+        /// <summary>
+        /// Constructs a complete absolute API Endpoint URL based on the API region, type and query parameters.
+        /// </summary>
+        /// <param name="actionItem"></param>
+        /// <returns></returns>
         public string GetAbsoluteUrlForApiAction(IActionDataItem actionItem)
         {
             var svcConfig = ServiceUris.GetServiceConfig(actionItem.ApiDefintition);
