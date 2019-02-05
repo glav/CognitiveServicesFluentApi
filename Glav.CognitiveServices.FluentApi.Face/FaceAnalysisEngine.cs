@@ -26,7 +26,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
 
         public override async Task AnalyseApiActionAsync(FaceAnalysisResults apiResults, ApiActionDefinition apiAction)
         {
-            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
+            await base.AnalyseApiActionAsync(apiAction, (actionData, commsResult) =>
             {
                 if (apiAction == FaceApiOperations.FaceDetection)
                 {

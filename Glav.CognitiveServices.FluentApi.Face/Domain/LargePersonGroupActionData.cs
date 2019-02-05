@@ -61,7 +61,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
 
         public bool IsBinaryData => false;
 
-        public ApiActionDefinition ApiType => FaceApiOperations.LargePersonGroupCreate;
+        public ApiActionDefinition ApiDefintition => FaceApiOperations.LargePersonGroupCreate;
 
         public string GroupId { get; private set; }
         public string Name { get; private set; }
@@ -83,5 +83,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         {
             return $"/{GroupId}";
         }
+
+        //TODO: MAY BE AN 'APPEND TO URL' FUNCTION THAT MODIFIES BASE URL FOR ACTION IF NEED BE FOR GROUP ID?
     }
 }

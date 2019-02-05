@@ -49,18 +49,18 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             Id = id;
             TextToAnalyse = textToAnalyse;
             Language = SupportedLanguageType.English;
-            ApiType = apiType;
+            ApiDefintition = apiType;
         }
         public TextAnalyticActionDataItem(long id, string textToAnalyse, SupportedLanguageType language, ApiActionDefinition apiType)
         {
             Id = id;
             TextToAnalyse = textToAnalyse;
             Language = language;
-            ApiType = apiType;
+            ApiDefintition = apiType;
         }
         public long Id { get; private set; }
         public SupportedLanguageType Language { get; private set; }
-        public ApiActionDefinition ApiType { get; private set; }
+        public ApiActionDefinition ApiDefintition { get; private set; }
         public string TextToAnalyse { get; private set; }
 
         public bool IsBinaryData => false;
