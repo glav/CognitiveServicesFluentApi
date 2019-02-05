@@ -26,7 +26,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         {
             InitialiseContextForAction(apiAction, apiResults);
 
-            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
+            await base.AnalyseApiActionAsync(apiAction, (actionData, commsResult) =>
               {
                   if (apiAction == ComputerVisionApiOperations.ImageAnalysis)
                   {

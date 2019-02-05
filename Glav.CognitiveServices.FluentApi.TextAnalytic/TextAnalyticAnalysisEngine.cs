@@ -27,7 +27,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 
         public override async Task AnalyseApiActionAsync(TextAnalyticAnalysisResults apiResults, ApiActionDefinition apiAction)
         {
-            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
+            await base.AnalyseApiActionAsync(apiAction, (actionData, commsResult) =>
             {
                 if (apiAction == TextAnalyticApiOperations.SentimentAnalysis)
                 {

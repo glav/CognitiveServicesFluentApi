@@ -28,44 +28,45 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
         public abstract Task AnalyseApiActionAsync(TAnalysisResults apiResults, ApiActionDefinition apiAction);
 
-        protected async Task AnalyseApiActionAsync(TAnalysisResults apiResults, ApiActionDefinition apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler)
+        protected async Task AnalyseApiActionAsync(ApiActionDefinition apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler)
         {
             if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction.Name))
             {
                 // Get the collection of actions to perform for an API call
                 var actions = AnalysisSettings.ActionsToPerform[apiAction.Name];
 
+                // In other words, if we can group the multiple actions into a single payload.
                 if (actions.SupportsBatchingMultipleItems)
                 {
-                    var urlQueryParams = actions.ToUrlQueryParameters();
-                    var payload = actions.ToString();
-                    apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseApiAction");
+                    //var urlQueryParams = actions.ToUrlQueryParameters();
+                    //var payload = actions.ToString();
+                    //apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseApiAction");
                     // Note that the payload we are passing along is always a string. At this ApiActionCollection level, we do not support binary here, only for individual
                     // Api action items.
-                    await ExecuteApiActionForActionCollectionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, urlQueryParams, payload);
+                    //await ExecuteApiActionForActionCollectionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, urlQueryParams, payload);
+                    await ExecuteApiActionForActionCollectionAsync(actions,apiActionHandler);
                 } else
                 {
                     var allItems = actions.GetAllItems();
 
                     foreach(var item in allItems)
                     {
-                        apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseApiAction");
-                        await ExecuteApiActionForSingleApiActionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, item);
+                        await ExecuteApiActionForSingleApiActionAsync(AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, item);
                     }
                 }
             }
         }
 
-        private async Task ExecuteApiActionForActionCollectionAsync(IDiagnosticLogger logger,
-                ApiActionDataCollection apiActions,
-                ApiActionDefinition apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler, 
-                string urlQueryParameters, string payload)
+        private async Task ExecuteApiActionForActionCollectionAsync(ApiActionDataCollection actionCollection, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler)
         {
-            logger.LogInfo($"Calling service for {apiAction.ToString()}", "ExecuteApiActionForActionCollectionAsync");
-            var result = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, payload, urlQueryParameters).ConfigureAwait(continueOnCapturedContext: false);
-            logger.LogInfo($"Processing results for {apiAction.ToString()}", "ExecuteApiActionForActionCollectionAsync");
+            var logger = AnalysisSettings.ConfigurationSettings.DiagnosticLogger;
+            var firstAction = actionCollection.GetAllItems().First();
 
-            apiActionHandler(apiActions, result);
+            logger.LogInfo($"Calling service for {firstAction.ToString()}", "ExecuteApiActionForActionCollectionAsync");
+            var result = await AnalysisSettings.CommunicationEngine.CallBatchServiceAsync(actionCollection).ConfigureAwait(continueOnCapturedContext: false);
+            logger.LogInfo($"Processing results for {firstAction.ToString()}", "ExecuteApiActionForActionCollectionAsync");
+
+            apiActionHandler(actionCollection, result);
         }
 
         private async Task ExecuteApiActionForSingleApiActionAsync(IDiagnosticLogger logger,
@@ -78,11 +79,15 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
             ICommunicationResult commsResult;
             if (actionItem.IsBinaryData)
             {
-                commsResult = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, actionItem.ToBinary(), urlQueryParams).ConfigureAwait(continueOnCapturedContext: false);
+                commsResult = await AnalysisSettings.CommunicationEngine
+                                        .CallServiceAsync(actionItem)
+                                        .ConfigureAwait(continueOnCapturedContext: false);
             }
             else
             {
-                commsResult = await AnalysisSettings.CommunicationEngine.CallServiceAsync(apiAction, actionItem.ToString(), urlQueryParams).ConfigureAwait(continueOnCapturedContext: false);
+                commsResult = await AnalysisSettings.CommunicationEngine
+                                        .CallServiceAsync(actionItem)
+                                        .ConfigureAwait(continueOnCapturedContext: false);
             }
             logger.LogInfo($"Processing results for {apiAction.ToString()}", "ExecuteApiActionForSingleApiActionAsync");
 

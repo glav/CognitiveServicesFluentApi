@@ -1,4 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
+﻿using Glav.CognitiveServices.FluentApi.Core.Contracts;
+using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 using System;
 using System.Collections.Generic;
@@ -68,5 +69,16 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
                 : string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, string.Empty);
 
         public IScoreEvaluationEngine GlobalScoringEngine { get; protected set; }
+
+        public string GetAbsoluteUrlForApiAction(IActionDataItem actionItem)
+        {
+            var svcConfig = ServiceUris.GetServiceConfig(actionItem.ApiDefintition);
+            var queryParms = actionItem.ToUrlQueryParameters();
+            var url = string.Format("{0}{1}{2}", BaseUrl, svcConfig.ServiceUri,
+                string.IsNullOrWhiteSpace(queryParms) ? string.Empty : $"?{queryParms}");
+
+            return url;
+
+        }
     }
 }

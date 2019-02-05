@@ -51,7 +51,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         public bool DetectOrientation{ get; private set; }
         public SupportedLanguageType Language { get; private set; }
 
-        public ApiActionDefinition ApiType => ComputerVisionApiOperations.OcrAnalysis;
+        public ApiActionDefinition ApiDefintition => ComputerVisionApiOperations.OcrAnalysis;
 
         public long Id { get; private set; }
 
