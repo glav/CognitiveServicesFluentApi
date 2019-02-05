@@ -38,12 +38,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                 // In other words, if we can group the multiple actions into a single payload.
                 if (actions.SupportsBatchingMultipleItems)
                 {
-                    //var urlQueryParams = actions.ToUrlQueryParameters();
-                    //var payload = actions.ToString();
-                    //apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Serialising payload for {apiAction.ToString()}", "AnalyseApiAction");
                     // Note that the payload we are passing along is always a string. At this ApiActionCollection level, we do not support binary here, only for individual
                     // Api action items.
-                    //await ExecuteApiActionForActionCollectionAsync(apiResults.AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, urlQueryParams, payload);
                     await ExecuteApiActionForActionCollectionAsync(actions,apiActionHandler);
                 } else
                 {
