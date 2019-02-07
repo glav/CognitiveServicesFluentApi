@@ -11,14 +11,14 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
     {
         public override bool SupportsBatchingMultipleItems => false;
 
-        public void Add(string groupId,
+        public void AddPersonGroupCreate(string groupId,
                 string name,
                 string userData = null)
         {
-            ItemList.Add(new LargePersonGroupActionDataItem(ItemList.Count+1, groupId,name,userData));
+            ItemList.Add(new LargePersonGroupActionDataItem(ItemList.Count+1, FaceApiOperations.LargePersonGroupCreate, groupId,name,userData));
         }
 
-        public void Add(string groupId)
+        public void AddPersonGroupGet(string groupId)
         {
             ItemList.Add(new LargePersonGroupActionDataItem(ItemList.Count + 1, groupId));
         }
@@ -27,7 +27,8 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
 
     public class LargePersonGroupActionDataItem : IActionDataItem
     {
-        public LargePersonGroupActionDataItem(long id, string groupId,
+        public LargePersonGroupActionDataItem(long id, ApiActionDefinition apiDefinition,
+                string groupId,
                 string name,
                 string userData = null)
         {
@@ -39,12 +40,22 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             {
                 throw new ArgumentException("groupId cannot exceed 64 in length");
             }
+            if (apiDefinition == null)
+            {
+                throw new ArgumentNullException("apiDefinition");
+            }
+            ApiDefintition = apiDefinition;
             Id = id;
             Name = name;
             GroupId = groupId;
             UserData = userData;
         }
 
+        /// <summary>
+        /// Only used for PersonGroupGet at this time.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="groupId"></param>
         public LargePersonGroupActionDataItem(long id, string groupId)
         {
             if (string.IsNullOrWhiteSpace(groupId))
@@ -57,11 +68,12 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             }
             Id = id;
             GroupId = groupId;
+            ApiDefintition = FaceApiOperations.LargePersonGroupGet;
         }
 
         public bool IsBinaryData => false;
 
-        public ApiActionDefinition ApiDefintition => FaceApiOperations.LargePersonGroupCreate;
+        public ApiActionDefinition ApiDefintition { get; private set; }
 
         public string GroupId { get; private set; }
         public string Name { get; private set; }
