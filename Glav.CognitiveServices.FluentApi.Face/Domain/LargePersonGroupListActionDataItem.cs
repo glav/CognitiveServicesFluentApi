@@ -1,5 +1,6 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
+using System;
 using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain
@@ -10,7 +11,12 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         {
             Id = id;
             Start = start;
+            if (top.HasValue && top.Value > 1000)
+            {
+                throw new ArgumentException("top cannot be greater than 1000");
+            }
             Top = top;
+
         }
         public long Id { get; private set; }
 
