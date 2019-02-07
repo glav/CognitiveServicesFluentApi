@@ -6,10 +6,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
 {
     public sealed class OperationStatusResult : BaseResponseResult<OperationStatusResultResponseRoot>
     {
-        public OperationStatusResult(ICommunicationResult apiCallResult)
+        public OperationStatusResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
             OperationState = OperationStateType.NotStarted;
-            ApiCallResult = apiCallResult;
             AddResultToCollection();
         }
 

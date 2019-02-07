@@ -7,9 +7,8 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
     public sealed class LanguagesResult : BaseResponseResult<LanguagesResultResponseRoot>
     {
-        public LanguagesResult(ICommunicationResult apiCallResult)
+        public LanguagesResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
-            ApiCallResult = apiCallResult;
             AddResultToCollection();
         }
 

@@ -7,9 +7,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
     public class ImageAnalysisResult : BaseResponseResult<VisionImageAnalysisResponseRoot>
     {
-        public ImageAnalysisResult(ICommunicationResult apiCallResult)
+        public ImageAnalysisResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
-            ApiCallResult = apiCallResult;
             ParseResponseData();
         }
 
