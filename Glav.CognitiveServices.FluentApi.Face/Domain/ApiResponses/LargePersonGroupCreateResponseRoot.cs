@@ -12,6 +12,11 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses
         public LargePersonGroupGetResponseItem LargePersonGroup { get; set; }
     }
 
+    public class LargePersonGroupListResponseRoot : LargePersonGroupCreateResponseRoot
+    {
+        public LargePersonGroupGetResponseItem[] LargePersonGroups { get; set; }
+    }
+
     public class LargePersonGroupGetResponseItem
     {
         public string name { get; set; }

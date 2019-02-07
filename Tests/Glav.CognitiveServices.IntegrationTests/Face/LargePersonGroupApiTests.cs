@@ -63,7 +63,6 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.NotNull(getResult.LargePersonGroupGetAnalysis.AnalysisResult.ApiCallResult);
             Assert.Equal(groupId, getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.largePersonGroupId);
             Assert.Equal(groupName, getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.name);
-
         }
 
 

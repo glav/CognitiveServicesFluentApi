@@ -14,10 +14,12 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             FaceDetection = new FaceDetectionApiOperation();
             LargePersonGroupCreate = new LargePersonGroupCreateApiOperation();
             LargePersonGroupGet = new LargePersonGroupGetApiOperation();
+            LargePersonGroupList = new LargePersonGroupListApiOperation();
         }
         public static FaceDetectionApiOperation FaceDetection { get; }
         public static LargePersonGroupCreateApiOperation LargePersonGroupCreate { get; }
         public static LargePersonGroupGetApiOperation LargePersonGroupGet { get; }
+        public static LargePersonGroupListApiOperation LargePersonGroupList { get; }
 
     }
 
@@ -38,6 +40,12 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
     public class LargePersonGroupCreateApiOperation : ApiActionDefinition
     {
         public LargePersonGroupCreateApiOperation() : base(HttpMethod.Put, FaceApiOperations.Category)
+        {
+        }
+    }
+    public class LargePersonGroupListApiOperation : ApiActionDefinition
+    {
+        public LargePersonGroupListApiOperation() : base(HttpMethod.Get, FaceApiOperations.Category)
         {
         }
     }
