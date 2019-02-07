@@ -28,8 +28,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             {
                 if ((int)ApiCallResult.StatusCode >= 400)
                 {
-                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
-                    ResponseData = new LargePersonGroupListResponseRoot { error = errorResponse };
+                    ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LargePersonGroupListResponseRoot>(ApiCallResult.Data);
                     ActionSubmittedSuccessfully = false;
                     return;
                 }
