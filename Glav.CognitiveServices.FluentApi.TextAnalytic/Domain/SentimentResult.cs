@@ -7,9 +7,8 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
     public sealed class SentimentResult : BaseResponseResult<SentimentResultResponseRoot>
     {
-        public SentimentResult(ICommunicationResult apiCallResult)
+        public SentimentResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
-            ApiCallResult = apiCallResult;
             AddResultToCollection();
         }
 

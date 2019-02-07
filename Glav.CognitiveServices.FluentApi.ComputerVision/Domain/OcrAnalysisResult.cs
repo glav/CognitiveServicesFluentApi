@@ -7,9 +7,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
     public class OcrAnalysisResult : BaseResponseResult<VisionOCRAnalysisResponseRoot>
     {
-        public OcrAnalysisResult(ICommunicationResult apiCallResult)
+        public OcrAnalysisResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
-            ApiCallResult = apiCallResult;
             ParseResponseData();
         }
 

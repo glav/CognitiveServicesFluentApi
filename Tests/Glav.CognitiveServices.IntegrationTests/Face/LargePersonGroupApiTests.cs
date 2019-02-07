@@ -65,6 +65,37 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.Equal(groupName, getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.name);
         }
 
+        [Fact]
+        public async Task ShouldBeAbleToListLargePersonGroups()
+        {
+            var groupId = System.Guid.NewGuid().ToString();
+            var groupName = $"integrationtest-{groupId}";
+
+            var createResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                .AddDebugDiagnosticLogging()
+                .UsingHttpCommunication()
+                .WithFaceAnalysisActions()
+                .CreateLargePersonGroup(groupId, groupName)
+                .AnalyseAllAsync();
+
+            Assert.True(createResult.LargePersonGroupCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+
+            var listResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                .AddDebugDiagnosticLogging()
+                .UsingHttpCommunication()
+                .WithFaceAnalysisActions()
+                .ListLargePersonGroups()
+                .AnalyseAllAsync();
+
+            Assert.NotNull(listResult);
+            Assert.NotNull(listResult.LargePersonGroupListAnalysis);
+            Assert.NotNull(listResult.LargePersonGroupListAnalysis.AnalysisResult);
+            Assert.NotNull(listResult.LargePersonGroupListAnalysis.AnalysisResult.ApiCallResult);
+            Assert.NotEmpty(listResult.LargePersonGroupListAnalysis.AnalysisResult.ResponseData.LargePersonGroups);
+            Assert.False(string.IsNullOrWhiteSpace(listResult.LargePersonGroupListAnalysis.AnalysisResult.ResponseData.LargePersonGroups[0].largePersonGroupId));
+        }
 
     }
 }

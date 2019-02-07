@@ -4,9 +4,14 @@ using Glav.CognitiveServices.FluentApi.Core.Communication;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
-    public abstract class BaseResponseResult<T> : IApiRequestResult<T> where T : IActionResponseRoot
+    public abstract class BaseResponseResult<TResponseData> 
+        : IApiRequestResult<TResponseData> where TResponseData : IActionResponseRoot
     {
-        public T ResponseData { get; protected set; }
+        public BaseResponseResult(ICommunicationResult apiCallResult)
+        {
+            ApiCallResult = apiCallResult;
+        }
+        public TResponseData ResponseData { get; protected set; }
 
         public ICommunicationResult ApiCallResult { get; protected set; }
         public bool ActionSubmittedSuccessfully { get; protected set; }

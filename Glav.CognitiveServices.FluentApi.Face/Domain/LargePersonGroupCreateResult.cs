@@ -7,9 +7,8 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
 {
     public class LargePersonGroupCreateResult : BaseResponseResult<LargePersonGroupCreateResponseRoot>
     {
-        public LargePersonGroupCreateResult(ICommunicationResult apiCallResult)
+        public LargePersonGroupCreateResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
-            ApiCallResult = apiCallResult;
             ParseResponseData();
         }
 
