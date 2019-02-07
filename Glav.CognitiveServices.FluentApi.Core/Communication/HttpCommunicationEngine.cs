@@ -42,7 +42,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             }
             else
             {
-                content = new StringContent(actionItem.ToString(), System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
+                // Only setup content if the operation is NOT a Http GET
+                content = actionItem.ApiDefintition.Method != HttpMethod.Get ?
+                    new StringContent(actionItem.ToString(), System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson) :
+                    null;
             }
 
             var url = _configurationSettings.GetAbsoluteUrlForApiAction(actionItem);

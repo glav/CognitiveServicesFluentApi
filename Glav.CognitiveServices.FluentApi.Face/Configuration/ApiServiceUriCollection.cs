@@ -8,8 +8,9 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
         public ApiServiceUriCollection()
         {
             Services.Add(FaceApiOperations.FaceDetection.Name, new FaceDetectionServiceConfig());
-            Services.Add(FaceApiOperations.LargePersonGroupCreate.Name, new LargePersonGroupServiceConfig());
-            Services.Add(FaceApiOperations.LargePersonGroupGet.Name, new LargePersonGroupServiceConfig());
+            Services.Add(FaceApiOperations.LargePersonGroupCreate.Name, new LargePersonGroupCreateServiceConfig());
+            Services.Add(FaceApiOperations.LargePersonGroupGet.Name, new LargePersonGroupGetServiceConfig());
+            Services.Add(FaceApiOperations.LargePersonGroupList.Name, new LargePersonGroupListServiceConfig());
         }
     }
 }

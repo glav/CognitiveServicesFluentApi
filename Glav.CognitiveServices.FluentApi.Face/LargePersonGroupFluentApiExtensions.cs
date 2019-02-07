@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
 
         public static FaceAnalysisSettings ListLargePersonGroups(this FaceAnalysisSettings apiAnalysis, string start = null, int top=1000)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupActionData>(FaceApiOperations.LargePersonGroupGet);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupActionData>(FaceApiOperations.LargePersonGroupList);
             actionData.AddPersonGroupList(start,top);
             return apiAnalysis;
         }

@@ -46,7 +46,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             }
             if (Top.HasValue)
             {
-                url.AppendFormat("{0}{1}", url.Length > 0 ? "&" : string.Empty, $"{Configuration.ApiConstants.LargePersonGroupStopParameterName}={Top}");
+                url.AppendFormat("{0}{1}", url.Length > 0 ? "&" : string.Empty, $"{Configuration.ApiConstants.LargePersonGroupTopParameterName}={Top}");
             }
             return url.ToString();
 

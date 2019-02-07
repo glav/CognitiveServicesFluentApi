@@ -77,16 +77,23 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         /// <returns></returns>
         public string GetAbsoluteUrlForApiAction(IActionDataItem actionItem)
         {
-            var svcConfig = ServiceUris.GetServiceConfig(actionItem.ApiDefintition);
-            var queryParms = actionItem.ToUrlQueryParameters();
-            var endUriFragment = actionItem.ToEndUriFragment();
-            var url = string.Format("{0}{1}{2}{3}",
-                    BaseUrl, 
-                    svcConfig.ServiceUri,
-                    string.IsNullOrWhiteSpace(endUriFragment) ? string.Empty : endUriFragment,
-                    string.IsNullOrWhiteSpace(queryParms) ? string.Empty : $"?{queryParms}");
+            try
+            {
+                var svcConfig = ServiceUris.GetServiceConfig(actionItem.ApiDefintition);
+                var queryParms = actionItem.ToUrlQueryParameters();
+                var endUriFragment = actionItem.ToEndUriFragment();
+                var url = string.Format("{0}{1}{2}{3}",
+                        BaseUrl,
+                        svcConfig.ServiceUri,
+                        string.IsNullOrWhiteSpace(endUriFragment) ? string.Empty : endUriFragment,
+                        string.IsNullOrWhiteSpace(queryParms) ? string.Empty : $"?{queryParms}");
 
-            return url;
+                return url;
+            } catch (Exception ex)
+            {
+                DiagnosticLogger.LogError(ex, "GetAbsoluteUrl");
+                throw;
+            }
 
         }
     }

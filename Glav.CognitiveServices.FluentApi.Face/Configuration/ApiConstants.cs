@@ -11,7 +11,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
         public const string FaceDetectionFaceIdUrlParameterName = "returnFaceId";
         public const string FaceDetectionFaceLandmarksUrlParameterName = "returnFaceLandmarks";
         public const string LargePersonGroupStartParameterName = "start";
-        public const string LargePersonGroupStopParameterName = "stop";
+        public const string LargePersonGroupTopParameterName = "top";
 
     }
 }
