@@ -23,6 +23,11 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             ItemList.Add(new LargePersonGroupActionDataItem(ItemList.Count + 1, groupId));
         }
 
+        public void AddPersonGroupList(string start, int? top = null)
+        {
+            ItemList.Add(new LargePersonGroupListActionDataItem(ItemList.Count+1,start,top));
+        }
+
     }
 
     public class LargePersonGroupActionDataItem : IActionDataItem
@@ -100,6 +105,48 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             return $"/{GroupId}";
         }
 
-        //TODO: MAY BE AN 'APPEND TO URL' FUNCTION THAT MODIFIES BASE URL FOR ACTION IF NEED BE FOR GROUP ID?
+    }
+
+    public class LargePersonGroupListActionDataItem : IActionDataItem
+    {
+        public LargePersonGroupListActionDataItem(long id, string start= null, int? top = null)
+        {
+            Id = id;
+            Start = start;
+            Top = top;
+        }
+        public long Id { get; private set; }
+
+        public ApiActionDefinition ApiDefintition => FaceApiOperations.LargePersonGroupList;
+
+        public bool IsBinaryData => false;
+
+        public string Start { get; private set; }
+        public int? Top { get; private set; }
+
+        public byte[] ToBinary()
+        {
+            return null;
+        }
+
+        public string ToEndUriFragment()
+        {
+            return null;
+        }
+
+        public string ToUrlQueryParameters()
+        {
+            var url = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(Start))
+            {
+                url.AppendFormat("{0}{1}", url.Length > 0 ? "&" : string.Empty, $"{Configuration.ApiConstants.LargePersonGroupStartParameterName}={Start}");
+            }
+            if (Top.HasValue)
+            {
+                url.AppendFormat("{0}{1}", url.Length > 0 ? "&" : string.Empty, $"{Configuration.ApiConstants.LargePersonGroupStopParameterName}={Top}");
+            }
+            return url.ToString();
+
+        }
     }
 }
