@@ -4,7 +4,7 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain
 {
-    public class LargePersonGroupActionDataItem : IActionDataItem
+    public abstract class LargePersonGroupActionDataItem : IActionDataItem
     {
         public LargePersonGroupActionDataItem(long id, ApiActionDefinition apiDefinition,
                 string groupId,
@@ -19,23 +19,15 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             {
                 throw new ArgumentException("groupId cannot exceed 64 in length");
             }
-            if (apiDefinition == null)
-            {
-                throw new ArgumentNullException("apiDefinition");
-            }
-            ApiDefintition = apiDefinition;
+
+            ApiDefintition = apiDefinition ?? throw new ArgumentNullException("apiDefinition");
             Id = id;
             Name = name;
             GroupId = groupId;
             UserData = userData;
         }
 
-        /// <summary>
-        /// Only used for PersonGroupGet at this time.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="groupId"></param>
-        public LargePersonGroupActionDataItem(long id, string groupId)
+        public LargePersonGroupActionDataItem(long id, ApiActionDefinition apiDefinition, string groupId)
         {
             if (string.IsNullOrWhiteSpace(groupId))
             {
@@ -47,7 +39,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             }
             Id = id;
             GroupId = groupId;
-            ApiDefintition = FaceApiOperations.LargePersonGroupGet;
+            ApiDefintition = apiDefinition ?? throw new ArgumentNullException("apiDefinition");
         }
 
         public bool IsBinaryData => false;
