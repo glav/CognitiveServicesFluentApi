@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         [Fact]
         public void ShouldParseFaceDetectionResultSuccessfully()
         {
-            var actionItem = new LargePersonGroupActionDataItem(1, "group_id");
+            var actionItem = new LargePersonGroupGetActionDataItem(1, "group_id");
             var config = new FaceConfigurationSettings("123", LocationKeyIdentifier.AustraliaEast);
             var actual = config.GetAbsoluteUrlForApiAction(actionItem);
             Assert.Equal("https://australiaeast.api.cognitive.microsoft.com/face/v1.0/largepersongroups/group_id", actual);
