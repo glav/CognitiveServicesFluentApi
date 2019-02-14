@@ -23,7 +23,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             ItemList.Add(new LargePersonGroupListActionDataItem(ItemList.Count+1,start,top));
         }
 
-        public void DeleteLargePersonGroup(string groupId)
+        public void AddPersonGroupDelete(string groupId)
         {
             ItemList.Add(new LargePersonGroupDeleteActionDataItem(ItemList.Count + 1, groupId));
         }
