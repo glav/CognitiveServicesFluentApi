@@ -3,11 +3,11 @@ using Glav.CognitiveServices.FluentApi.Core.Communication;
 using Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses;
 using System;
 
-namespace Glav.CognitiveServices.FluentApi.Face.Domain
+namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
-    public class LargePersonGroupDeleteResult : BaseResponseResult<LargePersonGroupDeleteResponseRoot>
+    public class LargePersonGroupCreateResult : BaseResponseResult<LargePersonGroupCreateResponseRoot>
     {
-        public LargePersonGroupDeleteResult(ICommunicationResult apiCallResult) : base(apiCallResult)
+        public LargePersonGroupCreateResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
             ParseResponseData();
         }
@@ -16,7 +16,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         {
             if (ApiCallResult == null)
             {
-                ResponseData = new LargePersonGroupDeleteResponseRoot
+                ResponseData = new LargePersonGroupCreateResponseRoot
                 {
                     error = new ApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = "No data returned." }
                 };
@@ -29,7 +29,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
                 if ((int)ApiCallResult.StatusCode >= 400)
                 {
                     var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
-                    ResponseData = new LargePersonGroupDeleteResponseRoot { error = errorResponse };
+                    ResponseData = new LargePersonGroupCreateResponseRoot { error = errorResponse };
                     ActionSubmittedSuccessfully = false;
                     return;
                 }
@@ -38,7 +38,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             }
             catch (Exception ex)
             {
-                ResponseData = new LargePersonGroupDeleteResponseRoot
+                ResponseData = new LargePersonGroupCreateResponseRoot
                 {
                     error = new ApiErrorResponse { code = StandardResponseCodes.ServerError, message = $"Error parsing results: {ex.Message}" }
                 };

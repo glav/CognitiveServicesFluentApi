@@ -1,6 +1,6 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Contracts;
 
-namespace Glav.CognitiveServices.FluentApi.Face.Domain
+namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup.LargePersonGroup
 {
     public class LargePersonGroupActionData : ApiActionDataCollection
     {

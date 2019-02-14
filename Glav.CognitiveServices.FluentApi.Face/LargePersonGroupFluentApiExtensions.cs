@@ -4,6 +4,7 @@ using Glav.CognitiveServices.FluentApi.Face.Configuration;
 using System.IO;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup.LargePersonGroup;
 
 namespace Glav.CognitiveServices.FluentApi.Face
 {

@@ -2,7 +2,7 @@
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 
-namespace Glav.CognitiveServices.FluentApi.Face.Domain
+namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
     public class LargePersonGroupGetAnalysisContext : BaseApiAnalysisContext<LargePersonGroupGetResult>
     {

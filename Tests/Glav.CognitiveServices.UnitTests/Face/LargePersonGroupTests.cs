@@ -25,6 +25,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.NotNull(result.LargePersonGroupDeleteAnalysis.AnalysisResult);
             Assert.NotNull(result.LargePersonGroupDeleteAnalysis.AnalysisResult.ApiCallResult);
             Assert.True(result.LargePersonGroupDeleteAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            Assert.True(result.LargePersonGroupDeleteAnalysis.IsSuccessfull());
         }
 
     }
