@@ -2,7 +2,7 @@
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System;
 
-namespace Glav.CognitiveServices.FluentApi.Face.Domain
+namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
     public abstract class LargePersonGroupActionDataItem : IActionDataItem
     {

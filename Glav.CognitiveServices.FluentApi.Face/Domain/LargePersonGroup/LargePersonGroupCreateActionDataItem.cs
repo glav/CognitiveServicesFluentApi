@@ -1,4 +1,4 @@
-﻿namespace Glav.CognitiveServices.FluentApi.Face.Domain
+﻿namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
     public class LargePersonGroupCreateActionDataItem : LargePersonGroupActionDataItem
     {

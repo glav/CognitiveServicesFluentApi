@@ -1,6 +1,7 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
+using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup;
 
 namespace Glav.CognitiveServices.FluentApi.Face
 {

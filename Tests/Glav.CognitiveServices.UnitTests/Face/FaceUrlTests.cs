@@ -1,12 +1,8 @@
 using Xunit;
 using Glav.CognitiveServices.UnitTests.Helpers;
 using Glav.CognitiveServices.FluentApi.Core;
-using Glav.CognitiveServices.UnitTests.Diagnostics;
-using System.Threading.Tasks;
-using System.Linq;
-using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
-using Glav.CognitiveServices.FluentApi.Face.Domain;
 using Glav.CognitiveServices.FluentApi.Face;
+using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {

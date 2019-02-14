@@ -2,6 +2,7 @@
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
+using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup;
 using System;
 using System.Threading.Tasks;
 
