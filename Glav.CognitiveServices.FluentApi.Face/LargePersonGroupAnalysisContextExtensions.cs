@@ -22,7 +22,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
 
         public static bool IsSuccessfull(this LargePersonGroupCreateAnalysisContext context)
         {
-            return context.AnalysisResults.Any(r => !r.ActionSubmittedSuccessfully || !r.ApiCallResult.Successfull);
+            return context.AnalysisResults.All(r => r.ActionSubmittedSuccessfully && r.ApiCallResult.Successfull);
         }
         public static bool IsSuccessfull(this LargePersonGroupDeleteAnalysisContext context)
         {
