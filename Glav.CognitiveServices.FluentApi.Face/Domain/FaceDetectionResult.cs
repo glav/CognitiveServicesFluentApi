@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             {
                 ResponseData = new FaceDetectResponseRoot
                 {
-                    error = new ApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = "No data returned." }
+                    error = new BaseApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = "No data returned." }
                 };
                 ActionSubmittedSuccessfully = false;
                 return;
@@ -28,7 +28,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             {
                 if ((int)ApiCallResult.StatusCode >= 400)
                 {
-                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
+                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(ApiCallResult.Data);
                     ResponseData = new FaceDetectResponseRoot { error = errorResponse };
                     ActionSubmittedSuccessfully = false;
                     return;
@@ -37,7 +37,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
                 var responseList = Newtonsoft.Json.JsonConvert.DeserializeObject<FaceDetectResponseItem[]>(ApiCallResult.Data);
                 if (responseList == null)
                 {
-                    var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
+                    var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(ApiCallResult.Data);
                     if (apiError != null)
                     {
                         ResponseData = new FaceDetectResponseRoot { error = apiError };
@@ -52,7 +52,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             {
                 ResponseData = new FaceDetectResponseRoot
                 {
-                    error = new ApiErrorResponse { code = StandardResponseCodes.ServerError, message = $"Error parsing results: {ex.Message}" }
+                    error = new BaseApiErrorResponse { code = StandardResponseCodes.ServerError, message = $"Error parsing results: {ex.Message}" }
                 };
                 ActionSubmittedSuccessfully = false;
             }

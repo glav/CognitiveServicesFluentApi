@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             {
                 ResponseData = new VisionOCRAnalysisResponseRoot
                 {
-                    error = ApiErrorResponse.CreateResponse(StandardResponseCodes.NoDataReturned,"No data returned.")
+                    error = new ApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = "No data returned." }
                 };
                 ActionSubmittedSuccessfully = false;
                 return;
@@ -51,7 +51,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             {
                 ResponseData = new VisionOCRAnalysisResponseRoot
                 {
-                    error = ApiErrorResponse.CreateResponse(StandardResponseCodes.ServerError,$"Error parsing results: {ex.Message}")
+                    error = new ApiErrorResponse { code = StandardResponseCodes.ServerError, message = $"Error parsing results: {ex.Message}" }
                 };
                 ActionSubmittedSuccessfully = false;
             }
