@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
             {
                 ResponseData = new LargePersonGroupCreateResponseRoot
                 {
-                    error = new ApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = "No data returned." }
+                    error = new BaseApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = "No data returned." }
                 };
                 ActionSubmittedSuccessfully = false;
                 return;
@@ -28,7 +28,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
             {
                 if ((int)ApiCallResult.StatusCode >= 400)
                 {
-                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
+                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(ApiCallResult.Data);
                     ResponseData = new LargePersonGroupCreateResponseRoot { error = errorResponse };
                     ActionSubmittedSuccessfully = false;
                     return;
@@ -40,7 +40,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
             {
                 ResponseData = new LargePersonGroupCreateResponseRoot
                 {
-                    error = new ApiErrorResponse { code = StandardResponseCodes.ServerError, message = $"Error parsing results: {ex.Message}" }
+                    error = new BaseApiErrorResponse { code = StandardResponseCodes.ServerError, message = $"Error parsing results: {ex.Message}" }
                 };
                 ActionSubmittedSuccessfully = false;
             }
