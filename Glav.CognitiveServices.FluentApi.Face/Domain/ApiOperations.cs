@@ -16,12 +16,20 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             LargePersonGroupGet = new LargePersonGroupGetApiOperation();
             LargePersonGroupList = new LargePersonGroupListApiOperation();
             LargePersonGroupDelete = new LargePersonGroupDeleteApiOperation();
+            LargePersonGroupPersonCreate = new LargePersonGroupPersonCreateApiOperation();
+            LargePersonGroupPersonGet = new LargePersonGroupPersonGetApiOperation();
+            LargePersonGroupPersonList = new LargePersonGroupPersonListApiOperation();
+            LargePersonGroupPersonDelete = new LargePersonGroupPersonDeleteApiOperation();
         }
         public static FaceDetectionApiOperation FaceDetection { get; }
         public static LargePersonGroupCreateApiOperation LargePersonGroupCreate { get; }
         public static LargePersonGroupGetApiOperation LargePersonGroupGet { get; }
         public static LargePersonGroupListApiOperation LargePersonGroupList { get; }
         public static LargePersonGroupDeleteApiOperation LargePersonGroupDelete { get; }
+        public static LargePersonGroupPersonCreateApiOperation LargePersonGroupPersonCreate { get; }
+        public static LargePersonGroupPersonGetApiOperation LargePersonGroupPersonGet { get; }
+        public static LargePersonGroupPersonListApiOperation LargePersonGroupPersonList { get; }
+        public static LargePersonGroupPersonDeleteApiOperation LargePersonGroupPersonDelete { get; }
 
     }
 
@@ -58,4 +66,34 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         {
         }
     }
+
+    // Large Person group person operations
+    public class LargePersonGroupPersonGetApiOperation : ApiActionDefinition
+    {
+        public LargePersonGroupPersonGetApiOperation() : base(HttpMethod.Get, FaceApiOperations.Category)
+        {
+        }
+    }
+
+    public class LargePersonGroupPersonCreateApiOperation : ApiActionDefinition
+    {
+        public LargePersonGroupPersonCreateApiOperation() : base(HttpMethod.Post, FaceApiOperations.Category)
+        {
+        }
+    }
+    public class LargePersonGroupPersonListApiOperation : ApiActionDefinition
+    {
+        public LargePersonGroupPersonListApiOperation() : base(HttpMethod.Get, FaceApiOperations.Category)
+        {
+        }
+    }
+    public class LargePersonGroupPersonDeleteApiOperation : ApiActionDefinition
+    {
+        public LargePersonGroupPersonDeleteApiOperation() : base(HttpMethod.Delete, FaceApiOperations.Category)
+        {
+        }
+    }
+
+
+
 }

@@ -12,6 +12,10 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
             Services.Add(FaceApiOperations.LargePersonGroupGet.Name, new LargePersonGroupGetServiceConfig());
             Services.Add(FaceApiOperations.LargePersonGroupList.Name, new LargePersonGroupListServiceConfig());
             Services.Add(FaceApiOperations.LargePersonGroupDelete.Name, new LargePersonGroupDeleteServiceConfig());
+            Services.Add(FaceApiOperations.LargePersonGroupPersonCreate.Name, new LargePersonGroupPersonCreateServiceConfig());
+            Services.Add(FaceApiOperations.LargePersonGroupPersonGet.Name, new LargePersonGroupPersonGetServiceConfig());
+            Services.Add(FaceApiOperations.LargePersonGroupPersonList.Name, new LargePersonGroupPersonListServiceConfig());
+            Services.Add(FaceApiOperations.LargePersonGroupPersonDelete.Name, new LargePersonGroupPersonDeleteServiceConfig());
         }
     }
 }
