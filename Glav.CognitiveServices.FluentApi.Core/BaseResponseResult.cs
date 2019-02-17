@@ -15,5 +15,6 @@ namespace Glav.CognitiveServices.FluentApi.Core
 
         public ICommunicationResult ApiCallResult { get; protected set; }
         public bool ActionSubmittedSuccessfully { get; protected set; }
+
     }
 }
