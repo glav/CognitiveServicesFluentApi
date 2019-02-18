@@ -29,17 +29,23 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 
         public LargePersonGroupActionDataItem(long id, ApiActionDefinition apiDefinition, string groupId)
         {
-            if (string.IsNullOrWhiteSpace(groupId))
-            {
-                throw new ArgumentNullException("groupId");
-            }
-            if (groupId.Length > 64)
-            {
-                throw new ArgumentException("groupId cannot exceed 64 in length");
-            }
+            ValidateId(groupId, "groupId");
             Id = id;
             GroupId = groupId;
             ApiDefintition = apiDefinition ?? throw new ArgumentNullException("apiDefinition");
+        }
+
+        protected void ValidateId(string id, string parameterName)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentNullException("groupId");
+            }
+            if (id.Length > 64)
+            {
+                throw new ArgumentException("groupId cannot exceed 64 in length");
+            }
+
         }
 
         public bool IsBinaryData => false;
@@ -62,11 +68,11 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
             return string.Format("{{\"name\":\"{0}\", \"userData\":\"{1}\"}}", Name, UserData);
         }
 
-        public string ToUrlQueryParameters()
+        public virtual string ToUrlQueryParameters()
         {
             return null;
         }
-        public string ToEndUriFragment()
+        public virtual string ToEndUriFragment()
         {
             return $"/{GroupId}";
         }
