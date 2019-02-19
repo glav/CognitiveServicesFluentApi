@@ -11,17 +11,17 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
                 string name,
                 string userData = null)
         {
-            //ItemList.Add(new LargePersonGroupCreateActionDataItem(ItemList.Count+1, groupId,name,userData));
+            ItemList.Add(new LargePersonGroupPersonCreateActionDataItem(ItemList.Count+1, groupId,name,userData));
         }
 
-        public void AddPersonGroupPersonGet(string groupId)
+        public void AddPersonGroupPersonGet(string groupId, string personId)
         {
-            //ItemList.Add(new LargePersonGroupGetActionDataItem(ItemList.Count + 1, groupId));
+            ItemList.Add(new LargePersonGroupPersonGetActionDataItem(ItemList.Count + 1, groupId,personId));
         }
 
-        public void AddPersonGroupPersonList(string start, int? top = null)
+        public void AddPersonGroupPersonList(string groupId, string start, int? top = null)
         {
-            //ItemList.Add(new LargePersonGroupListActionDataItem(ItemList.Count+1,start,top));
+            ItemList.Add(new LargePersonGroupPersonListActionDataItem(ItemList.Count+1,groupId,start,top));
         }
 
         public void AddPersonGroupPersonDelete(string groupId)

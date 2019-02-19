@@ -20,7 +20,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
         }
         public long Id { get; private set; }
 
-        public ApiActionDefinition ApiDefintition => FaceApiOperations.LargePersonGroupList;
+        public virtual ApiActionDefinition ApiDefintition => FaceApiOperations.LargePersonGroupList;
 
         public bool IsBinaryData => false;
 

@@ -3,6 +3,7 @@ using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
 using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup;
+using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson;
 using System;
 using System.Threading.Tasks;
 
@@ -23,6 +24,11 @@ namespace Glav.CognitiveServices.FluentApi.Face
             await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupGet).ConfigureAwait(continueOnCapturedContext: false);
             await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupList).ConfigureAwait(continueOnCapturedContext: false);
             await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupDelete).ConfigureAwait(continueOnCapturedContext: false);
+
+            await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupPersonCreate).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupPersonGet).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupPersonList).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupPersonDelete).ConfigureAwait(continueOnCapturedContext: false);
             return apiResults;
         }
 
@@ -54,6 +60,28 @@ namespace Glav.CognitiveServices.FluentApi.Face
                 if (apiAction == FaceApiOperations.LargePersonGroupDelete)
                 {
                     apiResults.SetResult(new LargePersonGroupDeleteAnalysisContext(actionData, new LargePersonGroupDeleteResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    return;
+                }
+
+
+                if (apiAction == FaceApiOperations.LargePersonGroupPersonDelete)
+                {
+                    apiResults.SetResult(new LargePersonGroupPersonDeleteAnalysisContext(actionData, new LargePersonGroupPersonDeleteResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    return;
+                }
+                if (apiAction == FaceApiOperations.LargePersonGroupPersonCreate)
+                {
+                    apiResults.SetResult(new LargePersonGroupPersonCreateAnalysisContext(actionData, new LargePersonGroupPersonCreateResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    return;
+                }
+                if (apiAction == FaceApiOperations.LargePersonGroupPersonGet)
+                {
+                    apiResults.SetResult(new LargePersonGroupPersonGetAnalysisContext(actionData, new LargePersonGroupPersonGetResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    return;
+                }
+                if (apiAction == FaceApiOperations.LargePersonGroupPersonList)
+                {
+                    apiResults.SetResult(new LargePersonGroupPersonListAnalysisContext(actionData, new LargePersonGroupPersonListResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                     return;
                 }
                 throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
