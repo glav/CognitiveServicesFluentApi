@@ -2,6 +2,7 @@
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
 using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup;
+using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson;
 
 namespace Glav.CognitiveServices.FluentApi.Face
 {
@@ -18,6 +19,11 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public LargePersonGroupGetAnalysisContext LargePersonGroupGetAnalysis { get; private set; }
         public LargePersonGroupListAnalysisContext LargePersonGroupListAnalysis { get; private set; }
         public LargePersonGroupDeleteAnalysisContext LargePersonGroupDeleteAnalysis { get; private set; }
+
+        public LargePersonGroupPersonCreateAnalysisContext LargePersonGroupPersonCreateAnalysis { get; private set; }
+        public LargePersonGroupPersonGetAnalysisContext LargePersonGroupPersonGetAnalysis { get; private set; }
+        public LargePersonGroupPersonListAnalysisContext LargePersonGroupPersonListAnalysis { get; private set; }
+        public LargePersonGroupPersonDeleteAnalysisContext LargePersonGroupPersonDeleteAnalysis { get; private set; }
 
         public void SetResult(FaceDetectionAnalysisContext faceDetectionAnalysis)
         {
@@ -39,6 +45,23 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public void SetResult(LargePersonGroupDeleteAnalysisContext largePersonGroupDeleteAnalysis)
         {
             LargePersonGroupDeleteAnalysis = largePersonGroupDeleteAnalysis;
+        }
+
+        public void SetResult(LargePersonGroupPersonDeleteAnalysisContext largePersonGroupPersonDeleteAnalysis)
+        {
+            LargePersonGroupPersonDeleteAnalysis = largePersonGroupPersonDeleteAnalysis;
+        }
+        public void SetResult(LargePersonGroupPersonCreateAnalysisContext largePersonGroupPersonCreateAnalysis)
+        {
+            LargePersonGroupPersonCreateAnalysis = largePersonGroupPersonCreateAnalysis;
+        }
+        public void SetResult(LargePersonGroupPersonGetAnalysisContext largePersonGroupPersonGetAnalysis)
+        {
+            LargePersonGroupPersonGetAnalysis = largePersonGroupPersonGetAnalysis;
+        }
+        public void SetResult(LargePersonGroupPersonListAnalysisContext largePersonGroupPersonListAnalysis)
+        {
+            LargePersonGroupPersonListAnalysis = largePersonGroupPersonListAnalysis;
         }
 
     }
