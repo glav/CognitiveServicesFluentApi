@@ -27,10 +27,10 @@ namespace Glav.CognitiveServices.FluentApi.Face
             actionData.AddPersonGroupPersonList(groupId,start,top);
             return apiAnalysis;
         }
-        public static FaceAnalysisSettings DeleteLargePersonGroupPerson(this FaceAnalysisSettings apiAnalysis, string groupId)
+        public static FaceAnalysisSettings DeleteLargePersonGroupPerson(this FaceAnalysisSettings apiAnalysis, string groupId, string personId)
         {
             var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupPersonActionData>(FaceApiOperations.LargePersonGroupPersonDelete);
-            actionData.AddPersonGroupPersonDelete(groupId);
+            actionData.AddPersonGroupPersonDelete(groupId,personId);
             return apiAnalysis;
         }
     }
