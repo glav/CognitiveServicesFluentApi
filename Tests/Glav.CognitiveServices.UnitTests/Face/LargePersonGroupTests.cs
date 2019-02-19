@@ -11,7 +11,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         private TestDataHelper _helper = new TestDataHelper();
 
         [Fact]
-        public async Task ShouldParseFaceDetectionResultSuccessfully()
+        public async Task ShouldParseLargePersonGroupDeleteResultSuccessfully()
         {
             var commsEngine = new MockCommsEngine(new MockCommsResult(null, System.Net.HttpStatusCode.OK));
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
