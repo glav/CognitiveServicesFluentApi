@@ -22,10 +22,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .DeleteLargePersonGroupPerson("123","456")
                 .AnalyseAllAsync();
 
-            Assert.NotNull(result.LargePersonGroupPersonDeleteAnalysis);
-            Assert.NotNull(result.LargePersonGroupPersonDeleteAnalysis.AnalysisResult);
-            Assert.NotNull(result.LargePersonGroupPersonDeleteAnalysis.AnalysisResult.ApiCallResult);
-            Assert.True(result.LargePersonGroupPersonDeleteAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            result.LargePersonGroupPersonDeleteAnalysis.AssertAnalysisContextValidity();
             Assert.True(result.LargePersonGroupPersonDeleteAnalysis.IsSuccessfull());
         }
 
@@ -41,10 +38,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .CreateLargePersonGroupPerson("123", "unittest","unittest-data")
                 .AnalyseAllAsync();
 
-            Assert.NotNull(result.LargePersonGroupPersonCreateAnalysis);
-            Assert.NotNull(result.LargePersonGroupPersonCreateAnalysis.AnalysisResult);
-            Assert.NotNull(result.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ApiCallResult);
-            Assert.True(result.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            result.LargePersonGroupPersonCreateAnalysis.AssertAnalysisContextValidity();
             Assert.NotNull(result.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData);
             Assert.NotNull(result.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData.personId);
         }
@@ -61,10 +55,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .ListLargePersonGroupPersons("123")
                 .AnalyseAllAsync();
 
-            Assert.NotNull(result.LargePersonGroupPersonListAnalysis);
-            Assert.NotNull(result.LargePersonGroupPersonListAnalysis.AnalysisResult);
-            Assert.NotNull(result.LargePersonGroupPersonListAnalysis.AnalysisResult.ApiCallResult);
-            Assert.True(result.LargePersonGroupPersonListAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            result.LargePersonGroupPersonListAnalysis.AssertAnalysisContextValidity();
             Assert.NotNull(result.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData.LargePersonGroupPersons);
 
