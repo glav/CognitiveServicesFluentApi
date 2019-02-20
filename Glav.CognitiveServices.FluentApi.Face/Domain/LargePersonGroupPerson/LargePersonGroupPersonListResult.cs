@@ -34,7 +34,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
                     return;
                 }
 
-                var responseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LargePersonGroupPersonGetResponseItem>(ApiCallResult.Data);
+                var responseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LargePersonGroupPersonGetResponseItem[]>(ApiCallResult.Data);
                 if (responseData == null)
                 {
                     var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(ApiCallResult.Data);
@@ -46,7 +46,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
                     return;
                 }
 
-
+                ResponseData = new LargePersonGroupPersonListResponseRoot { LargePersonGroupPersons = responseData };
                 ActionSubmittedSuccessfully = true;
             }
             catch (Exception ex)
