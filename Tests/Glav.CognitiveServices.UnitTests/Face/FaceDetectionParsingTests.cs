@@ -45,9 +45,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                     .AnalyseAllAsync();
 
             Assert.NotNull(result);
-            Assert.NotNull(result.FaceDetectionAnalysis);
-            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult);
-            Assert.True(result.FaceDetectionAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            result.FaceDetectionAnalysis.AssertAnalysisContextValidity();
             Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult.ResponseData);
 
             var resultData = result.FaceDetectionAnalysis.AnalysisResult.ResponseData;
@@ -67,9 +65,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                     .AnalyseAllAsync();
 
             Assert.NotNull(result);
-            Assert.NotNull(result.FaceDetectionAnalysis);
-            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult);
-            Assert.True(result.FaceDetectionAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            result.FaceDetectionAnalysis.AssertAnalysisContextValidity();
             Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult.ResponseData);
 
             var resultData = result.FaceDetectionAnalysis.AnalysisResult.ResponseData;

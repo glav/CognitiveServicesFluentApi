@@ -100,7 +100,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .AddKeyPhraseAnalysis("Can be anything here")
                 .AnalyseAllAsync();
 
-            Assert.NotEmpty(result.KeyPhraseAnalysis.AnalysisResults);
+            result.KeyPhraseAnalysis.AssertAnalysisContextValidity();
             var phraseResults = result.KeyPhraseAnalysis.GetResults();
             Assert.NotEmpty(phraseResults);
             Assert.Equal(2, phraseResults.Count());
@@ -129,7 +129,8 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .AddKeyPhraseAnalysis("Can be anything here")
                 .AnalyseAllAsync();
 
-            Assert.NotEmpty(result.KeyPhraseAnalysis.AnalysisResults);
+            Assert.NotNull(result);
+            Assert.NotNull(result.KeyPhraseAnalysis);
             var phraseResults = result.KeyPhraseAnalysis.GetInitialErrorMessage();
 
         }
@@ -150,8 +151,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
-            Assert.NotNull(result.LanguageAnalysis);
-            Assert.NotEmpty(result.LanguageAnalysis.AnalysisResults);
+            result.LanguageAnalysis.AssertAnalysisContextValidity();
 
             var results = result.LanguageAnalysis.GetResults();
             Assert.NotNull(results);
