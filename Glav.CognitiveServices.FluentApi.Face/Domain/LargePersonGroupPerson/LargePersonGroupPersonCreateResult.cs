@@ -46,7 +46,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
                     return;
                 }
 
-
+                ResponseData = responseData;
                 ActionSubmittedSuccessfully = true;
             }
             catch (Exception ex)
