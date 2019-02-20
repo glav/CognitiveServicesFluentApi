@@ -21,11 +21,23 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .DeleteLargePersonGroup("123")
                 .AnalyseAllAsync();
 
-            Assert.NotNull(result.LargePersonGroupDeleteAnalysis);
-            Assert.NotNull(result.LargePersonGroupDeleteAnalysis.AnalysisResult);
-            Assert.NotNull(result.LargePersonGroupDeleteAnalysis.AnalysisResult.ApiCallResult);
-            Assert.True(result.LargePersonGroupDeleteAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            result.LargePersonGroupDeleteAnalysis.AssertAnalysisContextValidity();
             Assert.True(result.LargePersonGroupDeleteAnalysis.IsSuccessfull());
+        }
+
+        [Fact]
+        public async Task ShouldParseLargePersonGroupCreateResultSuccessfully()
+        {
+            var commsEngine = new MockCommsEngine(new MockCommsResult(null, System.Net.HttpStatusCode.OK));
+            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
+                .AddConsoleDiagnosticLogging()
+                .UsingCustomCommunication(commsEngine)
+                .WithFaceAnalysisActions()
+                .CreateLargePersonGroup("123","unittest","unittest-data")
+                .AnalyseAllAsync();
+
+            result.LargePersonGroupCreateAnalysis.AssertAnalysisContextValidity();
+            Assert.True(result.LargePersonGroupCreateAnalysis.IsSuccessfull());
         }
 
     }
