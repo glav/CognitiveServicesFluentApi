@@ -7,7 +7,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
     public class LargePersonGroupPersonCreateServiceConfig : ApiServiceUriFragment
     {
         //largepersongroups/{largePersonGroupId}/persons
-        public override string Template => "face/{0}/largepersongroups/{1}/persons";
+        public override string Template => "face/{0}/largepersongroups";
 
         public override string Version => ApiConstants.FACE_VERSION;
 
@@ -16,7 +16,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
     public class LargePersonGroupPersonListServiceConfig : ApiServiceUriFragment
     {
 
-        public override string Template => "face/{0}/largepersongroups/{1}/persons";
+        public override string Template => "face/{0}/largepersongroups";
 
         public override string Version => ApiConstants.FACE_VERSION;
 
@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
     public class LargePersonGroupPersonGetServiceConfig : ApiServiceUriFragment
     {
 
-        public override string Template => "face/{0}/largepersongroups/{1}/persons";
+        public override string Template => "face/{0}/largepersongroups";
 
         public override string Version => ApiConstants.FACE_VERSION;
 
@@ -34,7 +34,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 
     public class LargePersonGroupPersonDeleteServiceConfig : ApiServiceUriFragment
     {
-        public override string Template => "face/{0}/largepersongroups/{1}/persons";
+        public override string Template => "face/{0}/largepersongroups";
 
         public override string Version => ApiConstants.FACE_VERSION;
 
