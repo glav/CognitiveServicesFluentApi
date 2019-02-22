@@ -1,4 +1,4 @@
-    using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Face;
 using System.Threading.Tasks;
 using Xunit;
@@ -10,11 +10,11 @@ using System.Net;
 
 namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 {
-    public class LargePersonGroupApiTests
+    public class LargePersonGroupPersonApiTests
     {
         private TestDataHelper _testDataHelper = new TestDataHelper();
         [Fact]
-        public async Task ShouldBeAbleToCreateLargePersonGroup()
+        public async Task ShouldBeAbleToCreateLargePersonGroupPerson()
         {
             var groupId = System.Guid.NewGuid().ToString();
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
@@ -23,6 +23,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .CreateLargePersonGroup(groupId,$"Unittest-{groupId}")
+                .CreateLargePersonGroupPerson(groupId, $"UnittestPerson-{groupId}","person-userdata")
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
@@ -31,7 +32,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         }
 
         [Fact]
-        public async Task ShouldBeAbleToGetLargePersonGroup()
+        public async Task ShouldBeAbleToGetLargePersonGroupPerson()
         {
             var groupId = System.Guid.NewGuid().ToString();
             var groupName = $"integrationtest-{groupId}";
@@ -41,28 +42,31 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
-                .CreateLargePersonGroup(groupId,groupName )
+                .CreateLargePersonGroup(groupId,groupName)
+                .CreateLargePersonGroupPerson(groupId,"testname","farout")
                 .AnalyseAllAsync();
 
             Assert.True(createResult.LargePersonGroupCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            Assert.True(createResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+
+            var personId = createResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData.personId;
 
             var getResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
-                .GetLargePersonGroup(groupId)
+                .GetLargePersonGroupPerson(groupId,personId)
                 .AnalyseAllAsync();
 
             Assert.NotNull(getResult);
-            Assert.NotNull(getResult.LargePersonGroupGetAnalysis);
-            getResult.LargePersonGroupGetAnalysis.AssertAnalysisContextValidity();
-            Assert.Equal(groupId, getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.largePersonGroupId);
-            Assert.Equal(groupName, getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.name);
+            Assert.NotNull(getResult.LargePersonGroupPersonGetAnalysis);
+            getResult.LargePersonGroupPersonGetAnalysis.AssertAnalysisContextValidity();
+            Assert.NotNull(getResult.LargePersonGroupPersonGetAnalysis.AnalysisResult.ResponseData.LargePersonGroupPerson);
         }
 
         [Fact]
-        public async Task ShouldBeAbleToListLargePersonGroups()
+        public async Task ShouldBeAbleToListLargePersonGroupPersons()
         {
             var groupId = System.Guid.NewGuid().ToString();
             var groupName = $"integrationtest-{groupId}";
@@ -73,23 +77,24 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .CreateLargePersonGroup(groupId, groupName)
+                .CreateLargePersonGroupPerson(groupId,"personName","whatever")
                 .AnalyseAllAsync();
 
             Assert.True(createResult.LargePersonGroupCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            Assert.True(createResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
 
             var listResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
-                .ListLargePersonGroups()
+                .ListLargePersonGroupPersons(groupId)
                 .AnalyseAllAsync();
 
             Assert.NotNull(listResult);
-            Assert.NotNull(listResult.LargePersonGroupListAnalysis);
-            listResult.LargePersonGroupListAnalysis.AssertAnalysisContextValidity();
-            Assert.NotEmpty(listResult.LargePersonGroupListAnalysis.AnalysisResult.ResponseData.LargePersonGroups);
-            Assert.False(string.IsNullOrWhiteSpace(listResult.LargePersonGroupListAnalysis.AnalysisResult.ResponseData.LargePersonGroups[0].largePersonGroupId));
+            listResult.LargePersonGroupPersonListAnalysis.AssertAnalysisContextValidity();
+            Assert.NotEmpty(listResult.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData.LargePersonGroupPersons);
+            Assert.False(string.IsNullOrWhiteSpace(listResult.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData.LargePersonGroupPersons[0].name));
         }
 
     }

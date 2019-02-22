@@ -46,6 +46,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
                     return;
                 }
 
+                ResponseData = new LargePersonGroupPersonGetResponseRoot { LargePersonGroupPerson = responseData };
 
                 ActionSubmittedSuccessfully = true;
             }
