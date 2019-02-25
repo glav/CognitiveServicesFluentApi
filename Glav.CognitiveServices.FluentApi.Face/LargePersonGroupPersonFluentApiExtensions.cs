@@ -1,7 +1,9 @@
 ﻿using Glav.CognitiveServices.FluentApi.Face.Configuration;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
+using Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses;
 using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup;
 using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson;
+using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face
 {
@@ -31,6 +33,12 @@ namespace Glav.CognitiveServices.FluentApi.Face
         {
             var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupPersonActionData>(FaceApiOperations.LargePersonGroupPersonDelete);
             actionData.AddPersonGroupPersonDelete(groupId,personId);
+            return apiAnalysis;
+        }
+        public static FaceAnalysisSettings AddFaceToPersonGroupPerson(this FaceAnalysisSettings apiAnalysis, string groupId, string personId, Uri imageUri, string userData = null, FaceRectangle targetFace = null)
+        {
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupPersonActionData>(FaceApiOperations.LargePersonGroupPersonFaceAdd);
+            actionData.AddFaceToPersonGroupPerson(groupId, personId, imageUri, userData, targetFace);
             return apiAnalysis;
         }
     }
