@@ -1,5 +1,7 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Contracts;
+using Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses;
 using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup;
+using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
 {
@@ -27,6 +29,11 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
         public void AddPersonGroupPersonDelete(string groupId, string personId)
         {
             ItemList.Add(new LargePersonGroupPersonDeleteActionDataItem(ItemList.Count + 1, groupId,personId));
+        }
+
+        public void AddFaceToPersonGroupPerson(string groupId, string personId, Uri imageUri, string userData = null, FaceRectangle targetFace = null)
+        {
+            ItemList.Add(new LargePersonGroupPersonFaceAddActionDataItem(ItemList.Count + 1, groupId, personId, imageUri, userData, targetFace));
         }
 
     }
