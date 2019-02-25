@@ -40,5 +40,12 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 
         public override ApiActionDefinition ApiAction => FaceApiOperations.LargePersonGroupPersonDelete;
     }
+    public class LargePersonGroupPersonFaceAddServiceConfig : ApiServiceUriFragment
+    {
+        public override string Template => "face/{0}/largepersongroups";
 
+        public override string Version => ApiConstants.FACE_VERSION;
+
+        public override ApiActionDefinition ApiAction => FaceApiOperations.LargePersonGroupPersonFaceAdd;
+    }
 }

@@ -12,6 +12,8 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
         public const string FaceDetectionFaceLandmarksUrlParameterName = "returnFaceLandmarks";
         public const string LargePersonGroupStartParameterName = "start";
         public const string LargePersonGroupTopParameterName = "top";
+        public const string LargePersonGroupUserDataParameterName = "userData";
+        public const string LargePersonGroupTargetFaceParameterName = "targetFace";
 
     }
 }
