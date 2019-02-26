@@ -82,6 +82,25 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.Equal("fbd2a038-dbff-452c-8e79-2ee81b1aa84e", lastResult.persistedFaceIds[1]);
         }
 
+        [Fact]
+        public async Task ShouldParseLargePersonGroupPersonFaceAddResultSuccessfully()
+        {
+            const string id = "25985303-c537-4467-b41d-bdb45cd95ca1";
+            const string returnData = "{    \"persistedFaceId\": \""+id+"\"  }";
+            var commsEngine = new MockCommsEngine(new MockCommsResult(returnData));
+            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
+                .AddConsoleDiagnosticLogging()
+                .UsingCustomCommunication(commsEngine)
+                .WithFaceAnalysisActions()
+                .AddFaceToPersonGroupPerson("123", "unittest1", new System.Uri("https://somehost/someimage.png"))
+                .AnalyseAllAsync();
+
+            result.LargePersonGroupPersonFaceAddAnalysis.AssertAnalysisContextValidity();
+            Assert.NotEmpty(result.LargePersonGroupPersonFaceAddAnalysis.AnalysisResults);
+            Assert.Equal(id, result.LargePersonGroupPersonFaceAddAnalysis.AnalysisResults[0].ResponseData.persistedFaceId);
+        }
+
+
     }
 
 }
