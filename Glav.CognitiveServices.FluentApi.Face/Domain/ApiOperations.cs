@@ -21,6 +21,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             LargePersonGroupPersonList = new LargePersonGroupPersonListApiOperation();
             LargePersonGroupPersonDelete = new LargePersonGroupPersonDeleteApiOperation();
             LargePersonGroupPersonFaceAdd = new LargePersonGroupPersonFaceAddApiOperation();
+            LargePersonGroupPersonFaceGet = new LargePersonGroupPersonFaceGetApiOperation();
         }
         public static FaceDetectionApiOperation FaceDetection { get; }
         public static LargePersonGroupCreateApiOperation LargePersonGroupCreate { get; }

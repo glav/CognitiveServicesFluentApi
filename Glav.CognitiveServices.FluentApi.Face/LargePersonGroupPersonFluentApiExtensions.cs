@@ -41,5 +41,11 @@ namespace Glav.CognitiveServices.FluentApi.Face
             actionData.AddFaceToPersonGroupPerson(groupId, personId, imageUri, userData, targetFace);
             return apiAnalysis;
         }
+        public static FaceAnalysisSettings GetFaceForPersonGroupPerson(this FaceAnalysisSettings apiAnalysis, string groupId, string personId, string persistedFaceId)
+        {
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupPersonActionData>(FaceApiOperations.LargePersonGroupPersonFaceGet);
+            actionData.GetFaceForPersonGroupPerson(groupId, personId, persistedFaceId);
+            return apiAnalysis;
+        }
     }
 }
