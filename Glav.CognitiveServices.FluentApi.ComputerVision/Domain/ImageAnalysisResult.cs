@@ -21,7 +21,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
                     error = new ApiErrorResponse
                     {
                         code = StandardResponseCodes.NoDataReturned,
-                        message = "No data returned."
+                        message = StandardResponseCodes.NoDataReturnedMessage
                     }
                 };
                 ActionSubmittedSuccessfully = false;

@@ -16,7 +16,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         {
             if (ApiCallResult == null)
             {
-                ResponseData = new KeyPhraseResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } };
+                ResponseData = new KeyPhraseResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = StandardResponseCodes.NoDataReturnedMessage } } };
                 ActionSubmittedSuccessfully = false;
                 return;
             }

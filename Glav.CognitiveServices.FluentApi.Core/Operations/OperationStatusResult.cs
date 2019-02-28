@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
         {
             if (ApiCallResult == null)
             {
-                ResponseData = new OperationStatusResultResponseRoot { status=OperationStatusResponseMessages.StatusFailed,  message = "No data returned." };
+                ResponseData = new OperationStatusResultResponseRoot { status=OperationStatusResponseMessages.StatusFailed, message = StandardResponseCodes.NoDataReturnedMessage };
                 ActionSubmittedSuccessfully = false;
                 return;
             }

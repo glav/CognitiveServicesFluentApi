@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
             {
                 ResponseData = new LargePersonGroupPersonListResponseRoot
                 {
-                    error = new BaseApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = "No data returned." }
+                    error = new BaseApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = StandardResponseCodes.NoDataReturnedMessage }
                 };
                 ActionSubmittedSuccessfully = false;
                 return;
