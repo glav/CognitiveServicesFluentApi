@@ -1,14 +1,15 @@
-﻿using Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses;
+﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses;
 using System;
 using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
 {
-    public class LargePersonGroupPersonFaceAddActionDataItem : LargePersonGroupPersonActionDataItem
+    public class LargePersonGroupPersonFaceAddActionDataItem : LargePersonGroupPersonFaceActionDataItem
     {
          public LargePersonGroupPersonFaceAddActionDataItem(long id, string groupId, string personId, Uri imageUri,
                 string userData = null, FaceRectangle targetFace = null)
-            : base(id, FaceApiOperations.LargePersonGroupPersonFaceAdd, groupId, null, userData)
+            : base(id, FaceApiOperations.LargePersonGroupPersonFaceAdd, groupId,personId)
         {
             TargetFace = targetFace;
             ImageUri = imageUri;
@@ -36,5 +37,37 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
         {
             return string.Format("{{\"url\":\"{0}\"}}", ImageUri.AbsoluteUri);
         }
+    }
+
+    public class LargePersonGroupPersonFaceGetActionDataItem : LargePersonGroupPersonFaceActionDataItem
+    {
+        public LargePersonGroupPersonFaceGetActionDataItem(long id, string groupId, string personId, string persistedFaceId)
+           : base(id, FaceApiOperations.LargePersonGroupPersonFaceGet, groupId, personId)
+        {
+            PersistedFaceId = persistedFaceId;
+        }
+
+        public string PersistedFaceId { get; private set; }
+
+        public override string ToEndUriFragment()
+        {
+            return base.ToEndUriFragment() + $"/{PersistedFaceId}";
+        }
+       
+    }
+
+    public abstract class LargePersonGroupPersonFaceActionDataItem : LargePersonGroupPersonActionDataItem
+    {
+        public LargePersonGroupPersonFaceActionDataItem(long id, ApiActionDefinition faceOperation, string groupId, string personId)
+           : base(id, faceOperation, groupId,personId)
+        {
+        }
+
+
+        public override string ToEndUriFragment()
+        {
+            return base.ToEndUriFragment() + "/persistedfaces";
+        }
+
     }
 }

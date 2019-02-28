@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
             {
                 ResponseData = new LargePersonGroupDeleteResponseRoot
                 {
-                    error = new BaseApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = "No data returned." }
+                    error = new BaseApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = StandardResponseCodes.NoDataReturnedMessage }
                 };
                 ActionSubmittedSuccessfully = false;
                 return;
