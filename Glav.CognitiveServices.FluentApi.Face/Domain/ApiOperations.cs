@@ -22,6 +22,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             LargePersonGroupPersonDelete = new LargePersonGroupPersonDeleteApiOperation();
             LargePersonGroupPersonFaceAdd = new LargePersonGroupPersonFaceAddApiOperation();
             LargePersonGroupPersonFaceGet = new LargePersonGroupPersonFaceGetApiOperation();
+            LargePersonGroupPersonFaceDelete = new LargePersonGroupPersonFaceDeleteApiOperation();
         }
         public static FaceDetectionApiOperation FaceDetection { get; }
         public static LargePersonGroupCreateApiOperation LargePersonGroupCreate { get; }
@@ -34,6 +35,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         public static LargePersonGroupPersonDeleteApiOperation LargePersonGroupPersonDelete { get; }
         public static LargePersonGroupPersonFaceAddApiOperation LargePersonGroupPersonFaceAdd { get; }
         public static LargePersonGroupPersonFaceGetApiOperation LargePersonGroupPersonFaceGet { get; }
+        public static LargePersonGroupPersonFaceDeleteApiOperation LargePersonGroupPersonFaceDelete { get; }
 
     }
 
@@ -111,5 +113,11 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         }
     }
 
+    public class LargePersonGroupPersonFaceDeleteApiOperation : ApiActionDefinition
+    {
+        public LargePersonGroupPersonFaceDeleteApiOperation() : base(HttpMethod.Delete, FaceApiOperations.Category)
+        {
+        }
+    }
 
 }

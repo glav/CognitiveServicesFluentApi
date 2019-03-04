@@ -40,5 +40,9 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
         {
             ItemList.Add(new LargePersonGroupPersonFaceGetActionDataItem(ItemList.Count + 1, groupId, personId, persistedFaceId));
         }
+        public void DeleteFaceForPersonGroupPerson(string groupId, string personId, string persistedFaceId)
+        {
+            ItemList.Add(new LargePersonGroupPersonFaceDeleteActionDataItem(ItemList.Count + 1, groupId, personId, persistedFaceId));
+        }
     }
 }

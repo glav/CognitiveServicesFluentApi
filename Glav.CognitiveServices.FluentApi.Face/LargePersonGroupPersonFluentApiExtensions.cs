@@ -47,5 +47,11 @@ namespace Glav.CognitiveServices.FluentApi.Face
             actionData.GetFaceForPersonGroupPerson(groupId, personId, persistedFaceId);
             return apiAnalysis;
         }
+        public static FaceAnalysisSettings DeleteFaceForPersonGroupPerson(this FaceAnalysisSettings apiAnalysis, string groupId, string personId, string persistedFaceId)
+        {
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupPersonActionData>(FaceApiOperations.LargePersonGroupPersonFaceDelete);
+            actionData.DeleteFaceForPersonGroupPerson(groupId, personId, persistedFaceId);
+            return apiAnalysis;
+        }
     }
 }
