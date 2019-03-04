@@ -31,6 +31,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupPersonDelete).ConfigureAwait(continueOnCapturedContext: false);
             await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupPersonFaceAdd).ConfigureAwait(continueOnCapturedContext: false);
             await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupPersonFaceGet).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupPersonFaceDelete).ConfigureAwait(continueOnCapturedContext: false);
             return apiResults;
         }
 
@@ -94,6 +95,11 @@ namespace Glav.CognitiveServices.FluentApi.Face
                 if (apiAction == FaceApiOperations.LargePersonGroupPersonFaceGet)
                 {
                     apiResults.SetResult(new LargePersonGroupPersonFaceGetAnalysisContext(actionData, new LargePersonGroupPersonFaceGetResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    return;
+                }
+                if (apiAction == FaceApiOperations.LargePersonGroupPersonFaceDelete)
+                {
+                    apiResults.SetResult(new LargePersonGroupPersonFaceDeleteAnalysisContext(actionData, new LargePersonGroupPersonFaceDeleteResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                     return;
                 }
                 throw new NotSupportedException($"{apiAction.ToString()} not supported yet");

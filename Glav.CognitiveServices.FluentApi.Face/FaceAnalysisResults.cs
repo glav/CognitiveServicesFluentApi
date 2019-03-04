@@ -26,6 +26,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public LargePersonGroupPersonDeleteAnalysisContext LargePersonGroupPersonDeleteAnalysis { get; private set; }
         public LargePersonGroupPersonFaceAddAnalysisContext LargePersonGroupPersonFaceAddAnalysis { get; private set; }
         public LargePersonGroupPersonFaceGetAnalysisContext LargePersonGroupPersonFaceGetAnalysis { get; private set; }
+        public LargePersonGroupPersonFaceDeleteAnalysisContext LargePersonGroupPersonFaceDeleteAnalysis { get; private set; }
 
         public void SetResult(FaceDetectionAnalysisContext faceDetectionAnalysis)
         {
@@ -73,6 +74,10 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public void SetResult(LargePersonGroupPersonFaceGetAnalysisContext largePersonGroupPersonFaceGetAnalysis)
         {
             LargePersonGroupPersonFaceGetAnalysis = largePersonGroupPersonFaceGetAnalysis;
+        }
+        public void SetResult(LargePersonGroupPersonFaceDeleteAnalysisContext largePersonGroupPersonFaceDeleteAnalysis)
+        {
+            LargePersonGroupPersonFaceDeleteAnalysis = largePersonGroupPersonFaceDeleteAnalysis;
         }
     }
 }
