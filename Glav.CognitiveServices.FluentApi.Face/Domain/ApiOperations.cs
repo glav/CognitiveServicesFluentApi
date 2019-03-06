@@ -16,6 +16,8 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
             LargePersonGroupGet = new LargePersonGroupGetApiOperation();
             LargePersonGroupList = new LargePersonGroupListApiOperation();
             LargePersonGroupDelete = new LargePersonGroupDeleteApiOperation();
+            LargePersonGroupTrainStart = new LargePersonGroupTrainStartApiOperation();
+            LargePersonGroupTrainStatus = new LargePersonGroupTrainStatusApiOperation();
             LargePersonGroupPersonCreate = new LargePersonGroupPersonCreateApiOperation();
             LargePersonGroupPersonGet = new LargePersonGroupPersonGetApiOperation();
             LargePersonGroupPersonList = new LargePersonGroupPersonListApiOperation();
@@ -29,6 +31,8 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         public static LargePersonGroupGetApiOperation LargePersonGroupGet { get; }
         public static LargePersonGroupListApiOperation LargePersonGroupList { get; }
         public static LargePersonGroupDeleteApiOperation LargePersonGroupDelete { get; }
+        public static LargePersonGroupTrainStartApiOperation LargePersonGroupTrainStart { get; }
+        public static LargePersonGroupTrainStatusApiOperation LargePersonGroupTrainStatus { get; }
         public static LargePersonGroupPersonCreateApiOperation LargePersonGroupPersonCreate { get; }
         public static LargePersonGroupPersonGetApiOperation LargePersonGroupPersonGet { get; }
         public static LargePersonGroupPersonListApiOperation LargePersonGroupPersonList { get; }
@@ -119,5 +123,20 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         {
         }
     }
+
+    public class LargePersonGroupTrainStartApiOperation : ApiActionDefinition
+    {
+        public LargePersonGroupTrainStartApiOperation() : base(HttpMethod.Post, FaceApiOperations.Category)
+        {
+        }
+    }
+
+    public class LargePersonGroupTrainStatusApiOperation : ApiActionDefinition
+    {
+        public LargePersonGroupTrainStatusApiOperation() : base(HttpMethod.Get, FaceApiOperations.Category)
+        {
+        }
+    }
+
 
 }

@@ -8,6 +8,19 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses
         public BaseApiErrorResponse error { get; set; }
     }
 
+    public class LargePersonGroupTrainStartResponseRoot : IActionResponseRoot
+    {
+        public BaseApiErrorResponse error { get; set; }
+    }
+
+    
+    public class LargePersonGroupTrainStatusResponseRoot : IActionResponseRoot
+    {
+        public BaseApiErrorResponse error { get; set; }
+        public LargePersonGroupTrainStatusResponseItem TrainingStatus {get;set;}
+    }
+
+
     public class LargePersonGroupDeleteResponseRoot : IActionResponseRoot
     {
         public BaseApiErrorResponse error { get; set; }
@@ -28,6 +41,15 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses
         public string name { get; set; }
         public string userData { get; set; }
         public string largePersonGroupId { get; set; }
+    }
+
+    public class LargePersonGroupTrainStatusResponseItem
+    {
+        public string status { get; set; }
+        public string createdDateTime { get; set; }
+        public string lastActionDateTime { get; set; }
+        public string lastSuccessfulTrainingDateTime { get; set; }
+        public string message { get; set; }
     }
 
 }
