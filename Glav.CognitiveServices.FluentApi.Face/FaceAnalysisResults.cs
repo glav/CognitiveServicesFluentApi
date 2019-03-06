@@ -19,6 +19,8 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public LargePersonGroupGetAnalysisContext LargePersonGroupGetAnalysis { get; private set; }
         public LargePersonGroupListAnalysisContext LargePersonGroupListAnalysis { get; private set; }
         public LargePersonGroupDeleteAnalysisContext LargePersonGroupDeleteAnalysis { get; private set; }
+        public LargePersonGroupTrainStartAnalysisContext LargePersonGroupTrainStartAnalysis { get; private set; }
+        public LargePersonGroupTrainStatusAnalysisContext LargePersonGroupTrainStatusAnalysis { get; private set; }
 
         public LargePersonGroupPersonCreateAnalysisContext LargePersonGroupPersonCreateAnalysis { get; private set; }
         public LargePersonGroupPersonGetAnalysisContext LargePersonGroupPersonGetAnalysis { get; private set; }
@@ -48,6 +50,14 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public void SetResult(LargePersonGroupDeleteAnalysisContext largePersonGroupDeleteAnalysis)
         {
             LargePersonGroupDeleteAnalysis = largePersonGroupDeleteAnalysis;
+        }
+        public void SetResult(LargePersonGroupTrainStartAnalysisContext largePersonGroupTrainStartAnalysis)
+        {
+            LargePersonGroupTrainStartAnalysis = largePersonGroupTrainStartAnalysis;
+        }
+        public void SetResult(LargePersonGroupTrainStatusAnalysisContext largePersonGroupTrainStatusAnalysis)
+        {
+            LargePersonGroupTrainStatusAnalysis = largePersonGroupTrainStatusAnalysis;
         }
 
         public void SetResult(LargePersonGroupPersonDeleteAnalysisContext largePersonGroupPersonDeleteAnalysis)
