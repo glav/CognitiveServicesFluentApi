@@ -27,6 +27,14 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
         {
             ItemList.Add(new LargePersonGroupDeleteActionDataItem(ItemList.Count + 1, groupId));
         }
+        public void AddPersonGroupTrainStart(string groupId)
+        {
+            ItemList.Add(new LargePersonGroupTrainStartActionDataItem(ItemList.Count + 1, groupId));
+        }
+        public void AddPersonGroupTrainStatus(string groupId)
+        {
+            ItemList.Add(new LargePersonGroupTrainStatusActionDataItem(ItemList.Count + 1, groupId));
+        }
 
     }
 }

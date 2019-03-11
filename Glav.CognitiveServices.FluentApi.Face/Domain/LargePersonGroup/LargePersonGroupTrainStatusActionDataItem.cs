@@ -9,7 +9,7 @@
 
         public override string ToEndUriFragment()
         {
-            return base.ToEndUriFragment() + "/train";
+            return base.ToEndUriFragment() + "/training";
         }
     }
 }
