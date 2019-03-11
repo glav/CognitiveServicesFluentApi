@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Glav.CognitiveServices.FluentApi.Core
+namespace Glav.CognitiveServices.FluentApi.Core.Extensions
 {
     public static class EnumParserExtensions
     {

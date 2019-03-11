@@ -53,5 +53,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             actionData.DeleteFaceForPersonGroupPerson(groupId, personId, persistedFaceId);
             return apiAnalysis;
         }
+
+ 
     }
 }

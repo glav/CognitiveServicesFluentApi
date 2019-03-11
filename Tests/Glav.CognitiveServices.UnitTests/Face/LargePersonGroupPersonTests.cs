@@ -4,6 +4,7 @@ using Glav.CognitiveServices.FluentApi.Core;
 using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.Face;
 using System.Linq;
+using Glav.CognitiveServices.FluentApi.Face.Configuration;
 
 namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
@@ -127,11 +128,15 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .AnalyseAllAsync();
 
             result.LargePersonGroupTrainStatusAnalysis.AssertAnalysisContextValidity();
-            Assert.Equal("succeeded", result.LargePersonGroupTrainStatusAnalysis.AnalysisResult.ResponseData.TrainingStatus.status);
+            Assert.Equal(ApiConstants.LargePersonGroupTrainStatusSucceeded, result.LargePersonGroupTrainStatusAnalysis.AnalysisResult.ResponseData.TrainingStatus.status);
             Assert.Equal("2018-10-15T11:51:27.6872495Z", result.LargePersonGroupTrainStatusAnalysis.AnalysisResult.ResponseData.TrainingStatus.createdDateTime);
             Assert.Equal("2018-10-15T11:51:27.8705696Z", result.LargePersonGroupTrainStatusAnalysis.AnalysisResult.ResponseData.TrainingStatus.lastActionDateTime);
             Assert.Equal("2018-10-15T11:51:27.8705696Z", result.LargePersonGroupTrainStatusAnalysis.AnalysisResult.ResponseData.TrainingStatus.lastSuccessfulTrainingDateTime);
             Assert.Equal("This is a response message", result.LargePersonGroupTrainStatusAnalysis.AnalysisResult.ResponseData.TrainingStatus.message);
+
+            Assert.True(result.IsTrainingComplete());
+            Assert.True(result.IsTrainingSuccessful());
+
         }
 
 
