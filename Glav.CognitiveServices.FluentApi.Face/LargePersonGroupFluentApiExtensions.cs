@@ -32,5 +32,18 @@ namespace Glav.CognitiveServices.FluentApi.Face
             actionData.AddPersonGroupDelete(groupId);
             return apiAnalysis;
         }
+
+        public static FaceAnalysisSettings StartTrainingLargePersonGroup(this FaceAnalysisSettings apiAnalysis, string groupId)
+        {
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupActionData>(FaceApiOperations.LargePersonGroupTrainStart);
+            actionData.AddPersonGroupTrainStart(groupId);
+            return apiAnalysis;
+        }
+        public static FaceAnalysisSettings CheckTrainingStatusLargePersonGroup(this FaceAnalysisSettings apiAnalysis, string groupId)
+        {
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<LargePersonGroupActionData>(FaceApiOperations.LargePersonGroupTrainStatus);
+            actionData.AddPersonGroupTrainStatus(groupId);
+            return apiAnalysis;
+        }
     }
 }

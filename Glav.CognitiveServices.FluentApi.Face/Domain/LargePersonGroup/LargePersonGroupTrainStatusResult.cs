@@ -34,6 +34,18 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
                     return;
                 }
 
+                var apiResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<LargePersonGroupTrainStatusResponseItem>(ApiCallResult.Data);
+                if (apiResponse == null)
+                {
+                    var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(ApiCallResult.Data);
+                    if (apiError != null)
+                    {
+                        ResponseData = new LargePersonGroupTrainStatusResponseRoot { error = apiError };
+                    }
+                    ActionSubmittedSuccessfully = false;
+                    return;
+                }
+                ResponseData = new LargePersonGroupTrainStatusResponseRoot { TrainingStatus = apiResponse };
                 ActionSubmittedSuccessfully = true;
             }
             catch (Exception ex)
