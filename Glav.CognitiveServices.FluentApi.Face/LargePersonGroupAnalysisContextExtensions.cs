@@ -1,12 +1,14 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Operations;
 using Glav.CognitiveServices.FluentApi.Face.Configuration;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
 using Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses;
 using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup;
-using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.Face
 {
@@ -70,6 +72,68 @@ namespace Glav.CognitiveServices.FluentApi.Face
         {
             var status = context.GetTrainingStatus();
             return status.IsTrainingComplete() && status.IsTrainingSuccessful();
+        }
+
+        public static async Task WaitForTrainingToCompleteAsync(this FaceAnalysisResults results, CancellationToken cancelToken,
+                int timeoutInMilliseconds = OperationStatusQueryEngine.DefaultOperationStateQueryTimeoutInMilliseconds,
+            int queryDelayInMilliseconds = OperationStatusQueryEngine.DefaultOperationStateQueryDelayInMilliseconds)
+        {
+            if (results.IsTrainingComplete())
+            {
+                return;
+            }
+            var logger = results.AnalysisSettings.ConfigurationSettings.DiagnosticLogger;
+            const string logTopic = "FaceTraining";
+            logger.LogInfo("Waiting for training to complete...", logTopic);
+
+            var actionCollection = results.AnalysisSettings.ActionsToPerform.First(a => a.Key == FaceApiOperations.LargePersonGroupTrainStart.Name).Value;
+            var groupIds = actionCollection
+                    .GetAllItems()
+                    .Cast<LargePersonGroupTrainStatusActionDataItem>()
+                    .Select(s => s.GroupId)
+                    .ToList();
+
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            try
+            {
+                while (true)
+                {
+                    if (cancelToken.IsCancellationRequested)
+                    {
+                        logger.LogWarning("Querying face training status was cancelled", logTopic);
+                        return;
+                    }
+
+                    var settings = results.AnalysisSettings.WithFaceAnalysisActions();
+                    groupIds.ForEach(grpId =>
+                    {
+                        settings.CheckTrainingStatusLargePersonGroup(grpId);
+                    });
+                    var checkResult = await settings.AnalyseAllAsync();
+                    var isComplete = checkResult.LargePersonGroupTrainStatusAnalysis.
+                        AnalysisResults.All(r => r.ResponseData.TrainingStatus.IsTrainingComplete());
+                    if (isComplete)
+                    {
+                        logger.LogInfo($"Querying for face training status completed in {stopWatch.ElapsedMilliseconds} milliseconds.", logTopic);
+                        return;
+                    }
+
+                    await System.Threading.Tasks.Task.Delay(queryDelayInMilliseconds);
+
+                    if (stopWatch.ElapsedMilliseconds > timeoutInMilliseconds)
+                    {
+                        logger.LogWarning($"Querying for face training status timed out." +
+                            $" Operation took {stopWatch.ElapsedMilliseconds} which was greater than threshold {timeoutInMilliseconds} milliseconds.", logTopic);
+
+                        return;
+                    }
+                }
+            }
+            finally
+            {
+                stopWatch.Stop();
+            }
         }
 
 

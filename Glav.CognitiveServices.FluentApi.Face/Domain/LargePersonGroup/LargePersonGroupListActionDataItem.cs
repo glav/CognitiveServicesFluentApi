@@ -32,12 +32,12 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
             return null;
         }
 
-        public string ToEndUriFragment()
+        public virtual string ToEndUriFragment()
         {
             return null;
         }
 
-        public string ToUrlQueryParameters()
+        public virtual string ToUrlQueryParameters()
         {
             var url = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(Start))

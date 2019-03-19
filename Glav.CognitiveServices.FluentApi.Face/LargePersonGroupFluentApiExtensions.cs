@@ -45,5 +45,6 @@ namespace Glav.CognitiveServices.FluentApi.Face
             actionData.AddPersonGroupTrainStatus(groupId);
             return apiAnalysis;
         }
+
     }
 }

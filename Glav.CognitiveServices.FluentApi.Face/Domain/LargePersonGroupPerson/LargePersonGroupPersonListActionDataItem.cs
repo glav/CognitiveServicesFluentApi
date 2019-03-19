@@ -18,5 +18,10 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
 
         public override ApiActionDefinition ApiDefintition => FaceApiOperations.LargePersonGroupPersonList;
 
+        public override string ToEndUriFragment()
+        {
+            return $"{base.ToEndUriFragment()}/{GroupId}/persons";
+        }
+
     }
 }
