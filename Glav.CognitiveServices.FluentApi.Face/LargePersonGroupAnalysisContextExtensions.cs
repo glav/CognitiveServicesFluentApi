@@ -74,6 +74,48 @@ namespace Glav.CognitiveServices.FluentApi.Face
             return status.IsTrainingComplete() && status.IsTrainingSuccessful();
         }
 
+        /// <summary>
+        /// Queries the result of a TrainStart API call.
+        /// </summary>
+        /// <param name="results"></param>
+        /// <returns>An enumerated list of <see cref="OperationStatusResult"/>. This contains the following possible statu: NotStarted, BadRequest,
+        /// Submitted,Running,CompletedSuccessfully,Failed,TimedOut,Cancelled,Uploaded</returns>
+        //public static async Task<IEnumerable<OperationStatusResult>> CheckOperationStatusAsync(this FaceAnalysisResults results)
+        //{
+        //    var operationStatusToQuery = results.LargePersonGroupTrainStartAnalysis.AnalysisResults.Select(s => s.ApiCallResult.OperationLocationUri).ToList();
+        //    var statusResponses = new List<OperationStatusResult>(operationStatusToQuery.Count);
+        //    var queryEngine = new OperationStatusQueryEngine(results.AnalysisSettings);
+        //    foreach (var statusUri in operationStatusToQuery)
+        //    {
+        //        statusResponses.Add(await queryEngine.CheckOperationStatusAsync(statusUri));
+        //    }
+        //    return statusResponses;
+        //}
+
+        ///// <summary>
+        ///// Will poll the operation status service until the ace training operation has completed processing.
+        ///// </summary>
+        ///// <param name="results">The Face analysis results</param>
+        ///// <param name="cancelToken">Cancellation token for the task</param>
+        ///// <param name="timeoutInMillseconds">The total timeout period in milliseconds for the wait operation. 
+        ///// This wait operation will efectively poll the operation status endpoint until the total time taken exceeds this value.</param>
+        ///// <param name="queryDelayInMilliseconds">The delay between each query operation to the API.</param>
+        ///// <returns>An enumerable list of <see cref="RecognizeTextAnalysisResult"/></returns>
+        //public static async Task<IEnumerable<OperationStatusResult>> WaitForOperationToCompleteAsync(this FaceAnalysisResults results, CancellationToken cancelToken,
+        //        int timeoutInMilliseconds = OperationStatusQueryEngine.DefaultOperationStateQueryTimeoutInMilliseconds,
+        //        int queryDelayInMilliseconds = OperationStatusQueryEngine.DefaultOperationStateQueryDelayInMilliseconds)
+        //{
+        //    var operationStatusToQuery = results.LargePersonGroupTrainStartAnalysis.AnalysisResults.Select(s => s.ApiCallResult.OperationLocationUri).ToList();
+        //    var analysisResponses = new List<OperationStatusResult>(operationStatusToQuery.Count);
+        //    var queryEngine = new OperationStatusQueryEngine(results.AnalysisSettings);
+        //    foreach (var statusUri in operationStatusToQuery)
+        //    {
+        //        var callResult = await queryEngine.WaitForOperationToCompleteAsync(statusUri, cancelToken, timeoutInMilliseconds, queryDelayInMilliseconds);
+        //        analysisResponses.Add(callResult);
+        //    }
+        //    return analysisResponses;
+        //}
+
         public static async Task WaitForTrainingToCompleteAsync(this FaceAnalysisResults results, CancellationToken cancelToken,
                 int timeoutInMilliseconds = OperationStatusQueryEngine.DefaultOperationStateQueryTimeoutInMilliseconds,
             int queryDelayInMilliseconds = OperationStatusQueryEngine.DefaultOperationStateQueryDelayInMilliseconds)
