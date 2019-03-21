@@ -62,8 +62,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                 using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory]))
                 {
                     int retryCount = 0;
-                    const int maxRetries = 3;
-                    while (retryCount < maxRetries)
+                    while (retryCount < _configurationSettings.MaxNumberOfRequestRetries)
                     {
                         HttpResponseMessage httpResult = null;
                         if (apiHttpMethod == HttpMethod.Put)
