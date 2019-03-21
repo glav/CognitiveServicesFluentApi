@@ -77,5 +77,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
             return $"[{DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.ffff")} UTC]";
         }
 
+        protected LoggingLevel LogLevel { get; set; }
+
+        public void SetLogLevel(LoggingLevel logLevel)
+        {
+            LogLevel = logLevel;
+        }
     }
 }

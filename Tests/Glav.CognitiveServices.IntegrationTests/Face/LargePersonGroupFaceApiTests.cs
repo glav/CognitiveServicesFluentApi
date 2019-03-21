@@ -20,8 +20,8 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             var personName = $"Person-{groupId}";
 
             var config = FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
-                .AddAllDefaultLogging()
-                .UsingMaximumRequestRetries(1)
+                .AddConsoleAndTraceLogging()
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions();
 

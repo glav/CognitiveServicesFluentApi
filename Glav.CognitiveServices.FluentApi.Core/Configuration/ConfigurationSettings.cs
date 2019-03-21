@@ -4,12 +4,14 @@ using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 {
     public abstract class ConfigurationSettings
     {
         private List<IDiagnosticLogger> _registeredDiagnosticLoggers = new List<IDiagnosticLogger>();
+        private LoggingLevel _logLevel = LoggingLevel.ErrorsOnly;
 
         public ConfigurationSettings(string apiCategory, string apiKey, LocationKeyIdentifier locationKey,
                     ApiServiceUriCollectionBase serviceUris)
@@ -36,7 +38,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             this.MaxNumberOfRequestRetries = settings.MaxNumberOfRequestRetries;
             this.LogLevel = settings.LogLevel;
             this.GlobalScoringEngine = settings.GlobalScoringEngine;
-            this.RegisteredDiagnosticTraceLoggers = settings.RegisteredDiagnosticTraceLoggers;
+            this.RegisteredDiagnosticLoggers = settings.RegisteredDiagnosticLoggers;
             this.DiagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
         }
 
@@ -62,10 +64,14 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         }
 
 
-        public LoggingLevel LogLevel { get; set; }
+        public LoggingLevel LogLevel
+        {
+            get { return _logLevel; }
+            set { _logLevel = value; this.DiagnosticLogger.SetLogLevel(_logLevel); }
+        }
         public IDiagnosticLogger DiagnosticLogger { get; private set; }
 
-        public IEnumerable<IDiagnosticLogger> RegisteredDiagnosticTraceLoggers
+        public IEnumerable<IDiagnosticLogger> RegisteredDiagnosticLoggers
         {
             get => _registeredDiagnosticLoggers;
             set => _registeredDiagnosticLoggers = value.ToList();
@@ -106,6 +112,22 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
                 throw;
             }
 
+        }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine($"LocationKey: {this.LocationKey}");
+            builder.AppendLine($"MaxNumberOfRequestRetries: {this.MaxNumberOfRequestRetries}");
+            builder.AppendLine($"LogLevel: {this.LogLevel}");
+            builder.AppendLine($"GlobalScoringEngine: {this.GlobalScoringEngine}");
+            builder.AppendLine($"RegisteredDiagnosticLoggers:");
+            this.RegisteredDiagnosticLoggers.ToList().ForEach(d =>
+            {
+                builder.AppendLine($"  Logger: {d}");
+            });
+
+            return builder.ToString();
         }
     }
 }

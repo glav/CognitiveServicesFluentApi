@@ -22,6 +22,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
         protected async Task AnalyseApiActionAsync(ApiActionDefinition apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler)
         {
+            AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo(AnalysisSettings.ConfigurationSettings.ToString());
+
             if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction.Name))
             {
                 // Get the collection of actions to perform for an API call
@@ -39,7 +41,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
                     foreach(var item in allItems)
                     {
-                        await ExecuteApiActionForSingleApiActionAsync(AnalysisSettings.ConfigurationSettings.DiagnosticLogger, actions, apiAction, apiActionHandler, item);
+                        await ExecuteApiActionForSingleApiActionAsync(actions, apiAction, apiActionHandler, item);
                     }
                 }
             }
@@ -57,11 +59,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
             apiActionHandler(actionCollection, result);
         }
 
-        private async Task ExecuteApiActionForSingleApiActionAsync(IDiagnosticLogger logger,
-                ApiActionDataCollection apiActions,
+        private async Task ExecuteApiActionForSingleApiActionAsync(ApiActionDataCollection apiActions,
                 ApiActionDefinition apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler,
                 IActionDataItem actionItem)
         {
+            var logger = AnalysisSettings.ConfigurationSettings.DiagnosticLogger;
             logger.LogInfo($"Calling service for {apiAction.ToString()}", "ExecuteApiActionForSingleApiActionAsync");
             var urlQueryParams = actionItem.ToUrlQueryParameters();
             ICommunicationResult commsResult;
