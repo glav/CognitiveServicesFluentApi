@@ -57,27 +57,44 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         {
             try
             {
+                ICommunicationResult commsResult = null;
+
                 using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory]))
                 {
-                    HttpResponseMessage httpResult = null;
-                    if (apiHttpMethod == HttpMethod.Put)
+                    int retryCount = 0;
+                    const int maxRetries = 3;
+                    while (retryCount < maxRetries)
                     {
-                        httpResult = await httpClient.PutAsync(url, content).ConfigureAwait(continueOnCapturedContext: false);
+                        HttpResponseMessage httpResult = null;
+                        if (apiHttpMethod == HttpMethod.Put)
+                        {
+                            httpResult = await httpClient.PutAsync(url, content).ConfigureAwait(continueOnCapturedContext: false);
 
+                        }
+                        if (apiHttpMethod == HttpMethod.Post)
+                        {
+                            httpResult = await httpClient.PostAsync(url, content).ConfigureAwait(continueOnCapturedContext: false);
+                        }
+                        if (apiHttpMethod == HttpMethod.Get)
+                        {
+                            httpResult = await httpClient.GetAsync(url).ConfigureAwait(continueOnCapturedContext: false);
+                        }
+                        if (apiHttpMethod == HttpMethod.Options || apiHttpMethod == HttpMethod.Delete)
+                        {
+                            throw new MissingMethodException($"HTTP Method {apiHttpMethod} not currently supported.");
+                        }
+                        commsResult = await CommunicationResult.ParseResultAsync(httpResult);
+                        if (!commsResult.Ratelimit.Exceeded)
+                        {
+                            return commsResult;
+                        }
+                        retryCount++;
+                        _configurationSettings.DiagnosticLogger.LogWarning($"Retrying operation, waiting {commsResult.Ratelimit.RetryDelayInSeconds} seconds ");
+                        await System.Threading.Tasks.Task.Delay(((int)commsResult.Ratelimit.RetryDelayInSeconds * 1000));
                     }
-                    if (apiHttpMethod == HttpMethod.Post)
-                    {
-                        httpResult = await httpClient.PostAsync(url, content).ConfigureAwait(continueOnCapturedContext: false);
-                    }
-                    if (apiHttpMethod == HttpMethod.Get)
-                    {
-                        httpResult = await httpClient.GetAsync(url).ConfigureAwait(continueOnCapturedContext: false);
-                    }
-                    if (apiHttpMethod == HttpMethod.Options || apiHttpMethod == HttpMethod.Delete)
-                    {
-                        throw new MissingMethodException($"HTTP Method {apiHttpMethod} not currently supported.");
-                    }
-                    return await CommunicationResult.ParseResult(httpResult);
+                    // If we get here, then we have tried too many times so just return the last result
+                    _configurationSettings.DiagnosticLogger.LogError($"Too many retries (#{retryCount}), aborting.");
+                    return commsResult;
                 }
             }
             catch (Exception ex)
@@ -111,7 +128,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                 using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[category]))
                 {
                     var httpResult = await httpClient.GetAsync(uri).ConfigureAwait(continueOnCapturedContext: false);
-                    return await CommunicationResult.ParseResult(httpResult);
+                    return await CommunicationResult.ParseResultAsync(httpResult);
                 }
             }
             catch (Exception ex)

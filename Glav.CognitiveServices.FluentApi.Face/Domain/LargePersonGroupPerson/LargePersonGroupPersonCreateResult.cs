@@ -28,23 +28,12 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
             {
                 if ((int)ApiCallResult.StatusCode >= 400)
                 {
-                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(ApiCallResult.Data);
-                    ResponseData = new LargePersonGroupPersonCreateResponseRoot { error = errorResponse };
+                    ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LargePersonGroupPersonCreateResponseRoot>(ApiCallResult.Data);
                     ActionSubmittedSuccessfully = false;
                     return;
                 }
 
                 var responseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LargePersonGroupPersonCreateResponseRoot>(ApiCallResult.Data);
-                if (responseData == null)
-                {
-                    var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(ApiCallResult.Data);
-                    if (apiError != null)
-                    {
-                        ResponseData = new LargePersonGroupPersonCreateResponseRoot { error = apiError };
-                    }
-                    ActionSubmittedSuccessfully = false;
-                    return;
-                }
 
                 ResponseData = responseData;
                 ActionSubmittedSuccessfully = true;

@@ -20,7 +20,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             var personName = $"Person-{groupId}";
 
             var config = FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
-                .AddDebugDiagnosticLogging()
+                .AddAllDefaultLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions();
 
@@ -34,9 +34,11 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             result.LargePersonGroupPersonCreateAnalysis.AssertAnalysisContextValidity();
             var personId = result.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData.personId;
 
-            var ListResult = await config
+            var addFaceResult = await config
                             .AddFaceToPersonGroupPerson(groupId, personId, new System.Uri("http://www.scface.org/examples/001_frontal.jpg"))
                             .AnalyseAllAsync();
+
+            addFaceResult.LargePersonGroupPersonFaceAddAnalysis.AssertAnalysisContextValidity();
 
             var faceResult = await config
                            .StartTrainingLargePersonGroup(groupId)
@@ -46,14 +48,9 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             await faceResult.WaitForTrainingToCompleteAsync(new System.Threading.CancellationToken());
 
             Assert.NotNull(faceResult);
-            faceResult.LargePersonGroupPersonFaceAddAnalysis.AssertAnalysisContextValidity();
             faceResult.LargePersonGroupTrainStartAnalysis.AssertAnalysisContextValidity();
             faceResult.LargePersonGroupTrainStatusAnalysis.AssertAnalysisContextValidity();
             Assert.True(faceResult.IsTrainingSuccessful());
-
-
         }
-
-      
     }
 }
