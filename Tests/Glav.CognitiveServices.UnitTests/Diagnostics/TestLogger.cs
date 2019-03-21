@@ -1,4 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
+﻿using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,6 +32,11 @@ namespace Glav.CognitiveServices.UnitTests.Diagnostics
         public void LogWarning(string message, string topic = null)
         {
             NumberOfLogWarningMessages++;
+        }
+
+        public void SetLogLevel(LoggingLevel logLevel)
+        {
+            
         }
     }
 }

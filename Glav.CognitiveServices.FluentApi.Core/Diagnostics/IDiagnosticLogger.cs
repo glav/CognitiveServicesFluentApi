@@ -10,5 +10,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
         void LogWarning(string message, string topic = null);
         void LogError(string message, string topic = null);
         void LogError(Exception ex, string topic = null);
+
+        void SetLogLevel(LoggingLevel logLevel);
     }
 }

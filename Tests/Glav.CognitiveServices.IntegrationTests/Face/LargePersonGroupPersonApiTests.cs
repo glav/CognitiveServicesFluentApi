@@ -19,7 +19,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             var groupId = System.Guid.NewGuid().ToString();
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-                .AddAllDefaultLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .CreateLargePersonGroup(groupId,$"Unittest-{groupId}")
@@ -39,7 +39,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 
             var createResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
-                .AddAllDefaultLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .CreateLargePersonGroup(groupId,groupName)
@@ -53,7 +53,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 
             var getResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
-                .AddAllDefaultLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .GetLargePersonGroupPerson(groupId,personId)

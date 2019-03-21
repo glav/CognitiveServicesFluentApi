@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         {
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-                .AddAllDefaultLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .AddUrlForFaceDetection("http://www.scface.org/examples/001_frontal.jpg",FaceDetectionAttributes.Gender)
@@ -39,7 +39,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-                .AddAllDefaultLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .AddFileForFaceDetection(imageData, FaceDetectionAttributes.Gender | FaceDetectionAttributes.Age)
@@ -64,7 +64,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         {
             var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
-                .AddAllDefaultLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .AddFileForFaceDetection(imageData, FaceDetectionAttributes.HeadPose | FaceDetectionAttributes.FacialHair |
@@ -86,7 +86,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         {
             var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
-                .AddAllDefaultLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .AddFileForFaceDetection(imageData, FaceDetectionAttributes.Hair | FaceDetectionAttributes.MakeUp |

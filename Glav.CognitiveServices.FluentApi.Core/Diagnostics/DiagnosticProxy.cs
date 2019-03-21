@@ -8,11 +8,16 @@ namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
     public class DiagnosticProxy : IDiagnosticLogger
     {
         private readonly List<IDiagnosticLogger> _loggers;
-        private readonly LoggingLevel _logLevel;
+        private LoggingLevel _logLevel;
 
         public DiagnosticProxy(IEnumerable<IDiagnosticLogger> loggers, LoggingLevel logLevel)
         {
             _loggers = loggers != null ? loggers.ToList() : new List<IDiagnosticLogger>();
+            _logLevel = logLevel;
+        }
+
+        public void SetLogLevel(LoggingLevel logLevel)
+        {
             _logLevel = logLevel;
         }
 

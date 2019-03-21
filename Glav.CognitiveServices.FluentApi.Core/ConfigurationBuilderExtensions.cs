@@ -74,18 +74,16 @@ namespace Glav.CognitiveServices.FluentApi.Core
         }
 
         /// <summary>
-        /// Registers all the default logging types. Currently this is Console, 
-        /// System.Diagnostics.Debug and System.Diagnostics.Trace diagnostic loggers.
+        /// Registers all the console and System.Diagnostics.Trace logging types. 
         /// This is NOT recommended for production since it registers multiple logging mechanisms.
         /// </summary>
         /// <remarks>DO NOT use this in production</remarks>
         /// <param name="configSettings"></param>
         /// <returns></returns>
-        public static ConfigurationSettings AddAllDefaultLogging(this ConfigurationSettings configSettings)
+        public static ConfigurationSettings AddConsoleAndTraceLogging(this ConfigurationSettings configSettings)
         {
             configSettings.AddConsoleDiagnosticLogging();
             configSettings.AddTraceDiagnosticLogging();
-            configSettings.AddDebugDiagnosticLogging();
             return configSettings;
         }
 
