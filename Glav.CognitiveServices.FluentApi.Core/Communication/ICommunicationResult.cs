@@ -11,6 +11,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         Uri OperationLocationUri { get; }
         Guid RequestId { get; }
         HttpStatusCode StatusCode { get; }
+        RequestRateLimitStatus Ratelimit { get; }
         bool Successfull { get; }
     }
 }

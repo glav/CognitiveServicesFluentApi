@@ -15,6 +15,6 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
         {
         }
         public override ApiActionDefinition AnalysisType => FaceApiOperations.LargePersonGroupPersonFaceAdd;
-
+        
     }
 }

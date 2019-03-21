@@ -19,7 +19,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             var groupId = System.Guid.NewGuid().ToString();
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-                .AddDebugDiagnosticLogging()
+                .AddAllDefaultLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .CreateLargePersonGroup(groupId,$"Unittest-{groupId}")
@@ -32,28 +32,28 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         }
 
         [Fact]
-        public async Task ShouldBeAbleToGetLargePersonGroupPerson()
+            public async Task ShouldBeAbleToGetLargePersonGroupPerson()
         {
             var groupId = System.Guid.NewGuid().ToString();
             var groupName = $"integrationtest-{groupId}";
 
             var createResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
-                .AddDebugDiagnosticLogging()
+                .AddAllDefaultLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .CreateLargePersonGroup(groupId,groupName)
                 .CreateLargePersonGroupPerson(groupId,"testname","farout")
                 .AnalyseAllAsync();
 
-            Assert.True(createResult.LargePersonGroupCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
-            Assert.True(createResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            createResult.LargePersonGroupCreateAnalysis.AssertAnalysisContextValidity();
+            createResult.LargePersonGroupPersonCreateAnalysis.AssertAnalysisContextValidity();
 
             var personId = createResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData.personId;
 
             var getResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
-                .AddDebugDiagnosticLogging()
+                .AddAllDefaultLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .GetLargePersonGroupPerson(groupId,personId)

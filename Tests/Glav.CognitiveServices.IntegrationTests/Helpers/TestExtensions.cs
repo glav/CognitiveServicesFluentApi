@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Helpers
             Assert.NotNull(analysisContext);
             Assert.NotNull(analysisContext.AnalysisResult);
             Assert.NotNull(analysisContext.AnalysisResult.ApiCallResult);
-            Assert.True(analysisContext.AnalysisResult.ActionSubmittedSuccessfully);
+            Assert.True(analysisContext.AnalysisResult.ActionSubmittedSuccessfully, $"Failed: {analysisContext.AnalysisResult.ApiCallResult.ErrorMessage}, Code: {analysisContext.AnalysisResult.ApiCallResult.StatusCode}");
         }
     }
 }
