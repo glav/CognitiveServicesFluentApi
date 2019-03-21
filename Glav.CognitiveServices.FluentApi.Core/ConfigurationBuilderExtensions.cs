@@ -117,5 +117,20 @@ namespace Glav.CognitiveServices.FluentApi.Core
             return configSettings;
         }
 
+        /// <summary>
+        /// Sets the maximum number of retries for any request issued if a Rate limit has been exceeded. The service will return how
+        /// long to wait if the request rate has been exceeded however this number determines the number of times it will attempt to retry
+        /// before abandoning the process.
+        /// </summary>
+        /// <param name="configSettings"></param>
+        /// <param name="maxRetries"></param>
+        /// <returns></returns>
+        public static ConfigurationSettings UsingMaximumRequestRetries(this ConfigurationSettings configSettings, int maxRetries)
+        {
+            configSettings.SetMaxRequestRetries(maxRetries);
+            return configSettings;
+        }
+
+
     }
 }

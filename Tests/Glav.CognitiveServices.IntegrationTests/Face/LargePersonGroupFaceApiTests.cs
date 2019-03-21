@@ -21,6 +21,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 
             var config = FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .AddAllDefaultLogging()
+                .UsingMaximumRequestRetries(1)
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions();
 

@@ -4,15 +4,12 @@ using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 {
     public abstract class ConfigurationSettings
     {
-        private Dictionary<string, string> _apiKeys = new Dictionary<string, string>();
         private List<IDiagnosticLogger> _registeredDiagnosticLoggers = new List<IDiagnosticLogger>();
-        private IDiagnosticLogger _diagnosticLogger;
 
         public ConfigurationSettings(string apiCategory, string apiKey, LocationKeyIdentifier locationKey,
                     ApiServiceUriCollectionBase serviceUris)
@@ -21,51 +18,64 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             {
                 throw new CognitiveServicesArgumentException("APIKey cannot be empty");
             }
+            this.MaxNumberOfRequestRetries = ApiConstants.DefaultMaxNumberOfRequestRetries;
             this.ApiCategory = apiCategory;
             this.LocationKey = locationKey;
-            _apiKeys.Add(apiCategory, apiKey);
+            this.ApiKeys = new Dictionary<string, string>(1);
+            this.ApiKeys.Add(apiCategory, apiKey);
             this.ServiceUris = serviceUris;
-            _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
+            this.DiagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
             this.GlobalScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
         public ConfigurationSettings(ConfigurationSettings settings)
         {
-            _apiKeys = settings.ApiKeys;
+            this.ApiKeys = settings.ApiKeys;
             this.LocationKey = settings.LocationKey;
             this.ServiceUris = settings.ServiceUris;
+            this.MaxNumberOfRequestRetries = settings.MaxNumberOfRequestRetries;
             this.LogLevel = settings.LogLevel;
             this.GlobalScoringEngine = settings.GlobalScoringEngine;
             this.RegisteredDiagnosticTraceLoggers = settings.RegisteredDiagnosticTraceLoggers;
-            _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
+            this.DiagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
         }
 
         public void RegisterDiagnosticLogger(IDiagnosticLogger logger)
         {
             _registeredDiagnosticLoggers.Add(logger);
-            _diagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers,LogLevel);
+            DiagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
         }
 
+        public int MaxNumberOfRequestRetries { get; private set; }
         public string ApiCategory { get; private set; }
         public void SetScoringEngine(IScoreEvaluationEngine scoringEngine)
         {
             this.GlobalScoringEngine = scoringEngine ?? throw new CognitiveServicesArgumentException("ScoringEngine cannot be NULL");
         }
 
+        public void SetMaxRequestRetries(int maxRetries)
+        {
+            if (maxRetries > 0)
+            {
+                this.MaxNumberOfRequestRetries = maxRetries;
+            }
+        }
+
+
         public LoggingLevel LogLevel { get; set; }
-        public IDiagnosticLogger DiagnosticLogger => _diagnosticLogger;
+        public IDiagnosticLogger DiagnosticLogger { get; private set; }
 
         public IEnumerable<IDiagnosticLogger> RegisteredDiagnosticTraceLoggers
         {
             get => _registeredDiagnosticLoggers;
             set => _registeredDiagnosticLoggers = value.ToList();
         }
-        public Dictionary<string, string> ApiKeys => _apiKeys;
+        public Dictionary<string, string> ApiKeys { get; private set; }
         public LocationKeyIdentifier LocationKey { get; protected set; }
         public ApiServiceUriCollectionBase ServiceUris { get; protected set; }
-        public string BaseUrl => 
-            LocationKey != LocationKeyIdentifier.Global 
-                ? string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, $"{LocationKey.ToTextLocation()}.") 
+        public string BaseUrl =>
+            LocationKey != LocationKeyIdentifier.Global
+                ? string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, $"{LocationKey.ToTextLocation()}.")
                 : string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, string.Empty);
 
         public IScoreEvaluationEngine GlobalScoringEngine { get; protected set; }
@@ -89,7 +99,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
                         string.IsNullOrWhiteSpace(queryParms) ? string.Empty : $"?{queryParms}");
 
                 return url;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 DiagnosticLogger.LogError(ex, "GetAbsoluteUrl");
                 throw;
