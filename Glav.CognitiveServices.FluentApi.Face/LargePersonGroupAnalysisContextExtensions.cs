@@ -85,12 +85,12 @@ namespace Glav.CognitiveServices.FluentApi.Face
             }
             var logger = results.AnalysisSettings.ConfigurationSettings.DiagnosticLogger;
             const string logTopic = "FaceTraining";
-            logger.LogInfo("Waiting for training to complete...", logTopic);
+            await logger.LogInfoAsync("Waiting for training to complete...", logTopic);
 
             var actionCollection = results.AnalysisSettings.ActionsToPerform.First(a => a.Key == FaceApiOperations.LargePersonGroupTrainStart.Name).Value;
             var groupIds = actionCollection
                     .GetAllItems()
-                    .Cast<LargePersonGroupTrainStatusActionDataItem>()
+                    .Cast<LargePersonGroupTrainStartActionDataItem>()
                     .Select(s => s.GroupId)
                     .ToList();
 
@@ -98,25 +98,25 @@ namespace Glav.CognitiveServices.FluentApi.Face
             stopWatch.Start();
             try
             {
+                var settings = results.AnalysisSettings.WithFaceAnalysisActions();
+                groupIds.ForEach(grpId =>
+                {
+                    settings.CheckTrainingStatusLargePersonGroup(grpId);
+                });
                 while (true)
                 {
                     if (cancelToken.IsCancellationRequested)
                     {
-                        logger.LogWarning("Querying face training status was cancelled", logTopic);
+                        await logger.LogWarningAsync("Querying face training status was cancelled", logTopic);
                         return;
                     }
 
-                    var settings = results.AnalysisSettings.WithFaceAnalysisActions();
-                    groupIds.ForEach(grpId =>
-                    {
-                        settings.CheckTrainingStatusLargePersonGroup(grpId);
-                    });
                     var checkResult = await settings.AnalyseAllAsync();
                     var isComplete = checkResult.LargePersonGroupTrainStatusAnalysis.
                         AnalysisResults.All(r => r.ResponseData.TrainingStatus.IsTrainingComplete());
                     if (isComplete)
                     {
-                        logger.LogInfo($"Querying for face training status completed in {stopWatch.ElapsedMilliseconds} milliseconds.", logTopic);
+                        await logger.LogInfoAsync($"Querying for face training status completed in {stopWatch.ElapsedMilliseconds} milliseconds.", logTopic);
                         return;
                     }
 
@@ -124,7 +124,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
 
                     if (stopWatch.ElapsedMilliseconds > timeoutInMilliseconds)
                     {
-                        logger.LogWarning($"Querying for face training status timed out." +
+                        await logger.LogWarningAsync($"Querying for face training status timed out." +
                             $" Operation took {stopWatch.ElapsedMilliseconds} which was greater than threshold {timeoutInMilliseconds} milliseconds.", logTopic);
 
                         return;

@@ -25,10 +25,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
 
         public async Task<OperationStatusResult> CheckOperationStatusAsync(Uri operationStatusLocationUri)
         {
-            _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("About to query operation status", "OperationStatusQuery");
+            await _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync("About to query operation status", "OperationStatusQuery");
             var serviceResult = await _analysisSettings.CommunicationEngine.ServiceGetAsync(operationStatusLocationUri.AbsoluteUri, _analysisSettings.ConfigurationSettings.ApiCategory);
             var result = new OperationStatusResult(serviceResult);
-            _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("Completed query operation status", "OperationStatusQuery");
+            await _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync("Completed query operation status", "OperationStatusQuery");
             return result;
         }
 
@@ -43,7 +43,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
                 return result;
             }
 
-            _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("Waiting for operation status to complete...", LoggingTopic);
+            await _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync("Waiting for operation status to complete...", LoggingTopic);
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -53,13 +53,13 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
                 {
                     if (cancelToken.IsCancellationRequested)
                     {
-                        _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo("Querying operation status was cancelled", LoggingTopic);
+                        await _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync("Querying operation status was cancelled", LoggingTopic);
                         return OperationStatusResult.CreateCancelledOperation(result.ApiCallResult);
                     }
                     result = await CheckOperationStatusAsync(operationStatusLocationUri);
                     if (HasOperationEnded(result.OperationState))
                     {
-                        _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Querying for operation status " +
+                        await _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync($"Querying for operation status " +
                             $"completed in {stopWatch.ElapsedMilliseconds} milliseconds.", LoggingTopic);
 
                         return result;
@@ -69,7 +69,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
 
                     if (stopWatch.ElapsedMilliseconds > timeoutInMilliseconds)
                     {
-                        _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo($"Querying for operation status timed out." +
+                        await _analysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync($"Querying for operation status timed out." +
                             $" Operation took {stopWatch.ElapsedMilliseconds} which was greater than threshold {timeoutInMilliseconds} milliseconds.", LoggingTopic);
 
                         return OperationStatusResult.CreateTimeoutOperation(result.ApiCallResult);

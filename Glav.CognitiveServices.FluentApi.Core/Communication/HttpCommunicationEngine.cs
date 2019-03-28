@@ -33,7 +33,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         /// <returns></returns>
         public async Task<ICommunicationResult> CallServiceAsync(IActionDataItem actionItem)
         {
-            _configurationSettings.DiagnosticLogger.LogInfo($"Performing async service call for {actionItem.ApiDefintition}", "HttpCommunicationEngine");
+            await _configurationSettings.DiagnosticLogger.LogInfoAsync($"Performing async service call for {actionItem.ApiDefintition}", "HttpCommunicationEngine");
             ByteArrayContent content = null;
             if (actionItem.IsBinaryData)
             {
@@ -80,7 +80,8 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                         }
                         if (apiHttpMethod == HttpMethod.Options || apiHttpMethod == HttpMethod.Delete)
                         {
-                            throw new MissingMethodException($"HTTP Method {apiHttpMethod} not currently supported.");
+                            httpResult = await httpClient.DeleteAsync(url).ConfigureAwait(continueOnCapturedContext: false);
+                            //throw new MissingMethodException($"HTTP Method {apiHttpMethod} not currently supported.");
                         }
                         commsResult = await CommunicationResult.ParseResultAsync(httpResult);
                         if (!commsResult.Ratelimit.Exceeded)
@@ -88,17 +89,17 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                             return commsResult;
                         }
                         retryCount++;
-                        _configurationSettings.DiagnosticLogger.LogWarning($"Retrying operation, waiting {commsResult.Ratelimit.RetryDelayInSeconds} seconds ");
+                        await _configurationSettings.DiagnosticLogger.LogWarningAsync($"Retrying operation, waiting {commsResult.Ratelimit.RetryDelayInSeconds} seconds ");
                         await System.Threading.Tasks.Task.Delay(((int)commsResult.Ratelimit.RetryDelayInSeconds * 1000));
                     }
                     // If we get here, then we have tried too many times so just return the last result
-                    _configurationSettings.DiagnosticLogger.LogError($"Too many retries (#{retryCount}), aborting.");
+                    await _configurationSettings.DiagnosticLogger.LogErrorAsync($"Too many retries (#{retryCount}), aborting.");
                     return commsResult;
                 }
             }
             catch (Exception ex)
             {
-                _configurationSettings.DiagnosticLogger.LogError(ex, "HttpCommunicationEngine");
+                await _configurationSettings.DiagnosticLogger.LogErrorAsync(ex, "HttpCommunicationEngine");
                 return CommunicationResult.Fail(ex.Message);
             }
         }

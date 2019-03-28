@@ -108,7 +108,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             }
             catch (Exception ex)
             {
-                DiagnosticLogger.LogError(ex, "GetAbsoluteUrl");
+                DiagnosticLogger.LogErrorAsync(ex, "GetAbsoluteUrl");
                 throw;
             }
 

@@ -43,5 +43,23 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 
             result.LargePersonGroupPersonFaceDeleteAnalysis.AssertAnalysisContextValidity();
         }
+
+        [Fact]
+        public async Task ShouldDetectTrainingCompleted()
+        {
+            const string resultData = "{\"status\":\"running\",\"createdDateTime\":\"2019-03-28T06:51:39.1054821Z\",\"lastActionDateTime\":\"2019-03-28T06:51:39.1054821Z\",\"message\":null}";
+
+            var commsEngine = new MockCommsEngine(new MockCommsResult(resultData));
+            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
+                .AddConsoleDiagnosticLogging()
+                .UsingCustomCommunication(commsEngine)
+                .WithFaceAnalysisActions()
+                .CheckTrainingStatusLargePersonGroup("group-id")
+                .AnalyseAllAsync();
+
+            result.LargePersonGroupTrainStatusAnalysis.AssertAnalysisContextValidity();
+            Assert.False(result.IsTrainingComplete());
+        }
+
     }
 }
