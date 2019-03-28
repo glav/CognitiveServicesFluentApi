@@ -22,10 +22,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 
         protected async Task AnalyseApiActionAsync(ApiActionDefinition apiAction, Action<ApiActionDataCollection, ICommunicationResult> apiActionHandler)
         {
-            AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfo(AnalysisSettings.ConfigurationSettings.ToString());
-
             if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction.Name))
             {
+                await AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync(AnalysisSettings.ConfigurationSettings.ToString());
+
                 // Get the collection of actions to perform for an API call
                 var actions = AnalysisSettings.ActionsToPerform[apiAction.Name];
 
@@ -52,9 +52,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
             var logger = AnalysisSettings.ConfigurationSettings.DiagnosticLogger;
             var firstAction = actionCollection.GetAllItems().First();
 
-            logger.LogInfo($"Calling service for {firstAction.ToString()}", "ExecuteApiActionForActionCollectionAsync");
+            await logger.LogInfoAsync($"Calling service for {firstAction.ToString()}", "ExecuteApiActionForActionCollectionAsync");
             var result = await AnalysisSettings.CommunicationEngine.CallBatchServiceAsync(actionCollection).ConfigureAwait(continueOnCapturedContext: false);
-            logger.LogInfo($"Processing results for {firstAction.ToString()}", "ExecuteApiActionForActionCollectionAsync");
+            await logger.LogInfoAsync($"Processing results for {firstAction.ToString()}", "ExecuteApiActionForActionCollectionAsync");
 
             apiActionHandler(actionCollection, result);
         }
@@ -64,7 +64,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                 IActionDataItem actionItem)
         {
             var logger = AnalysisSettings.ConfigurationSettings.DiagnosticLogger;
-            logger.LogInfo($"Calling service for {apiAction.ToString()}", "ExecuteApiActionForSingleApiActionAsync");
+            await logger.LogInfoAsync($"Calling service for {apiAction.ToString()}", "ExecuteApiActionForSingleApiActionAsync");
             var urlQueryParams = actionItem.ToUrlQueryParameters();
             ICommunicationResult commsResult;
             if (actionItem.IsBinaryData)
@@ -79,7 +79,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
                                         .CallServiceAsync(actionItem)
                                         .ConfigureAwait(continueOnCapturedContext: false);
             }
-            logger.LogInfo($"Processing results for {apiAction.ToString()}", "ExecuteApiActionForSingleApiActionAsync");
+            await logger.LogInfoAsync($"Processing results for {apiAction.ToString()}", "ExecuteApiActionForSingleApiActionAsync");
 
             apiActionHandler(apiActions, commsResult);
         }

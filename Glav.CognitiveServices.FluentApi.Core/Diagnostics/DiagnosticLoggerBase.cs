@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
 {
@@ -10,30 +11,34 @@ namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
         const string MessageType_Warning = "Wrning";
         const string MessageType_Informational = "Informational";
 
-        public void LogInfo(string message, string topic = null)
+        public Task LogInfoAsync(string message, string topic = null)
         {
             var msg = FormLogMessage(topic, message, MessageType_Informational);
             WriteToOutput(msg);
+            return Task.FromResult(0);
         }
 
-        public void LogWarning(string message, string topic = null)
+        public Task LogWarningAsync(string message, string topic = null)
         {
             var msg = FormLogMessage(topic, message, MessageType_Warning);
             WriteToOutput(msg);
+            return Task.FromResult(0);
         }
 
 
-        public void LogError(string message, string topic = null)
+        public Task LogErrorAsync(string message, string topic = null)
         {
             var msg = FormLogMessage(topic, message, MessageType_Error);
             WriteToOutput(msg);
+            return Task.FromResult(0);
         }
 
-        public void LogError(Exception ex, string topic = null)
+        public Task LogErrorAsync(Exception ex, string topic = null)
         {
             var exceptionDetails = ExtractDetailsFromException(ex);
             var msg = FormLogMessage(topic, exceptionDetails, MessageType_Error);
             WriteToOutput(msg);
+            return Task.FromResult(0);
         }
 
         public abstract void WriteToOutput(string msg);
@@ -83,5 +88,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
         {
             LogLevel = logLevel;
         }
+
+ 
     }
 }
