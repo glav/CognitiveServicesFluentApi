@@ -4,8 +4,9 @@ using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using System;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
 using Glav.CognitiveServices.FluentApi.Core.Diagnostics;
+using Glav.CognitiveServices.FluentApi.Core.Contracts;
 
-namespace Glav.CognitiveServices.FluentApi.Core.Contracts
+namespace Glav.CognitiveServices.FluentApi.Core.Analysis
 {
     public abstract class BaseAnalysisEngine<TAnalysisResults> : IAnalysisEngine<TAnalysisResults>
                 where TAnalysisResults : class, IAnalysisResults

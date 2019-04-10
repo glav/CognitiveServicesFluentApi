@@ -1,6 +1,7 @@
 ﻿using Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses;
 using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
+using Glav.CognitiveServices.FluentApi.Core.Parsing;
 using System;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
@@ -18,7 +19,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             {
                 ResponseData = new VisionImageAnalysisResponseRoot
                 {
-                    error = new ApiErrorResponse
+                    error = new RequestIdErrorResponse
                     {
                         code = StandardResponseCodes.NoDataReturned,
                         message = StandardResponseCodes.NoDataReturnedMessage
@@ -32,7 +33,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             {
                 if ((int)ApiCallResult.StatusCode >= 400)
                 {
-                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
+                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<RequestIdErrorResponse>(ApiCallResult.Data);
                     ResponseData = new VisionImageAnalysisResponseRoot { error = errorResponse };
                     ActionSubmittedSuccessfully = false;
                     return;
@@ -41,7 +42,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
                 ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<VisionImageAnalysisResponseRoot>(ApiCallResult.Data);
                 if (ResponseData == null)
                 {
-                    var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
+                    var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<RequestIdErrorResponse>(ApiCallResult.Data);
                     if (apiError != null)
                     {
                         ResponseData = new VisionImageAnalysisResponseRoot { error =  apiError };
@@ -55,7 +56,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             {
                 ResponseData = new VisionImageAnalysisResponseRoot
                 {
-                    error = new ApiErrorResponse
+                    error = new RequestIdErrorResponse
                     {
                         code = StandardResponseCodes.ServerError,
                         message = $"Error parsing results: {ex.Message}"
