@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
 {
-    public class ApiErrorResponse : BaseApiErrorResponse
+    public class RequestIdErrorResponse : BaseApiErrorResponse
     {
         public string requestId { get; set; }
 

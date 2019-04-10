@@ -9,7 +9,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
         public string language { get; set; }
         public RegionResponseItem[] regions { get; set; }
 
-        public ApiErrorResponse error { get; set; }
+        public RequestIdErrorResponse error { get; set; }
     }
 
 }

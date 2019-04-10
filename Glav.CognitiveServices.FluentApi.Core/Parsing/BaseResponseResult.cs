@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
 
-namespace Glav.CognitiveServices.FluentApi.Core
+namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 {
     public abstract class BaseResponseResult<TResponseData> 
         : IApiRequestResult<TResponseData> where TResponseData : IActionResponseRoot
