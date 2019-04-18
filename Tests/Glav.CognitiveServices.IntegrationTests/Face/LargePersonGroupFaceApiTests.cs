@@ -53,6 +53,9 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.NotNull(faceResult);
             faceResult.LargePersonGroupTrainStartAnalysis.AssertAnalysisContextValidity();
             faceResult.LargePersonGroupTrainStatusAnalysis.AssertAnalysisContextValidity();
+
+            await faceResult.WaitForTrainingToCompleteAsync(new System.Threading.CancellationToken());
+
             Assert.True(faceResult.IsTrainingSuccessful());
 
             var deleteResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)

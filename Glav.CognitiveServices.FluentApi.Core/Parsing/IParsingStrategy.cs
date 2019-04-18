@@ -5,23 +5,19 @@ using System.Collections.Generic;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 {
-    public interface IParsingStrategy<TResponseRoot, TResponseItem, TError> 
-        where TResponseRoot : IActionResponseWithError,  new()
+    public interface IParsingStrategy<TResponseRoot, TResponseItem> 
+        where TResponseRoot : IActionResponseRootWithError,  new()
         where TResponseItem : class, new()
-        where TError : BaseApiErrorResponse
     {
         bool ActionSubmittedSuccessfully { get; }
         TResponseRoot ResponseRootData { get; }
         TResponseItem ResponseItemData { get; }
-
- 
+        void ParseApiCall(ICommunicationResult apiCallResult);
     }
 
-    public class CallReturnsDataParsingStrategy<TResponseRoot, TResponseItem, TError> : IParsingStrategy<TResponseRoot, TResponseItem, TError> 
-        where TResponseRoot : IActionResponseWithError, new()
+    public class CallReturnsDataParsingStrategy<TResponseRoot, TResponseItem> : IParsingStrategy<TResponseRoot, TResponseItem> 
+        where TResponseRoot : IActionResponseRootWithError, new()
         where TResponseItem : class, new()
-        where TError : BaseApiErrorResponse
-
     {
         private List<BaseApiErrorResponse> _errors = new List<BaseApiErrorResponse>();
 
@@ -48,7 +44,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
             {
                 if ((int)apiCallResult.StatusCode >= 400)
                 {
-                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<TError>(apiCallResult.Data);
+                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(apiCallResult.Data);
                     ResponseRootData = new TResponseRoot { error = errorResponse };
                     ActionSubmittedSuccessfully = false;
                     return;
@@ -57,7 +53,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
                 ResponseItemData = Newtonsoft.Json.JsonConvert.DeserializeObject<TResponseItem>(apiCallResult.Data);
                 if (ResponseItemData == null)
                 {
-                    var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<TError>(apiCallResult.Data);
+                    var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(apiCallResult.Data);
                     if (apiError != null)
                     {
                         ResponseRootData = new TResponseRoot { error = apiError };
@@ -78,11 +74,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
         }
     }
 
-    public class CallReturnsNoDataParsingStrategy<TResponseRoot, TResponseItem, TError> : IParsingStrategy<TResponseRoot, TResponseItem, TError>
-       where TResponseRoot : IActionResponseWithError, new()
-       where TResponseItem : class, new()
-       where TError : BaseApiErrorResponse
-
+    public class CallReturnsNoDataParsingStrategy<TResponseRoot> : IParsingStrategy<TResponseRoot, TResponseRoot>
+       where TResponseRoot : class,IActionResponseRootWithError, new()
+      // where TResponseItem : class, new()
     {
         private List<BaseApiErrorResponse> _errors = new List<BaseApiErrorResponse>();
 
@@ -90,7 +84,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 
         public TResponseRoot ResponseRootData { get; private set; }
 
-        public TResponseItem ResponseItemData { get; private set; }
+        public TResponseRoot ResponseItemData { get; private set; }
 
 
         public void ParseApiCall(ICommunicationResult apiCallResult)
@@ -109,7 +103,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
             {
                 if ((int)apiCallResult.StatusCode >= 400)
                 {
-                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<TError>(apiCallResult.Data);
+                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(apiCallResult.Data);
                     ResponseRootData = new TResponseRoot { error = errorResponse };
                     ActionSubmittedSuccessfully = false;
                     return;
