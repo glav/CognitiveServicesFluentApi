@@ -6,6 +6,16 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
+    public class LargePersonGroupTrainStatusResult : BaseResponseResultWithStrategy<LargePersonGroupTrainStatusResponseRoot, LargePersonGroupTrainStatusResponseItem>
+    {
+        public LargePersonGroupTrainStatusResult(ICommunicationResult apiCallResult)
+            : base(apiCallResult, new CallReturnsDataParsingStrategy<LargePersonGroupTrainStatusResponseRoot, LargePersonGroupTrainStatusResponseItem>())
+        {
+            ParsingStrategy.ParseApiCall(apiCallResult);
+            ResponseData = new LargePersonGroupTrainStatusResponseRoot { TrainingStatus = ParsingStrategy.ResponseItemData };
+        }
+    }
+    /*
     public class LargePersonGroupTrainStatusResult : BaseResponseResult<LargePersonGroupTrainStatusResponseRoot>
     {
         public LargePersonGroupTrainStatusResult(ICommunicationResult apiCallResult) : base(apiCallResult)
@@ -60,4 +70,5 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
         }
 
     }
+    */
 }

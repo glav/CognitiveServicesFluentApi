@@ -20,7 +20,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
     public abstract class BaseResponseResultWithStrategy<TResponseRoot, TResponseItem>
        : IApiRequestResult<TResponseRoot>
         where TResponseRoot : IActionResponseRootWithError, new()
-        where TResponseItem : class, new()
+        where TResponseItem : class
     {
         public BaseResponseResultWithStrategy(ICommunicationResult apiCallResult, IParsingStrategy<TResponseRoot, TResponseItem> parsingStrategy)
         {

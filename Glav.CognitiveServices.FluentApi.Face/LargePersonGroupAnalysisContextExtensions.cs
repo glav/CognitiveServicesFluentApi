@@ -112,6 +112,9 @@ namespace Glav.CognitiveServices.FluentApi.Face
                     }
 
                     var checkResult = await settings.AnalyseAllAsync();
+                    results.LargePersonGroupTrainStatusAnalysis.UpdateTrainingStatus(checkResult.LargePersonGroupTrainStatusAnalysis.AnalysisResult);
+                    
+
                     var isComplete = checkResult.LargePersonGroupTrainStatusAnalysis.
                         AnalysisResults.All(r => r.ResponseData.TrainingStatus.IsTrainingComplete());
                     if (isComplete)

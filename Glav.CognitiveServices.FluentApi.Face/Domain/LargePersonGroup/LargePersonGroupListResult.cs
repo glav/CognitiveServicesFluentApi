@@ -6,7 +6,18 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
-    public class LargePersonGroupListResult : BaseResponseResult<LargePersonGroupListResponseRoot>
+    public class LargePersonGroupListResult : BaseResponseResultWithStrategy<LargePersonGroupListResponseRoot, LargePersonGroupGetResponseItem[]>
+    {
+        public LargePersonGroupListResult(ICommunicationResult apiCallResult) : base(apiCallResult, 
+            new CallReturnsDataParsingStrategy<LargePersonGroupListResponseRoot, LargePersonGroupGetResponseItem[]>())
+        {
+            ParsingStrategy.ParseApiCall(apiCallResult);
+            ResponseData = new LargePersonGroupListResponseRoot { LargePersonGroups = ParsingStrategy.ResponseItemData };
+        }
+    }
+    
+    /*
+        public class LargePersonGroupListResult : BaseResponseResult<LargePersonGroupListResponseRoot>
     {
         public LargePersonGroupListResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
@@ -58,5 +69,5 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
             }
         }
 
-    }
+    }*/
 }
