@@ -4,6 +4,7 @@ using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System;
 using System.Collections.Generic;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
+using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
@@ -53,6 +54,21 @@ namespace Glav.CognitiveServices.FluentApi.Core
             }
 
             return ActionsToPerform[actionType.Name] as T;
+        }
+
+        public override string ToString()
+        {
+            var buffer = new StringBuilder();
+            buffer.AppendLine($"Communications: {this.CommunicationEngine.ToString()}");
+            buffer.Append(ConfigurationSettings.ToString());
+            buffer.AppendLine("Actions to perform:");
+            foreach (var action in ActionsToPerform)
+            {
+                buffer.AppendLine($"\t{action.Key}");
+            }
+
+            return buffer.ToString();
+
         }
 
     }

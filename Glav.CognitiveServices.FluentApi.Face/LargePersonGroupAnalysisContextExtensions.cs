@@ -95,6 +95,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
                     .ToList();
 
             var stopWatch = new Stopwatch();
+            var attempts = 0;
             stopWatch.Start();
             try
             {
@@ -110,6 +111,9 @@ namespace Glav.CognitiveServices.FluentApi.Face
                         await logger.LogWarningAsync("Querying face training status was cancelled", logTopic);
                         return;
                     }
+
+                    attempts++;
+                    await logger.LogInfoAsync($"Querying face training status, attempt #{attempts} in progress", logTopic);
 
                     var checkResult = await settings.AnalyseAllAsync();
                     results.LargePersonGroupTrainStatusAnalysis.UpdateTrainingStatus(checkResult.LargePersonGroupTrainStatusAnalysis.AnalysisResult);

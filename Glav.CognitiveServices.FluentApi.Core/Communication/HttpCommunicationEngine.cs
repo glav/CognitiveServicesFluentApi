@@ -137,5 +137,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             }
         }
 
+        public override string ToString()
+        {
+            return "HttpCommunicationEngine";
+        }
+
     }
 }

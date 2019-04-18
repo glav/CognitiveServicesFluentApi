@@ -38,7 +38,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         {
             var input = _helper.GetFileDataEmbeddedInAssembly("FaceDetectionResponse.json");
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
-                    .AddConsoleDiagnosticLogging()
+                    .AddConsoleAndTraceLogging()
                     .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(input)))
                     .WithFaceAnalysisActions()
                     .AddUrlForFaceDetection("http://whatever",FaceDetectionAttributes.Age)
