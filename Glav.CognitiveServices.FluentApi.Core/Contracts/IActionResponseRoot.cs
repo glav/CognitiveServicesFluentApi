@@ -9,7 +9,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
     {
     }
 
-    public interface IActionResponseWithError : IActionResponseRoot
+    public interface IActionResponseRootWithError : IActionResponseRoot
     {
         BaseApiErrorResponse error { get; set; }
     }

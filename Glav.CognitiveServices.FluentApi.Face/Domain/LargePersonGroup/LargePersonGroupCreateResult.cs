@@ -6,6 +6,16 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
+    public class LargePersonGroupCreateResult : BaseResponseResulNoDatatWithStrategy<LargePersonGroupCreateResponseRoot>
+    {
+        public LargePersonGroupCreateResult(ICommunicationResult apiCallResult) 
+            : base(apiCallResult, new CallReturnsNoDataParsingStrategy<LargePersonGroupCreateResponseRoot>())
+        {
+            ParseResponseData();
+        }
+    }
+    
+    /*
     public class LargePersonGroupCreateResult : BaseResponseResult<LargePersonGroupCreateResponseRoot>
     {
         public LargePersonGroupCreateResult(ICommunicationResult apiCallResult) : base(apiCallResult)
@@ -48,4 +58,5 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
         }
 
     }
+    */
 }
