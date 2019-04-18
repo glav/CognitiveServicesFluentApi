@@ -8,13 +8,13 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses
         public BaseApiErrorResponse error { get; set; }
     }
 
-    public class LargePersonGroupTrainStartResponseRoot : IActionResponseRoot
+    public class LargePersonGroupTrainStartResponseRoot : IActionResponseRootWithError
     {
         public BaseApiErrorResponse error { get; set; }
     }
 
     
-    public class LargePersonGroupTrainStatusResponseRoot : IActionResponseRoot
+    public class LargePersonGroupTrainStatusResponseRoot : IActionResponseRootWithError
     {
         public BaseApiErrorResponse error { get; set; }
         public LargePersonGroupTrainStatusResponseItem TrainingStatus {get;set;}
