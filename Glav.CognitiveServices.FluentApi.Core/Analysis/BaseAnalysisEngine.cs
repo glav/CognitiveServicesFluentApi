@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Analysis
         {
             if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction.Name))
             {
-                await AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync(AnalysisSettings.ConfigurationSettings.ToString());
+                await AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync(AnalysisSettings.ToString(),"Analysis Settings");
 
                 // Get the collection of actions to perform for an API call
                 var actions = AnalysisSettings.ActionsToPerform[apiAction.Name];

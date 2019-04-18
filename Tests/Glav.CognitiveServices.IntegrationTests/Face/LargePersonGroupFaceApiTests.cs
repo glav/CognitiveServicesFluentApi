@@ -31,7 +31,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 
             var addFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                             .AddConsoleAndTraceLogging()
-                            .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                            .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                             .UsingHttpCommunication()
                             .WithFaceAnalysisActions()
                             .AddFaceToPersonGroupPerson(groupId, personId, new System.Uri("http://www.scface.org/examples/001_frontal.jpg"))
