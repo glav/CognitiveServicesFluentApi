@@ -5,7 +5,7 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Operations
 {
-    public sealed class OperationStatusResult : BaseResponseResult<OperationStatusResultResponseRoot>
+    public sealed class OperationStatusResult : BaseApiResponse<OperationStatusResultResponseRoot>
     {
         public OperationStatusResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {

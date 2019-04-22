@@ -3,24 +3,24 @@ using Glav.CognitiveServices.FluentApi.Core.Contracts;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses
 {
-    public class LargePersonGroupPersonCreateResponseRoot : IActionResponseRoot
+    public class LargePersonGroupPersonCreateResponseRoot : IActionResponseRootWithError
     {
         public string personId { get; set; }
         public BaseApiErrorResponse error { get; set; }
     }
 
-    public class LargePersonGroupPersonDeleteResponseRoot : IActionResponseRoot
+    public class LargePersonGroupPersonDeleteResponseRoot : IActionResponseRootWithError
     {
         public BaseApiErrorResponse error { get; set; }
     }
 
-    public class LargePersonGroupPersonGetResponseRoot : IActionResponseRoot
+    public class LargePersonGroupPersonGetResponseRoot : IActionResponseRootWithError
     {
         public LargePersonGroupPersonGetResponseItem LargePersonGroupPerson { get; set; }
         public BaseApiErrorResponse error { get; set; }
     }
 
-    public class LargePersonGroupPersonListResponseRoot : IActionResponseRoot
+    public class LargePersonGroupPersonListResponseRoot : IActionResponseRootWithError
     {
         public LargePersonGroupPersonGetResponseItem[] LargePersonGroupPersons { get; set; }
         public BaseApiErrorResponse error { get; set; }

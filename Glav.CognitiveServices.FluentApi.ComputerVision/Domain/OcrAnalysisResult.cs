@@ -6,7 +6,7 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class OcrAnalysisResult : BaseResponseResult<VisionOCRAnalysisResponseRoot>
+    public class OcrAnalysisResult : BaseApiResponse<VisionOCRAnalysisResponseRoot>
     {
         public OcrAnalysisResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {

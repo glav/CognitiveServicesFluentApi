@@ -19,8 +19,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
         where TResponseRoot : IActionResponseRootWithError, new()
         where TResponseItem : class
     {
-        private List<BaseApiErrorResponse> _errors = new List<BaseApiErrorResponse>();
-
         public bool ActionSubmittedSuccessfully { get; private set; }
 
         public TResponseRoot ResponseRootData { get; private set; }
@@ -76,10 +74,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 
     public class CallReturnsNoDataParsingStrategy<TResponseRoot> : IParsingStrategy<TResponseRoot, TResponseRoot>
        where TResponseRoot : class,IActionResponseRootWithError, new()
-      // where TResponseItem : class, new()
     {
-        private List<BaseApiErrorResponse> _errors = new List<BaseApiErrorResponse>();
-
         public bool ActionSubmittedSuccessfully { get; private set; }
 
         public TResponseRoot ResponseRootData { get; private set; }
