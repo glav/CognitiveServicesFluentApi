@@ -4,10 +4,10 @@ using Glav.CognitiveServices.FluentApi.Core.Communication;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 {
-    public abstract class BaseResponseResult<TResponseData> 
+    public abstract class BaseApiResponse<TResponseData> 
         : IApiRequestResult<TResponseData> where TResponseData : IActionResponseRoot
     {
-        public BaseResponseResult(ICommunicationResult apiCallResult)
+        public BaseApiResponse(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
         }
@@ -17,18 +17,17 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
         public bool ActionSubmittedSuccessfully { get; protected set; }
     }
 
-    public abstract class BaseResponseResultWithStrategy<TResponseRoot, TResponseItem>
-       : IApiRequestResult<TResponseRoot>
-        where TResponseRoot : IActionResponseRootWithError, new()
-        where TResponseItem : class
+    public abstract class BaseApiResponseWithStrategy<TResponseRoot, TResponseItem>
+      : IApiRequestResult<TResponseRoot>
+       where TResponseRoot : IActionResponseRootWithError, new()
+       where TResponseItem : class
     {
-        public BaseResponseResultWithStrategy(ICommunicationResult apiCallResult, IParsingStrategy<TResponseRoot, TResponseItem> parsingStrategy)
+        public BaseApiResponseWithStrategy(ICommunicationResult apiCallResult, IParsingStrategy<TResponseRoot, TResponseItem> parsingStrategy)
         {
             ApiCallResult = apiCallResult;
             ParsingStrategy = parsingStrategy;
         }
         public TResponseRoot ResponseData { get; protected set; }
-        public TResponseItem ResponseItemData { get { return ParsingStrategy.ResponseItemData; } }
 
         public ICommunicationResult ApiCallResult { get; protected set; }
         public bool ActionSubmittedSuccessfully { get { return ParsingStrategy.ActionSubmittedSuccessfully; } }
@@ -40,27 +39,22 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
         }
     }
 
-    public abstract class BaseResponseResulNoDatatWithStrategy<TResponseRoot>
-      : IApiRequestResult<TResponseRoot>
-       where TResponseRoot : class, IActionResponseRootWithError, new()
-      // where TResponseItem : class, new()
+    public abstract class BaseApiResponseReturnsData<TResponseRoot, TResponseItem>
+       : BaseApiResponseWithStrategy<TResponseRoot, TResponseItem>
+        where TResponseRoot : IActionResponseRootWithError, new()
+        where TResponseItem : class
     {
-        public BaseResponseResulNoDatatWithStrategy(ICommunicationResult apiCallResult, IParsingStrategy<TResponseRoot, TResponseRoot> parsingStrategy)
+        public BaseApiResponseReturnsData(ICommunicationResult apiCallResult) : base(apiCallResult, new CallReturnsDataParsingStrategy<TResponseRoot,TResponseItem>())
         {
-            ApiCallResult = apiCallResult;
-            ParsingStrategy = parsingStrategy;
         }
-        public TResponseRoot ResponseData { get { return ParsingStrategy.ResponseRootData; } }
-        public TResponseRoot ResponseItemData { get { return ParsingStrategy.ResponseRootData; } }
+    }
 
-        public ICommunicationResult ApiCallResult { get; protected set; }
-        public bool ActionSubmittedSuccessfully { get { return ParsingStrategy.ActionSubmittedSuccessfully; } }
-        public IParsingStrategy<TResponseRoot, TResponseRoot> ParsingStrategy { get; protected set; }
-
-        public void ParseResponseData()
+    public abstract class BaseApiResponseReturnsNoData<TResponseRoot>
+      : BaseApiResponseWithStrategy<TResponseRoot, TResponseRoot>
+       where TResponseRoot : class, IActionResponseRootWithError, new()
+    {
+        public BaseApiResponseReturnsNoData(ICommunicationResult apiCallResult) : base(apiCallResult,new CallReturnsNoDataParsingStrategy<TResponseRoot>())
         {
-            ParsingStrategy.ParseApiCall(ApiCallResult);
-
         }
     }
 }

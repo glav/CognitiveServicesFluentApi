@@ -6,7 +6,7 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public sealed class KeyPhraseResult : BaseResponseResult<KeyPhraseResultResponseRoot>
+    public sealed class KeyPhraseResult : BaseApiResponse<KeyPhraseResultResponseRoot>
     {
         public KeyPhraseResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {

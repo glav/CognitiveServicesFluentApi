@@ -3,7 +3,7 @@ using Glav.CognitiveServices.FluentApi.Core.Contracts;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.ApiResponses
 {
-    public class LargePersonGroupPersonFaceGetResponseRoot : IActionResponseRoot
+    public class LargePersonGroupPersonFaceGetResponseRoot : IActionResponseRootWithError
     {
         public string persistedFaceId { get; set; }
         public string userData { get; set; }
