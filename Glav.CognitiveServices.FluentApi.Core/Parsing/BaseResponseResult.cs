@@ -19,7 +19,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 
     public abstract class BaseApiResponseWithStrategy<TResponseRoot, TResponseItem>
       : IApiRequestResult<TResponseRoot>
-       where TResponseRoot : IActionResponseRootWithError, new()
+       where TResponseRoot : IActionResponseRoot, new()
        where TResponseItem : class
     {
         public BaseApiResponseWithStrategy(ICommunicationResult apiCallResult, IParsingStrategy<TResponseRoot, TResponseItem> parsingStrategy)
@@ -41,19 +41,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 
     public abstract class BaseApiResponseReturnsData<TResponseRoot, TResponseItem>
        : BaseApiResponseWithStrategy<TResponseRoot, TResponseItem>
-        where TResponseRoot : IActionResponseRootWithError, new()
+        where TResponseRoot : IActionResponseRoot, new()
         where TResponseItem : class
     {
         public BaseApiResponseReturnsData(ICommunicationResult apiCallResult) : base(apiCallResult, new CallReturnsDataParsingStrategy<TResponseRoot,TResponseItem>())
-        {
-        }
-    }
-
-    public abstract class BaseApiResponseReturnsNoData<TResponseRoot>
-      : BaseApiResponseWithStrategy<TResponseRoot, TResponseRoot>
-       where TResponseRoot : class, IActionResponseRootWithError, new()
-    {
-        public BaseApiResponseReturnsNoData(ICommunicationResult apiCallResult) : base(apiCallResult,new CallReturnsNoDataParsingStrategy<TResponseRoot>())
         {
         }
     }

@@ -6,6 +6,15 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
+    public class RecognizeTextAnalysisResult : BaseApiResponseReturnsData<VisionRecognizeTextAnalysisResponseRoot, VisionRecognizeTextAnalysisResponseRoot>
+    {
+        public RecognizeTextAnalysisResult(ICommunicationResult apiCallResult) : base(apiCallResult)
+        {
+            ParseResponseData();
+            ResponseData = ParsingStrategy.ResponseItemData;
+        }
+    }
+    /*
     public class RecognizeTextAnalysisResult : BaseApiResponse<VisionRecognizeTextAnalysisResponseRoot>
     {
         public RecognizeTextAnalysisResult(ICommunicationResult apiCallResult) : base(apiCallResult)
@@ -13,6 +22,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             ParseResponseData();
         }
 
+        
         private void ParseResponseData()
         {
             if (ApiCallResult == null)
@@ -63,6 +73,6 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
                 ActionSubmittedSuccessfully = false;
             }
         }
-
     }
+    */
 }
