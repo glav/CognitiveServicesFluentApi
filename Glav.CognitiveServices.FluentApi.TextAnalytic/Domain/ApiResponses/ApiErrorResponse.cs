@@ -2,13 +2,9 @@
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses
 {
-    public class ApiErrorResponse : ErrorResponse
+    public class ApiErrorResponse : BaseApiErrorResponse
     {
         public long id { get; set; }
-    }
-
-    public class ErrorResponse : BaseApiErrorResponse
-    {
         public BaseApiErrorResponse InnerError { get; set; }
     }
 }

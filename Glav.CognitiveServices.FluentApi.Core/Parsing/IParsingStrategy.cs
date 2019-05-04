@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 {
     public interface IParsingStrategy<TResponseRoot, TResponseItem> 
-        where TResponseRoot : IActionResponseRootWithError,  new()
+        where TResponseRoot : IActionResponseRoot,  new()
         where TResponseItem : class
     {
         bool ActionSubmittedSuccessfully { get; }
@@ -15,103 +15,91 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
         void ParseApiCall(ICommunicationResult apiCallResult);
     }
 
-    public class CallReturnsDataParsingStrategy<TResponseRoot, TResponseItem> : IParsingStrategy<TResponseRoot, TResponseItem> 
-        where TResponseRoot : IActionResponseRootWithError, new()
+    public abstract class BaseParsingStrategy<TResponseRoot, TResponseItem> : IParsingStrategy<TResponseRoot, TResponseItem>
+        where TResponseRoot : IActionResponseRoot, new()
         where TResponseItem : class
     {
-        public bool ActionSubmittedSuccessfully { get; private set; }
+        public bool ActionSubmittedSuccessfully { get; protected set; }
 
-        public TResponseRoot ResponseRootData { get; private set; }
+        public TResponseRoot ResponseRootData { get; protected set; }
 
-        public TResponseItem ResponseItemData { get; private set; }
+        public TResponseItem ResponseItemData { get; protected set; }
 
-     
-        public void ParseApiCall(ICommunicationResult apiCallResult)
+        public abstract void ParseApiCall(ICommunicationResult apiCallResult);
+        protected void SetError(string code, string message)
         {
-            if (apiCallResult == null)
+            ResponseRootData = new TResponseRoot();
+            var errResponse = ResponseItemData as IActionResponseRootWithError;
+            if (errResponse != null)
             {
-                ResponseRootData = new TResponseRoot
-                {
-                    error = new BaseApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = StandardResponseCodes.NoDataReturnedMessage }
-                };
-                ActionSubmittedSuccessfully = false;
-                return;
+                errResponse.error = new BaseApiErrorResponse { code = code, message = message };
             }
+        }
 
-            try
+        protected void SetError(BaseApiErrorResponse error)
+        {
+            ResponseRootData = new TResponseRoot();
+            var errResponse = ResponseItemData as IActionResponseRootWithError;
+            if (errResponse != null)
             {
-                if ((int)apiCallResult.StatusCode >= 400)
-                {
-                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(apiCallResult.Data);
-                    ResponseRootData = new TResponseRoot { error = errorResponse };
-                    ActionSubmittedSuccessfully = false;
-                    return;
-                }
-
-                ResponseItemData = Newtonsoft.Json.JsonConvert.DeserializeObject<TResponseItem>(apiCallResult.Data);
-                if (ResponseItemData == null)
-                {
-                    var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(apiCallResult.Data);
-                    if (apiError != null)
-                    {
-                        ResponseRootData = new TResponseRoot { error = apiError };
-                    }
-                    ActionSubmittedSuccessfully = false;
-                    return;
-                }
-                ActionSubmittedSuccessfully = true;
-            }
-            catch (Exception ex)
-            {
-                ResponseRootData = new TResponseRoot
-                {
-                    error = new BaseApiErrorResponse { code = StandardResponseCodes.ServerError, message = $"Error parsing results: {ex.Message}" }
-                };
-                ActionSubmittedSuccessfully = false;
+                errResponse.error = error;
             }
         }
     }
-
-    public class CallReturnsNoDataParsingStrategy<TResponseRoot> : IParsingStrategy<TResponseRoot, TResponseRoot>
-       where TResponseRoot : class,IActionResponseRootWithError, new()
+    public class CallReturnsDataParsingStrategy<TResponseRoot, TResponseItem> : BaseParsingStrategy<TResponseRoot, TResponseItem> 
+        where TResponseRoot : IActionResponseRoot, new()
+        where TResponseItem : class
     {
-        public bool ActionSubmittedSuccessfully { get; private set; }
-
-        public TResponseRoot ResponseRootData { get; private set; }
-
-        public TResponseRoot ResponseItemData { get; private set; }
 
 
-        public void ParseApiCall(ICommunicationResult apiCallResult)
+     
+        public override void ParseApiCall(ICommunicationResult apiCallResult)
         {
             if (apiCallResult == null)
             {
-                ResponseRootData = new TResponseRoot
-                {
-                    error = new BaseApiErrorResponse { code = StandardResponseCodes.NoDataReturned, message = StandardResponseCodes.NoDataReturnedMessage }
-                };
+                SetError(StandardResponseCodes.NoDataReturned, StandardResponseCodes.NoDataReturnedMessage);
                 ActionSubmittedSuccessfully = false;
                 return;
             }
 
             try
             {
+                ActionSubmittedSuccessfully = false;
+
                 if ((int)apiCallResult.StatusCode >= 400)
                 {
                     var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(apiCallResult.Data);
-                    ResponseRootData = new TResponseRoot { error = errorResponse };
-                    ActionSubmittedSuccessfully = false;
+                    SetError(errorResponse);
                     return;
                 }
 
+                if (apiCallResult.StatusCode == System.Net.HttpStatusCode.Accepted && apiCallResult.OperationLocationUri != null)
+                {
+                    ActionSubmittedSuccessfully = true;
+                    return;
+                }
+
+                if (apiCallResult.StatusCode == System.Net.HttpStatusCode.Accepted && apiCallResult.OperationLocationUri == null)
+                {
+                    SetError(StandardResponseCodes.OperationAcceptedButNoOperationLocationUri, StandardResponseCodes.OperationAcceptedButNoOperationLocationUriMessage);
+                    return;
+                }
+
+                if (!string.IsNullOrWhiteSpace(apiCallResult.Data))
+                {
+                    ResponseItemData = Newtonsoft.Json.JsonConvert.DeserializeObject<TResponseItem>(apiCallResult.Data);
+                    if (ResponseItemData == null)
+                    {
+                        var apiError = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseApiErrorResponse>(apiCallResult.Data);
+                        SetError(apiError);
+                        return;
+                    }
+                }
                 ActionSubmittedSuccessfully = true;
             }
             catch (Exception ex)
             {
-                ResponseRootData = new TResponseRoot
-                {
-                    error = new BaseApiErrorResponse { code = StandardResponseCodes.ServerError, message = $"Error parsing results: {ex.Message}" }
-                };
+                SetError(StandardResponseCodes.ServerError, $"Error parsing results: {ex.Message}");
                 ActionSubmittedSuccessfully = false;
             }
         }

@@ -6,6 +6,8 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
+    //Note we do not use the BaseApiResponse that makes use of a parsing strategy as these results can be a mix of errors and success so requires a little more
+    //custom effort.
     public sealed class SentimentResult : BaseApiResponse<SentimentResultResponseRoot>
     {
         public SentimentResult(ICommunicationResult apiCallResult) : base(apiCallResult)
@@ -56,6 +58,4 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         }
 
     }
-
-
 }

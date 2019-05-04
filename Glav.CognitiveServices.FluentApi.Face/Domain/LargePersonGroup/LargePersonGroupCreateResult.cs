@@ -6,7 +6,7 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
-    public class LargePersonGroupCreateResult : BaseApiResponseReturnsNoData<LargePersonGroupCreateResponseRoot>
+    public class LargePersonGroupCreateResult : BaseApiResponseReturnsData<LargePersonGroupCreateResponseRoot, LargePersonGroupCreateResponseRoot>
     {
         public LargePersonGroupCreateResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
