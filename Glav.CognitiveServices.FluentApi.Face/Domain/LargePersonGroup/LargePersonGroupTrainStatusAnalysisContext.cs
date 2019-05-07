@@ -24,7 +24,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
             {
                 throw new CognitiveServicesArgumentException("No results to update");
             }
-            this.AnalysisResults.First().ResponseData.TrainingStatus = result.ParsingStrategy.ResponseItemData;
+            this.AnalysisResults.First().ResponseData.TrainingStatus = result.ParsingStrategy.ResponseData;
         }
 
     }
