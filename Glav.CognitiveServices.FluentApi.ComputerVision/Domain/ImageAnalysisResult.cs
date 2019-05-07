@@ -6,12 +6,17 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class ImageAnalysisResult : BaseApiResponseReturnsData<VisionImageAnalysisResponseRoot, VisionImageAnalysisResponseRoot>
+    public class ImageAnalysisResult : BaseApiResponseReturnsData<VisionImageAnalysisResponseRoot, VisionImageAnalysisResponseRoot, RequestIdErrorResponse>
     {
         public ImageAnalysisResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
             ParseResponseData();
-            ResponseData = ParsingStrategy.ResponseItemData;
+            if (!ActionSubmittedSuccessfully)
+            {
+                ResponseData = new VisionImageAnalysisResponseRoot { error = ParsingStrategy.ResponseError };
+                return;
+            }
+            ResponseData = ParsingStrategy.ResponseData;
         }
         /*
         private void ParseResponseData()
