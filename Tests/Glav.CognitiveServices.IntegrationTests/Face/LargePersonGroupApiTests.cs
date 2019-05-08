@@ -12,7 +12,6 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 {
     public class LargePersonGroupApiTests
     {
-        private TestDataHelper _testDataHelper = new TestDataHelper();
         [Fact]
         public async Task ShouldBeAbleToCreateLargePersonGroup()
         {
