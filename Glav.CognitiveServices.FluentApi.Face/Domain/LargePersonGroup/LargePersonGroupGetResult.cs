@@ -6,7 +6,7 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
-    public class LargePersonGroupGetResult : BaseApiResponseWithStandardErrorReturnsData<LargePersonGroupGetResponseRoot, LargePersonGroupGetResponseRoot>
+    public class LargePersonGroupGetResult : BaseApiResponseWithStandardErrorReturnsData<LargePersonGroupGetResponseRoot, LargePersonGroupGetResponseItem>
     {
         public LargePersonGroupGetResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
@@ -16,7 +16,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
                 ResponseData = new LargePersonGroupGetResponseRoot { error = ParsingStrategy.ResponseError };
                 return;
             }
-            ResponseData = ParsingStrategy.ResponseData;
+            ResponseData = new LargePersonGroupGetResponseRoot { LargePersonGroup = ParsingStrategy.ResponseData };
         }
     }
     
