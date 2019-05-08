@@ -9,8 +9,6 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
     public class LargePersonGroupPersonFaceTests
     {
-        private TestDataHelper _helper = new TestDataHelper();
-
         [Fact]
         public async Task ShouldParseLargePersonGroupPersonFaceGetResultSuccessfully()
         {
