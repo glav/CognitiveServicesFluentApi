@@ -11,6 +11,11 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
         public LargePersonGroupListResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
             ParseResponseData();
+            if (!ActionSubmittedSuccessfully)
+            {
+                ResponseData = new LargePersonGroupListResponseRoot { error = ParsingStrategy.ResponseError };
+                return;
+            }
             ResponseData = new LargePersonGroupListResponseRoot { LargePersonGroups = ParsingStrategy.ResponseData };
         }
     }
