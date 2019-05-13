@@ -5,7 +5,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 {
 
     public interface IParsingStrategy<out TResponse,out TError>
-        where TError : class
     {
         bool ActionSubmittedSuccessfully { get; }
         TResponse ResponseData { get; }
