@@ -4,7 +4,6 @@ using Glav.CognitiveServices.FluentApi.Core.Contracts;
 namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 {
     public abstract class BaseParsingStrategy<TResponse,TError> : IParsingStrategy<TResponse, TError>
-        where TError : class
     {
         public bool ActionSubmittedSuccessfully { get; protected set; }
 
