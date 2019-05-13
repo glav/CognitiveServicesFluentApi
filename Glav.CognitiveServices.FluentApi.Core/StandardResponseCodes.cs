@@ -11,5 +11,8 @@ namespace Glav.CognitiveServices.FluentApi.Core
         public const string ServerError = "ServerError";
         public const string OperationAcceptedButNoOperationLocationUri = "AcceptedNoLocationUriReturned";
         public const string OperationAcceptedButNoOperationLocationUriMessage = "The operation was accepted but did not return an operation Uri";
+        public const string NoDataParsed = "NoDataParsed";
+        public const string NoDataParsedMessage = "No data was able to be parsed from the response.";
+
     }
 }

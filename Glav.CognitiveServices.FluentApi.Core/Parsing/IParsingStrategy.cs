@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 {
 
-    public interface IParsingStrategy<TResponse,TError>
+    public interface IParsingStrategy<out TResponse,out TError>
         where TError : class
     {
         bool ActionSubmittedSuccessfully { get; }

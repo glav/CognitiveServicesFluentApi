@@ -3,7 +3,7 @@ using Glav.CognitiveServices.FluentApi.Core.Communication;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 {
-    public abstract class BaseApiResponseWithStrategy<TResponseRoot,TResponse, TError>
+    public class BaseApiResponseWithStrategy<TResponseRoot,TResponse, TError>
       : IApiRequestResult<TResponseRoot>
         where TResponseRoot : IActionResponseRoot, new()
         where TError : class
