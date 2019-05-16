@@ -13,6 +13,9 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  ComputerVisionApiKey: '8eef5939794442bfb33fd72981cc008d'
+  FaceApiKey: '4f382c61b5e742eab06b39ed79ccdab6'
+  TextAnalyticApiKey: '8f81d129d8884825a341a2e534bfb5ea'
 
 steps:
 - task: NuGetToolInstaller@0
