@@ -21,6 +21,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
         {
             var apiResults = new FaceAnalysisResults(AnalysisSettings);
             await AnalyseApiActionAsync(apiResults, FaceApiOperations.FaceDetection).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, FaceApiOperations.FaceIdentification).ConfigureAwait(continueOnCapturedContext: false);
             await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupCreate).ConfigureAwait(continueOnCapturedContext: false);
             await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupGet).ConfigureAwait(continueOnCapturedContext: false);
             await AnalyseApiActionAsync(apiResults, FaceApiOperations.LargePersonGroupList).ConfigureAwait(continueOnCapturedContext: false);
@@ -46,6 +47,11 @@ namespace Glav.CognitiveServices.FluentApi.Face
                 if (apiAction == FaceApiOperations.FaceDetection)
                 {
                     apiResults.SetResult(new FaceDetectionAnalysisContext(actionData, new FaceDetectionResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    return;
+                }
+                if (apiAction == FaceApiOperations.FaceIdentification)
+                {
+                    apiResults.SetResult(new FaceIdentificationAnalysisContext(actionData, new FaceIdentificationResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupCreate)
