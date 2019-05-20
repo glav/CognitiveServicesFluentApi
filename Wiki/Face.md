@@ -85,3 +85,20 @@ var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123",
 ```
 
 ## Person Face association and training
+The supported person groups and face training are:
+### LargePersonGroup
+* CreateLargePersonGroup
+* GetLargePersonGroup
+* ListLargePersonGroups
+* DeleteLargePersonGroup
+* StartTrainingLargePersonGroup
+* CheckTrainingStatusLargePersonGroup
+
+### LargePersonGroupPerson
+* CreateLargePersonGroupPerson
+* GetLargePersonGroupPerson
+* ListLargePersonGroupPersons
+* DeleteLargePersonGroupPerson
+* AddFaceToPersonGroupPerson
+* GetFaceForPersonGroupPerson
+* DeleteFaceForPersonGroupPerson
