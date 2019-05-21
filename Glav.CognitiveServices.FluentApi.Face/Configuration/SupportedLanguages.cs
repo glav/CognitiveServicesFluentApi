@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
             var items = new List<SupportedLanguageItem>();
             items.Add(new SupportedLanguageItem(SupportedLanguageType.Unspecified, string.Empty,
                             new ApiActionDefinition[] {
-                                FaceApiOperations.FaceDetection
+                                FaceApiOperations.FaceDetection, FaceApiOperations.FaceIdentification
                             }));
             //items.Add(new SupportedLanguageItem(SupportedLanguageType.English, "en",
             //                new ApiActionDefinition[] {
