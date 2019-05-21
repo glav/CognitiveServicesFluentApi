@@ -23,33 +23,31 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             var personId = setupResult.PersonId;
             var groupId = setupResult.GroupId;
 
+            // Change this once on master branch
+            const string baseImageUrl = "https://raw.githubusercontent.com/glav/CognitiveServicesFluentApi/glav/PersonGroupSupport/Tests/Glav.CognitiveServices.IntegrationTests/TestData/";
+
             // Add some faces to the person in the group
             var addFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                             .AddConsoleAndTraceLogging()
                             .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                             .UsingHttpCommunication()
                             .WithFaceAnalysisActions()
-                            .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri("http://www.scface.org/examples/001_frontal.jpg"))
+                            .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me1.jpg"))
+                            .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me2.jpg"))
+                            .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me3.jpg"))
+                            .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me4.jpg"))
+                           .StartTrainingLargePersonGroup(groupId)
+                           .CheckTrainingStatusLargePersonGroup(groupId)
                             .AnalyseAllAsync();
 
             addFaceResult.LargePersonGroupPersonFaceAddAnalysis.AssertAnalysisContextValidity();
 
-            var faceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
-                            .AddConsoleAndTraceLogging()
-                            .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-                            .UsingHttpCommunication()
-                            .WithFaceAnalysisActions()
-                           .StartTrainingLargePersonGroup(groupId)
-                           .CheckTrainingStatusLargePersonGroup(groupId)
-                           .AnalyseAllAsync();
+            await addFaceResult.WaitForTrainingToCompleteAsync(new System.Threading.CancellationToken());
 
-            await faceResult.WaitForTrainingToCompleteAsync(new System.Threading.CancellationToken());
+            addFaceResult.LargePersonGroupTrainStartAnalysis.AssertAnalysisContextValidity();
+            addFaceResult.LargePersonGroupTrainStatusAnalysis.AssertAnalysisContextValidity();
 
-            Assert.NotNull(faceResult);
-            faceResult.LargePersonGroupTrainStartAnalysis.AssertAnalysisContextValidity();
-            faceResult.LargePersonGroupTrainStatusAnalysis.AssertAnalysisContextValidity();
-
-            Assert.True(faceResult.IsTrainingSuccessful());
+            Assert.True(addFaceResult.IsTrainingSuccessful());
 
         }
 

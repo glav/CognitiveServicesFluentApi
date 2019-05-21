@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Communication;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
 using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup;
@@ -31,69 +32,134 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public LargePersonGroupPersonFaceGetAnalysisContext LargePersonGroupPersonFaceGetAnalysis { get; private set; }
         public LargePersonGroupPersonFaceDeleteAnalysisContext LargePersonGroupPersonFaceDeleteAnalysis { get; private set; }
 
-        public void SetResult(FaceDetectionAnalysisContext faceDetectionAnalysis)
+        public void SetFaceDetectionResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
-            FaceDetectionAnalysis = faceDetectionAnalysis;
+            if (FaceDetectionAnalysis == null)
+            {
+                FaceDetectionAnalysis = new FaceDetectionAnalysisContext(actionData, new FaceDetectionResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            FaceDetectionAnalysis.AnalysisResults.Add(new FaceDetectionResult(commsResult));
         }
-        public void SetResult(FaceIdentificationAnalysisContext faceIdentificationAnalysis)
+        public void SetFaceIdentificationResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)//FaceIdentificationAnalysisContext faceIdentificationAnalysis)
         {
-            FaceIdentificationAnalysis = faceIdentificationAnalysis;
-        }
-
-        public void SetResult(LargePersonGroupCreateAnalysisContext largePersonGroupCreateAnalysis)
-        {
-            LargePersonGroupCreateAnalysis = largePersonGroupCreateAnalysis;
-        }
-
-        public void SetResult(LargePersonGroupGetAnalysisContext largePersonGroupGetAnalysis)
-        {
-            LargePersonGroupGetAnalysis = largePersonGroupGetAnalysis;
-        }
-        public void SetResult(LargePersonGroupListAnalysisContext largePersonGroupListAnalysis)
-        {
-            LargePersonGroupListAnalysis = largePersonGroupListAnalysis;
-        }
-        public void SetResult(LargePersonGroupDeleteAnalysisContext largePersonGroupDeleteAnalysis)
-        {
-            LargePersonGroupDeleteAnalysis = largePersonGroupDeleteAnalysis;
-        }
-        public void SetResult(LargePersonGroupTrainStartAnalysisContext largePersonGroupTrainStartAnalysis)
-        {
-            LargePersonGroupTrainStartAnalysis = largePersonGroupTrainStartAnalysis;
-        }
-        public void SetResult(LargePersonGroupTrainStatusAnalysisContext largePersonGroupTrainStatusAnalysis)
-        {
-            LargePersonGroupTrainStatusAnalysis = largePersonGroupTrainStatusAnalysis;
+            if (FaceIdentificationAnalysis == null)
+            {
+                FaceIdentificationAnalysis = new FaceIdentificationAnalysisContext(actionData, new FaceIdentificationResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            FaceIdentificationAnalysis.AnalysisResults.Add(new FaceIdentificationResult(commsResult));
         }
 
-        public void SetResult(LargePersonGroupPersonDeleteAnalysisContext largePersonGroupPersonDeleteAnalysis)
+        public void SetLargePersonGroupCreateResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
-            LargePersonGroupPersonDeleteAnalysis = largePersonGroupPersonDeleteAnalysis;
-        }
-        public void SetResult(LargePersonGroupPersonCreateAnalysisContext largePersonGroupPersonCreateAnalysis)
-        {
-            LargePersonGroupPersonCreateAnalysis = largePersonGroupPersonCreateAnalysis;
-        }
-        public void SetResult(LargePersonGroupPersonGetAnalysisContext largePersonGroupPersonGetAnalysis)
-        {
-            LargePersonGroupPersonGetAnalysis = largePersonGroupPersonGetAnalysis;
-        }
-        public void SetResult(LargePersonGroupPersonListAnalysisContext largePersonGroupPersonListAnalysis)
-        {
-            LargePersonGroupPersonListAnalysis = largePersonGroupPersonListAnalysis;
-        }
-        public void SetResult(LargePersonGroupPersonFaceAddAnalysisContext largePersonGroupPersonFaceAddAnalysis)
-        {
-            LargePersonGroupPersonFaceAddAnalysis = largePersonGroupPersonFaceAddAnalysis;
+            if (LargePersonGroupCreateAnalysis == null)
+            {
+                LargePersonGroupCreateAnalysis = new LargePersonGroupCreateAnalysisContext(actionData, new LargePersonGroupCreateResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            LargePersonGroupCreateAnalysis.AnalysisResults.Add(new LargePersonGroupCreateResult(commsResult));
         }
 
-        public void SetResult(LargePersonGroupPersonFaceGetAnalysisContext largePersonGroupPersonFaceGetAnalysis)
+        public void SetLargePersonGroupGetResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
-            LargePersonGroupPersonFaceGetAnalysis = largePersonGroupPersonFaceGetAnalysis;
+            if (LargePersonGroupGetAnalysis == null)
+            {
+                LargePersonGroupGetAnalysis = new LargePersonGroupGetAnalysisContext(actionData, new LargePersonGroupGetResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            LargePersonGroupGetAnalysis.AnalysisResults.Add(new LargePersonGroupGetResult(commsResult));
         }
-        public void SetResult(LargePersonGroupPersonFaceDeleteAnalysisContext largePersonGroupPersonFaceDeleteAnalysis)
+        public void SetLargePersonGroupListResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
-            LargePersonGroupPersonFaceDeleteAnalysis = largePersonGroupPersonFaceDeleteAnalysis;
+            if (LargePersonGroupListAnalysis == null)
+            {
+                LargePersonGroupListAnalysis = new LargePersonGroupListAnalysisContext(actionData, new LargePersonGroupListResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            LargePersonGroupListAnalysis.AnalysisResults.Add(new LargePersonGroupListResult(commsResult));
+        }
+        public void SetargePersonGroupDeleteResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        {
+            if (LargePersonGroupDeleteAnalysis == null)
+            {
+                LargePersonGroupDeleteAnalysis = new LargePersonGroupDeleteAnalysisContext(actionData, new LargePersonGroupDeleteResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine); 
+                return;
+            }
+            LargePersonGroupDeleteAnalysis.AnalysisResults.Add(new LargePersonGroupDeleteResult(commsResult));
+        }
+        public void SetLargePersonGroupTrainStartResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        {
+            LargePersonGroupTrainStartAnalysis = new LargePersonGroupTrainStartAnalysisContext(actionData,new LargePersonGroupTrainStartResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+        }
+        public void SetargePersonGroupTrainStatusResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        {
+            LargePersonGroupTrainStatusAnalysis = new LargePersonGroupTrainStatusAnalysisContext(actionData,new LargePersonGroupTrainStatusResult(commsResult),AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+        }
+
+        public void SetLargePersonGroupPersonDeleteResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        {
+            if (LargePersonGroupPersonDeleteAnalysis == null)
+            {
+                LargePersonGroupPersonDeleteAnalysis = new LargePersonGroupPersonDeleteAnalysisContext(actionData, new LargePersonGroupPersonDeleteResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            LargePersonGroupPersonDeleteAnalysis.AnalysisResults.Add(new LargePersonGroupPersonDeleteResult(commsResult));
+        }
+        public void SetLargePersonGroupPersonCreateResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        {
+            if (LargePersonGroupPersonCreateAnalysis == null)
+            {
+                LargePersonGroupPersonCreateAnalysis = new LargePersonGroupPersonCreateAnalysisContext(actionData, new LargePersonGroupPersonCreateResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            LargePersonGroupPersonCreateAnalysis.AnalysisResults.Add(new LargePersonGroupPersonCreateResult(commsResult));
+        }
+        public void SetLargePersonGroupPersonGetResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        {
+            if (LargePersonGroupPersonGetAnalysis == null)
+            {
+                LargePersonGroupPersonGetAnalysis = new LargePersonGroupPersonGetAnalysisContext(actionData, new LargePersonGroupPersonGetResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            LargePersonGroupPersonGetAnalysis.AnalysisResults.Add(new LargePersonGroupPersonGetResult(commsResult));
+        }
+        public void SetLargePersonGroupPersonListResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        {
+            if (LargePersonGroupPersonListAnalysis == null)
+            {
+                LargePersonGroupPersonListAnalysis = new LargePersonGroupPersonListAnalysisContext(actionData, new LargePersonGroupPersonListResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            LargePersonGroupPersonListAnalysis.AnalysisResults.Add(new LargePersonGroupPersonListResult(commsResult));
+        }
+        public void SetLargePersonGroupPersonFaceAddResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        {
+            if (LargePersonGroupPersonFaceAddAnalysis == null)
+            {
+                LargePersonGroupPersonFaceAddAnalysis = new LargePersonGroupPersonFaceAddAnalysisContext(actionData, new LargePersonGroupPersonFaceAddResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            LargePersonGroupPersonFaceAddAnalysis.AnalysisResults.Add(new LargePersonGroupPersonFaceAddResult(commsResult));
+        }
+
+        public void SetLargePersonGroupPersonFaceGetResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        {
+            if (LargePersonGroupPersonFaceGetAnalysis == null)
+            {
+                LargePersonGroupPersonFaceGetAnalysis = new LargePersonGroupPersonFaceGetAnalysisContext(actionData, new LargePersonGroupPersonFaceGetResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            LargePersonGroupPersonFaceGetAnalysis.AnalysisResults.Add(new LargePersonGroupPersonFaceGetResult(commsResult));
+        }
+        public void SetLargePersonGroupPersonFaceDeleteResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        {
+            if (LargePersonGroupPersonFaceDeleteAnalysis == null)
+            {
+                LargePersonGroupPersonFaceDeleteAnalysis = new LargePersonGroupPersonFaceDeleteAnalysisContext(actionData, new LargePersonGroupPersonFaceDeleteResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
+            }
+            LargePersonGroupPersonFaceDeleteAnalysis.AnalysisResults.Add(new LargePersonGroupPersonFaceDeleteResult(commsResult));
         }
     }
 }
