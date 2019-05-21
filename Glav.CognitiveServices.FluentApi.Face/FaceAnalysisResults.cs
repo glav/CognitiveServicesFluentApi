@@ -32,7 +32,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
         public LargePersonGroupPersonFaceGetAnalysisContext LargePersonGroupPersonFaceGetAnalysis { get; private set; }
         public LargePersonGroupPersonFaceDeleteAnalysisContext LargePersonGroupPersonFaceDeleteAnalysis { get; private set; }
 
-        public void SetFaceDetectionResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddFaceDetectionResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (FaceDetectionAnalysis == null)
             {
@@ -41,7 +41,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             }
             FaceDetectionAnalysis.AnalysisResults.Add(new FaceDetectionResult(commsResult));
         }
-        public void SetFaceIdentificationResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)//FaceIdentificationAnalysisContext faceIdentificationAnalysis)
+        public void AddFaceIdentificationResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (FaceIdentificationAnalysis == null)
             {
@@ -51,7 +51,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             FaceIdentificationAnalysis.AnalysisResults.Add(new FaceIdentificationResult(commsResult));
         }
 
-        public void SetLargePersonGroupCreateResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupCreateResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupCreateAnalysis == null)
             {
@@ -61,7 +61,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             LargePersonGroupCreateAnalysis.AnalysisResults.Add(new LargePersonGroupCreateResult(commsResult));
         }
 
-        public void SetLargePersonGroupGetResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupGetResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupGetAnalysis == null)
             {
@@ -70,7 +70,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             }
             LargePersonGroupGetAnalysis.AnalysisResults.Add(new LargePersonGroupGetResult(commsResult));
         }
-        public void SetLargePersonGroupListResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupListResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupListAnalysis == null)
             {
@@ -79,7 +79,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             }
             LargePersonGroupListAnalysis.AnalysisResults.Add(new LargePersonGroupListResult(commsResult));
         }
-        public void SetargePersonGroupDeleteResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupDeleteResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupDeleteAnalysis == null)
             {
@@ -88,7 +88,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             }
             LargePersonGroupDeleteAnalysis.AnalysisResults.Add(new LargePersonGroupDeleteResult(commsResult));
         }
-        public void SetLargePersonGroupTrainStartResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupTrainStartResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             LargePersonGroupTrainStartAnalysis = new LargePersonGroupTrainStartAnalysisContext(actionData,new LargePersonGroupTrainStartResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
         }
@@ -97,7 +97,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             LargePersonGroupTrainStatusAnalysis = new LargePersonGroupTrainStatusAnalysisContext(actionData,new LargePersonGroupTrainStatusResult(commsResult),AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
         }
 
-        public void SetLargePersonGroupPersonDeleteResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupPersonDeleteResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupPersonDeleteAnalysis == null)
             {
@@ -106,7 +106,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             }
             LargePersonGroupPersonDeleteAnalysis.AnalysisResults.Add(new LargePersonGroupPersonDeleteResult(commsResult));
         }
-        public void SetLargePersonGroupPersonCreateResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupPersonCreateResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupPersonCreateAnalysis == null)
             {
@@ -115,7 +115,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             }
             LargePersonGroupPersonCreateAnalysis.AnalysisResults.Add(new LargePersonGroupPersonCreateResult(commsResult));
         }
-        public void SetLargePersonGroupPersonGetResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupPersonGetResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupPersonGetAnalysis == null)
             {
@@ -124,7 +124,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             }
             LargePersonGroupPersonGetAnalysis.AnalysisResults.Add(new LargePersonGroupPersonGetResult(commsResult));
         }
-        public void SetLargePersonGroupPersonListResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupPersonListResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupPersonListAnalysis == null)
             {
@@ -133,7 +133,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             }
             LargePersonGroupPersonListAnalysis.AnalysisResults.Add(new LargePersonGroupPersonListResult(commsResult));
         }
-        public void SetLargePersonGroupPersonFaceAddResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupPersonFaceAddResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupPersonFaceAddAnalysis == null)
             {
@@ -143,7 +143,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             LargePersonGroupPersonFaceAddAnalysis.AnalysisResults.Add(new LargePersonGroupPersonFaceAddResult(commsResult));
         }
 
-        public void SetLargePersonGroupPersonFaceGetResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupPersonFaceGetResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupPersonFaceGetAnalysis == null)
             {
@@ -152,7 +152,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
             }
             LargePersonGroupPersonFaceGetAnalysis.AnalysisResults.Add(new LargePersonGroupPersonFaceGetResult(commsResult));
         }
-        public void SetLargePersonGroupPersonFaceDeleteResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLargePersonGroupPersonFaceDeleteResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LargePersonGroupPersonFaceDeleteAnalysis == null)
             {

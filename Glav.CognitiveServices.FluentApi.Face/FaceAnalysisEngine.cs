@@ -48,37 +48,37 @@ namespace Glav.CognitiveServices.FluentApi.Face
             {
                 if (apiAction == FaceApiOperations.FaceDetection)
                 {
-                    apiResults.SetFaceDetectionResult(actionData, commsResult);
+                    apiResults.AddFaceDetectionResult(actionData, commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.FaceIdentification)
                 {
-                    apiResults.SetFaceIdentificationResult(actionData,commsResult);
+                    apiResults.AddFaceIdentificationResult(actionData,commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupCreate)
                 {
-                    apiResults.SetLargePersonGroupCreateResult(actionData,commsResult);
+                    apiResults.AddLargePersonGroupCreateResult(actionData,commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupGet)
                 {
-                    apiResults.SetLargePersonGroupGetResult(actionData,commsResult);
+                    apiResults.AddLargePersonGroupGetResult(actionData,commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupList)
                 {
-                    apiResults.SetLargePersonGroupListResult(actionData,commsResult);
+                    apiResults.AddLargePersonGroupListResult(actionData,commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupDelete)
                 {
-                    apiResults.SetargePersonGroupDeleteResult(actionData, commsResult);
+                    apiResults.AddLargePersonGroupDeleteResult(actionData, commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupTrainStart)
                 {
-                    apiResults.SetLargePersonGroupTrainStartResult(actionData,commsResult);
+                    apiResults.AddLargePersonGroupTrainStartResult(actionData,commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupTrainStatus)
@@ -90,37 +90,37 @@ namespace Glav.CognitiveServices.FluentApi.Face
 
                 if (apiAction == FaceApiOperations.LargePersonGroupPersonDelete)
                 {
-                    apiResults.SetLargePersonGroupPersonDeleteResult(actionData, commsResult);
+                    apiResults.AddLargePersonGroupPersonDeleteResult(actionData, commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupPersonCreate)
                 {
-                    apiResults.SetLargePersonGroupPersonCreateResult(actionData, commsResult);
+                    apiResults.AddLargePersonGroupPersonCreateResult(actionData, commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupPersonGet)
                 {
-                    apiResults.SetLargePersonGroupPersonGetResult(actionData,commsResult);
+                    apiResults.AddLargePersonGroupPersonGetResult(actionData,commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupPersonList)
                 {
-                    apiResults.SetLargePersonGroupPersonListResult(actionData,commsResult);
+                    apiResults.AddLargePersonGroupPersonListResult(actionData,commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupPersonFaceAdd)
                 {
-                    apiResults.SetLargePersonGroupPersonFaceAddResult(actionData,commsResult);
+                    apiResults.AddLargePersonGroupPersonFaceAddResult(actionData,commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupPersonFaceGet)
                 {
-                    apiResults.SetLargePersonGroupPersonFaceGetResult(actionData, commsResult);
+                    apiResults.AddLargePersonGroupPersonFaceGetResult(actionData, commsResult);
                     return;
                 }
                 if (apiAction == FaceApiOperations.LargePersonGroupPersonFaceDelete)
                 {
-                    apiResults.SetLargePersonGroupPersonFaceDeleteResult(actionData,commsResult);
+                    apiResults.AddLargePersonGroupPersonFaceDeleteResult(actionData,commsResult);
                     return;
                 }
                 throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
