@@ -1,6 +1,7 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Face;
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -38,13 +39,40 @@ namespace Glav.CognitiveServices.IntegrationTests.Helpers
                 .AnalyseAllAsync();
 
             if (result.LargePersonGroupGetAnalysis.AnalysisResult.ApiCallResult.Successfull &&
-                    result.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData != null &&
-                     result.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup != null &&
                      !string.IsNullOrWhiteSpace(result.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.largePersonGroupId))
             {
-                return new OpResult { Success = true,
-                    PersonId = result.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.largePersonGroupId ,
-                    GroupId = groupIdToUse};
+                var personResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                .AddConsoleAndTraceLogging()
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .UsingHttpCommunication()
+                .WithFaceAnalysisActions()
+                .ListLargePersonGroupPersons(GroupId)
+                .AnalyseAllAsync();
+
+                var person = personResult.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData.LargePersonGroupPersons.FirstOrDefault();
+                if (person != null)
+                {
+
+                    return new OpResult
+                    {
+                        Success = true,
+                        PersonId = person.personId,
+                        GroupId = groupIdToUse
+                    };
+                }
+
+                var addPersonResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                .AddConsoleAndTraceLogging()
+                .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
+                .UsingHttpCommunication()
+                .WithFaceAnalysisActions()
+                .CreateLargePersonGroupPerson(groupIdToUse,PersonName, "Used for integration testing only")
+                .AnalyseAllAsync();
+
+                if (addPersonResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully)
+                {
+                    return new OpResult { GroupId = groupIdToUse, Success = true, PersonId = addPersonResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData.personId };
+                }
             }
 
             // Create a group and person within the group
