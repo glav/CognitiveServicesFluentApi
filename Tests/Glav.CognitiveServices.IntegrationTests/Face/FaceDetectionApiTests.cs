@@ -12,6 +12,26 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
     public class FaceDetectionApiTests
     {
         private TestDataHelper _testDataHelper = new TestDataHelper();
+
+        [Fact]
+        public async Task ShouldParsefaceDetectionError()
+        {
+            var detectResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                                       .AddConsoleAndTraceLogging()
+                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                                       .UsingHttpCommunication()
+                                       .WithFaceAnalysisActions()
+                                       .AddUriForFaceDetection(new System.Uri("http://blah/blah/blah.jpg"),FaceDetectionAttributes.Age)
+                                       .AnalyseAllAsync();
+
+            Assert.NotNull(detectResult);
+            Assert.NotNull(detectResult.FaceDetectionAnalysis);
+            Assert.NotEmpty(detectResult.FaceDetectionAnalysis.AnalysisResults);
+            Assert.NotNull(detectResult.FaceDetectionAnalysis.AnalysisResult.ResponseData);
+            Assert.NotNull(detectResult.FaceDetectionAnalysis.AnalysisResult.ResponseData.error);
+            Assert.Equal("InvalidURL", detectResult.FaceIdentificationAnalysis.AnalysisResult.ResponseData.error.code);
+        }
+
         [Fact]
         public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysisForUrlAnalysis()
         {
