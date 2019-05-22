@@ -6,14 +6,15 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain
 {
-    public class FaceDetectionResult : BaseApiResponseReturnsData<FaceDetectResponseRoot, FaceDetectResponseItem[], BaseApiErrorResponse>
+    public class FaceDetectionResult : BaseApiResponseReturnsData<FaceDetectResponseRoot, FaceDetectResponseItem[], FaceDetectResponseRoot>
     {
         public FaceDetectionResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
             ParseResponseData();
             if (!ActionSubmittedSuccessfully)
             {
-                ResponseData = new FaceDetectResponseRoot { error = ParsingStrategy.ResponseError };
+                ResponseData = ParsingStrategy.ResponseError;
+                return;
             }
             ResponseData = new FaceDetectResponseRoot { detectedFaces = ParsingStrategy.ResponseData };
         }
