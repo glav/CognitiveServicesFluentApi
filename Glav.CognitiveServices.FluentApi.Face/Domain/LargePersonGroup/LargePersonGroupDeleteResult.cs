@@ -6,14 +6,14 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
-    public class LargePersonGroupDeleteResult : BaseApiResponseWithStandardErrorReturnsData<LargePersonGroupDeleteResponseRoot, LargePersonGroupDeleteResponseRoot>
+    public class LargePersonGroupDeleteResult : BaseApiResponseReturnsData<LargePersonGroupDeleteResponseRoot, LargePersonGroupDeleteResponseRoot, LargePersonGroupDeleteResponseRoot>
     {
         public LargePersonGroupDeleteResult(ICommunicationResult apiCallResult): base(apiCallResult)
         {
             ParseResponseData();
             if (!ActionSubmittedSuccessfully)
             {
-                ResponseData = new LargePersonGroupDeleteResponseRoot { error = ParsingStrategy.ResponseError };
+                ResponseData = ParsingStrategy.ResponseError;
             }
        }
     }

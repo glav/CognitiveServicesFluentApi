@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Glav.CognitiveServices.IntegrationTests.Helpers;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
 using System.Net;
+using System;
 
 namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 {
@@ -47,6 +48,26 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.NotNull(result.LargePersonGroupCreateAnalysis.AnalysisResult.ResponseData.error);
             Assert.Equal("BadArgument", result.LargePersonGroupCreateAnalysis.AnalysisResult.ResponseData.error.code);
         }
+
+        [Fact]
+        public async Task ShouldParseLargePersonDeleteError()
+        {
+            var deleteResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                                       .AddConsoleAndTraceLogging()
+                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                                       .UsingHttpCommunication()
+                                       .WithFaceAnalysisActions()
+                                       .DeleteLargePersonGroup($"ShouldNotExist{Guid.NewGuid().ToString()}")
+                                       .AnalyseAllAsync();
+
+            Assert.NotNull(deleteResult);
+            Assert.NotNull(deleteResult.LargePersonGroupDeleteAnalysis);
+            Assert.NotEmpty(deleteResult.LargePersonGroupDeleteAnalysis.AnalysisResults);
+            Assert.NotNull(deleteResult.LargePersonGroupDeleteAnalysis.AnalysisResult.ResponseData);
+            Assert.NotNull(deleteResult.LargePersonGroupDeleteAnalysis.AnalysisResult.ResponseData.error);
+            Assert.Equal("LargePersonGroupNotFound", deleteResult.LargePersonGroupDeleteAnalysis.AnalysisResult.ResponseData.error.code);
+        }
+
 
         [Fact]
         public async Task ShouldBeAbleToGetLargePersonGroup()
