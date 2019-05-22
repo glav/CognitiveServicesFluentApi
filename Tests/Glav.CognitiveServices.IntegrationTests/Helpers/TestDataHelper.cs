@@ -81,7 +81,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Helpers
             .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
             .UsingHttpCommunication()
             .WithFaceAnalysisActions()
-            .CreateLargePersonGroup(GroupId, GroupName)
+            .CreateLargePersonGroup(groupIdToUse, GroupName)
             .CreateLargePersonGroupPerson(groupIdToUse, PersonName, "Used for integration testing only - can be deleted")
             .AnalyseAllAsync();
 
