@@ -68,6 +68,25 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.Equal("LargePersonGroupNotFound", deleteResult.LargePersonGroupDeleteAnalysis.AnalysisResult.ResponseData.error.code);
         }
 
+        [Fact]
+        public async Task ShouldParseLargePersonGetError()
+        {
+            var getResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                                       .AddConsoleAndTraceLogging()
+                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                                       .UsingHttpCommunication()
+                                       .WithFaceAnalysisActions()
+                                       .GetLargePersonGroup($"ShouldNotExist{Guid.NewGuid().ToString()}")
+                                       .AnalyseAllAsync();
+
+            Assert.NotNull(getResult);
+            Assert.NotNull(getResult.LargePersonGroupGetAnalysis);
+            Assert.NotEmpty(getResult.LargePersonGroupGetAnalysis.AnalysisResults);
+            Assert.NotNull(getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData);
+            Assert.NotNull(getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.error);
+            Assert.Equal("LargePersonGroupNotFound", getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.error.code);
+        }
+
 
         [Fact]
         public async Task ShouldBeAbleToGetLargePersonGroup()
