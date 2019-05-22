@@ -29,7 +29,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             Assert.NotEmpty(detectResult.FaceDetectionAnalysis.AnalysisResults);
             Assert.NotNull(detectResult.FaceDetectionAnalysis.AnalysisResult.ResponseData);
             Assert.NotNull(detectResult.FaceDetectionAnalysis.AnalysisResult.ResponseData.error);
-            Assert.Equal("InvalidURL", detectResult.FaceIdentificationAnalysis.AnalysisResult.ResponseData.error.code);
+            Assert.Equal("InvalidURL", detectResult.FaceDetectionAnalysis.AnalysisResult.ResponseData.error.code);
         }
 
         [Fact]

@@ -30,6 +30,25 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         }
 
         [Fact]
+        public async Task ShouldParseLargePersonGroupCreateError()
+        {
+            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .AddConsoleAndTraceLogging()
+                .UsingHttpCommunication()
+                .WithFaceAnalysisActions()
+                .CreateLargePersonGroup("$@#!", "should fail")
+                .AnalyseAllAsync();
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.LargePersonGroupCreateAnalysis);
+            Assert.NotEmpty(result.LargePersonGroupCreateAnalysis.AnalysisResults);
+            Assert.NotNull(result.LargePersonGroupCreateAnalysis.AnalysisResult.ResponseData);
+            Assert.NotNull(result.LargePersonGroupCreateAnalysis.AnalysisResult.ResponseData.error);
+            Assert.Equal("BadArgument", result.LargePersonGroupCreateAnalysis.AnalysisResult.ResponseData.error.code);
+        }
+
+        [Fact]
         public async Task ShouldBeAbleToGetLargePersonGroup()
         {
             var groupId = System.Guid.NewGuid().ToString();
