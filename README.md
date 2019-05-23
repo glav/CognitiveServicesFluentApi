@@ -10,9 +10,6 @@ If you are new to this project, please see the getting started section below. Fo
 * [Face Fluent API](./Wiki/Face.md)
 * [Scoring system](./Wiki/Scoring.md)
 
-### Project Board
-[Azure DevOps project Board is located here](https://dev.azure.com/glav/Glav.CognitiveServices.Api)
-
 ## How to get started.
 Easiest way is to install the nuget package for your specific analysis functionality. Note: packages are currently pre-release so you need the version specifier.
 
@@ -177,3 +174,5 @@ This API is only in early stages and many refinements are yet to be applied.
 #### Sonarqube Code Analaysis
 [Sonarqube Code Analysis report](https://sonarcloud.io/dashboard?id=CognitiveFluentApi)
 
+#### Project Board
+[Azure DevOps project Board is located here](https://dev.azure.com/glav/Glav.CognitiveServices.Api)
