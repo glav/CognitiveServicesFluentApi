@@ -102,5 +102,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.Equal(HairColor.Unknown, "blur and green".ToHairColor());
         }
 
+
+
     }
 }
