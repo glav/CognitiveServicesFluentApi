@@ -13,6 +13,7 @@
     <None Remove="TestData\ComputerVisionImageAnalysisResponse.json" />
     <None Remove="TestData\ComputerVisionOcrAnalysisResponse.json" />
     <None Remove="TestData\ComputerVisionRecognizeTextAnalysisResponse.json" />
+    <None Remove="TestData\FaceApiErrorResponse.json" />
     <None Remove="TestData\FaceDetectionResponse-FemaleWithAge.json" />
     <None Remove="TestData\FaceDetectionResponse.json" />
     <None Remove="TestData\FaceLargePersonGroupPersonListResponse.json" />
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="TestData\FaceApiErrorResponse.json" />
     <EmbeddedResource Include="TestData\FaceDetectionResponse-FemaleWithAge.json" />
     <EmbeddedResource Include="TestData\FaceDetectionResponse.json" />
     <EmbeddedResource Include="TestData\ComputerVisionImageAnalysisResponse.json" />

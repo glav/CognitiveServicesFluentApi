@@ -15,25 +15,6 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         private TestDataHelper _testDataHelper = new TestDataHelper();
 
         [Fact]
-        public async Task ShouldParsefaceIdentificationError()
-        {
-            var identifyResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
-                                       .AddConsoleAndTraceLogging()
-                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
-                                       .UsingHttpCommunication()
-                                       .WithFaceAnalysisActions()
-                                       .IdentifyFace("123", "456")  // Rubbish data
-                                       .AnalyseAllAsync();
-
-            Assert.NotNull(identifyResult);
-            Assert.NotNull(identifyResult.FaceIdentificationAnalysis);
-            Assert.NotEmpty(identifyResult.FaceIdentificationAnalysis.AnalysisResults);
-            Assert.NotNull(identifyResult.FaceIdentificationAnalysis.AnalysisResult.ResponseData);
-            Assert.NotNull(identifyResult.FaceIdentificationAnalysis.AnalysisResult.ResponseData.error);
-            Assert.Equal("LargePersonGroupNotFound", identifyResult.FaceIdentificationAnalysis.AnalysisResult.ResponseData.error.code);
-        }
-
-        [Fact]
         public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysisForUrlAnalysis()
         {
             var setupResult = await _testDataHelper.EnsureLargePersonGroupIsSetupAsync();
