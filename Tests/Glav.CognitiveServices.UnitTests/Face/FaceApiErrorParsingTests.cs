@@ -132,6 +132,104 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             ResponseErrorAssertion(trainResult, trainResult.LargePersonGroupTrainStatusAnalysis);
         }
 
+        [Fact]
+        public async Task ShouldParseLargePersonGroupPersonCreateError()
+        {
+            var lpgpcResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys("oops", LocationKeyIdentifier.AustraliaEast)
+                                       .AddConsoleAndTraceLogging()
+                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                                        .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(_inputData, System.Net.HttpStatusCode.BadRequest)))
+                                       .WithFaceAnalysisActions()
+                                       .CreateLargePersonGroupPerson("123","mopey")
+                                       .AnalyseAllAsync();
+
+            ResponseErrorAssertion(lpgpcResult, lpgpcResult.LargePersonGroupPersonCreateAnalysis);
+        }
+
+        [Fact]
+        public async Task ShouldParseLargePersonGroupPersonDeleteError()
+        {
+            var lpgpdResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys("oops", LocationKeyIdentifier.AustraliaEast)
+                                       .AddConsoleAndTraceLogging()
+                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                                        .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(_inputData, System.Net.HttpStatusCode.BadRequest)))
+                                       .WithFaceAnalysisActions()
+                                       .DeleteLargePersonGroupPerson("123", "mopey")
+                                       .AnalyseAllAsync();
+
+            ResponseErrorAssertion(lpgpdResult, lpgpdResult.LargePersonGroupPersonDeleteAnalysis);
+        }
+
+        [Fact]
+        public async Task ShouldParseLargePersonGroupPersonFaceAddError()
+        {
+            var faceAddResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys("oops", LocationKeyIdentifier.AustraliaEast)
+                                       .AddConsoleAndTraceLogging()
+                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                                        .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(_inputData, System.Net.HttpStatusCode.BadRequest)))
+                                       .WithFaceAnalysisActions()
+                                       .AddFaceToPersonGroupPerson("123", "mopey", new System.Uri("http://host/endpoint"))
+                                       .AnalyseAllAsync();
+
+            ResponseErrorAssertion(faceAddResult, faceAddResult.LargePersonGroupPersonFaceAddAnalysis);
+        }
+
+        [Fact]
+        public async Task ShouldParseLargePersonGroupPersonFaceDeleteError()
+        {
+            var faceDelResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys("oops", LocationKeyIdentifier.AustraliaEast)
+                                       .AddConsoleAndTraceLogging()
+                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                                        .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(_inputData, System.Net.HttpStatusCode.BadRequest)))
+                                       .WithFaceAnalysisActions()
+                                       .DeleteFaceForPersonGroupPerson("123", "mopey", "someface")
+                                       .AnalyseAllAsync();
+
+            ResponseErrorAssertion(faceDelResult, faceDelResult.LargePersonGroupPersonFaceDeleteAnalysis);
+        }
+
+        [Fact]
+        public async Task ShouldParseLargePersonGroupPersonFaceGetError()
+        {
+            var faceGetResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys("oops", LocationKeyIdentifier.AustraliaEast)
+                                       .AddConsoleAndTraceLogging()
+                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                                        .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(_inputData, System.Net.HttpStatusCode.BadRequest)))
+                                       .WithFaceAnalysisActions()
+                                       .GetFaceForPersonGroupPerson("123", "mopey", "someface")
+                                       .AnalyseAllAsync();
+
+            ResponseErrorAssertion(faceGetResult, faceGetResult.LargePersonGroupPersonFaceGetAnalysis);
+        }
+
+        [Fact]
+        public async Task ShouldParseLargePersonGroupPersonGetError()
+        {
+            var getResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys("oops", LocationKeyIdentifier.AustraliaEast)
+                                       .AddConsoleAndTraceLogging()
+                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                                        .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(_inputData, System.Net.HttpStatusCode.BadRequest)))
+                                       .WithFaceAnalysisActions()
+                                       .GetLargePersonGroupPerson("hoochey", "coochey" )
+                                       .AnalyseAllAsync();
+
+            ResponseErrorAssertion(getResult, getResult.LargePersonGroupPersonGetAnalysis);
+        }
+
+        [Fact]
+        public async Task ShouldParseLargePersonGroupPersonListError()
+        {
+            var listResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys("oops", LocationKeyIdentifier.AustraliaEast)
+                                       .AddConsoleAndTraceLogging()
+                                       .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                                        .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(_inputData, System.Net.HttpStatusCode.BadRequest)))
+                                       .WithFaceAnalysisActions()
+                                       .ListLargePersonGroupPersons("some group")
+                                       .AnalyseAllAsync();
+
+            ResponseErrorAssertion(listResult, listResult.LargePersonGroupPersonListAnalysis);
+        }
+
         private static void ResponseErrorAssertion(IAnalysisResults root, dynamic analysisContext)
         {
             Assert.NotNull(root);

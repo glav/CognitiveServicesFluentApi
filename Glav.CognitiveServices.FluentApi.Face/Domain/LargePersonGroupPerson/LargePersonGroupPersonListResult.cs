@@ -6,14 +6,14 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
 {
-    public class LargePersonGroupPersonListResult : BaseApiResponseReturnsData<LargePersonGroupPersonListResponseRoot, LargePersonGroupPersonGetResponseItem[], BaseApiErrorResponse>
+    public class LargePersonGroupPersonListResult : BaseApiResponseReturnsData<LargePersonGroupPersonListResponseRoot, LargePersonGroupPersonGetResponseItem[], LargePersonGroupPersonListResponseRoot>
     {
         public LargePersonGroupPersonListResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
             ParseResponseData();
             if (!ActionSubmittedSuccessfully)
             {
-                ResponseData = new LargePersonGroupPersonListResponseRoot { error = ParsingStrategy.ResponseError };
+                ResponseData = ParsingStrategy.ResponseError;
                 return;
             }
             ResponseData = new LargePersonGroupPersonListResponseRoot { LargePersonGroupPersons = ParsingStrategy.ResponseData };
