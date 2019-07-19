@@ -45,8 +45,8 @@ stages:
         # Additional properties that will be passed to the scanner, 
         # Put one key=value per line, example:
         # sonar.exclusions=**/*.bin
-        sonar.organization=glav-github
-        sonar.cs.vscoveragexml.reportsPaths=$(Agent.TempDirectory)/**/*.coveragexml
+        sonar.organization: 'glav-github'
+        sonar.cs.vscoveragexml.reportsPaths: '$(Agent.TempDirectory)/**/*.coveragexml'
         
 
     - task: VSBuild@1
