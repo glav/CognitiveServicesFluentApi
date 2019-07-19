@@ -84,7 +84,7 @@ stages:
       Get-ChildItem -Recurse -Filter "*.coverage" | % {
       $outfile = "$([System.IO.Path]::GetFileNameWithoutExtension($_.FullName)).coveragexml"
       $output = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($_.FullName), $outfile)
-      "Analyse '$($_.FullName)' with output '$output'..."
+      "Analyse [$($_.FullName)] with output [$output]..."
       . $env:USERPROFILE\.nuget\packages\microsoft.codecoverage\$ver\build\netstandard1.0\CodeCoverage\CodeCoverage.exe analyze /output:$output $_.FullName
       }
       "Done"'
