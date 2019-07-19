@@ -41,12 +41,12 @@ stages:
         projectKey: CognitiveFluentApi
         projectName: 'Azure Cognitive Services Fluent API'
         projectVersion: 0.8
-        extraProperties: |
+        extraProperties: '|
         # Additional properties that will be passed to the scanner, 
         # Put one key=value per line, example:
         # sonar.exclusions=**/*.bin
-        sonar.organization: 'glav-github'
-        sonar.cs.vscoveragexml.reportsPaths: '$(Agent.TempDirectory)/**/*.coveragexml'
+        sonar.organization=glav-github
+        sonar.cs.vscoveragexml.reportsPaths=$(Agent.TempDirectory)/**/*.coveragexml'
         
 
     - task: VSBuild@1
@@ -78,7 +78,7 @@ stages:
         arguments: '--configuration $(BuildConfiguration) --no-build --collect "Code Coverage"'
         feedsToUse: config
 
-    - powershell: |
+    - powershell: '|
       $ver = (Get-ChildItem $env:USERPROFILE\.nuget\packages\Microsoft.CodeCoverage | Select-Object -Property Name | Sort-Object -Descending | Select-Object -First 1).Name
         
       Get-ChildItem -Recurse -Filter "*.coverage" | % {
@@ -87,7 +87,7 @@ stages:
       "Analyse '$($_.FullName)' with output '$output'..."
       . $env:USERPROFILE\.nuget\packages\microsoft.codecoverage\$ver\build\netstandard1.0\CodeCoverage\CodeCoverage.exe analyze /output:$output $_.FullName
       }
-      "Done"
+      "Done"'
       
       errorActionPreference: silentlyContinue
       workingDirectory: '$(Agent.TempDirectory)'
