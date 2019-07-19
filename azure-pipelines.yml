@@ -12,7 +12,7 @@ variables:
   buildConfiguration: 'Release'
 
 stages:
-- stage: Build-Package
+- stage: Build_Package
   jobs:
   - job: Job1
     pool:
