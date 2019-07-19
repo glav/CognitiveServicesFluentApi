@@ -39,7 +39,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             var line3 = result.OcrAnalysis.AnalysisResult.ResponseData.regions[0].lines[2];
             Assert.Equal(1, line1.words.Length);
             Assert.Equal(2, line2.words.Length);
-            Assert.Equal(2, line3.words.Length);
+            Assert.Equal(3, line3.words.Length);
 
             Assert.Equal("ABBEY", line1.words[0].text);
 
