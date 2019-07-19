@@ -90,10 +90,10 @@ stages:
           "Analyse [$($_.FullName)] with output [$output]..."
           . $env:USERPROFILE\.nuget\packages\microsoft.codecoverage\$ver\build\netstandard1.0\CodeCoverage\CodeCoverage.exe analyze /output:$output $_.FullName
           }
-          "Done"'
+          "Done"
         azurePowerShellVersion: 'LatestVersion'
       displayName: 'Convert Code coverage binary to XML'
-      
+
     - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
       displayName: 'Run Code Analysis'
 
