@@ -14,7 +14,7 @@ variables:
 stages:
 - stage: Build_Package
   jobs:
-  - job: Job1
+  - job: BuildAndPackage
     pool:
       vmImage: 'windows-latest'
     steps:
