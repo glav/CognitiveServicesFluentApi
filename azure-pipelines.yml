@@ -76,22 +76,22 @@ stages:
         projects: 'Tests\Glav.CognitiveServices.IntegrationTests\Glav.CognitiveServices.IntegrationTests.csproj'
         arguments: '--configuration $(BuildConfiguration) --no-build --collect "Code Coverage"'
         feedsToUse: config
-
-    - powershell: '|
-      $ver = (Get-ChildItem $env:USERPROFILE\.nuget\packages\Microsoft.CodeCoverage | Select-Object -Property Name | Sort-Object -Descending | Select-Object -First 1).Name
-        
-      Get-ChildItem -Recurse -Filter "*.coverage" | % {
-      $outfile = "$([System.IO.Path]::GetFileNameWithoutExtension($_.FullName)).coveragexml"
-      $output = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($_.FullName), $outfile)
-      "Analyse [$($_.FullName)] with output [$output]..."
-      . $env:USERPROFILE\.nuget\packages\microsoft.codecoverage\$ver\build\netstandard1.0\CodeCoverage\CodeCoverage.exe analyze /output:$output $_.FullName
-      }
-      "Done"'
-      
-      errorActionPreference: silentlyContinue
-      workingDirectory: '$(Agent.TempDirectory)'
+    - task: AzurePowerShell@4
+      inputs:
+        ScriptType: 'InlineScript'
+        Inline: |
+          $ver = (Get-ChildItem $env:USERPROFILE\.nuget\packages\Microsoft.CodeCoverage | Select-Object -Property Name | Sort-Object -Descending | Select-Object -First 1).Name
+                  
+          Get-ChildItem -Recurse -Filter "*.coverage" | % {
+          $outfile = "$([System.IO.Path]::GetFileNameWithoutExtension($_.FullName)).coveragexml"
+          $output = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($_.FullName), $outfile)
+          "Analyse [$($_.FullName)] with output [$output]..."
+          . $env:USERPROFILE\.nuget\packages\microsoft.codecoverage\$ver\build\netstandard1.0\CodeCoverage\CodeCoverage.exe analyze /output:$output $_.FullName
+          }
+          "Done"'
+        azurePowerShellVersion: 'LatestVersion'
       displayName: 'Convert Code coverage binary to XML'
-
+      
     - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
       displayName: 'Run Code Analysis'
 
