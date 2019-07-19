@@ -76,8 +76,10 @@ stages:
         projects: 'Tests\Glav.CognitiveServices.IntegrationTests\Glav.CognitiveServices.IntegrationTests.csproj'
         arguments: '--configuration $(BuildConfiguration) --no-build --collect "Code Coverage"'
         feedsToUse: config
+
     - task: AzurePowerShell@4
       inputs:
+        azureSubscription: 'Azure Free Trial (d6876356-8975-4384-bbec-4be79f7fe030)'
         ScriptType: 'InlineScript'
         Inline: |
           $ver = (Get-ChildItem $env:USERPROFILE\.nuget\packages\Microsoft.CodeCoverage | Select-Object -Property Name | Sort-Object -Descending | Select-Object -First 1).Name
