@@ -125,14 +125,17 @@ stages:
 
 - stage: Deployment
   jobs:
-  - job: DeployPackageToFeed
-    pool:
-      vmImage: 'windows-latest'
+  - job: ManualApproval
+    pool: server
     steps:
     - task: ManualIntervention@8
       inputs:
         instructions: 'Approve/Continue to deploy package to Nuget Feed'
         emailRecipients: 'glav@theglavs.com'
+  - job: DeployPackageToFeed
+    pool:
+      vmImage: 'windows-latest'
+    steps:
     - task: AzurePowerShell@4
       inputs:
         azureSubscription: 'Azure Free Trial (d6876356-8975-4384-bbec-4be79f7fe030)'
