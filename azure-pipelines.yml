@@ -123,3 +123,15 @@ stages:
       displayName: 'Chuck Norris Quotes'
 
 
+- stage: DeployPackageToFeed
+  jobs:
+  - job: DeployPackageToFeed
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: AzurePowerShell@4
+      inputs:
+        azureSubscription: 'Azure Free Trial (d6876356-8975-4384-bbec-4be79f7fe030)'
+        ScriptType: 'InlineScript'
+        Inline: 'Write-Output "Deploy stage WIP"'
+        azurePowerShellVersion: 'LatestVersion'
