@@ -129,9 +129,11 @@ stages:
     pool: server
     steps:
     - task: ManualIntervention@8
+      displayName: 'Manual intervention to publish feed'
       inputs:
         instructions: 'Approve/Continue to deploy package to Nuget Feed'
         emailRecipients: 'glav@theglavs.com'
+  
   - job: DeployPackageToFeed
     pool:
       vmImage: 'windows-latest'
