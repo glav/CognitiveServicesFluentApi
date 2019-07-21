@@ -122,9 +122,6 @@ stages:
     - task: solidify-labs.chucknorris-build-enhancer.chuck-norris-task.ChuckNorrisTask@0
       displayName: 'Chuck Norris Quotes'
 
-
-- stage: Deployment
-  jobs:
   - job: ManualApproval
     pool: server
     steps:
@@ -133,14 +130,23 @@ stages:
       inputs:
         instructions: 'Approve/Continue to deploy package to Nuget Feed'
         emailRecipients: 'glav@theglavs.com'
-  
-  - job: DeployPackageToFeed
+
+
+- stage: Deployment
+  jobs:
+  - deployment: DeployJob
+    displayName: DeployPackageToFeed
     pool:
       vmImage: 'windows-latest'
-    steps:
-    - task: AzurePowerShell@4
-      inputs:
-        azureSubscription: 'Azure Free Trial (d6876356-8975-4384-bbec-4be79f7fe030)'
-        ScriptType: 'InlineScript'
-        Inline: 'Write-Output "Deploy stage WIP"'
-        azurePowerShellVersion: 'LatestVersion'
+    dependsOn: ManualApproval
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzurePowerShell@4
+            inputs:
+              azureSubscription: 'Azure Free Trial (d6876356-8975-4384-bbec-4be79f7fe030)'
+              ScriptType: 'InlineScript'
+              Inline: 'Write-Output "Deploy stage WIP"'
+              azurePowerShellVersion: 'LatestVersion'    
+    
