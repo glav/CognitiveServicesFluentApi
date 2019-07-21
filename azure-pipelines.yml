@@ -32,6 +32,7 @@ stages:
         command: 'restore'
         projects: '**/*.csproj'
         noCache: true
+      condition: succeeded()
 
     - task: SonarQubePrepare@4
       displayName: 'Prepare analysis on SonarQube'
@@ -46,6 +47,7 @@ stages:
           # sonar.exclusions=**/*.bin
           sonar.organization=glav-github
           sonar.cs.vscoveragexml.reportsPaths=$(Agent.TempDirectory)/**/*.coveragexml
+      condition: succeeded()
 
     - task: VSBuild@1
       displayName: 'Build solution **\*.sln'
@@ -54,11 +56,13 @@ stages:
         vsVersion: 15.0
         platform: '$(BuildPlatform)'
         configuration: '$(BuildConfiguration)'
+      condition: succeeded()
 
     - task: qetza.replacetokens.replacetokens-task.replacetokens@2
       displayName: 'Replace tokens in **\*.json'
       inputs:
         targetFiles: '**\*.json'
+      condition: succeeded()
 
     - task: DotNetCoreCLI@2
       displayName: 'Unit Tests'
@@ -67,6 +71,7 @@ stages:
         projects: 'Tests\Glav.CognitiveServices.UnitTests\Glav.CognitiveServices.UnitTests.csproj'
         arguments: '--configuration $(BuildConfiguration) --no-build --collect "Code Coverage"'
         feedsToUse: config
+      condition: succeeded()
 
     - task: DotNetCoreCLI@2
       displayName: 'Integration Tests'
@@ -75,6 +80,7 @@ stages:
         projects: 'Tests\Glav.CognitiveServices.IntegrationTests\Glav.CognitiveServices.IntegrationTests.csproj'
         arguments: '--configuration $(BuildConfiguration) --no-build --collect "Code Coverage"'
         feedsToUse: config
+      condition: succeeded()
 
     - task: AzurePowerShell@4
       inputs:
@@ -92,12 +98,15 @@ stages:
           "Done"
         azurePowerShellVersion: 'LatestVersion'
       displayName: 'Convert Code coverage binary to XML'
+      condition: succeeded()
 
     - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
       displayName: 'Run Code Analysis'
+      condition: succeeded()
 
     - task: SonarSource.sonarqube.291ed61f-1ee4-45d3-b1b0-bf822d9095ef.SonarQubePublish@4
       displayName: 'Publish Quality Gate Result'
+      condition: succeeded()
 
     - task: PublishSymbols@1
       displayName: 'Publish symbols path: '
@@ -111,13 +120,13 @@ stages:
         SourceFolder: '$(build.sourcesdirectory)'
         Contents: '**\bin\$(BuildConfiguration)\**'
         TargetFolder: '$(build.artifactstagingdirectory)'
-      condition: succeededOrFailed()
+      condition: succeeded()
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
       inputs:
         PathtoPublish: '$(build.artifactstagingdirectory)'
-      condition: succeededOrFailed()
+      condition: succeeded()
 
     - task: solidify-labs.chucknorris-build-enhancer.chuck-norris-task.ChuckNorrisTask@0
       displayName: 'Chuck Norris Quotes'
@@ -130,6 +139,7 @@ stages:
       inputs:
         instructions: 'Approve/Continue to deploy package to Nuget Feed'
         emailRecipients: 'glav@theglavs.com'
+      condition: succeeded()
 
 
 - stage: Deployment
@@ -138,7 +148,6 @@ stages:
     displayName: DeployPackageToFeed
     pool:
       vmImage: 'windows-latest'
-    dependsOn: ManualApproval
     environment: Feed
     strategy:
       runOnce:
@@ -150,4 +159,5 @@ stages:
               ScriptType: 'InlineScript'
               Inline: 'Write-Output "Deploy stage WIP"'
               azurePowerShellVersion: 'LatestVersion'    
+            condition: succeeded()
     
