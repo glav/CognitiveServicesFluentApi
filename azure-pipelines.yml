@@ -139,6 +139,7 @@ stages:
     pool:
       vmImage: 'windows-latest'
     dependsOn: ManualApproval
+    environment: Feed
     strategy:
       runOnce:
         deploy:
