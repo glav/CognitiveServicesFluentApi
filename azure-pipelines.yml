@@ -152,7 +152,7 @@ stages:
             inputs:  
               command: 'push'
               feedsToUse: 'select'
-              packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+              packagesToPush: '$(build.ArtifactStagingDirectory)/**/*.nupkg;!$(build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
               nuGetFeedType: 'internal'
               publishVstsFeed: 'CognitiveServicesFluentApiInternal'
               versioningScheme: 'off'
