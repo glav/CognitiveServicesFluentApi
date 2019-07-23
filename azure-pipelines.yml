@@ -132,6 +132,10 @@ stages:
     - task: solidify-labs.chucknorris-build-enhancer.chuck-norris-task.ChuckNorrisTask@0
       displayName: 'Chuck Norris Quotes'
 
+    - task: ManualIntervention@8
+      inputs:
+        instructions: 'Please approve to continue'
+
 - stage: Deployment
   jobs:
   - deployment: DeployJob
@@ -143,9 +147,6 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: ManualIntervention@8
-            inputs:
-              instructions: 'Please approve to continue'
           - task: AzurePowerShell@4
             inputs:
               azureSubscription: 'Azure Free Trial (d6876356-8975-4384-bbec-4be79f7fe030)'
