@@ -122,12 +122,13 @@ stages:
         TargetFolder: '$(build.artifactstagingdirectory)'
       condition: succeeded()
 
-    - task: PublishBuildArtifacts@1
+    - task: PublishPipelineArtifact@1
       displayName: 'Publish Artifact: drop'
       inputs:
-        PathtoPublish: '$(build.artifactstagingdirectory)'
+        targetPath: '$(build.artifactstagingdirectory)'
+        artifact: 'drop'
       condition: succeeded()
-
+        
     - task: solidify-labs.chucknorris-build-enhancer.chuck-norris-task.ChuckNorrisTask@0
       displayName: 'Chuck Norris Quotes'
 
@@ -148,11 +149,17 @@ stages:
               ScriptType: 'InlineScript'
               Inline: 'Write-Output "Deploy stage WIP"'
               azurePowerShellVersion: 'LatestVersion'  
+            condition: succeeded()
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'current'
+              targetPath: '$(Pipeline.Workspace)'
+              artifactName: 'drop'
           - task: NuGetCommand@2
             inputs:  
               command: 'push'
               feedsToUse: 'select'
-              packagesToPush: '$(build.ArtifactStagingDirectory)/**/*.nupkg;!$(build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+              packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
               nuGetFeedType: 'internal'
               publishVstsFeed: 'CognitiveServicesFluentApiInternal'
               versioningScheme: 'off'
