@@ -132,10 +132,6 @@ stages:
     - task: solidify-labs.chucknorris-build-enhancer.chuck-norris-task.ChuckNorrisTask@0
       displayName: 'Chuck Norris Quotes'
 
-    - task: ManualIntervention@8
-      inputs:
-        instructions: 'Please approve to continue'
-
 - stage: Deployment
   jobs:
   - deployment: DeployJob
