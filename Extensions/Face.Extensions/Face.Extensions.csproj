@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Glav.CognitiveServices.FluentApi.Face.Extensions</AssemblyName>
+    <Version>0.9.0</Version>
+    <Authors>Paul Glavich</Authors>
+    <Product>Cognitive Services Fluent API</Product>
+    <Description>A set of utility or convenience extensions for the fluent API for using the Face set of cognitive services</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Cognitive services, .net, azure, Face</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Face\Glav.CognitiveServices.FluentApi.Face.csproj" />
+  </ItemGroup>
+
+</Project>
