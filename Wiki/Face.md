@@ -72,3 +72,7 @@ var notWearingGlasses = firstResult.IsGlassesType(GlassesType.NoGlasses);
 var imageHasGoodExposure = firstResult.IsExposureLevel(ExposureLevel.GoodExposure);
 var faceId = firstResult.faceId;
 ```
+
+## Extensions package
+Glav.CognitiveServices.FluentApi.Face.Extensions
+WIP

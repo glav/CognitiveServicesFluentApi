@@ -12,20 +12,26 @@ If you are new to this project, please see the getting started section below. Fo
 
 ## How to get started.
 Easiest way is to install the nuget package for your specific analysis functionality. Note: packages are currently pre-release so you need the version specifier.
+Also note that the fluent API for each cognitive service has a set of convenience or extension methods which is located in a separate package for ease of updates. 
+It is recommended (at least initially) to install the 'Extensions' package as that includes the dependent fluent API package and provides extra convenience. More
+details on those extension/convenience methods is provided within the specific fluent API documentation.
 
 #### For text analyitics (such as Sentiment analysis):
 
 ```powershell
-Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic
+Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic  # Just the Fluent API
+Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic.Extensions # Fluent API with included extension/convenience methods
 ```
 
 #### For ComputerVision (such as image description or adult content detection in images)
 ```powershell
-Install-Package Glav.CognitiveServices.FluentApi.ComputerVision
+Install-Package Glav.CognitiveServices.FluentApi.ComputerVision # Just the Fluent API
+Install-Package Glav.CognitiveServices.FluentApi.ComputerVision.Extensions # Fluent API with included extension/convenience methods
 ```
 #### For Face 
 ```powershell
-Install-Package Glav.CognitiveServices.FluentApi.Face
+Install-Package Glav.CognitiveServices.FluentApi.Face # Just the Fluent API
+Install-Package Glav.CognitiveServices.FluentApi.Face.Extensions # Fluent API with included extension/convenience methods
 ```
 
 #### Azure Cognitive Services Setup

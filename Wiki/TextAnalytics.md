@@ -80,3 +80,7 @@ This applies for all TextAnalytics results. However, for KeyPhrase analysis you 
 var allPhrases = result.TextAnalyticKeyPhraseAnalysis.GetAllKeyPhrases().ToArray();
 var result1 = allPhrases[0];
 ```
+
+## Extensions package
+Glav.CognitiveServices.FluentApi.TextAnalytic.Extensions
+WIP

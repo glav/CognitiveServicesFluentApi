@@ -147,3 +147,7 @@ Assert.Equal("sometext", firstResult.GetAllRecognisedText().First());
 ```
 where 30000 represents the total time in milliseconds to wait for this operation to complete (timeout) and 2000 represents the time in milliseconds to wait between each
 status query operation.
+
+## Extensions package
+Glav.CognitiveServices.FluentApi.ComputerVision.Extensions
+WIP
