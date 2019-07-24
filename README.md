@@ -19,19 +19,28 @@ details on those extension/convenience methods is provided within the specific f
 #### For text analyitics (such as Sentiment analysis):
 
 ```powershell
-Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic  # Just the Fluent API
 Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic.Extensions # Fluent API with included extension/convenience methods
+
+# -or-
+
+Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic  # Just the Fluent API
 ```
 
 #### For ComputerVision (such as image description or adult content detection in images)
 ```powershell
-Install-Package Glav.CognitiveServices.FluentApi.ComputerVision # Just the Fluent API
 Install-Package Glav.CognitiveServices.FluentApi.ComputerVision.Extensions # Fluent API with included extension/convenience methods
+
+# -or-
+
+Install-Package Glav.CognitiveServices.FluentApi.ComputerVision # Just the Fluent API
 ```
-#### For Face 
+#### For Face
 ```powershell
-Install-Package Glav.CognitiveServices.FluentApi.Face # Just the Fluent API
 Install-Package Glav.CognitiveServices.FluentApi.Face.Extensions # Fluent API with included extension/convenience methods
+
+# -or-
+
+Install-Package Glav.CognitiveServices.FluentApi.Face # Just the Fluent API
 ```
 
 #### Azure Cognitive Services Setup
