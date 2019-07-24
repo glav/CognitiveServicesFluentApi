@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Glav.CognitiveServices.FluentApi.TextAnalytic.Extensions</AssemblyName>
-    <RootNamespace>Glav.CognitiveServices.FluentApi.TextAnalytic.Extensions</RootNamespace>
+    <RootNamespace>Glav.CognitiveServices.FluentApi.TextAnalytic</RootNamespace>
     <Version>0.9.0</Version>
     <Authors>Paul Glavich</Authors>
     <Product>Cognitive Services Fluent API</Product>

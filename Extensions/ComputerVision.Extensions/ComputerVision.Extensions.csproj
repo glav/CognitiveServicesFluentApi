@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Glav.CognitiveServices.FluentApi.ComputerVision.Extensions</AssemblyName>
-    <RootNamespace>Glav.CognitiveServices.FluentApi.ComputerVision.Extensions</RootNamespace>
+    <RootNamespace>Glav.CognitiveServices.FluentApi.ComputerVision</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.9.0</Version>
     <Authors>Paul Glavich</Authors>

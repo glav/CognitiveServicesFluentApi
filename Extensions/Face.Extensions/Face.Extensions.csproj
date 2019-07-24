@@ -13,6 +13,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Cognitive services, .net, azure, Face</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RootNamespace>Glav.CognitiveServices.FluentApi.Face</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

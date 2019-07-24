@@ -34,6 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Extensions\ComputerVision.Extensions\ComputerVision.Extensions.csproj" />
+    <ProjectReference Include="..\..\Extensions\Face.Extensions\Face.Extensions.csproj" />
+    <ProjectReference Include="..\..\Extensions\TextAnalytic.Extensions\TextAnalytic.Extensions\TextAnalytic.Extensions.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.ComputerVision\Glav.CognitiveServices.FluentApi.ComputerVision.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Core\Glav.CognitiveServices.FluentApi.Core.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Face\Glav.CognitiveServices.FluentApi.Face.csproj" />
