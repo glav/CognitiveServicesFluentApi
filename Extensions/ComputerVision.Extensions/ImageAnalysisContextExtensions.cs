@@ -57,14 +57,5 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                 .ToArray();
         }
 
-        public static string GetInitialErrorMessage(this ImageAnalysisContext context)
-        {
-            var message = context.AnalysisResult.ResponseData.error != null ?
-                context.AnalysisResult.ResponseData.error.message :
-                context.AnalysisResult.ApiCallResult.Data;
-            return message;
-
-        }
-
     }
 }

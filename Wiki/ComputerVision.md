@@ -151,3 +151,29 @@ status query operation.
 ## Extensions package
 Glav.CognitiveServices.FluentApi.ComputerVision.Extensions
 WIP
+### Image Analysis
+* IsAdultContent()
+```c#
+var result = analysisResult.ImageAnalysis.IsAdultContent();
+```
+* IsRacyContent()
+```c#
+var result = analysisResult.ImageAnalysis.IsRacyContent();
+```
+* GetDescriptiveCaptions(double minimumConfidenceLevel)
+```c#
+var result = analysisResult.ImageAnalysis.GetDescriptiveCaptions(0.1);
+```
+* GetDescriptiveCaptions(string scoreLevelDescription)
+```c#
+var result = analysisResult.ImageAnalysis.GetDescriptiveCaptions(DefaultScoreLevels.Positive);
+```
+* GetTags(string scoreLevelDescription)
+```c#
+var result = analysisResult.ImageAnalysis.GetTags(DefaultScoreLevels.Positive);
+```
+* GetTagsEqualToOrAboveAConfidenceLevel(string scoreLevelDescription)
+```c#
+var result = analysisResult.ImageAnalysis.GetTagsEqualToOrAboveAConfidenceLevel(DefaultScoreLevels.SlightlyPositive);
+```
+

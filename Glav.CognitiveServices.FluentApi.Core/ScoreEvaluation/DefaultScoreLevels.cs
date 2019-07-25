@@ -19,11 +19,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
 
         private void ConstructDefaultValues()
         {
-            AddStartingScoreLevel(0.35, "Negative");
-            AddNextScoreLevelDefinitionInList(0.45, "Slightly Negative");
-            AddNextScoreLevelDefinitionInList(0.55, "Neutral");
-            AddNextScoreLevelDefinitionInList(0.75, "Slightly Positive");
-            AddFinalScoreLevel("Positive");
+            AddStartingScoreLevel(0.35, Negative);
+            AddNextScoreLevelDefinitionInList(0.45, SlightlyNegative);
+            AddNextScoreLevelDefinitionInList(0.55, Neutral);
+            AddNextScoreLevelDefinitionInList(0.75, SlightlyPositive);
+            AddFinalScoreLevel(Positive);
         }
 
     }
