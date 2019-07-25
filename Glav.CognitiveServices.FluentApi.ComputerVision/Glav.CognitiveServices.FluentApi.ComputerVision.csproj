@@ -13,7 +13,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Cognitive services, .net, azure, ComputerVision</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <Version>0.9.0</Version>
+    <Version>0.9.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
