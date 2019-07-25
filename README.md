@@ -11,8 +11,8 @@ If you are new to this project, please see the getting started section below. Fo
 * [Scoring system](./Wiki/Scoring.md)
 
 ## How to get started.
-Easiest way is to install the nuget package for your specific analysis functionality. Note: packages are currently pre-release so you need the version specifier.
-Also note that the fluent API for each cognitive service has a set of convenience or extension methods which is located in a separate package for ease of updates. 
+Easiest way is to install the nuget package for your specific analysis functionality. 
+Note that the fluent API for each cognitive service has a set of convenience or extension methods which is located in a separate package for ease of updates. 
 It is recommended (at least initially) to install the 'Extensions' package as that includes the dependent fluent API package and provides extra convenience. More
 details on those extension/convenience methods is provided within the specific fluent API documentation.
 
