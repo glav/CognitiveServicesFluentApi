@@ -12,11 +12,6 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         {
             return context.ScoringEngine.EvaluateScore(responseItem.score);
         }
-        public static ScoreLevelBoundsDefinition Score(this KeyPhraseAnalysisContext context, double scoreValue)
-        {
-            return context.ScoringEngine.EvaluateScore(scoreValue);
-        }
-
 
         public static IEnumerable<KeyPhraseResultResponseItem> GetResults(this KeyPhraseAnalysisContext context)
         {
