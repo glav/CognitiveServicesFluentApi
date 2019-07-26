@@ -76,3 +76,35 @@ var faceId = firstResult.faceId;
 ## Extensions package
 Glav.CognitiveServices.FluentApi.Face.Extensions
 WIP
+### Image Analysis
+* IEnumerable<FaceDetectResponseItem> GetResults()
+* bool IsGender(GenderType gender)
+```c#
+var results = result.FaceDetectionAnalysis.GetResults();
+var isFemale = results.First().IsGender(GenderType.Female);
+```
+* bool IsGlassesType(GlassesType glasses)
+```c#
+var noGlasses = result.FaceDetectionAnalysis.First().IsGlassesType(GlassesType.NoGlasses);
+```
+* bool HasEyeMakeup()
+```c#
+var noGlasses = result.FaceDetectionAnalysis.First().HasEyeMakeup();
+```
+* bool HasLipMakeup()
+```c#
+var noGlasses = result.FaceDetectionAnalysis.First().HasLipMakeup();
+```
+
+* bool IsNoiseLevel(NoiseLevel level)
+```c#
+var noGlasses = result.FaceDetectionAnalysis.First().IsNoiseLevel(NoiseLevel.Low);
+```
+* bool IsExposureLevel(ExposureLevel level)
+```c#
+var noGlasses = result.FaceDetectionAnalysis.First().IsExposureLevel(ExposureLevel.GoodExposure);
+```
+* bool IsBlurLevel(BlurLevel level)
+```c#
+var noGlasses = result.FaceDetectionAnalysis.First().IsBlurLevel(BlurLevel.Low);
+```

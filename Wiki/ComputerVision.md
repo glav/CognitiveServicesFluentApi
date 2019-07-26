@@ -152,28 +152,34 @@ status query operation.
 Glav.CognitiveServices.FluentApi.ComputerVision.Extensions
 WIP
 ### Image Analysis
-* IsAdultContent()
+* bool IsAdultContent()
 ```c#
 var result = analysisResult.ImageAnalysis.IsAdultContent();
 ```
-* IsRacyContent()
+* bool IsRacyContent()
 ```c#
 var result = analysisResult.ImageAnalysis.IsRacyContent();
 ```
-* GetDescriptiveCaptions(double minimumConfidenceLevel)
+* string[] GetDescriptiveCaptions(double minimumConfidenceLevel)
 ```c#
 var result = analysisResult.ImageAnalysis.GetDescriptiveCaptions(0.1);
 ```
-* GetDescriptiveCaptions(string scoreLevelDescription)
+* string[] GetDescriptiveCaptions(string scoreLevelDescription)
 ```c#
 var result = analysisResult.ImageAnalysis.GetDescriptiveCaptions(DefaultScoreLevels.Positive);
 ```
-* GetTags(string scoreLevelDescription)
+* string[] GetTags(string scoreLevelDescription)
 ```c#
 var result = analysisResult.ImageAnalysis.GetTags(DefaultScoreLevels.Positive);
 ```
-* GetTagsEqualToOrAboveAConfidenceLevel(string scoreLevelDescription)
+* string[] GetTagsEqualToOrAboveAConfidenceLevel(string scoreLevelDescription)
 ```c#
 var result = analysisResult.ImageAnalysis.GetTagsEqualToOrAboveAConfidenceLevel(DefaultScoreLevels.SlightlyPositive);
 ```
+
+### Ocr Analysis
+tbd
+
+### Recognise Text Analysis
+tbd
 
