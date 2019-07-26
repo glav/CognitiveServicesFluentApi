@@ -1,4 +1,59 @@
 
+## Version: 0.9.1 [07/26/2019 18:41:07]
+### New Items
+* e4e6346 -Created separate extension packages to separate out extension/convenience methods from core API functionality
+### Full change list
+* c1e6fd9 Getting final extension method in for computer vision in Wiki
+* 7e0fdea Updated face and computer vision wiki
+* d3b3e43 Updated Wiki and a little more refactoring
+* 5299959 version bump to 0.9.1
+* d4441e6 Minor addition of method info
+* f64f6fb Slight refactoring
+* 4b1c40a Minor documentation update
+* 85353ac Minor update to Wiki formatting
+* f15ad24 Updates to the Wiki for new packages
+* 6b878a9 Moved the Face and TextAnalytics extensions into the new package projects
+* e03b570 Moved ComputerVision extensions into the new package project
+* e4e6346 NEW:Created separate extension packages to separate out extension/convenience methods from core API functionality
+* ec0d75e Merge branch 'master' of https://github.com/glav/CognitiveServicesFluentApi
+* 75f8bc0 Taking out manual intervention - just doesn't work with YAML pipelines
+* 4c6447d Trying manual intervention again in earlier stage
+* 5ce01a0 Trying manual intervention again
+* 84e936d Change to pipeline artifacts for build/release pipeline
+* e7ae2a5 Update tagging/release script to ensure tags are also pushed
+* d445ebc Using internal feed for now
+* 06f79e9 Using internal feed for now
+* d17c5ca Trying to get manual intervention to work again 3
+* 0f7e985 Trying to get manual intervention to work again
+* e191fde Trying to get manual intervention to work
+* f76e321 Updated manual intervention
+* 07ee56f Added manual step before deploy to nuget - as job no agent
+* b391865 Added manual step before deploy to nuget
+* e839b62 Adding basic deploy stage - WIP
+* 1175d8b Update azure-pipelines.yml for Azure Pipelines
+* 13d5183 Update azure-pipelines.yml for Azure Pipelines
+* 371c6f1 Update azure-pipelines.yml for Azure Pipelines
+* 644a28e Update azure-pipelines.yml for Azure Pipelines
+* 0760622 Simple Job text change
+* 48ec3ab Merge branch 'master' of https://github.com/glav/CognitiveServicesFluentApi
+* 8f32d52 Modified test to suit to results from updated service
+* 8da15fb Attempt to fix parsing issue 4
+* 08b0469 Attempt to fix sonarqube parsing issue 3
+* 74227f0 Attempt to fix sonarqube parsing issue 2
+* 2162704 Attempt to fix sonarqube parsing issue
+* 45a93d5 Attempt ti fix sonarqube parsing issue
+* 14235a4 Removed API keys - stoopid
+* 7ff1b7f Update azure-pipelines.yml for Azure Pipelines
+* 5dfffde Adding back build config
+* 482092f Move Project board link to bottom of doc
+* 6fae7b9 Added link to Azure DevOps project board
+* 93093fb Update azure-pipelines.yml for Azure Pipelines
+* f78fbbd Added variables/api keys
+* c0c635b Update azure-pipelines.yml for Azure Pipelines
+* 7e79835 Update azure-pipelines.yml for Azure Pipelines
+* bbcaef4 Set up CI with Azure Pipelines
+* b581d7c Fixing some code smells
+
 ## Version: 0.9.0 [01/22/2019 09:38:47]
 ### New Items
 * a5512c0 -Completely removing Emotion from Wiki, remaining enumerations and tests
