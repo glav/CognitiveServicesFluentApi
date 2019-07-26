@@ -178,8 +178,19 @@ var result = analysisResult.ImageAnalysis.GetTagsEqualToOrAboveAConfidenceLevel(
 ```
 
 ### Ocr Analysis
-tbd
+* IEnumerable<string> GetAllWords()
+```c#
+var words = result.OcrAnalysis.GetAllWords();
+```
+* SupportedLanguageItem LanguageDetected()
+```c#
+var lang = result.OcrAnalysis.LanguageDetected();
+```
 
 ### Recognise Text Analysis
-tbd
+* IEnumerable<string> GetAllRecognisedText()
+```c#
+var analysisResult = await result.WaitForOperationToCompleteAsync();
+var allText = analysisResult.First().GetAllRecognisedText();
+```
 
