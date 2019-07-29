@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Glav.CognitiveServices.FluentApi.TextAnalytic\Glav.CognitiveServices.FluentApi.TextAnalytic.csproj" />
+    <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.TextAnalytic\Glav.CognitiveServices.FluentApi.TextAnalytic.csproj" />
   </ItemGroup>
 
 </Project>

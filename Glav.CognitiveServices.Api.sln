@@ -40,11 +40,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.Flue
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{8EFB8126-326B-43D6-A8CE-D3A86D978C3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerVision.Extensions", "Extensions\ComputerVision.Extensions\ComputerVision.Extensions.csproj", "{081D7DB7-D24D-4FD0-9114-54D7C21537A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerVision.Extensions", "Extensions\ComputerVision.Extensions\ComputerVision.Extensions.csproj", "{081D7DB7-D24D-4FD0-9114-54D7C21537A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Face.Extensions", "Extensions\Face.Extensions\Face.Extensions.csproj", "{CBCE9271-FF30-442E-8476-7A54A3186312}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Face.Extensions", "Extensions\Face.Extensions\Face.Extensions.csproj", "{CBCE9271-FF30-442E-8476-7A54A3186312}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextAnalytic.Extensions", "Extensions\TextAnalytic.Extensions\TextAnalytic.Extensions\TextAnalytic.Extensions.csproj", "{A648B66A-3296-4581-8AEB-2A5D9E69286A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextAnalytic.Extensions", "Extensions\TextAnalytic.Extensions\TextAnalytic.Extensions.csproj", "{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -152,18 +152,18 @@ Global
 		{CBCE9271-FF30-442E-8476-7A54A3186312}.Release|x64.Build.0 = Release|Any CPU
 		{CBCE9271-FF30-442E-8476-7A54A3186312}.Release|x86.ActiveCfg = Release|Any CPU
 		{CBCE9271-FF30-442E-8476-7A54A3186312}.Release|x86.Build.0 = Release|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Debug|x64.Build.0 = Debug|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Debug|x86.Build.0 = Debug|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Release|x64.ActiveCfg = Release|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Release|x64.Build.0 = Release|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Release|x86.ActiveCfg = Release|Any CPU
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A}.Release|x86.Build.0 = Release|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Debug|x64.Build.0 = Debug|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Debug|x86.Build.0 = Debug|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Release|x64.ActiveCfg = Release|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Release|x64.Build.0 = Release|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Release|x86.ActiveCfg = Release|Any CPU
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -173,7 +173,7 @@ Global
 		{0049C04C-35EB-4261-9ADE-A808D793F20B} = {74E950BA-80F3-495D-B089-A0286FBD8DDC}
 		{081D7DB7-D24D-4FD0-9114-54D7C21537A9} = {8EFB8126-326B-43D6-A8CE-D3A86D978C3A}
 		{CBCE9271-FF30-442E-8476-7A54A3186312} = {8EFB8126-326B-43D6-A8CE-D3A86D978C3A}
-		{A648B66A-3296-4581-8AEB-2A5D9E69286A} = {8EFB8126-326B-43D6-A8CE-D3A86D978C3A}
+		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4} = {8EFB8126-326B-43D6-A8CE-D3A86D978C3A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BFC44EA-8668-4141-B51B-8ABA808EF0F3}

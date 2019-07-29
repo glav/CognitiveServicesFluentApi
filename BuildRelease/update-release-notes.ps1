@@ -47,7 +47,12 @@ function addToFile($heading, $content)
 }
 
 #Create the release notes file if does not already exist
-createIfNotExist
+try {
+  createIfNotExist
+} catch 
+{
+  exit 1;
+}
 
 #Using the git commit history, extract out any commits with NEW: and BUGFIX: as the commit message
 $newChanges = extractLines "NEW:"
