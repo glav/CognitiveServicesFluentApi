@@ -57,6 +57,19 @@ TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKe
 TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.WestUs)
     .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors);
 ```
+#### .UsingMaximumRequestRetries(int maxRetries)
+* Extends: `ConfigurationSettings`
+* Returns: `ConfigurationSettings`
+* Description: Sets the number of retries that are performed if a request rate limit has been exceeded. Depending on the 
+pricing tier, request rate limits may be exceeded, particulary if using the free tier which has small request limits. When the 
+request rate has been exceeded, the response will contain the time to wait before issuing anothe request. Assuming the maximum number
+of retries is greater than 1, then the amount of time is waited, then another request is issued. If the maximum number of retry requests
+is exceeded, then the process is abandoned. The default number of retries is 3.
+> Example usage:
+``` c#
+TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.WestUs)
+    .UsingMaximumRequestRetries(4);
+```
 
 #### .UsingCustomGlobalScoringEngine(IScoreEvaluationEngine)
 * Extends: `ConfigurationSettings`

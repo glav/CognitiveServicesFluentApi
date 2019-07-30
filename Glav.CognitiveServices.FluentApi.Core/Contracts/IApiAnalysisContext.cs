@@ -22,7 +22,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
             ScoringEngine = scoringEngine;
         }
 
-        public abstract ApiActionType AnalysisType { get; }
+        public abstract ApiActionDefinition AnalysisType { get; }
         public virtual ApiActionDataCollection AnalysisInput { get; protected set; }
 
         /// <summary>

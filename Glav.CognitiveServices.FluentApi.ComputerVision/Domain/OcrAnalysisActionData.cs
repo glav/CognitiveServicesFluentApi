@@ -51,7 +51,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         public bool DetectOrientation{ get; private set; }
         public SupportedLanguageType Language { get; private set; }
 
-        public ApiActionType ApiType => ApiActionType.ComputerVisionOcrAnalysis;
+        public ApiActionDefinition ApiDefintition => ComputerVisionApiOperations.OcrAnalysis;
 
         public long Id { get; private set; }
 
@@ -68,6 +68,12 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
             }
             return string.Format("{{\"url\":\"{0}\"}}", ImageUriToAnalyse.AbsoluteUri);
         }
+
+        public string ToEndUriFragment()
+        {
+            return null;
+        }
+
 
         public string ToUrlQueryParameters()
         {

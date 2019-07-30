@@ -19,7 +19,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 
         public static TextAnalyticAnalysisSettings AddSentimentAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
-            return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsSentiment);
+            return apiAnalysis.AddTextForAnalysis(textToAnalyse, TextAnalyticApiOperations.SentimentAnalysis);
         }
 
         public static TextAnalyticAnalysisSettings AddSentimentAnalysisSplitIntoSentences(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
@@ -27,14 +27,14 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             var sentences = textToAnalyse.SplitTextIntoSentences();
             sentences.ToList().ForEach(s =>
             {
-                apiAnalysis.AddTextForAnalysis(s, ApiActionType.TextAnalyticsSentiment);
+                apiAnalysis.AddTextForAnalysis(s, TextAnalyticApiOperations.SentimentAnalysis);
             });
             return apiAnalysis;
         }
 
         public static TextAnalyticAnalysisSettings AddKeyPhraseAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
-            return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsKeyphrases);
+            return apiAnalysis.AddTextForAnalysis(textToAnalyse, TextAnalyticApiOperations.KeyPhraseAnalysis);
         }
 
         public static TextAnalyticAnalysisSettings AddKeyPhraseAnalysisSplitIntoSentences(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
@@ -42,18 +42,18 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             var sentences = textToAnalyse.SplitTextIntoSentences();
             sentences.ToList().ForEach(s =>
             {
-                apiAnalysis.AddTextForAnalysis(s, ApiActionType.TextAnalyticsKeyphrases);
+                apiAnalysis.AddTextForAnalysis(s, TextAnalyticApiOperations.KeyPhraseAnalysis);
             });
             return apiAnalysis;
         }
 
         public static TextAnalyticAnalysisSettings AddLanguageAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
-            return apiAnalysis.AddTextForAnalysis(textToAnalyse, ApiActionType.TextAnalyticsLanguages);
+            return apiAnalysis.AddTextForAnalysis(textToAnalyse, TextAnalyticApiOperations.LanguageAnalysis);
         }
 
 
-        private static TextAnalyticAnalysisSettings AddTextForAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse, ApiActionType actionType)
+        private static TextAnalyticAnalysisSettings AddTextForAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse, ApiActionDefinition actionType)
         {
             var actionData = apiAnalysis.GetOrCreateActionDataInstance<TextAnalyticActionData>(actionType);
             actionData.Add(actionType, textToAnalyse);

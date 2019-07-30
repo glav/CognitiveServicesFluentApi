@@ -1,5 +1,6 @@
 ﻿using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
 using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Communication;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Core.Operations;
 using System;
@@ -35,31 +36,35 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 
         }
 
-        public void AddResult(ImageAnalysisResult result)
+        public void AddImageAnalysisResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (ImageAnalysis == null)
             {
-                throw new ArgumentNullException("Cannot add a result without first setting the result context");
+                ImageAnalysis = new ImageAnalysisContext(actionData, new ImageAnalysisResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
             }
-            ImageAnalysis.AnalysisResults.Add(result);
+            ImageAnalysis.AnalysisResults.Add(new ImageAnalysisResult(commsResult));
+
         }
 
-        public void AddResult(OcrAnalysisResult result)
+        public void AddOcrAnalysisResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (OcrAnalysis == null)
             {
-                throw new ArgumentNullException("Cannot add a result without first setting the result context");
+                OcrAnalysis = new OcrAnalysisContext(actionData, new OcrAnalysisResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
             }
-            OcrAnalysis.AnalysisResults.Add(result);
+            OcrAnalysis.AnalysisResults.Add(new OcrAnalysisResult(commsResult));
         }
 
-        public void AddResult(RecognizeTextAnalysisResult result)
+        public void AddRecognizeTextResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (RecognizeTextAnalysis == null)
             {
-                throw new ArgumentNullException("Cannot add a result without first setting the result context");
+                RecognizeTextAnalysis = new RecognizeTextAnalysisContext(actionData, new RecognizeTextAnalysisResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                return;
             }
-            RecognizeTextAnalysis.AnalysisResults.Add(result);
+            RecognizeTextAnalysis.AnalysisResults.Add(new RecognizeTextAnalysisResult(commsResult));
         }
     }
 }

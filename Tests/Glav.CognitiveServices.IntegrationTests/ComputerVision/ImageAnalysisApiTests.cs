@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 {
     public class ImageAnalysisApiTests
     {
-        private TestDataHelper _testDataHelper = new TestDataHelper();
+        private readonly  TestDataHelper _testDataHelper = new TestDataHelper();
         [Fact]
         public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysis()
         {

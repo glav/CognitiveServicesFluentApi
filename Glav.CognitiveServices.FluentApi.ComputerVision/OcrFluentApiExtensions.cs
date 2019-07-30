@@ -15,7 +15,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                 ImageAnalysisDetails imageDetails = ImageAnalysisDetails.None,
                 SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<ImageAnalysisActionData>(ApiActionType.ComputerVisionImageAnalysis);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<ImageAnalysisActionData>(ComputerVisionApiOperations.ImageAnalysis);
             actionData.Add(new Uri(url),visualFeatures, imageDetails,language);
             return apiAnalysis;
         }
@@ -34,7 +34,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         ImageAnalysisDetails imageDetails = ImageAnalysisDetails.None,
         SupportedLanguageType language = SupportedLanguageType.Unspecified)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<ImageAnalysisActionData>(ApiActionType.ComputerVisionImageAnalysis);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<ImageAnalysisActionData>(ComputerVisionApiOperations.ImageAnalysis);
             actionData.Add(imageData, visualFeatures, imageDetails, language);
             return apiAnalysis;
         }

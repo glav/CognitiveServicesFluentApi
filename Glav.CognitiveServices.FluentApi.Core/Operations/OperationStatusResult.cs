@@ -1,15 +1,15 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
+using Glav.CognitiveServices.FluentApi.Core.Parsing;
 using System;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Operations
 {
-    public sealed class OperationStatusResult : BaseResponseResult<OperationStatusResultResponseRoot>
+    public sealed class OperationStatusResult : BaseApiResponse<OperationStatusResultResponseRoot>
     {
-        public OperationStatusResult(ICommunicationResult apiCallResult)
+        public OperationStatusResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
             OperationState = OperationStateType.NotStarted;
-            ApiCallResult = apiCallResult;
             AddResultToCollection();
         }
 
@@ -19,7 +19,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Operations
         {
             if (ApiCallResult == null)
             {
-                ResponseData = new OperationStatusResultResponseRoot { status=OperationStatusResponseMessages.StatusFailed,  message = "No data returned." };
+                ResponseData = new OperationStatusResultResponseRoot { status=OperationStatusResponseMessages.StatusFailed, message = StandardResponseCodes.NoDataReturnedMessage };
                 ActionSubmittedSuccessfully = false;
                 return;
             }

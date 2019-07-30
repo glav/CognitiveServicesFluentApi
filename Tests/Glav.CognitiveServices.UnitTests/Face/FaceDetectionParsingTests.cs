@@ -38,16 +38,14 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         {
             var input = _helper.GetFileDataEmbeddedInAssembly("FaceDetectionResponse.json");
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
-                    .AddConsoleDiagnosticLogging()
+                    .AddConsoleAndTraceLogging()
                     .UsingCustomCommunication(new MockCommsEngine(new MockCommsResult(input)))
                     .WithFaceAnalysisActions()
                     .AddUrlForFaceDetection("http://whatever",FaceDetectionAttributes.Age)
                     .AnalyseAllAsync();
 
             Assert.NotNull(result);
-            Assert.NotNull(result.FaceDetectionAnalysis);
-            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult);
-            Assert.True(result.FaceDetectionAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            result.FaceDetectionAnalysis.AssertAnalysisContextValidity();
             Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult.ResponseData);
 
             var resultData = result.FaceDetectionAnalysis.AnalysisResult.ResponseData;
@@ -67,9 +65,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                     .AnalyseAllAsync();
 
             Assert.NotNull(result);
-            Assert.NotNull(result.FaceDetectionAnalysis);
-            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult);
-            Assert.True(result.FaceDetectionAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            result.FaceDetectionAnalysis.AssertAnalysisContextValidity();
             Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult.ResponseData);
 
             var resultData = result.FaceDetectionAnalysis.AnalysisResult.ResponseData;
@@ -105,6 +101,8 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.Equal(HairColor.Brown, "brOwn".ToHairColor());
             Assert.Equal(HairColor.Unknown, "blur and green".ToHairColor());
         }
+
+
 
     }
 }

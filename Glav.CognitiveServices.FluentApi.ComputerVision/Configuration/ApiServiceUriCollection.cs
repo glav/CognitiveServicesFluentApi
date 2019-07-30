@@ -1,4 +1,5 @@
-﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
+﻿using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
 {
@@ -6,9 +7,9 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
     {
         public ApiServiceUriCollection()
         {
-            Services.Add(ApiActionType.ComputerVisionImageAnalysis, new ImageAnalysisServiceConfig());
-            Services.Add(ApiActionType.ComputerVisionOcrAnalysis, new OcrAnalysisServiceConfig());
-            Services.Add(ApiActionType.ComputerVisionRecognizeText, new RecognizeTextAnalysisServiceConfig());
+            Services.Add(ComputerVisionApiOperations.ImageAnalysis.Name, new ImageAnalysisServiceConfig());
+            Services.Add(ComputerVisionApiOperations.OcrAnalysis.Name, new OcrAnalysisServiceConfig());
+            Services.Add(ComputerVisionApiOperations.RecognizeText.Name, new RecognizeTextAnalysisServiceConfig());
         }
     }
 }

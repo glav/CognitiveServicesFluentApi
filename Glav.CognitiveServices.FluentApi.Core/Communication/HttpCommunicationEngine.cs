@@ -1,5 +1,7 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -22,49 +24,111 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             return client;
         }
 
-        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null)
+        /// <summary>
+        /// The main method of communicating with the cognitive service APIs with support for POST, PUT and GET
+        /// </summary>
+        /// <param name="apiActionType"></param>
+        /// <param name="content"></param>
+        /// <param name="urlQueryParameters"></param>
+        /// <returns></returns>
+        public async Task<ICommunicationResult> CallServiceAsync(IActionDataItem actionItem)
         {
-            var content = new ByteArrayContent(payload);
-            content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
-            return await PostToServiceAsync(apiActionType, content, urlQueryParameters);
-        }
-        public async Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
-        {
-            var content = new StringContent(payload,System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
-            return await PostToServiceAsync(apiActionType, content, urlQueryParameters);
-        }
-        private async Task<ICommunicationResult> PostToServiceAsync(ApiActionType apiActionType, ByteArrayContent content, string urlQueryParameters)
-        {
-            _configurationSettings.DiagnosticLogger.LogInfo($"Performing async service call for {apiActionType}", "HttpCommunicationEngine");
-
-            var svcConfig = _configurationSettings.ServiceUris.GetServiceConfig(apiActionType);
-            var uri = string.Format("{0}{1}{2}", _configurationSettings.BaseUrl, svcConfig.ServiceUri,
-                            string.IsNullOrWhiteSpace(urlQueryParameters) ? string.Empty : $"?{urlQueryParameters}");
-
-            try
+            await _configurationSettings.DiagnosticLogger.LogInfoAsync($"Performing async service call for {actionItem.ApiDefintition}", "HttpCommunicationEngine");
+            ByteArrayContent content = null;
+            if (actionItem.IsBinaryData)
             {
-                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[svcConfig.ApiCategory]))
-                {
-                    var httpResult = await httpClient.PostAsync(uri, content).ConfigureAwait(continueOnCapturedContext: false);
-                    _configurationSettings.DiagnosticLogger.LogInfo($"Async service call for {apiActionType} completed ok.", "HttpCommunicationEngine");
-                    return await CommunicationResult.ParseResult(httpResult);
-                }
+                content = new ByteArrayContent(actionItem.ToBinary());
+                content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
             }
-            catch (Exception ex)
+            else
             {
-                _configurationSettings.DiagnosticLogger.LogError(ex, "HttpCommunicationEngine");
-                return CommunicationResult.Fail(ex.Message);
+                // Only setup content if the operation is NOT a Http GET
+                content = actionItem.ApiDefintition.Method != HttpMethod.Get ?
+                    new StringContent(actionItem.ToString(), System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson) :
+                    null;
             }
 
+            var url = _configurationSettings.GetAbsoluteUrlForApiAction(actionItem);
+            return await CallServiceInternal(url,actionItem.ApiDefintition.Method, content,actionItem.ApiDefintition.Category);
+
         }
-        public async Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory)
+
+        private async Task<ICommunicationResult> CallServiceInternal(string url, HttpMethod apiHttpMethod, ByteArrayContent content, string apiCategory)
         {
             try
             {
+                ICommunicationResult commsResult = null;
+
                 using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[apiCategory]))
                 {
+                    int retryCount = 0;
+                    while (retryCount < _configurationSettings.MaxNumberOfRequestRetries)
+                    {
+                        HttpResponseMessage httpResult = null;
+                        if (apiHttpMethod == HttpMethod.Put)
+                        {
+                            httpResult = await httpClient.PutAsync(url, content).ConfigureAwait(continueOnCapturedContext: false);
+
+                        }
+                        if (apiHttpMethod == HttpMethod.Post)
+                        {
+                            httpResult = await httpClient.PostAsync(url, content).ConfigureAwait(continueOnCapturedContext: false);
+                        }
+                        if (apiHttpMethod == HttpMethod.Get)
+                        {
+                            httpResult = await httpClient.GetAsync(url).ConfigureAwait(continueOnCapturedContext: false);
+                        }
+                        if (apiHttpMethod == HttpMethod.Options || apiHttpMethod == HttpMethod.Delete)
+                        {
+                            httpResult = await httpClient.DeleteAsync(url).ConfigureAwait(continueOnCapturedContext: false);
+                            //throw new MissingMethodException($"HTTP Method {apiHttpMethod} not currently supported.");
+                        }
+                        commsResult = await CommunicationResult.ParseResultAsync(httpResult);
+                        if (!commsResult.Ratelimit.Exceeded)
+                        {
+                            return commsResult;
+                        }
+                        retryCount++;
+                        await _configurationSettings.DiagnosticLogger.LogWarningAsync($"Retrying operation, waiting {commsResult.Ratelimit.RetryDelayInSeconds} seconds ");
+                        await System.Threading.Tasks.Task.Delay(((int)commsResult.Ratelimit.RetryDelayInSeconds * 1000));
+                    }
+                    // If we get here, then we have tried too many times so just return the last result
+                    await _configurationSettings.DiagnosticLogger.LogErrorAsync($"Too many retries (#{retryCount}), aborting.");
+                    return commsResult;
+                }
+            }
+            catch (Exception ex)
+            {
+                await _configurationSettings.DiagnosticLogger.LogErrorAsync(ex, "HttpCommunicationEngine");
+                return CommunicationResult.Fail(ex.Message);
+            }
+        }
+
+        public async Task<ICommunicationResult> CallBatchServiceAsync(ApiActionDataCollection actionItemCollection)
+        {
+            var urlQueryParams = actionItemCollection.ToUrlQueryParameters();
+            var payload = actionItemCollection.ToString();
+            var firstAction = actionItemCollection.GetAllItems().First();
+            var url = _configurationSettings.GetAbsoluteUrlForApiAction(firstAction);
+            var content = new StringContent(actionItemCollection.ToString(), System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
+            return await CallServiceInternal(url, firstAction.ApiDefintition.Method, content, firstAction.ApiDefintition.Category);
+        }
+
+        /// <summary>
+        /// This method is provided mostly to facilitate the OperationStatus call which only provides a simple API
+        /// endpoint in response to one of the main cognitive service calls to check on an operations status.
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public async Task<ICommunicationResult> ServiceGetAsync(string uri, string category)
+        {
+            try
+            {
+                using (var httpClient = HttpCommunicationEngine.CreateHttpClient(_configurationSettings.ApiKeys[category]))
+                {
                     var httpResult = await httpClient.GetAsync(uri).ConfigureAwait(continueOnCapturedContext: false);
-                    return await CommunicationResult.ParseResult(httpResult);
+                    return await CommunicationResult.ParseResultAsync(httpResult);
                 }
             }
             catch (Exception ex)
@@ -72,5 +136,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                 return CommunicationResult.Fail(ex.Message);
             }
         }
+
+        public override string ToString()
+        {
+            return "HttpCommunicationEngine";
+        }
+
     }
 }

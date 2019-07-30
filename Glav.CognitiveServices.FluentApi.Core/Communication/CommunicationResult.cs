@@ -43,6 +43,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
             {
                 LocationUri = new Uri(_httpResponse.Headers.GetValues("Location").First());
             }
+            Ratelimit = new RequestRateLimitStatus(_httpResponse);
         }
 
         public Guid RequestId { get; private set; }
@@ -57,17 +58,41 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
 
         public string Data { get; private set; }
 
+        public RequestRateLimitStatus Ratelimit { get; private set; }
+
         public static CommunicationResult Fail(string errorMessage)
         {
             return new CommunicationResult { Successfull = false, ErrorMessage = errorMessage };
         }
 
-        public static async Task<CommunicationResult> ParseResult(HttpResponseMessage httpResponse)
+        public static async Task<CommunicationResult> ParseResultAsync(HttpResponseMessage httpResponse)
         {
             var result = new CommunicationResult(httpResponse);
             await result.AnalyseResponse();
             return result;
         }
 
+    }
+
+    public class RequestRateLimitStatus
+    {
+        public RequestRateLimitStatus()
+        {
+
+        }
+        public RequestRateLimitStatus(HttpResponseMessage httpResponse)
+        {
+            if (httpResponse == null || (int)httpResponse.StatusCode != 429)
+            {
+                return;
+            }
+            Exceeded = true;
+            RetryDelayInSeconds = httpResponse.Headers.RetryAfter.Delta.HasValue
+                                    ? (long)httpResponse.Headers.RetryAfter.Delta.Value.TotalSeconds 
+                                    : 0;
+        }
+
+        public bool Exceeded { get; }
+        public long RetryDelayInSeconds { get; }
     }
 }

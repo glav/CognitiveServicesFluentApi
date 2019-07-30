@@ -6,7 +6,7 @@
         public FaceAttributesResponseItem faceAttributes { get; set; }
 
         public FaceLandmarksResponseItem faceLandmarks { get; set; }
-        public FaceRectangleResponseItem faceRectangle { get; set; }
+        public FaceRectangle faceRectangle { get; set; }
     }
 
 }

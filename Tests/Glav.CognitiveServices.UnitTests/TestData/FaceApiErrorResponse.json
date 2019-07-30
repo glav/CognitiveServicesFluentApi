@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "BadArgument",
+    "message": "Large person group ID is invalid."
+  }
+}

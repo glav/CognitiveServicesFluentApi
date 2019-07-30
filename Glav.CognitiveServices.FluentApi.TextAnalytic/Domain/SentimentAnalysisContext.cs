@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             : base(actionData, analysisResult, scoringEngine)
         {
         }
-        public override ApiActionType AnalysisType { get { return ApiActionType.TextAnalyticsSentiment; } }
+        public override ApiActionDefinition AnalysisType { get { return TextAnalyticApiOperations.SentimentAnalysis; } }
 
     }
 }

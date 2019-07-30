@@ -4,6 +4,7 @@ using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System;
 using System.Collections.Generic;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
+using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
@@ -11,7 +12,7 @@ namespace Glav.CognitiveServices.FluentApi.Core
     {
         public CoreAnalysisSettings(ConfigurationSettings settings, ICommunicationEngine communicationEngine)
         {
-            ActionsToPerform = new Dictionary<ApiActionType, ApiActionDataCollection>();
+            ActionsToPerform = new Dictionary<string, ApiActionDataCollection>();
             ConfigurationSettings = settings;
             CommunicationEngine = communicationEngine;
         }
@@ -41,18 +42,33 @@ namespace Glav.CognitiveServices.FluentApi.Core
         }
 
         public ConfigurationSettings ConfigurationSettings { get; private set; }
-        public Dictionary<ApiActionType, ApiActionDataCollection> ActionsToPerform { get; private set; }
+        public Dictionary<string, ApiActionDataCollection> ActionsToPerform { get; private set; }
         public ICommunicationEngine CommunicationEngine { get; private set; }
 
-        public T GetOrCreateActionDataInstance<T>(ApiActionType actionType) where T : ApiActionDataCollection, new()
+        public T GetOrCreateActionDataInstance<T>(ApiActionDefinition actionType) where T : ApiActionDataCollection, new()
         {
-            if (!ActionsToPerform.ContainsKey(actionType))
+            if (!ActionsToPerform.ContainsKey(actionType.Name))
             {
                 var data = new T();
-                ActionsToPerform.Add(actionType, data);
+                ActionsToPerform.Add(actionType.Name, data);
             }
 
-            return ActionsToPerform[actionType] as T;
+            return ActionsToPerform[actionType.Name] as T;
+        }
+
+        public override string ToString()
+        {
+            var buffer = new StringBuilder();
+            buffer.AppendLine($"Communications: {this.CommunicationEngine.ToString()}");
+            buffer.Append(ConfigurationSettings.ToString());
+            buffer.AppendLine("Actions to perform:");
+            foreach (var action in ActionsToPerform)
+            {
+                buffer.AppendLine($"\t{action.Key}");
+            }
+
+            return buffer.ToString();
+
         }
 
     }

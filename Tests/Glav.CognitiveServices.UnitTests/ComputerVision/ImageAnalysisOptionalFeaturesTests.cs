@@ -1,6 +1,7 @@
 using Xunit;
 using Glav.CognitiveServices.FluentApi.ComputerVision;
 using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
+using Glav.CognitiveServices.FluentApi.ComputerVision.Configuration;
 
 namespace Glav.CognitiveServices.UnitTests.ComputerVision
 {
@@ -25,6 +26,8 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
         [Fact]
         public void UrlArgumentsForAllOptionsShouldBeValidQueryParameters()
         {
+            SupportedLanguages.Setup();
+
             var actionData = new ImageAnalysisActionDataItem(1,new System.Uri("https://localhost"), ImageAnalysisVisualFeatures.Categories | ImageAnalysisVisualFeatures.Faces, ImageAnalysisDetails.Celebrities, FluentApi.Core.SupportedLanguageType.English);
             var actual = actionData.ToUrlQueryParameters();
             var expected = "visualFeatures=Categories,Faces&details=Celebrities&language=en";

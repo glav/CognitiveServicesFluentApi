@@ -119,8 +119,7 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
-            Assert.NotNull(result.OcrAnalysis);
-            Assert.NotNull(result.OcrAnalysis.AnalysisResults);
+            result.OcrAnalysis.AssertAnalysisContextValidity();
             Assert.NotNull(result.OcrAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.OcrAnalysis.AnalysisResult.ResponseData.regions);
 

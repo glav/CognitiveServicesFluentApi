@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
 {
     public interface IDiagnosticLogger
     {
-        void LogInfo(string message, string topic = null);
-        void LogWarning(string message, string topic = null);
-        void LogError(string message, string topic = null);
-        void LogError(Exception ex, string topic = null);
+        Task LogInfoAsync(string message, string topic = null);
+        Task LogWarningAsync(string message, string topic = null);
+        Task LogErrorAsync(string message, string topic = null);
+        Task LogErrorAsync(Exception ex, string topic = null);
+
+        void SetLogLevel(LoggingLevel logLevel);
     }
 }

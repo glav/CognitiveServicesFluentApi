@@ -12,7 +12,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public static ImageAnalysisSettings AddUrlForRecognizeTextAnalysis(this ImageAnalysisSettings apiAnalysis, string url,
                 RecognizeTextMode mode)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<RecognizeTextAnalysisActionData>(ApiActionType.ComputerVisionRecognizeText);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<RecognizeTextAnalysisActionData>(ComputerVisionApiOperations.RecognizeText);
             actionData.Add(new Uri(url),mode);
             return apiAnalysis;
         }
@@ -27,7 +27,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public static ImageAnalysisSettings AddFileForRecognizeTextAnalysis(this ImageAnalysisSettings apiAnalysis, byte[] imageData,
                 RecognizeTextMode mode)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<RecognizeTextAnalysisActionData>(ApiActionType.ComputerVisionRecognizeText);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<RecognizeTextAnalysisActionData>(ComputerVisionApiOperations.RecognizeText);
             actionData.Add(imageData,mode);
             return apiAnalysis;
         }
