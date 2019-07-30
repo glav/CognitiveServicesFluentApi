@@ -113,6 +113,37 @@ The supported person groups and face training are:
 * GetFaceForPersonGroupPerson
 * DeleteFaceForPersonGroupPerson
 
+## People/Person Group management
+You can create, delete, and list groups which can contain a person or persons. In addition you can retrieve a single group and its related metadata.
+```c#
+var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
+    .AddConsoleDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithFaceAnalysisActions()
+    .CreateLargePersonGroup("123","unittest","unittest-data")
+    .AnalyseAllAsync();
+```
+
+## Person Face association and training
+The supported person groups and face training are:
+### LargePersonGroup
+* CreateLargePersonGroup
+* GetLargePersonGroup
+* ListLargePersonGroups
+* DeleteLargePersonGroup
+* StartTrainingLargePersonGroup
+* CheckTrainingStatusLargePersonGroup
+
+### LargePersonGroupPerson
+* CreateLargePersonGroupPerson
+* GetLargePersonGroupPerson
+* ListLargePersonGroupPersons
+* DeleteLargePersonGroupPerson
+* AddFaceToPersonGroupPerson
+* GetFaceForPersonGroupPerson
+* DeleteFaceForPersonGroupPerson
+
+
 ## Extensions package
 Glav.CognitiveServices.FluentApi.Face.Extensions
 WIP
