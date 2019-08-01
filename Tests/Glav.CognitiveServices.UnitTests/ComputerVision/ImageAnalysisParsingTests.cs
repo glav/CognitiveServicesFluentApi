@@ -148,5 +148,27 @@ namespace Glav.CognitiveServices.UnitTests.ComputerVision
             Assert.Equal(4, result.Length);
 
         }
+
+        [Fact]
+        public async Task ShouldReflectErrorCOnditionInVisionResult()
+        {
+            var commsResult = new MockCommsResult("{'requestId':'1','code':'boom!'}", System.Net.HttpStatusCode.BadRequest);
+            var commsEngine = new MockCommsEngine(commsResult);
+
+            var analysisResult = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("123", FluentApi.Core.LocationKeyIdentifier.AustraliaEast)
+                .UsingCustomCommunication(commsEngine)
+                .WithComputerVisionAnalysisActions()
+                .AddUrlForImageAnalysis("http://someurl/that/wont/get/called")
+                .AnalyseAllAsync();
+
+            Assert.NotNull(analysisResult);
+            Assert.False(analysisResult.ImageAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
+            Assert.NotNull(analysisResult.ImageAnalysis.AnalysisResult.ResponseData);
+            Assert.NotNull(analysisResult.ImageAnalysis.AnalysisResult.ResponseData.error);
+            Assert.Equal("1",analysisResult.ImageAnalysis.AnalysisResult.ResponseData.error.requestId);
+            Assert.Equal("boom!",analysisResult.ImageAnalysis.AnalysisResult.ResponseData.error.code);
+
+        }
+
     }
 }

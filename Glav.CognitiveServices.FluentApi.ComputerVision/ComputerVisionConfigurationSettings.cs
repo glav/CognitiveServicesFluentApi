@@ -1,13 +1,14 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.ComputerVision.Configuration;
+using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
     public class ComputerVisionConfigurationSettings : ConfigurationSettings
     {
         public ComputerVisionConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey) 
-                : base(ApiActionCategory.ComputerVision,apiKey,locationKey, new ApiServiceUriCollection())
+                : base(ComputerVisionApiOperations.Category,apiKey,locationKey, new ApiServiceUriCollection())
         {
         }
 
@@ -17,6 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 
         public static ComputerVisionConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey)
         {
+            SupportedLanguages.Setup();
             return new ComputerVisionConfigurationSettings(apiKey, locationKey);
         }
     }

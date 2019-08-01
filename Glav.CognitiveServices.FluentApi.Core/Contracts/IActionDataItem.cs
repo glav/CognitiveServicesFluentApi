@@ -8,8 +8,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
     public interface IActionDataItem
     {
         long Id { get;  }
-        ApiActionType ApiType { get; }
+        ApiActionDefinition ApiDefintition { get; }
         string ToUrlQueryParameters();
+        string ToEndUriFragment();
         bool IsBinaryData { get;  }
         byte[] ToBinary();
     }

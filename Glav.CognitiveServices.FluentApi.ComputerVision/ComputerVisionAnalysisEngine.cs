@@ -1,10 +1,10 @@
+using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
+using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Analysis;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System;
 using System.Threading.Tasks;
-using Glav.CognitiveServices.FluentApi.Core.Configuration;
-using Glav.CognitiveServices.FluentApi.Core;
-using Glav.CognitiveServices.FluentApi.ComputerVision.Domain;
-using Glav.CognitiveServices.FluentApi.Core.Operations;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
@@ -16,57 +16,36 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public override async Task<ComputerVisionAnalysisResults> AnalyseAllAsync()
         {
             var apiResults = new ComputerVisionAnalysisResults(AnalysisSettings);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionImageAnalysis).ConfigureAwait(continueOnCapturedContext: false);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionOcrAnalysis).ConfigureAwait(continueOnCapturedContext: false);
-            await AnalyseApiActionAsync(apiResults, ApiActionType.ComputerVisionRecognizeText).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, ComputerVisionApiOperations.ImageAnalysis).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, ComputerVisionApiOperations.OcrAnalysis).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, ComputerVisionApiOperations.RecognizeText).ConfigureAwait(continueOnCapturedContext: false);
             return apiResults;
 
         }
 
-        public override async Task AnalyseApiActionAsync(ComputerVisionAnalysisResults apiResults, ApiActionType apiAction)
+        public override async Task AnalyseApiActionAsync(ComputerVisionAnalysisResults apiResults, ApiActionDefinition apiAction)
         {
-            InitialiseContextForAction(apiAction, apiResults);
-
-            await base.AnalyseApiActionAsync(apiResults, apiAction, (actionData, commsResult) =>
+            await base.AnalyseApiActionAsync(apiAction, (actionData, commsResult) =>
               {
-                  switch (apiAction)
+                  if (apiAction == ComputerVisionApiOperations.ImageAnalysis)
                   {
-                      case ApiActionType.ComputerVisionImageAnalysis:
-                          apiResults.AddResult(new ImageAnalysisResult(commsResult));
-                          break;
-                      case ApiActionType.ComputerVisionOcrAnalysis:
-                          apiResults.AddResult(new OcrAnalysisResult(commsResult));
-                          break;
-                      case ApiActionType.ComputerVisionRecognizeText:
-                          apiResults.AddResult(new RecognizeTextAnalysisResult(commsResult));
-                          break;
-                      default:
-                          throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
+                      apiResults.AddImageAnalysisResult(actionData,commsResult);
+                      return;
                   }
+                  if (apiAction == ComputerVisionApiOperations.OcrAnalysis)
+                  {
+                      apiResults.AddOcrAnalysisResult(actionData,commsResult);
+                      return;
+                  }
+                  if (apiAction == ComputerVisionApiOperations.RecognizeText)
+                  {
+                      apiResults.AddRecognizeTextResult(actionData, commsResult);
+                      return;
+                  }
+                  throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
 
               }).ConfigureAwait(continueOnCapturedContext: false);
         }
 
-        private void InitialiseContextForAction(ApiActionType apiAction, ComputerVisionAnalysisResults apiResults)
-        {
-            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction) && apiResults.ImageAnalysis == null && apiAction == ApiActionType.ComputerVisionImageAnalysis)
-            {
-                // Get the collection of actions to perform for an API call
-                var actions = AnalysisSettings.ActionsToPerform[apiAction];
-                apiResults.SetImageResultContext(new ImageAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
-            }
-            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction) && apiResults.OcrAnalysis == null && apiAction == ApiActionType.ComputerVisionOcrAnalysis)
-            {
-                // Get the collection of actions to perform for an API call
-                var actions = AnalysisSettings.ActionsToPerform[apiAction];
-                apiResults.SetOcrResultContext(new OcrAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
-            }
-            if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction) && apiResults.RecognizeTextAnalysis == null && apiAction == ApiActionType.ComputerVisionRecognizeText)
-            {
-                // Get the collection of actions to perform for an API call
-                var actions = AnalysisSettings.ActionsToPerform[apiAction];
-                apiResults.SetRecognizeTextResultContext(new RecognizeTextAnalysisContext(actions, AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
-            }
-        }
     }
 }

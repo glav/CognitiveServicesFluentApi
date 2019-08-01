@@ -12,22 +12,21 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
     public class FaceDetectionApiTests
     {
         private TestDataHelper _testDataHelper = new TestDataHelper();
+
+
         [Fact]
         public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysisForUrlAnalysis()
         {
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-                .AddDebugDiagnosticLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .AddUrlForFaceDetection("http://www.scface.org/examples/001_frontal.jpg",FaceDetectionAttributes.Gender)
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
-            Assert.NotNull(result.FaceDetectionAnalysis);
-            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult);
-            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult.ApiCallResult);
-            Assert.NotNull(result.FaceDetectionAnalysis.AnalysisResult.ResponseData);
+            result.FaceDetectionAnalysis.AssertAnalysisContextValidity();
             Assert.True(result.FaceDetectionAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
             Assert.NotEmpty(result.FaceDetectionAnalysis.AnalysisResult.ResponseData.detectedFaces);
             Assert.Equal(1, result.FaceDetectionAnalysis.AnalysisResult.ResponseData.detectedFaces.Length);
@@ -42,7 +41,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-                .AddDebugDiagnosticLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .AddFileForFaceDetection(imageData, FaceDetectionAttributes.Gender | FaceDetectionAttributes.Age)
@@ -67,7 +66,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         {
             var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
-                .AddDebugDiagnosticLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .AddFileForFaceDetection(imageData, FaceDetectionAttributes.HeadPose | FaceDetectionAttributes.FacialHair |
@@ -89,7 +88,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         {
             var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
             var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
-                .AddDebugDiagnosticLogging()
+                .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
                 .AddFileForFaceDetection(imageData, FaceDetectionAttributes.Hair | FaceDetectionAttributes.MakeUp |

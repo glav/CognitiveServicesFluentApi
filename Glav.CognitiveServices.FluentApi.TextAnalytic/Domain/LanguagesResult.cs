@@ -1,49 +1,24 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
+using Glav.CognitiveServices.FluentApi.Core.Parsing;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.Parsing;
 using System;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public sealed class LanguagesResult : BaseResponseResult<LanguagesResultResponseRoot>
+    public sealed class LanguagesResult : BaseApiResponseWithStrategy<LanguagesResultResponseRoot, LanguagesResultResponseRoot, ApiErrorResponse>
     {
-        public LanguagesResult(ICommunicationResult apiCallResult)
+        public LanguagesResult(ICommunicationResult apiResult)
+            : base(apiResult, new TextAnalyticParsingStrategy<LanguagesResultResponseRoot, LanguagesResultResponseItem>())
         {
-            ApiCallResult = apiCallResult;
-            AddResultToCollection();
-        }
-
-        private void AddResultToCollection()
-        {
-            if (ApiCallResult == null)
+            ParseResponseData();
+            if (!ActionSubmittedSuccessfully)
             {
-                ResponseData = new LanguagesResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } };
-                ActionSubmittedSuccessfully = false;
+                ResponseData = new LanguagesResultResponseRoot { errors = new ApiErrorResponse[] { ParsingStrategy.ResponseError } };
                 return;
             }
-
-            try
-            {
-                ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LanguagesResultResponseRoot>(ApiCallResult.Data);
-                if (ResponseData == null || ResponseData.documents == null)
-                {
-                    var errors = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
-                    if (errors != null)
-                    {
-                        ResponseData = new LanguagesResultResponseRoot { errors = new ApiErrorResponse[] { errors } };
-                    }
-                    ActionSubmittedSuccessfully = false;
-                    return;
-                }
-                ActionSubmittedSuccessfully = true;
-            } catch (Exception ex)
-            {
-                ResponseData = new LanguagesResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = $"Error parsing results: {ex.Message}" } } };
-                ActionSubmittedSuccessfully = false;
-            }
+            ResponseData = ParsingStrategy.ResponseData;
         }
-
     }
-
-
-}
+ }

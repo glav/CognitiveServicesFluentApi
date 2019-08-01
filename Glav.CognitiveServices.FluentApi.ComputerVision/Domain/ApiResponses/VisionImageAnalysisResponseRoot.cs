@@ -13,7 +13,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
         public FaceResponseItem[] faces { get; set; }
         public ColorResponseItem color { get; set; }
         public ImageTypeResponseItem imageType { get; set; }
-        public ApiErrorResponse error { get; set; }
+        public RequestIdErrorResponse error { get; set; }
     }
 
 }

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
 {
     public class DiagnosticProxy : IDiagnosticLogger
     {
         private readonly List<IDiagnosticLogger> _loggers;
-        private readonly LoggingLevel _logLevel;
+        private LoggingLevel _logLevel;
 
         public DiagnosticProxy(IEnumerable<IDiagnosticLogger> loggers, LoggingLevel logLevel)
         {
@@ -16,36 +17,55 @@ namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
             _logLevel = logLevel;
         }
 
-        public void LogError(string message, string topic = null)
+        public void SetLogLevel(LoggingLevel logLevel)
+        {
+            _logLevel = logLevel;
+        }
+
+        public async Task LogErrorAsync(string message, string topic = null)
         {
             if ((int)_logLevel >= (int)LoggingLevel.ErrorsOnly)
             {
-                _loggers.ForEach(l => l.LogError(message, topic));
+                foreach (var logger in _loggers)
+                {
+                    await logger.LogErrorAsync(message, topic);
+                }
             }
         }
 
-        public void LogError(Exception ex, string topic = null)
+        public async Task LogErrorAsync(Exception ex, string topic = null)
         {
             if ((int)_logLevel >= (int)LoggingLevel.ErrorsOnly)
             {
-                _loggers.ForEach(l => l.LogError(ex, topic));
+                foreach (var logger in _loggers)
+                {
+                    await logger.LogErrorAsync(ex, topic);
+                }
             }
         }
 
-        public void LogInfo(string message, string topic = null)
+        public async Task LogInfoAsync(string message, string topic = null)
         {
             if ((int)_logLevel >= (int)LoggingLevel.Everything)
             {
-                _loggers.ForEach(l => l.LogInfo(message, topic));
+                foreach (var logger in _loggers)
+                {
+                    await logger.LogInfoAsync(message, topic);
+                }
             }
         }
 
-        public void LogWarning(string message, string topic = null)
+        public async Task LogWarningAsync(string message, string topic = null)
         {
             if ((int)_logLevel >= (int)LoggingLevel.WarningsAndErrors)
             {
-                _loggers.ForEach(l => l.LogWarning(message, topic));
+                foreach (var logger in _loggers)
+                {
+                    await logger.LogWarningAsync(message, topic);
+                }
             }
         }
+
+ 
     }
 }

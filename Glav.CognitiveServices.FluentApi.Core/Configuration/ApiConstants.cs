@@ -8,5 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
     {
         public const string LanguageUrlParameterName = "language";
 
+        public const int DefaultMaxNumberOfRequestRetries = 3;
+
     }
 }

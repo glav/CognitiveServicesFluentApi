@@ -3,7 +3,7 @@
 ### This section is incomplete - WIP
 
 # Face API Service
-The Face cognitive service provides the ability to perform face detection, verify face matches, and generally manage a wide area of facial recognition features through the analysis of images and/or video.
+The Face cognitive service provides the ability to perform face detection, verify face matches, and generally manage a wide area of facial recognition features through the analysis of images and/or video. In addition, the face cognitive service allows management of groups of people, with associated faces to train against for improved facial recognition processing.
 
 ## Face Usage
 To detect a face in an image at a particular Url, then determine its gender and age, you can do the following:
@@ -72,6 +72,77 @@ var notWearingGlasses = firstResult.IsGlassesType(GlassesType.NoGlasses);
 var imageHasGoodExposure = firstResult.IsExposureLevel(ExposureLevel.GoodExposure);
 var faceId = firstResult.faceId;
 ```
+## People/Person Group management
+You can create, delete, and list groups which can contain a person or persons. In addition you can retrieve a single group and its related metadata.
+```c#
+var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
+    .AddConsoleDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithFaceAnalysisActions()
+    .CreateLargePersonGroup("123","unittest","unittest-data")
+    .AnalyseAllAsync();
+```
+
+## People/Person Group management
+You can create, delete, and list groups which can contain a person or persons. In addition you can retrieve a single group and its related metadata.
+```c#
+var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
+    .AddConsoleDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithFaceAnalysisActions()
+    .CreateLargePersonGroup("123","unittest","unittest-data")
+    .AnalyseAllAsync();
+```
+
+## Person Face association and training
+The supported person groups and face training are:
+### LargePersonGroup
+* CreateLargePersonGroup
+* GetLargePersonGroup
+* ListLargePersonGroups
+* DeleteLargePersonGroup
+* StartTrainingLargePersonGroup
+* CheckTrainingStatusLargePersonGroup
+
+### LargePersonGroupPerson
+* CreateLargePersonGroupPerson
+* GetLargePersonGroupPerson
+* ListLargePersonGroupPersons
+* DeleteLargePersonGroupPerson
+* AddFaceToPersonGroupPerson
+* GetFaceForPersonGroupPerson
+* DeleteFaceForPersonGroupPerson
+
+## People/Person Group management
+You can create, delete, and list groups which can contain a person or persons. In addition you can retrieve a single group and its related metadata.
+```c#
+var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys("123", LocationKeyIdentifier.AustraliaEast)
+    .AddConsoleDiagnosticLogging()
+    .UsingHttpCommunication()
+    .WithFaceAnalysisActions()
+    .CreateLargePersonGroup("123","unittest","unittest-data")
+    .AnalyseAllAsync();
+```
+
+## Person Face association and training
+The supported person groups and face training are:
+### LargePersonGroup
+* CreateLargePersonGroup
+* GetLargePersonGroup
+* ListLargePersonGroups
+* DeleteLargePersonGroup
+* StartTrainingLargePersonGroup
+* CheckTrainingStatusLargePersonGroup
+
+### LargePersonGroupPerson
+* CreateLargePersonGroupPerson
+* GetLargePersonGroupPerson
+* ListLargePersonGroupPersons
+* DeleteLargePersonGroupPerson
+* AddFaceToPersonGroupPerson
+* GetFaceForPersonGroupPerson
+* DeleteFaceForPersonGroupPerson
+
 
 ## Extensions package
 Glav.CognitiveServices.FluentApi.Face.Extensions
@@ -108,3 +179,4 @@ var noGlasses = result.FaceDetectionAnalysis.First().IsExposureLevel(ExposureLev
 ```c#
 var noGlasses = result.FaceDetectionAnalysis.First().IsBlurLevel(BlurLevel.Low);
 ```
+

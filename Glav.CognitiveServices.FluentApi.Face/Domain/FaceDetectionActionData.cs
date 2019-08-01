@@ -63,13 +63,17 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         public bool? ReturnFaceId { get; private set; }
         public bool? ReturnFaceLandmarks { get; private set; }
 
-        public ApiActionType ApiType => ApiActionType.FaceDetection;
+        public ApiActionDefinition ApiDefintition => FaceApiOperations.FaceDetection;
 
         public long Id { get; private set; }
 
         public byte[] ToBinary()
         {
             return ImageDataToAnalyse;
+        }
+        public string ToEndUriFragment()
+        {
+            return null;
         }
 
         public override string ToString()

@@ -7,7 +7,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
         public string status { get; set; }
         public RecognitionResultItem recognitionResult { get; set; }
         // std error response
-        public ApiErrorResponse error { get; set; }
+        public RequestIdErrorResponse error { get; set; }
     }
 
     public class RecognitionResultItem

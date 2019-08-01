@@ -1,15 +1,17 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
+using Glav.CognitiveServices.FluentApi.Core.Parsing;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
 using System;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public sealed class SentimentResult : BaseResponseResult<SentimentResultResponseRoot>
+    //Note we do not use the BaseApiResponse that makes use of a parsing strategy as these results can be a mix of errors and success so requires a little more
+    //custom effort.
+    public sealed class SentimentResult : BaseApiResponse<SentimentResultResponseRoot>
     {
-        public SentimentResult(ICommunicationResult apiCallResult)
+        public SentimentResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
-            ApiCallResult = apiCallResult;
             AddResultToCollection();
         }
 
@@ -17,7 +19,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         {
             if (ApiCallResult == null)
             {
-                ResponseData = new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = "No data returned." } } };
+                ResponseData = new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = StandardResponseCodes.NoDataReturnedMessage } } };
                 ActionSubmittedSuccessfully = false;
                 return;
             }
@@ -56,6 +58,4 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         }
 
     }
-
-
 }

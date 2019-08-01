@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Extensions;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain
 {

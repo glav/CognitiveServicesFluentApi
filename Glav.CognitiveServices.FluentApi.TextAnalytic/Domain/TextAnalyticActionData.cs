@@ -12,7 +12,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
     {
         public override bool SupportsBatchingMultipleItems => true;
 
-        public void Add(ApiActionType apiType, string textToAnalyse, SupportedLanguageType language = SupportedLanguageType.English)
+        public void Add(ApiActionDefinition apiType, string textToAnalyse, SupportedLanguageType language = SupportedLanguageType.English)
         {
             ItemList.Add(new TextAnalyticActionDataItem(ItemList.Count + 1, textToAnalyse, language, apiType));
         }
@@ -44,23 +44,23 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 
     public sealed class TextAnalyticActionDataItem : IActionDataItem
     {
-        public TextAnalyticActionDataItem(long id, string textToAnalyse, ApiActionType apiType)
+        public TextAnalyticActionDataItem(long id, string textToAnalyse, ApiActionDefinition apiType)
         {
             Id = id;
             TextToAnalyse = textToAnalyse;
             Language = SupportedLanguageType.English;
-            ApiType = apiType;
+            ApiDefintition = apiType;
         }
-        public TextAnalyticActionDataItem(long id, string textToAnalyse, SupportedLanguageType language, ApiActionType apiType)
+        public TextAnalyticActionDataItem(long id, string textToAnalyse, SupportedLanguageType language, ApiActionDefinition apiType)
         {
             Id = id;
             TextToAnalyse = textToAnalyse;
             Language = language;
-            ApiType = apiType;
+            ApiDefintition = apiType;
         }
         public long Id { get; private set; }
         public SupportedLanguageType Language { get; private set; }
-        public ApiActionType ApiType { get; private set; }
+        public ApiActionDefinition ApiDefintition { get; private set; }
         public string TextToAnalyse { get; private set; }
 
         public bool IsBinaryData => false;
@@ -79,5 +79,11 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         {
             return null;
         }
+
+        public string ToEndUriFragment()
+        {
+            return null;
+        }
+
     }
 }

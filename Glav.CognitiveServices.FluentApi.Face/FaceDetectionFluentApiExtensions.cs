@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
                 bool? returnFaceLandmarks = null,
                 bool? returnFaceId = null)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<FaceDetectionActionData>(ApiActionType.FaceDetection);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<FaceDetectionActionData>(FaceApiOperations.FaceDetection);
             actionData.Add(uri, returnedAttributes, returnFaceLandmarks, returnFaceId);
             return apiAnalysis;
         }
@@ -34,7 +34,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
                 bool? returnFaceLandmarks = null,
                 bool? returnFaceId = null)
         {
-            var actionData = apiAnalysis.GetOrCreateActionDataInstance<FaceDetectionActionData>(ApiActionType.FaceDetection);
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<FaceDetectionActionData>(FaceApiOperations.FaceDetection);
             actionData.Add(imageData, returnedAttributes, returnFaceLandmarks, returnFaceId);
             return apiAnalysis;
         }

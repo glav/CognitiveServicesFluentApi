@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.Core
 {
     public sealed class SupportedLanguageItem
     {
-        public SupportedLanguageItem(SupportedLanguageType languageType, string code, IEnumerable<ApiActionType> apiSupport)
+        public SupportedLanguageItem(SupportedLanguageType languageType, string code, IEnumerable<ApiActionDefinition> apiSupport)
         {
             LanguageType = languageType;
             Code = code;
@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.FluentApi.Core
 
         public SupportedLanguageType LanguageType { get; private set; }
         public string Code { get; private set; }
-        public IEnumerable<ApiActionType> ApiSupport { get; }
+        public IEnumerable<ApiActionDefinition> ApiSupport { get; }
     }
 
     public enum SupportedLanguageType

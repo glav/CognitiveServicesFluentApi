@@ -38,5 +38,7 @@ namespace Glav.CognitiveServices.UnitTests
         public HttpStatusCode StatusCode { get; private set; }
 
         public bool Successfull => true;
+
+        public RequestRateLimitStatus Ratelimit => new RequestRateLimitStatus();
     }
 }

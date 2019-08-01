@@ -1,5 +1,6 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Communication;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
+using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.UnitTests
@@ -7,23 +8,37 @@ namespace Glav.CognitiveServices.UnitTests
     public class MockCommsEngine : ICommunicationEngine
     {
         private ICommunicationResult _mockResult;
-        public MockCommsEngine(ICommunicationResult mockResult)
+        private bool _shouldBlowUp;
+        public MockCommsEngine(ICommunicationResult mockResult, bool shouldBlowUp = false)
         {
             _mockResult = mockResult;
+            _shouldBlowUp = shouldBlowUp;
         }
 
-        public Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, string payload, string urlQueryParameters = null)
+        public Task<ICommunicationResult> CallBatchServiceAsync(ApiActionDataCollection actionItemCollection)
         {
+            if (_shouldBlowUp)
+            {
+                return Task.FromResult<ICommunicationResult>(CommunicationResult.Fail("Boom!"));
+            }
             return Task.FromResult<ICommunicationResult>(_mockResult);
         }
 
-        public Task<ICommunicationResult> CallServiceAsync(ApiActionType apiActionType, byte[] payload, string urlQueryParameters = null)
+        public Task<ICommunicationResult> CallServiceAsync(IActionDataItem actionItem)
         {
+            if (_shouldBlowUp)
+            {
+                return Task.FromResult<ICommunicationResult>(CommunicationResult.Fail("Boom!"));
+            }
             return Task.FromResult<ICommunicationResult>(_mockResult);
         }
 
-        public Task<ICommunicationResult> CallServiceAsync(string uri, ApiActionCategory apiCategory)
+        public Task<ICommunicationResult> ServiceGetAsync(string uri, string category)
         {
+            if (_shouldBlowUp)
+            {
+                return Task.FromResult<ICommunicationResult>(CommunicationResult.Fail("Boom!"));
+            }
             return Task.FromResult<ICommunicationResult>(_mockResult);
         }
     }
