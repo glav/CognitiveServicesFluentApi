@@ -34,7 +34,9 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 .AnalyseAllAsync();
 
             listFaceResult.LargePersonGroupPersonListAnalysis.AssertAnalysisContextValidity();
-            const string baseImageUrl = "https://raw.githubusercontent.com/glav/CognitiveServicesFluentApi/glav/PersonGroupSupport/Tests/Glav.CognitiveServices.IntegrationTests/TestData/";
+
+            // Change this once on master branch
+            const string baseImageUrl = "https://raw.githubusercontent.com/glav/CognitiveServicesFluentApi/PersonGroupSupportUndelete/Tests/Glav.CognitiveServices.IntegrationTests/TestData/";
 
             // Only add in faces if we have to
             if (listFaceResult.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData.LargePersonGroupPersons == null ||
@@ -42,7 +44,6 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
                 listFaceResult.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData.LargePersonGroupPersons[0].persistedFaceIds == null ||
                 listFaceResult.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData.LargePersonGroupPersons[0].persistedFaceIds.Length == 0)
             {
-                // Change this once on master branch
 
                 // Add some faces to the person in the group
                 var addFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
