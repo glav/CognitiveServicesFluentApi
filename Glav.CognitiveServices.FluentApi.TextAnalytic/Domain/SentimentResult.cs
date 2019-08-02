@@ -1,8 +1,10 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
+using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Core.Parsing;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
 using System;
+using System.Net;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
@@ -21,6 +23,31 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             {
                 ResponseData = new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { new ApiErrorResponse { id = 1, message = StandardResponseCodes.NoDataReturnedMessage } } };
                 ActionSubmittedSuccessfully = false;
+                return;
+            }
+
+            if (((int)ApiCallResult.StatusCode) >= (int)HttpStatusCode.BadRequest || !ApiCallResult.Successfull)
+            {
+                ActionSubmittedSuccessfully = false;
+
+                // try deserialising body first in case service returned some valuable info
+                if (!string.IsNullOrEmpty(ApiCallResult.Data))
+                {
+                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthError>(ApiCallResult.Data);
+                    if (errorResponse != null)
+                    {
+                        ResponseData = new SentimentResultResponseRoot
+                        {
+                            errors = new ApiErrorResponse[] {
+                                        new ApiErrorResponse { InnerError = errorResponse.error,
+                                            code = errorResponse.error?.code,
+                                            message = errorResponse.error?.message } }
+                        };
+                        return;
+                    }
+                }
+                ResponseData = new SentimentResultResponseRoot { errors = new ApiErrorResponse[] 
+                    { new ApiErrorResponse { id = (int)ApiCallResult.StatusCode, message = ApiCallResult.ErrorMessage } } };
                 return;
             }
 

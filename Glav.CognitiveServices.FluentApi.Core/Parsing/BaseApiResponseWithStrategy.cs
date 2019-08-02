@@ -5,9 +5,11 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 {
     public class BaseApiResponseWithStrategy<TResponseRoot,TResponse, TError>
       : IApiRequestResult<TResponseRoot>
-        where TResponseRoot : IActionResponseRoot, new()
+        where TResponseRoot : IActionResponseRoot
+        where TResponse : class 
+        where TError : class
     {
-        public BaseApiResponseWithStrategy(ICommunicationResult apiCallResult, IParsingStrategy<TResponse, TError> parsingStrategy)
+        public BaseApiResponseWithStrategy(ICommunicationResult apiCallResult, IParsingStrategy<TResponse, TError> parsingStrategy) 
         {
             ApiCallResult = apiCallResult;
             ParsingStrategy = parsingStrategy;

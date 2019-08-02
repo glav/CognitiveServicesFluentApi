@@ -4,6 +4,8 @@ using System;
 namespace Glav.CognitiveServices.FluentApi.Core.Parsing
 {
     public class CallReturnsDataParsingStrategy<TResponse, TError> : BaseParsingStrategy<TResponse, TError>
+        where TResponse : class
+        where TError : class, new()
     {
         public override void ParseApiCall(ICommunicationResult apiCallResult)
         {
