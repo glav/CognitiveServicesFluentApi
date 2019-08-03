@@ -31,23 +31,16 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
                 ActionSubmittedSuccessfully = false;
 
                 // try deserialising body first in case service returned some valuable info
-                if (!string.IsNullOrEmpty(ApiCallResult.Data))
+                TryParsingCatchAllError();
+                if (ResponseData != null)
                 {
-                    var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthError>(ApiCallResult.Data);
-                    if (errorResponse != null)
-                    {
-                        ResponseData = new SentimentResultResponseRoot
-                        {
-                            errors = new ApiErrorResponse[] {
-                                        new ApiErrorResponse { InnerError = errorResponse.error,
-                                            code = errorResponse.error?.code,
-                                            message = errorResponse.error?.message } }
-                        };
-                        return;
-                    }
+                    return;
                 }
-                ResponseData = new SentimentResultResponseRoot { errors = new ApiErrorResponse[] 
-                    { new ApiErrorResponse { id = (int)ApiCallResult.StatusCode, message = ApiCallResult.ErrorMessage } } };
+                ResponseData = new SentimentResultResponseRoot
+                {
+                    errors = new ApiErrorResponse[]
+                    { new ApiErrorResponse { id = (int)ApiCallResult.StatusCode, message = ApiCallResult.ErrorMessage } }
+                };
                 return;
             }
 
@@ -84,5 +77,22 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             }
         }
 
+        private void TryParsingCatchAllError()
+        {
+            if (!string.IsNullOrEmpty(ApiCallResult.Data))
+            {
+                var errorResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<CatchAllError>(ApiCallResult.Data);
+                if (errorResponse != null)
+                {
+                    ResponseData = new SentimentResultResponseRoot
+                    {
+                        errors = new ApiErrorResponse[] {
+                                        new ApiErrorResponse { InnerError = errorResponse.error ?? errorResponse.innerError,
+                                            code = errorResponse.error != null ? errorResponse.error.code : errorResponse.code,
+                                            message = errorResponse.error != null ? errorResponse.error.message : errorResponse.message} }
+                    };
+                }
+            }
+        }
     }
 }

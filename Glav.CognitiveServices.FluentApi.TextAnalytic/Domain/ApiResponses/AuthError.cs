@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses
 {
-    public class AuthError
+    public class CatchAllError : BaseApiErrorResponse
     {
         public BaseApiErrorResponse error { get; set; }
+        public BaseApiErrorResponse innerError { get; set; }
     }
 }
