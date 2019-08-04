@@ -36,7 +36,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
             listFaceResult.LargePersonGroupPersonListAnalysis.AssertAnalysisContextValidity();
 
             // Change this once on master branch
-            const string baseImageUrl = "https://raw.githubusercontent.com/glav/CognitiveServicesFluentApi/PersonGroupSupportUndelete/Tests/Glav.CognitiveServices.IntegrationTests/TestData/";
+            const string baseImageUrl = "https://raw.githubusercontent.com/glav/CognitiveServicesFluentApi/master/Tests/Glav.CognitiveServices.IntegrationTests/TestData/";
 
             // Only add in faces if we have to
             if (listFaceResult.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData.LargePersonGroupPersons == null ||
