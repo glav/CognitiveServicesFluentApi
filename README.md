@@ -184,7 +184,7 @@ This is just the beginning though. For full details on all the fluent API option
 This API is only in early stages and many refinements are yet to be applied.
 
 #### Build Status
-![Build Status](https://glav.visualstudio.com/_apis/public/build/definitions/ce515890-8bbd-414a-8432-78aacd311745/34/badge)
+[![Build Status](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_apis/build/status/CognitiveServicesFluentApi%20CI%20Yaml?branchName=master)](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_build/latest?definitionId=63&branchName=master)
 
 #### Sonarqube Code Analaysis
 [Sonarqube Code Analysis report](https://sonarcloud.io/dashboard?id=CognitiveFluentApi)
