@@ -84,6 +84,8 @@ git commit -m "Updated release notes for $releaseTag"
 ## finish up by tagging the git repo and push it
 git tag -a "$releaseTag" -m "Release: $newVersion"
 git push --tags
+git push
+
 
 
 
