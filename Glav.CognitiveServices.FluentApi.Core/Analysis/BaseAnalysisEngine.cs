@@ -11,7 +11,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Analysis
     public abstract class BaseAnalysisEngine<TAnalysisResults> : IAnalysisEngine<TAnalysisResults>
                 where TAnalysisResults : class, IAnalysisResults
     {
-        public BaseAnalysisEngine(CoreAnalysisSettings analysisSettings)
+        protected BaseAnalysisEngine(CoreAnalysisSettings analysisSettings)
         {
             AnalysisSettings = analysisSettings;
         }
@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Analysis
         {
             if (AnalysisSettings.ActionsToPerform.ContainsKey(apiAction.Name))
             {
-                await AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync(AnalysisSettings.ToString(),"Analysis Settings");
+                await AnalysisSettings.ConfigurationSettings.DiagnosticLogger.LogInfoAsync(AnalysisSettings.ToString(), "Analysis Settings");
 
                 // Get the collection of actions to perform for an API call
                 var actions = AnalysisSettings.ActionsToPerform[apiAction.Name];
@@ -35,12 +35,13 @@ namespace Glav.CognitiveServices.FluentApi.Core.Analysis
                 {
                     // Note that the payload we are passing along is always a string. At this ApiActionCollection level, we do not support binary here, only for individual
                     // Api action items.
-                    await ExecuteApiActionForActionCollectionAsync(actions,apiActionHandler);
-                } else
+                    await ExecuteApiActionForActionCollectionAsync(actions, apiActionHandler);
+                }
+                else
                 {
                     var allItems = actions.GetAllItems();
 
-                    foreach(var item in allItems)
+                    foreach (var item in allItems)
                     {
                         await ExecuteApiActionForSingleApiActionAsync(actions, apiAction, apiActionHandler, item);
                     }
@@ -66,20 +67,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.Analysis
         {
             var logger = AnalysisSettings.ConfigurationSettings.DiagnosticLogger;
             await logger.LogInfoAsync($"Calling service for {apiAction.ToString()}", "ExecuteApiActionForSingleApiActionAsync");
-            var urlQueryParams = actionItem.ToUrlQueryParameters();
-            ICommunicationResult commsResult;
-            if (actionItem.IsBinaryData)
-            {
-                commsResult = await AnalysisSettings.CommunicationEngine
-                                        .CallServiceAsync(actionItem)
-                                        .ConfigureAwait(continueOnCapturedContext: false);
-            }
-            else
-            {
-                commsResult = await AnalysisSettings.CommunicationEngine
-                                        .CallServiceAsync(actionItem)
-                                        .ConfigureAwait(continueOnCapturedContext: false);
-            }
+            var commsResult = await AnalysisSettings.CommunicationEngine
+                                    .CallServiceAsync(actionItem)
+                                    .ConfigureAwait(continueOnCapturedContext: false);
             await logger.LogInfoAsync($"Processing results for {apiAction.ToString()}", "ExecuteApiActionForSingleApiActionAsync");
 
             apiActionHandler(apiActions, commsResult);
