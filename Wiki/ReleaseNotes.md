@@ -1,4 +1,206 @@
 
+## Version: 0.9.2 [08/04/2019 13:37:26]
+### New Items
+* b50e833 -Addition of Face Identify API action
+* 9c17a3e - Changes loggers to be async, also re-ordered face analytic calls to ensure deletes always worked
+* 693782e -Added maximum retry config setting to honour rate limit response from service, extension method, implementation and updated documentation
+* ca48810 -Added retry logic based on Retryheader when RateLimit exceeded, and new TraceLogger extension
+* ca20c96 - Added support for LargePersonGroupTrain and TrainStatus
+* 1df1dc1 -Adding support for LargePersonGroupPersonFaceDelete
+* 731bf88 -Added initial support for LargePersonGroupPerson Face add functionality
+* 582e54c -Adding support for LargePersonGroupPerson operations
+* 06408cf -Initial adding of LargePersonGroupDelete support and refactoring for simpler largepersongroup code
+* 7a525d9 - Amending IActionDataItem to support EndUriFragment for PersonGroup support
+* 804086e - Modified Face API to support new API Action, removal of enum
+* 347f4e5 - Major refactoring to Core, TextAnalytic and ComputerVision to support new form of APIActions, removal of Enum
+* 331c534 -Refactoring to support LargePersonGroup Create and additional actions
+* 5453d7c -Adding context, action and result classes for LargePersonGroup support
+* b1a420f -Added PUT operation support in prep for LargePersonGroups functionality in Face API
+* ee08997 -Addition of Face Identify API action
+* b4aca76 - Changes loggers to be async, also re-ordered face analytic calls to ensure deletes always worked
+* 0461b15 -Added maximum retry config setting to honour rate limit response from service, extension method, implementation and updated documentation
+* c954814 -Added retry logic based on Retryheader when RateLimit exceeded, and new TraceLogger extension
+* 960087a - Added support for LargePersonGroupTrain and TrainStatus
+* a6f3d61 -Adding support for LargePersonGroupPersonFaceDelete
+* e2412c8 -Added initial support for LargePersonGroupPerson Face add functionality
+* 4e73029 -Adding support for LargePersonGroupPerson operations
+* 7761c03 -Initial adding of LargePersonGroupDelete support and refactoring for simpler largepersongroup code
+* cecf3e1 - Amending IActionDataItem to support EndUriFragment for PersonGroup support
+* 175a048 - Modified Face API to support new API Action, removal of enum
+* 51be3bf - Major refactoring to Core, TextAnalytic and ComputerVision to support new form of APIActions, removal of Enum
+* f0ff582 -Refactoring to support LargePersonGroup Create and additional actions
+* 498e302 -Adding context, action and result classes for LargePersonGroup support
+* 65f266e -Added PUT operation support in prep for LargePersonGroups functionality in Face API
+### Bugfixes
+* dfff44c -Fixing flaw in logging that caused it not to log anything and setting log level had no effect
+* 3770807 -Fixing flaw in logging that caused it not to log anything and setting log level had no effect
+### Full change list
+* 0f3c41b Fixed all the tests
+* d6ab33f Fixing tests
+* 9b02c65 Merge branch 'PersonGroupSupportUndelete' into glav/FixingBadApiKeyResponseErrors
+* adcf02e minor comment change
+* 82630a7 Version bump
+* d132776 Merge branch 'PersonGroupSupportUndelete' of https://github.com/glav/CognitiveServicesFluentApi into PersonGroupSupportUndelete
+* e0cab8f Added final set of tests to ensure largepersongroupperson error response parsing works
+* ac7166a Fixed up remaining  LargePersonGroup error parsing issues
+* 113039a Adding test around largepersongrouplist and made it pass
+* a613a99 Adding test around largepersongroupget and made it pass
+* d482355 Adding test around largepersongroupdelete and made it pass
+* 1f5e415 Made the tests pass
+* 8154039 Added fluent extension for FaceIdentification and fixed error respons parsing
+* 9f4e88a Fixing test helper group face creation method
+* 8707e5e Cleaned up computer vision stuff
+* 6f6018d Fixing returning results to ensure we collect multiple call results
+* e428324 Slightly modified image
+* b50e833 NEW:Addition of Face Identify API action
+* 504ff8b Cleanup
+* 456f17c Refactoring TextAnalytics results using parsing strategy
+* 8ad4dfc Added better response handling in result class after merge
+* ac30a30 Added test to ensure response refactor still reflected error
+* ead90b2 Splitting out classes and cleanup
+* a77ff2f Fixing tests
+* c22ae61 More major response parsing refactoring with parsing strategies - still WIP
+* a805cbb Some more response parsing refactoring
+* c2692c2 Refactored all the Face API results to use common base classes
+* 9bd4b85 Add some extra logging and clean it up a bit
+* 8cbd659 Fixing face training status bug not updating status when waiting and checking
+* cb29a51 Continued refactor, making tests pass, implemented in a few result classes in face API
+* 765f444 Started reactor for parsing strategy impl
+* 9c17a3e NEW: Changes loggers to be async, also re-ordered face analytic calls to ensure deletes always worked
+* dfff44c BUG:Fixing flaw in logging that caused it not to log anything and setting log level had no effect
+* 693782e NEW:Added maximum retry config setting to honour rate limit response from service, extension method, implementation and updated documentation
+* ca48810 NEW:Added retry logic based on Retryheader when RateLimit exceeded, and new TraceLogger extension
+* c68cbeb Cleaning up test
+* 9d0c0bd Added large integration test for training a face, and made it pass
+* be2da41 Added more extension methods for LargePersonGroup Training and added further extensins for string to dates with tests
+* ce2bb05 Added test for LargePersonGroupTrainStatus and made it pass
+* ca20c96 NEW: Added support for LargePersonGroupTrain and TrainStatus
+* 33fa23d Added test for face delete and made it pass
+* 1df1dc1 NEW:Adding support for LargePersonGroupPersonFaceDelete
+* 23c5982 Added test, made it pass
+* f751b6d Completed LargePresonGroupPersonFaceGet impl and some refactoring
+* 7d83bec Added unit test for LargePersonGroup Add face
+* e8fcd80 Adding extra support for person face add data submission and result assignment
+* 731bf88 NEW:Added initial support for LargePersonGroupPerson Face add functionality
+* d597d40 Added integration tests and made them work
+* fbe0fa3 Adding in Face Wiki merge fixes
+* 5f7981c Added LargePersonGroupCreate test
+* 7d29ec0 Test cleanup
+* 9d33355 Added test around LargePersonGroupPersonList and made test work
+* 2590282 Made tests pass
+* b3695f8 Added LargePersonGroupPerson Create test and renamed LargePersonGroup test to be more appropriate
+* 010ad71 Completed impl for LargePersonGroupPerson and added initial test
+* 65a3722 Added missing method impl for PersonGroupPerson delete
+* 65579c1 Adding analysis context for LargePersonGroupPerson actions
+* 8412f56 Adding LargePersonGroupPerson response structures
+* 582e54c NEW:Adding support for LargePersonGroupPerson operations
+* ac85f8a Refactored to use common error response class
+* 8d80e0c Fixed other extension method
+* 012ea32 Little bit of grouping, added extension method, fixed test
+* 31347da Added test and made it pass for LargePersonGroupDelete
+* 5d2c3f7 Added relevant config for LargePersonGroupDelete
+* 06408cf NEW:Initial adding of LargePersonGroupDelete support and refactoring for simpler largepersongroup code
+* 3738552 Made the tests work
+* 86d0edb Minor addition of some validation
+* 16a0870 Added fluent extension for LargePersonGroupGet/List
+* b908dac Minor refactoring - extracted classes into separate files
+* 0adc773 Added test for LargePersonGroupList and minor refactor
+* c445b73 Added separate LargepersonGroupList action data to support specific parameters
+* 836bec1 Fixed large person group get and ensured tests pass
+* 7a525d9 NEW: Amending IActionDataItem to support EndUriFragment for PersonGroup support
+* f6bba63 Adding test and cleanup to ensure support for additional Uri fragments to allow PersonGroup functionality to work
+* 1bb1040 Adding some documentation
+* 4686ddd Massive refactor to support proper API definition and more flexible HTTP backend
+* 12e90ee Cleaned up communications engine with simplified structure and new APIActionDefinition support. All tests actually pass!
+* 1280425 Fixed all Unit tests
+* c6be7db Fixing some unit tests
+* 804086e NEW: Modified Face API to support new API Action, removal of enum
+* 347f4e5 NEW: Major refactoring to Core, TextAnalytic and ComputerVision to support new form of APIActions, removal of Enum
+* 331c534 NEW:Refactoring to support LargePersonGroup Create and additional actions
+* 5453d7c NEW:Adding context, action and result classes for LargePersonGroup support
+* b1a420f NEW:Added PUT operation support in prep for LargePersonGroups functionality in Face API
+* d66687e Fixing Wiki merge conflicts
+* 642cddb Adding test to simulate bad API key
+* 60ed8e5 Changed directory structure only. Removed empty/nested project dir
+* 1ffa4cb Added final set of tests to ensure largepersongroupperson error response parsing works
+* 5e5ac4d Fixed up remaining  LargePersonGroup error parsing issues
+* 9747e73 Adding test around largepersongrouplist and made it pass
+* 4b5f003 Adding test around largepersongroupget and made it pass
+* 58577ea Adding test around largepersongroupdelete and made it pass
+* 99e8c0b Made the tests pass
+* 0cace33 Added fluent extension for FaceIdentification and fixed error respons parsing
+* c8d2342 Fixing test helper group face creation method
+* 3909178 Cleaned up computer vision stuff
+* 6845da1 Fixing returning results to ensure we collect multiple call results
+* eba9dae Slightly modified image
+* ee08997 NEW:Addition of Face Identify API action
+* b798614 Cleanup
+* 4e29c30 Refactoring TextAnalytics results using parsing strategy
+* 5344ec2 Added better response handling in result class after merge
+* 813c7ed Added test to ensure response refactor still reflected error
+* e568f4f Splitting out classes and cleanup
+* a1ba5c0 Fixing tests
+* 6fe43de More major response parsing refactoring with parsing strategies - still WIP
+* abcd9f4 Some more response parsing refactoring
+* 036562f Refactored all the Face API results to use common base classes
+* f2afaed Add some extra logging and clean it up a bit
+* 94e496a Fixing face training status bug not updating status when waiting and checking
+* 050251b Continued refactor, making tests pass, implemented in a few result classes in face API
+* fed29e1 Started reactor for parsing strategy impl
+* b4aca76 NEW: Changes loggers to be async, also re-ordered face analytic calls to ensure deletes always worked
+* 3770807 BUG:Fixing flaw in logging that caused it not to log anything and setting log level had no effect
+* 0461b15 NEW:Added maximum retry config setting to honour rate limit response from service, extension method, implementation and updated documentation
+* c954814 NEW:Added retry logic based on Retryheader when RateLimit exceeded, and new TraceLogger extension
+* 6198515 Cleaning up test
+* c62a6a7 Added large integration test for training a face, and made it pass
+* e8850e2 Added more extension methods for LargePersonGroup Training and added further extensins for string to dates with tests
+* 60806ac Added test for LargePersonGroupTrainStatus and made it pass
+* 960087a NEW: Added support for LargePersonGroupTrain and TrainStatus
+* 7ede3bd Added test for face delete and made it pass
+* a6f3d61 NEW:Adding support for LargePersonGroupPersonFaceDelete
+* 8f28b5e Added test, made it pass
+* fab9ff9 Completed LargePresonGroupPersonFaceGet impl and some refactoring
+* 0a2968e Added unit test for LargePersonGroup Add face
+* cdb01c4 Adding extra support for person face add data submission and result assignment
+* e2412c8 NEW:Added initial support for LargePersonGroupPerson Face add functionality
+* 2502d3a Added integration tests and made them work
+* c6f1d87 Wiki changes
+* a4e1d10 Added LargePersonGroupCreate test
+* 53b1a42 Test cleanup
+* b3c7028 Added test around LargePersonGroupPersonList and made test work
+* 989f716 Made tests pass
+* 9ff926a Added LargePersonGroupPerson Create test and renamed LargePersonGroup test to be more appropriate
+* 6062cc4 Completed impl for LargePersonGroupPerson and added initial test
+* a022b24 Added missing method impl for PersonGroupPerson delete
+* c7dedfe Adding analysis context for LargePersonGroupPerson actions
+* 8a9ddf4 Adding LargePersonGroupPerson response structures
+* 4e73029 NEW:Adding support for LargePersonGroupPerson operations
+* 57eeb96 Refactored to use common error response class
+* d2eb156 Fixed other extension method
+* e2a496d Little bit of grouping, added extension method, fixed test
+* 0ad2ccb Added test and made it pass for LargePersonGroupDelete
+* 1c91937 Added relevant config for LargePersonGroupDelete
+* 7761c03 NEW:Initial adding of LargePersonGroupDelete support and refactoring for simpler largepersongroup code
+* b09b3c0 Made the tests work
+* d5d76b6 Minor addition of some validation
+* 76c0d20 Added fluent extension for LargePersonGroupGet/List
+* bf8af46 Minor refactoring - extracted classes into separate files
+* 20b430d Added test for LargePersonGroupList and minor refactor
+* 819c151 Added separate LargepersonGroupList action data to support specific parameters
+* 3511a64 Fixed large person group get and ensured tests pass
+* cecf3e1 NEW: Amending IActionDataItem to support EndUriFragment for PersonGroup support
+* 4946c91 Adding test and cleanup to ensure support for additional Uri fragments to allow PersonGroup functionality to work
+* 4323e93 Adding some documentation
+* 31ddccb Massive refactor to support proper API definition and more flexible HTTP backend
+* 5ebc982 Cleaned up communications engine with simplified structure and new APIActionDefinition support. All tests actually pass!
+* 8c3aafd Fixed all Unit tests
+* 01a8627 Fixing some unit tests
+* 175a048 NEW: Modified Face API to support new API Action, removal of enum
+* 51be3bf NEW: Major refactoring to Core, TextAnalytic and ComputerVision to support new form of APIActions, removal of Enum
+* f0ff582 NEW:Refactoring to support LargePersonGroup Create and additional actions
+* 498e302 NEW:Adding context, action and result classes for LargePersonGroup support
+* 65f266e NEW:Added PUT operation support in prep for LargePersonGroups functionality in Face API
+
 ## Version: 0.9.1 [07/26/2019 18:41:07]
 ### New Items
 * e4e6346 -Created separate extension packages to separate out extension/convenience methods from core API functionality
