@@ -2,7 +2,7 @@
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses
 {
-    public class VisionOCRAnalysisResponseRoot : IActionResponseRoot
+    public class VisionOcrAnalysisResponseRoot : IActionResponseRoot
     {
         public string orientation { get; set; }
         public double textAngle { get; set; }

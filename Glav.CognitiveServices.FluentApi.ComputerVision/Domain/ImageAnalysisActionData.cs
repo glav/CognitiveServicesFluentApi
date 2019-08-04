@@ -36,7 +36,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
                 SupportedLanguageType language)
         {
             Id = id;
-            ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("ImageUri is required");
+            ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("imageUri");
             VisualFeatures = visualFeatures;
             ImageDetails = imageDetails;
             Language = language;
@@ -48,7 +48,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         SupportedLanguageType language)
         {
             Id = id;
-            ImageDataToAnalyse = imageData ?? throw new ArgumentNullException("ImageData is required");
+            ImageDataToAnalyse = imageData ?? throw new ArgumentNullException("imageData");
             VisualFeatures = visualFeatures;
             ImageDetails = imageDetails;
             Language = language;

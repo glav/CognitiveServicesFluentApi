@@ -28,7 +28,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
                 RecognizeTextMode mode)
         {
             Id = id;
-            ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("ImageUri is required");
+            ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("imageUri");
             Mode = mode;
         }
 
@@ -36,7 +36,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
                 RecognizeTextMode mode)
         {
             Id = id;
-            ImageDataToAnalyse = imageData ?? throw new ArgumentNullException("ImageData is required");
+            ImageDataToAnalyse = imageData ?? throw new ArgumentNullException("imageData");
             Mode = mode;
         }
 

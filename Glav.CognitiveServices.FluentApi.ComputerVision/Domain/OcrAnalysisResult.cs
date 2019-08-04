@@ -6,14 +6,14 @@ using System;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class OcrAnalysisResult : BaseApiResponseReturnsData<VisionOCRAnalysisResponseRoot, VisionOCRAnalysisResponseRoot, RequestIdErrorResponse>
+    public class OcrAnalysisResult : BaseApiResponseReturnsData<VisionOcrAnalysisResponseRoot, VisionOcrAnalysisResponseRoot, RequestIdErrorResponse>
     {
         public OcrAnalysisResult(ICommunicationResult apiCallResult) : base(apiCallResult)
         {
             ParseResponseData();
             if (!ActionSubmittedSuccessfully)
             {
-                ResponseData = new VisionOCRAnalysisResponseRoot { error = ParsingStrategy.ResponseError };
+                ResponseData = new VisionOcrAnalysisResponseRoot { error = ParsingStrategy.ResponseError };
                 return;
             }
             ResponseData = ParsingStrategy.ResponseData;
