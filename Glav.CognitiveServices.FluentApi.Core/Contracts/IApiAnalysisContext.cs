@@ -9,13 +9,13 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
     public abstract class BaseApiAnalysisContext<TResult> where TResult : IApiCallResult
     {
-        public BaseApiAnalysisContext(ApiActionDataCollection actionData, TResult analysisResult, IScoreEvaluationEngine scoringEngine)
+        protected BaseApiAnalysisContext(ApiActionDataCollection actionData, TResult analysisResult, IScoreEvaluationEngine scoringEngine)
         {
             AnalysisInput = actionData;
             AnalysisResults = new List<TResult> { analysisResult };
             ScoringEngine = scoringEngine;
         }
-        public BaseApiAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
+        protected BaseApiAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
         {
             AnalysisInput = actionData;
             AnalysisResults = new List<TResult>();

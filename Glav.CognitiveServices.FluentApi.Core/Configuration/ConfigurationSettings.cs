@@ -13,7 +13,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         private List<IDiagnosticLogger> _registeredDiagnosticLoggers = new List<IDiagnosticLogger>();
         private LoggingLevel _logLevel = LoggingLevel.ErrorsOnly;
 
-        public ConfigurationSettings(string apiCategory, string apiKey, LocationKeyIdentifier locationKey,
+        protected ConfigurationSettings(string apiCategory, string apiKey, LocationKeyIdentifier locationKey,
                     ApiServiceUriCollectionBase serviceUris)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
@@ -30,7 +30,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             this.GlobalScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
-        public ConfigurationSettings(ConfigurationSettings settings)
+        protected ConfigurationSettings(ConfigurationSettings settings)
         {
             this.ApiKeys = settings.ApiKeys;
             this.LocationKey = settings.LocationKey;

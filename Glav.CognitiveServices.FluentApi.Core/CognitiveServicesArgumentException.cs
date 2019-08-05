@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Core
 {
+    [System.SerializableAttribute]
     public class CognitiveServicesArgumentException : CognitiveServicesException
     {
         public CognitiveServicesArgumentException()
