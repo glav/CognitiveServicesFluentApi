@@ -81,7 +81,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
                         if (apiHttpMethod == HttpMethod.Options || apiHttpMethod == HttpMethod.Delete)
                         {
                             httpResult = await httpClient.DeleteAsync(url).ConfigureAwait(continueOnCapturedContext: false);
-                            //throw new MissingMethodException($"HTTP Method {apiHttpMethod} not currently supported.");
                         }
                         commsResult = await CommunicationResult.ParseResultAsync(httpResult);
                         if (!commsResult.Ratelimit.Exceeded)
@@ -106,8 +105,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
 
         public async Task<ICommunicationResult> CallBatchServiceAsync(ApiActionDataCollection actionItemCollection)
         {
-            var urlQueryParams = actionItemCollection.ToUrlQueryParameters();
-            var payload = actionItemCollection.ToString();
             var firstAction = actionItemCollection.GetAllItems().First();
             var url = _configurationSettings.GetAbsoluteUrlForApiAction(firstAction);
             var content = new StringContent(actionItemCollection.ToString(), System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);

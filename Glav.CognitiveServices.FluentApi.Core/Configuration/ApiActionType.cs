@@ -7,7 +7,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 {
     public abstract class ApiActionDefinition
     {
-        public ApiActionDefinition()
+        protected ApiActionDefinition()
         {
 
         }
