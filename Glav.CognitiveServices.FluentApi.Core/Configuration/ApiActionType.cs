@@ -11,7 +11,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         {
 
         }
-        protected ApiActionDefinition(HttpMethod httpMethod, string apiCategory)//, ApiActionType actionType)
+        protected ApiActionDefinition(HttpMethod httpMethod, string apiCategory)
         {
             Method = httpMethod;
             Category = apiCategory;
