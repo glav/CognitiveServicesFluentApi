@@ -6,7 +6,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
     public abstract class LargePersonGroupActionDataItem : IActionDataItem
     {
-        public LargePersonGroupActionDataItem(long id, ApiActionDefinition apiDefinition,
+        protected LargePersonGroupActionDataItem(long id, ApiActionDefinition apiDefinition,
                 string groupId,
                 string name,
                 string userData = null)
@@ -27,7 +27,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
             UserData = userData;
         }
 
-        public LargePersonGroupActionDataItem(long id, ApiActionDefinition apiDefinition, string groupId)
+        protected LargePersonGroupActionDataItem(long id, ApiActionDefinition apiDefinition, string groupId)
         {
             ValidateId(groupId, "groupId");
             Id = id;
@@ -39,7 +39,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                throw new ArgumentNullException("groupId");
+                throw new ArgumentNullException("id");
             }
             if (id.Length > 64)
             {

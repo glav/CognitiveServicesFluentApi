@@ -4,7 +4,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson
 {
     public abstract class LargePersonGroupPersonFaceActionDataItem : LargePersonGroupPersonActionDataItem
     {
-        public LargePersonGroupPersonFaceActionDataItem(long id, ApiActionDefinition faceOperation, string groupId, 
+        protected LargePersonGroupPersonFaceActionDataItem(long id, ApiActionDefinition faceOperation, string groupId, 
             string personId, string persistedFaceId)
             : base(id, faceOperation, groupId, personId)
         {
