@@ -7,7 +7,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
     public abstract class BaseApiResponse<TResponseData> 
         : IApiRequestResult<TResponseData> where TResponseData : IActionResponseRoot
     {
-        public BaseApiResponse(ICommunicationResult apiCallResult)
+        protected BaseApiResponse(ICommunicationResult apiCallResult)
         {
             ApiCallResult = apiCallResult;
         }
