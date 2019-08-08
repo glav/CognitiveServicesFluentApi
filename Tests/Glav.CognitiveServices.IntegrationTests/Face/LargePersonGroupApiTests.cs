@@ -9,7 +9,7 @@ using Glav.CognitiveServices.FluentApi.Face.Domain;
 using System.Net;
 using System;
 
-namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
+namespace Glav.CognitiveServices.IntegrationTests.Face
 {
     public class LargePersonGroupApiTests
     {

@@ -2,13 +2,10 @@ using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Face;
 using System.Threading.Tasks;
 using Xunit;
-using System.Linq;
-using Microsoft.Extensions.Configuration;
 using Glav.CognitiveServices.IntegrationTests.Helpers;
-using Glav.CognitiveServices.FluentApi.Face.Domain;
 using System.Net;
 
-namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
+namespace Glav.CognitiveServices.IntegrationTests.Face
 {
     public class LargePersonGroupPersonApiTests
     {

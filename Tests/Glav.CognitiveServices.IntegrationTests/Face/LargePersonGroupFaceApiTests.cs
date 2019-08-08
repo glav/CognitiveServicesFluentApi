@@ -4,7 +4,7 @@ using Glav.CognitiveServices.IntegrationTests.Helpers;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
+namespace Glav.CognitiveServices.IntegrationTests.Face
 {
     public class LargePersonGroupFaceApiTests
     {

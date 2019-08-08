@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Glav.CognitiveServices.IntegrationTests.Helpers;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
 
-namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
+namespace Glav.CognitiveServices.IntegrationTests.Face
 {
     public class FaceDetectionApiTests
     {

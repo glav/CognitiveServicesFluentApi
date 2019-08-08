@@ -1,19 +1,25 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Core.Analysis;
+using Glav.CognitiveServices.FluentApi.Core.Communication;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Face.Domain;
 using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup;
 using Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroupPerson;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.Face
 {
     public sealed class FaceAnalysisEngine : BaseAnalysisEngine<FaceAnalysisResults>
     {
+        private Dictionary<string, Action<FaceAnalysisResults, ApiActionDataCollection, ICommunicationResult>> _resultCollectors = 
+                                    new Dictionary<string, Action<FaceAnalysisResults, ApiActionDataCollection, ICommunicationResult>>();
+
         public FaceAnalysisEngine(CoreAnalysisSettings analysisSettings) : base(analysisSettings)
         {
+            SetupResultCollection();
         }
 
 
@@ -41,88 +47,52 @@ namespace Glav.CognitiveServices.FluentApi.Face
             return apiResults;
         }
 
+        private void SetupResultCollection()
+        {
+            var resultCollectors = new Dictionary<string, Action<FaceAnalysisResults,ApiActionDataCollection, ICommunicationResult>>();
+            _resultCollectors.Add(FaceApiOperations.FaceDetection.Name, 
+                        (apiAction, actionData, commsResult) => apiAction.AddFaceDetectionResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.FaceIdentification.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddFaceIdentificationResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupCreate.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupCreateResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupGet.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupGetResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupList.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupListResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupDelete.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupDeleteResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupTrainStart.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupTrainStartResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupTrainStatus.Name,
+                        (apiAction, actionData, commsResult) => apiAction.SetargePersonGroupTrainStatusResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupPersonDelete.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupPersonDeleteResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupPersonCreate.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupPersonCreateResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupPersonGet.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupPersonGetResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupPersonList.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupPersonListResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupPersonFaceAdd.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupPersonFaceAddResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupPersonFaceGet.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupPersonFaceGetResult(actionData, commsResult));
+            _resultCollectors.Add(FaceApiOperations.LargePersonGroupPersonFaceDelete.Name,
+                        (apiAction, actionData, commsResult) => apiAction.AddLargePersonGroupPersonFaceDeleteResult(actionData, commsResult));
+
+        }
 
         public override async Task AnalyseApiActionAsync(FaceAnalysisResults apiResults, ApiActionDefinition apiAction)
         {
             await base.AnalyseApiActionAsync(apiAction, (actionData, commsResult) =>
             {
-                if (apiAction == FaceApiOperations.FaceDetection)
+                if (_resultCollectors.ContainsKey(apiAction.Name))
                 {
-                    apiResults.AddFaceDetectionResult(actionData, commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.FaceIdentification)
-                {
-                    apiResults.AddFaceIdentificationResult(actionData,commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupCreate)
-                {
-                    apiResults.AddLargePersonGroupCreateResult(actionData,commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupGet)
-                {
-                    apiResults.AddLargePersonGroupGetResult(actionData,commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupList)
-                {
-                    apiResults.AddLargePersonGroupListResult(actionData,commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupDelete)
-                {
-                    apiResults.AddLargePersonGroupDeleteResult(actionData, commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupTrainStart)
-                {
-                    apiResults.AddLargePersonGroupTrainStartResult(actionData,commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupTrainStatus)
-                {
-                    apiResults.SetargePersonGroupTrainStatusResult(actionData,commsResult);
+                    _resultCollectors[apiAction.Name](apiResults, actionData, commsResult);
                     return;
                 }
 
-
-                if (apiAction == FaceApiOperations.LargePersonGroupPersonDelete)
-                {
-                    apiResults.AddLargePersonGroupPersonDeleteResult(actionData, commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupPersonCreate)
-                {
-                    apiResults.AddLargePersonGroupPersonCreateResult(actionData, commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupPersonGet)
-                {
-                    apiResults.AddLargePersonGroupPersonGetResult(actionData,commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupPersonList)
-                {
-                    apiResults.AddLargePersonGroupPersonListResult(actionData,commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupPersonFaceAdd)
-                {
-                    apiResults.AddLargePersonGroupPersonFaceAddResult(actionData,commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupPersonFaceGet)
-                {
-                    apiResults.AddLargePersonGroupPersonFaceGetResult(actionData, commsResult);
-                    return;
-                }
-                if (apiAction == FaceApiOperations.LargePersonGroupPersonFaceDelete)
-                {
-                    apiResults.AddLargePersonGroupPersonFaceDeleteResult(actionData,commsResult);
-                    return;
-                }
                 throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
             }).ConfigureAwait(continueOnCapturedContext: false);
 
