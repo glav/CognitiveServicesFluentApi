@@ -1,4 +1,20 @@
 
+## Version: 1.0.0 [08/09/2019 17:58:57]
+### Full change list
+* 18aa305 Remove some more code smells
+* efa2a0d More refactoring of code smells
+* aed74d7 Remove code smell
+* 48271a6 Removal of more code smells
+* e2cc142 More code smell cleanup
+* c19c819 Remove comment
+* fe3e3c4 Remove more code smells
+* b4255b1 Removed some code smells as per Sonarqube
+* 91c7ab0 Update README.md
+* d19d834 Fixing some code smells
+* 0145885 Fixed cleanup deleting wrong file, removed intended one
+* 9e3e6ff Ensure push in auto script
+* 1768984 Cleanup
+
 ## Version: 0.9.2 [08/04/2019 13:37:26]
 ### New Items
 * b50e833 -Addition of Face Identify API action
