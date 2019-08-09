@@ -14,7 +14,7 @@ namespace Glav.CognitiveServices.FluentApi.Face
 {
     public sealed class FaceAnalysisEngine : BaseAnalysisEngine<FaceAnalysisResults>
     {
-        private Dictionary<string, Action<FaceAnalysisResults, ApiActionDataCollection, ICommunicationResult>> _resultCollectors = 
+        private readonly Dictionary<string, Action<FaceAnalysisResults, ApiActionDataCollection, ICommunicationResult>> _resultCollectors = 
                                     new Dictionary<string, Action<FaceAnalysisResults, ApiActionDataCollection, ICommunicationResult>>();
 
         public FaceAnalysisEngine(CoreAnalysisSettings analysisSettings) : base(analysisSettings)
@@ -49,7 +49,6 @@ namespace Glav.CognitiveServices.FluentApi.Face
 
         private void SetupResultCollection()
         {
-            var resultCollectors = new Dictionary<string, Action<FaceAnalysisResults,ApiActionDataCollection, ICommunicationResult>>();
             _resultCollectors.Add(FaceApiOperations.FaceDetection.Name, 
                         (apiAction, actionData, commsResult) => apiAction.AddFaceDetectionResult(actionData, commsResult));
             _resultCollectors.Add(FaceApiOperations.FaceIdentification.Name,
