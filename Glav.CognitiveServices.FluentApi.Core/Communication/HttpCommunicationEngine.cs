@@ -35,21 +35,30 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         {
             await _configurationSettings.DiagnosticLogger.LogInfoAsync($"Performing async service call for {actionItem.ApiDefintition}", "HttpCommunicationEngine");
             ByteArrayContent content = null;
-            if (actionItem.IsBinaryData)
+            try
             {
-                content = new ByteArrayContent(actionItem.ToBinary());
-                content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
-            }
-            else
-            {
-                // Only setup content if the operation is NOT a Http GET
-                content = actionItem.ApiDefintition.Method != HttpMethod.Get ?
-                    new StringContent(actionItem.ToString(), System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson) :
-                    null;
-            }
+                if (actionItem.IsBinaryData)
+                {
+                    content = new ByteArrayContent(actionItem.ToBinary());
+                    content.Headers.ContentType = new MediaTypeHeaderValue(HttpHeaders.MediaTypeApplicationOctetStream);
+                }
+                else
+                {
+                    // Only setup content if the operation is NOT a Http GET
+                    content = actionItem.ApiDefintition.Method != HttpMethod.Get ?
+                        new StringContent(actionItem.ToString(), System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson) :
+                        null;
+                }
 
-            var url = _configurationSettings.GetAbsoluteUrlForApiAction(actionItem);
-            return await CallServiceInternal(url,actionItem.ApiDefintition.Method, content,actionItem.ApiDefintition.Category);
+                var url = _configurationSettings.GetAbsoluteUrlForApiAction(actionItem);
+                return await CallServiceInternal(url, actionItem.ApiDefintition.Method, content, actionItem.ApiDefintition.Category);
+            } finally
+            {
+                if (content != null)
+                {
+                    content.Dispose();
+                }
+            }
 
         }
 
@@ -107,8 +116,10 @@ namespace Glav.CognitiveServices.FluentApi.Core.Communication
         {
             var firstAction = actionItemCollection.GetAllItems().First();
             var url = _configurationSettings.GetAbsoluteUrlForApiAction(firstAction);
-            var content = new StringContent(actionItemCollection.ToString(), System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson);
-            return await CallServiceInternal(url, firstAction.ApiDefintition.Method, content, firstAction.ApiDefintition.Category);
+            using (var content = new StringContent(actionItemCollection.ToString(), System.Text.Encoding.UTF8, HttpHeaders.MediaTypeApplicationJson))
+            {
+                return await CallServiceInternal(url, firstAction.ApiDefintition.Method, content, firstAction.ApiDefintition.Category);
+            }
         }
 
         /// <summary>

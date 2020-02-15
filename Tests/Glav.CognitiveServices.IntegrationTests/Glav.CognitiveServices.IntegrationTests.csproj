@@ -18,6 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="TestData\001_face_frontal.jpg" />
     <None Remove="TestData\abbey_road.png" />
     <None Remove="TestData\female_face_image.jpeg" />
     <None Remove="TestData\Handwriting1.png" />
@@ -49,6 +50,7 @@
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="TestData\001_face_frontal.jpg" />
     <EmbeddedResource Include="TestData\abbey_road.png" />
     <EmbeddedResource Include="TestData\female_face_image.jpeg" />
     <EmbeddedResource Include="TestData\Handwriting1.png" />

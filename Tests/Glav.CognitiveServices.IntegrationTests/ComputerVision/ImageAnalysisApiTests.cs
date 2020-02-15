@@ -14,12 +14,14 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         [Fact]
         public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysis()
         {
+            var faceFrontData = _testDataHelper.GetFileDataEmbeddedInAssembly("001_face_frontal.jpg");
+
             var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg", ImageAnalysisVisualFeatures.Faces)  // or http://recognitionmemory.org/files/2016/04/C2_032.jpg
+                .AddFileForImageAnalysis(faceFrontData, ImageAnalysisVisualFeatures.Faces)  
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
@@ -34,12 +36,14 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         [Fact]
         public async Task AdultTagAndCelebrityDataDataShouldBeProvidedWhenRequestedAsPartOfAnalysis()
         {
+            var faceFrontData = _testDataHelper.GetFileDataEmbeddedInAssembly("001_face_frontal.jpg");
+
             var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg", ImageAnalysisVisualFeatures.Adult | ImageAnalysisVisualFeatures.Tags
+                .AddFileForImageAnalysis(faceFrontData, ImageAnalysisVisualFeatures.Adult | ImageAnalysisVisualFeatures.Tags
                                         , ImageAnalysisDetails.Celebrities, SupportedLanguageType.English)
                 .AnalyseAllAsync();
 
@@ -57,14 +61,17 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         [Fact]
         public async Task ShouldSupportMultipleImagesForAnalysis()
         {
+            var faceFrontData = _testDataHelper.GetFileDataEmbeddedInAssembly("001_face_frontal.jpg");
+            var yetiFileData = _testDataHelper.GetFileDataEmbeddedInAssembly("yeti-car.jpg");
+
             var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg", ImageAnalysisVisualFeatures.Tags | ImageAnalysisVisualFeatures.Categories
+                .AddFileForImageAnalysis(faceFrontData, ImageAnalysisVisualFeatures.Tags | ImageAnalysisVisualFeatures.Categories
                                         , ImageAnalysisDetails.Celebrities, SupportedLanguageType.English)
-                .AddUrlForImageAnalysis("http://recognitionmemory.org/files/2016/04/C2_032.jpg", ImageAnalysisVisualFeatures.Categories)
+                .AddFileForImageAnalysis(yetiFileData, ImageAnalysisVisualFeatures.Categories)
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
@@ -91,14 +98,14 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         [Fact]
         public async Task ShouldBeAbleToAnalyseImageFromBinaryData()
         {
-            var fileData = _testDataHelper.GetFileDataEmbeddedInAssembly("yeti-car.jpg");
+            var yetiFileData = _testDataHelper.GetFileDataEmbeddedInAssembly("yeti-car.jpg");
 
             var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddFileForImageAnalysis(fileData, ImageAnalysisVisualFeatures.Tags)
+                .AddFileForImageAnalysis(yetiFileData, ImageAnalysisVisualFeatures.Tags)
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);
@@ -112,15 +119,16 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
         [Fact]
         public async Task ShouldBeAbleToAnalyseImageFromBinaryDataAndFromUrlInTheSamePipeline()
         {
-            var fileData = _testDataHelper.GetFileDataEmbeddedInAssembly("yeti-car.jpg");
+            var yetiFileData = _testDataHelper.GetFileDataEmbeddedInAssembly("yeti-car.jpg");
+            var faceFrontData = _testDataHelper.GetFileDataEmbeddedInAssembly("001_face_frontal.jpg");
 
             var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.ComputerVisionApiKey, LocationKeyIdentifier.SouthEastAsia)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddDebugDiagnosticLogging()
                 .UsingHttpCommunication()
                 .WithComputerVisionAnalysisActions()
-                .AddFileForImageAnalysis(fileData, ImageAnalysisVisualFeatures.Tags)
-                .AddUrlForImageAnalysis("http://www.scface.org/examples/001_frontal.jpg",ImageAnalysisVisualFeatures.Faces)
+                .AddFileForImageAnalysis(yetiFileData, ImageAnalysisVisualFeatures.Tags)
+                .AddFileForImageAnalysis(faceFrontData,ImageAnalysisVisualFeatures.Faces)
                 .AnalyseAllAsync();
 
             Assert.NotNull(result);

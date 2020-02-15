@@ -16,6 +16,7 @@
     <Version>1.0.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <NullableContextOptions>enable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>

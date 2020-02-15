@@ -14,6 +14,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Cognitive services, .net, azure, ComputerVision</PackageTags>
     <Description>A set of utility or convenience extensions for the fluent API for using the ComputerVision set of cognitive services</Description>
+    <NullableContextOptions>enable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>

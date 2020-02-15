@@ -16,6 +16,7 @@
     <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
     <PackageReleaseNotes>Addition of Face API support, removal of emotion API whichis deprecated.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <NullableContextOptions>enable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>

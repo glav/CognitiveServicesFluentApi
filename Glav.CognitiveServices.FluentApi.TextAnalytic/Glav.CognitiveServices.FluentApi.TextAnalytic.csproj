@@ -16,6 +16,7 @@
     <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <NullableContextOptions>enable</NullableContextOptions>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -61,7 +61,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
 
         public byte[] ToBinary()
         {
-            return null;
+            return Array.Empty<byte>();
         }
         public string ToEndUriFragment()
         {
