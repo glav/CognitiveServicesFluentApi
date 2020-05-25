@@ -4,6 +4,7 @@ using Glav.CognitiveServices.FluentApi.Face.Domain;
 using Glav.CognitiveServices.FluentApi.Core.Communication;
 using System;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain
 {
@@ -35,7 +36,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         {
             Id = id;
             LargePersonGroupId = personGroupId;
-            FaceIds = faceIds;
+            FaceIds = new ReadOnlyCollection<string>(faceIds);
             MaxNumOfCandidatesReturned = maxCandidatesReturned >= 0 && maxCandidatesReturned <= 100 ? maxCandidatesReturned : 0;
             ConfidenceThreshold = confidenceThreshold >= 0 && confidenceThreshold <= 1 ? confidenceThreshold : 0;
         }
@@ -45,13 +46,13 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         {
             Id = id;
             LargePersonGroupId = personGroupId;
-            FaceIds = faceIds;
+            FaceIds = new ReadOnlyCollection<string>(faceIds);
         }
 
         public bool IsBinaryData => false;
 
         public string LargePersonGroupId { get; private set; }
-        public string[] FaceIds { get; private set; }
+        public ReadOnlyCollection<string> FaceIds { get; private set; }
         public int MaxNumOfCandidatesReturned { get; private set; }
         public float ConfidenceThreshold { get; private set; }
 

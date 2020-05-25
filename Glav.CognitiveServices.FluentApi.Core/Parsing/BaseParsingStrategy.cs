@@ -17,21 +17,18 @@ namespace Glav.CognitiveServices.FluentApi.Core.Parsing
         protected void SetStandardError(string code, string message)
         {
             ResponseError = new TError();
-            var errResponseData = ResponseData as IActionResponseRootWithError;
-            if (errResponseData != null)
+            if (ResponseData is IActionResponseRootWithError errResponseData)
             {
                 errResponseData.error = new BaseApiErrorResponse { code = code, message = message };
             }
 
-            var errResponseError = ResponseError as IActionResponseRootWithError;
-            if (errResponseError != null)
+            if (ResponseError is IActionResponseRootWithError errResponseError)
             {
                 errResponseError.error = new BaseApiErrorResponse { code = code, message = message };
                 return;
             }
 
-            var baseError = ResponseError as IBaseApiErrorResponse;
-            if (baseError != null)
+            if (ResponseError is IBaseApiErrorResponse baseError)
             {
                 baseError.code = code;
                 baseError.message = message;
