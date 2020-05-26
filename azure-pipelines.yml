@@ -22,9 +22,9 @@ stages:
       displayName: 'Use NuGet 4.3.0'
 
     - task: DotNetCoreInstaller@1
-      displayName: 'Use .NET Core sdk 3.1.4'
+      displayName: 'Use .NET Core sdk 3.1.100'
       inputs:
-        version: 3.1.4
+        version: 3.1.100
 
     - task: DotNetCoreCLI@2
       displayName: 'dotnet restore'
