@@ -1,0 +1,23 @@
+name: Issues workflow
+
+on:
+  issues:
+    types: [opened]
+    
+jobs:
+  respond:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/github-script@v1
+      name: Responding to opened issue
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '👋 Thanks for reporting this issue! My day job keeps me pretty busy so will try and respond as soon as I can. Optionally, would happily accept pull requests. 😁'
+          })
