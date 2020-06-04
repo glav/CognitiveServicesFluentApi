@@ -39,9 +39,9 @@ namespace Glav.CognitiveServices.IntegrationTests
 
         }
 
-        public static string TextAnalyticsApiKey => Configuration["ApiKeys:TextAnalytics"];
-        public static string ComputerVisionApiKey => Configuration["ApiKeys:ComputerVision"];
-        public static string FaceApiKey => Configuration["ApiKeys:Face"];
+        public static string TextAnalyticsApiKey => _textAnalyticsApiKey;
+        public static string ComputerVisionApiKey => _computerVisionApiKey;
+        public static string FaceApiKey => _faceApiKey;
 
         private static string GetConfigOrEnvironmentVariable(string configKey, string envVariable)
         {
