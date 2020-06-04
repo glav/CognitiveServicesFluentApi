@@ -10,7 +10,7 @@ namespace Glav.CognitiveServices.IntegrationTests.ComputerVision
 {
     public class OcrAnalysisApiTests
     {
-        private TestDataHelper _testDataHelper = new TestDataHelper();
+        private readonly TestDataHelper _testDataHelper = new TestDataHelper();
 
         [Fact]
         public async Task TextInPhotohHouldBeRecognised_Mostly()
