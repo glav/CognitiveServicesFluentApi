@@ -56,7 +56,6 @@ stages:
       displayName: 'Build solution **\*.sln'
       inputs:
         solution: '**\*.sln'
-        vsVersion: 15.0
         platform: '$(BuildPlatform)'
         configuration: '$(BuildConfiguration)'
       condition: succeeded()
