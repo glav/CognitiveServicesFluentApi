@@ -62,11 +62,8 @@ stages:
       condition: succeeded()
  
     - script: |
-        set TEXTANALYTIC_API_KEY=$(TEXTANALYTIC_API_KEY)
         set
       displayName: Set a variable and then display all
-      env:
-        FACE_API_KEY: $(FACE_API_KEY)
 
     - task: DotNetCoreCLI@2
       displayName: 'Unit Tests'
