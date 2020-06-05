@@ -39,7 +39,7 @@ jobs:
     - name: Test enironment vars
       env:
         TEST: blah
-        run: echo $TEST
+      run: echo $TEST
 
     - name: Integration Tests
       env:
