@@ -10,6 +10,9 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  TEXTANALYTIC_API_KEY: $(TextAnalyticApiKey)
+  COMPUTERVISION_API_KEY: $(ComputerVisionApiKey)
+  FACE_API_KEY: $(FaceApiKey)
 
 stages:
 - stage: Build_Package
@@ -56,12 +59,6 @@ stages:
         vsVersion: 15.0
         platform: '$(BuildPlatform)'
         configuration: '$(BuildConfiguration)'
-      condition: succeeded()
-
-    - task: qetza.replacetokens.replacetokens-task.replacetokens@2
-      displayName: 'Replace tokens in **\*.json'
-      inputs:
-        targetFiles: '**\*.json'
       condition: succeeded()
 
     - task: DotNetCoreCLI@2
