@@ -41,4 +41,7 @@ jobs:
         COMPUTERVISION_API_KEY: ${{ secrets.COMPUTERVISIONAPIKEY }}
         FACE_API_KEY: ${{ secrets.FACEAPIKEY }}
         TEXTANALYTIC_API_KEY: ${{ secrets.TEXTANALYTICAPIKEY }}
+        TEST: blah
+      run: echo $TEST
       run: dotnet test --no-restore --verbosity normal ./Tests/Glav.CognitiveServices.IntegrationTests/Glav.CognitiveServices.IntegrationTests.csproj
+      
