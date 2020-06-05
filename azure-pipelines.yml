@@ -10,9 +10,9 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  #TEXTANALYTIC_API_KEY: $(TEXTANALYTIC_API_KEY)
-  #COMPUTERVISION_API_KEY: $(ComputerVisionApiKey)
-  #FACE_API_KEY: $(FaceApiKey)
+  TEXTANALYTIC_API_KEY: $(TEXTANALYTIC_API_KEY)
+  COMPUTERVISION_API_KEY: $(ComputerVisionApiKey)
+  FACE_API_KEY: $(FaceApiKey)
 
 stages:
 - stage: Build_Package
