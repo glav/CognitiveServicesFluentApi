@@ -67,7 +67,6 @@ stages:
         command: test
         projects: 'Tests\Glav.CognitiveServices.UnitTests\Glav.CognitiveServices.UnitTests.csproj'
         arguments: '--configuration $(BuildConfiguration) --no-build --collect "Code Coverage"'
-        feedsToUse: config
       condition: succeeded()
 
     - task: DotNetCoreCLI@2
@@ -76,7 +75,6 @@ stages:
         command: test
         projects: 'Tests\Glav.CognitiveServices.IntegrationTests\Glav.CognitiveServices.IntegrationTests.csproj'
         arguments: '--configuration $(BuildConfiguration) --no-build --collect "Code Coverage"'
-        feedsToUse: config
       condition: succeeded()
 
     - task: AzurePowerShell@4
