@@ -20,6 +20,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .AddSentimentAnalysis("I am having a fantastic time.")
                 .AnalyseAllAsync();
 
+            result.WriteVerboseResults();
+
             Assert.NotNull(result);
             Assert.NotNull(result.SentimentAnalysis);
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult);
@@ -40,6 +42,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a fantastic time.")
                 .AnalyseAllAsync();
+
+            result.WriteVerboseResults();
 
             Assert.NotNull(result);
             Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Positive));
@@ -66,6 +70,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .AddSentimentAnalysis("I am having a terrible time.")
                 .AnalyseAllAsync();
 
+            result.WriteVerboseResults();
+
             Assert.NotNull(result);
             Assert.NotNull(result.SentimentAnalysis);
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult);
@@ -85,6 +91,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .WithTextAnalyticAnalysisActions()
                 .AddSentimentAnalysis("I am having a terrible time.")
                 .AnalyseAllAsync();
+
+            result.WriteVerboseResults();
 
             Assert.NotNull(result);
             Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Negative));
@@ -112,6 +120,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
                 .AddSentimentAnalysis("This is really good")
                 .AddSentimentAnalysis("This is absolutely fantastic")
                 .AnalyseAllAsync();
+
+            result.WriteVerboseResults();
 
             Assert.NotNull(result);
             Assert.Equal(1, result.SentimentAnalysis.NumberOfResponses(DefaultScoreLevels.Negative));

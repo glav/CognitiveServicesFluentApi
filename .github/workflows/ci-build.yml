@@ -35,3 +35,16 @@ jobs:
     
     - name: Unit Tests
       run: dotnet test --no-restore --verbosity normal ./Tests/Glav.CognitiveServices.UnitTests/Glav.CognitiveServices.UnitTests.csproj
+
+    - name: Test enironment vars
+      env:
+        TEST: blah
+      run: echo $TEST
+
+    - name: Integration Tests
+      env:
+        COMPUTERVISION_API_KEY: ${{ secrets.COMPUTERVISIONAPIKEY }}
+        FACE_API_KEY: ${{ secrets.FACEAPIKEY }}
+        TEXTANALYTIC_API_KEY: ${{ secrets.TEXTANALYTICAPIKEY }}
+      run: dotnet test --no-restore --verbosity normal ./Tests/Glav.CognitiveServices.IntegrationTests/Glav.CognitiveServices.IntegrationTests.csproj
+      
