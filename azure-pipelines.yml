@@ -10,9 +10,9 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  TEXTANALYTIC_API_KEY: $(TEXTANALYTIC_API_KEY)
-  COMPUTERVISION_API_KEY: $(ComputerVisionApiKey)
-  FACE_API_KEY: $(FaceApiKey)
+  #TEXTANALYTIC_API_KEY: $(TEXTANALYTIC_API_KEY)
+  #COMPUTERVISION_API_KEY: $(ComputerVisionApiKey)
+  #FACE_API_KEY: $(FaceApiKey)
 
 stages:
 - stage: Build_Package
@@ -60,6 +60,13 @@ stages:
         platform: '$(BuildPlatform)'
         configuration: '$(BuildConfiguration)'
       condition: succeeded()
+ 
+    - script: |
+        set TEXTANALYTIC_API_KEY=$(TEXTANALYTIC_API_KEY)
+        set
+      displayName: Set a variable and then display all
+      env:
+        FACE_API_KEY: $(FACE_API_KEY)
 
     - task: DotNetCoreCLI@2
       displayName: 'Unit Tests'
