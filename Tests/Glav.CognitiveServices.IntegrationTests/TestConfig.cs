@@ -45,7 +45,7 @@ namespace Glav.CognitiveServices.IntegrationTests
 
         private static string GetConfigOrEnvironmentVariable(string configKey, string envVariable1, string envVariable2)
         {
-            if (string.IsNullOrWhiteSpace(Configuration[configKey]))
+            if (!string.IsNullOrWhiteSpace(Configuration[configKey]))
             {
                 return Configuration[configKey];
             }
