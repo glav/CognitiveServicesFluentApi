@@ -78,7 +78,7 @@ stages:
       inputs:
         command: test
         projects: 'Tests\Glav.CognitiveServices.IntegrationTests\Glav.CognitiveServices.IntegrationTests.csproj'
-        arguments: '--configuration $(BuildConfiguration) --no-build --collect "Code Coverage"'
+        arguments: '--configuration $(BuildConfiguration) --no-build --collect "Code Coverage" --verbosity normal'
       condition: succeeded()
 
     - task: AzurePowerShell@4
