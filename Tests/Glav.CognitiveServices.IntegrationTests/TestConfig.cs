@@ -31,9 +31,9 @@ namespace Glav.CognitiveServices.IntegrationTests
 
             Configuration = builder.Build();
 
-            _textAnalyticsApiKey = GetConfigOrEnvironmentVariable("ApiKeys:TextAnalytics", "TEXTANALYTIC_API_KEY");
-            _computerVisionApiKey = GetConfigOrEnvironmentVariable("ApiKeys:ComputerVision", "COMPUTERVISION_API_KEY");
-            _faceApiKey = GetConfigOrEnvironmentVariable("ApiKeys:Face", "FACE_API_KEY");
+            _textAnalyticsApiKey = GetConfigOrEnvironmentVariable("ApiKeys:TextAnalytics", "TEXTANALYTIC_API_KEY", "SECRET_TEXTANALYTIC_API_KEY");
+            _computerVisionApiKey = GetConfigOrEnvironmentVariable("ApiKeys:ComputerVision", "COMPUTERVISION_API_KEY", "SECRET_COMPUTERVISION_API_KEY");
+            _faceApiKey = GetConfigOrEnvironmentVariable("ApiKeys:Face", "FACE_API_KEY", "SECRET_FACE_API_KEY");
 
 
 
@@ -43,9 +43,13 @@ namespace Glav.CognitiveServices.IntegrationTests
         public static string ComputerVisionApiKey => _computerVisionApiKey;
         public static string FaceApiKey => _faceApiKey;
 
-        private static string GetConfigOrEnvironmentVariable(string configKey, string envVariable)
+        private static string GetConfigOrEnvironmentVariable(string configKey, string envVariable1, string envVariable2)
         {
-            return string.IsNullOrWhiteSpace(Configuration[configKey]) ? Environment.GetEnvironmentVariable(envVariable) : Configuration[configKey];
+            if (string.IsNullOrWhiteSpace(Configuration[configKey]))
+            {
+                return Configuration[configKey];
+            }
+            return string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable(envVariable1)) ? Environment.GetEnvironmentVariable(envVariable1) : Environment.GetEnvironmentVariable(envVariable2);
         }
     }
 }
