@@ -37,20 +37,20 @@ stages:
         noCache: true
       condition: succeeded()
 
-    # - task: SonarQubePrepare@4
-    #   displayName: 'Prepare analysis on SonarQube'
-    #   inputs:
-    #     SonarQube: 'Public Hosted Sonarqube'
-    #     projectKey: CognitiveFluentApi
-    #     projectName: 'Azure Cognitive Services Fluent API'
-    #     projectVersion: 0.8
-    #     extraProperties: |
-    #       # Additional properties that will be passed to the scanner, 
-    #       # Put one key=value per line, example:
-    #       # sonar.exclusions=**/*.bin
-    #       sonar.organization=glav-github
-    #       sonar.cs.vscoveragexml.reportsPaths=$(Agent.TempDirectory)/**/*.coveragexml
-    #   condition: succeeded()
+    - task: SonarQubePrepare@4
+      displayName: 'Prepare analysis on SonarQube'
+      inputs:
+        SonarQube: 'Public Hosted Sonarqube'
+        projectKey: CognitiveFluentApi
+        projectName: 'Azure Cognitive Services Fluent API'
+        projectVersion: 0.8
+        extraProperties: |
+          # Additional properties that will be passed to the scanner, 
+          # Put one key=value per line, example:
+          # sonar.exclusions=**/*.bin
+          sonar.organization=glav-github
+          sonar.cs.vscoveragexml.reportsPaths=$(Agent.TempDirectory)/**/*.coveragexml
+      condition: succeeded()
 
     - task: VSBuild@1
       displayName: 'Build solution **\*.sln'
@@ -99,13 +99,13 @@ stages:
       displayName: 'Convert Code coverage binary to XML'
       condition: succeeded()
 
-    # - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
-    #   displayName: 'Run Code Analysis'
-    #   condition: succeeded()
+    - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
+      displayName: 'Run Code Analysis'
+      condition: succeeded()
 
-    # - task: SonarSource.sonarqube.291ed61f-1ee4-45d3-b1b0-bf822d9095ef.SonarQubePublish@4
-    #   displayName: 'Publish Quality Gate Result'
-    #   condition: succeeded()
+    - task: SonarSource.sonarqube.291ed61f-1ee4-45d3-b1b0-bf822d9095ef.SonarQubePublish@4
+      displayName: 'Publish Quality Gate Result'
+      condition: succeeded()
 
     - task: PublishSymbols@1
       displayName: 'Publish symbols path: '
