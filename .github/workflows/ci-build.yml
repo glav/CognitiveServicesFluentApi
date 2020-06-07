@@ -1,4 +1,4 @@
-name: .NET Core
+name: Glav.CognitiveServices CI
 
 on:
   push:
