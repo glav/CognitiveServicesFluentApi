@@ -1,7 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Paul Glavich</Authors>
+    <Product>Cognitive Services Fluent API - LUIS</Product>
+    <Description>A basic fluent API for using the Luis related set of cognitive services</Description>
+    <Copyright>Paul Glavich 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Cognitive services, .net, azure, LUIS</PackageTags>
+    <PackageReleaseNotes>Addition of simplistic features to support basic functions of LUIS</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
