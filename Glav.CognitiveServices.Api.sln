@@ -52,6 +52,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\issues.yml = .github\workflows\issues.yml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.Luis", "Glav.CognitiveServices.FluentApi.Luis\Glav.CognitiveServices.FluentApi.Luis.csproj", "{98ECDE0D-7459-4084-99B3-961E4D52B826}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -170,6 +172,18 @@ Global
 		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Release|x64.Build.0 = Release|Any CPU
 		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Release|x86.ActiveCfg = Release|Any CPU
 		{92F866CD-5140-4DBB-9D42-D9AF1856BFF4}.Release|x86.Build.0 = Release|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Debug|x64.Build.0 = Debug|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Debug|x86.Build.0 = Debug|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Release|x64.ActiveCfg = Release|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Release|x64.Build.0 = Release|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Release|x86.ActiveCfg = Release|Any CPU
+		{98ECDE0D-7459-4084-99B3-961E4D52B826}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
