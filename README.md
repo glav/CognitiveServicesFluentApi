@@ -10,6 +10,15 @@ If you are new to this project, please see the getting started section below. Fo
 * [Face Fluent API](./Wiki/Face.md)
 * [Scoring system](./Wiki/Scoring.md)
 
+#### Build Status
+[![Build Status](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_apis/build/status/CognitiveServicesFluentApi%20CI%20Yaml?branchName=master)](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_build/latest?definitionId=63&branchName=master)
+
+#### Sonarqube Code Analaysis
+[Sonarqube Code Analysis report](https://sonarcloud.io/dashboard?id=CognitiveFluentApi)
+
+#### Project Board
+[Azure DevOps project Board is located here](https://dev.azure.com/glav/Glav.CognitiveServices.Api)
+
 ## How to get started.
 Easiest way is to install the nuget package for your specific analysis functionality. 
 Note that the fluent API for each cognitive service has a set of convenience or extension methods which is located in a separate package for ease of updates. 
@@ -183,11 +192,3 @@ This is just the beginning though. For full details on all the fluent API option
 ### Note
 This API is only in early stages and many refinements are yet to be applied.
 
-#### Build Status
-[![Build Status](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_apis/build/status/CognitiveServicesFluentApi%20CI%20Yaml?branchName=master)](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_build/latest?definitionId=63&branchName=master)
-
-#### Sonarqube Code Analaysis
-[Sonarqube Code Analysis report](https://sonarcloud.io/dashboard?id=CognitiveFluentApi)
-
-#### Project Board
-[Azure DevOps project Board is located here](https://dev.azure.com/glav/Glav.CognitiveServices.Api)
