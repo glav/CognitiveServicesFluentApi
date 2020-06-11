@@ -16,6 +16,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Cognitive services, .net, azure, LUIS</PackageTags>
     <PackageReleaseNotes>Addition of simplistic features to support basic functions of LUIS</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
