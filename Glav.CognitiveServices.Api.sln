@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wiki", "Wiki", "{8DDD157F-2
 	ProjectSection(SolutionItems) = preProject
 		Wiki\Common.md = Wiki\Common.md
 		Wiki\ComputerVision.md = Wiki\ComputerVision.md
+		Wiki\Contribution.md = Wiki\Contribution.md
 		Wiki\Face.md = Wiki\Face.md
 		README.md = README.md
 		Wiki\ReleaseNotes.md = Wiki\ReleaseNotes.md
