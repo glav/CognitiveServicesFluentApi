@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.FluentApi.Luis
 
         }
 
-        public void AddImageAnalysisResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddLuisAppAnalysisResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
             if (LuisAppAnalysis == null)
             {
