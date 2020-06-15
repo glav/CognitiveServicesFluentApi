@@ -11,6 +11,6 @@ If you want to add a new integration with a new cognitive service
 * Add in 'Domain' directory starting with ApiOperations
 * Add in ApiResponses to Domain namespace
 * Do AnalysisResult class and AnalysisContext in Domain namespace
-* Add ActionData and ActionDataItem classes
-
+* Add ActionData and ActionDataItem class(es)
+* Add AnalysisResults class(es)
 
