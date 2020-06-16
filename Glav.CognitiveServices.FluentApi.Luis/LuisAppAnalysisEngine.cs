@@ -28,7 +28,7 @@ namespace Glav.CognitiveServices.FluentApi.Luis
                     apiResults.AddLuisAppAnalysisResult(actionData, commsResult);
                     return;
                 }
-                throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
+                throw new NotSupportedException($"{apiAction} not supported yet");
 
             }).ConfigureAwait(continueOnCapturedContext: false);
         }
