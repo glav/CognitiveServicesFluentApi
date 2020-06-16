@@ -3,8 +3,6 @@ using Glav.CognitiveServices.FluentApi.Core.Analysis;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Luis.Domain;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Glav.CognitiveServices.FluentApi.Luis
