@@ -16,7 +16,7 @@ namespace Glav.CognitiveServices.FluentApi.Luis
         /// Luis is slightly different to other cognitive services in that instead of just an API Key, it requires an
         /// AppId (from Luis portal application settings) and a subscription Key (from Luid portal publish settings).
         /// </summary>
-        LuisConfigurationSettings(string appId, string subscriptionKey, LocationKeyIdentifier locationKey) 
+        public LuisConfigurationSettings(string appId, string subscriptionKey, LocationKeyIdentifier locationKey) 
                 : base(LuisAnalysisApiOperations.Category,subscriptionKey, locationKey, new ApiServiceUriCollection())
         {
             this.ApiKeys.Add(APP_ID, appId);

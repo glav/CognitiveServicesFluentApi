@@ -12,5 +12,6 @@ If you want to add a new integration with a new cognitive service
 * Add in ApiResponses to Domain namespace
 * Do AnalysisResult class and AnalysisContext in Domain namespace
 * Add ActionData and ActionDataItem class(es)
+* Ensure ActionDataItem class has ToQueryFragment and ToEndUriFragment implemented (even if returning nothing)
 * Add AnalysisResults class(es)
 * Add AnalysisEngine class
