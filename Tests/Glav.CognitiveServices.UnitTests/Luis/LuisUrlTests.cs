@@ -11,7 +11,7 @@ namespace Glav.CognitiveServices.UnitTests.Luis
     public class LuisUrlTests
     {
         [Fact]
-        public void ShouldParseFaceDetectionResultSuccessfully()
+        public void ShouldConstructStagingUrlSuccessfully()
         {
             const string appId = "APPID";
             const string subKey = "SUBKEY";
