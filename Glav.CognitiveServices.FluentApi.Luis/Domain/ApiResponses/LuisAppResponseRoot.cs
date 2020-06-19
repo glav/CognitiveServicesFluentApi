@@ -7,5 +7,6 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain.ApiResponses
     {
         public BaseApiErrorResponse error { get; set; }
         public string query { get; set; }
+        public LuisAppPrediction prediction { get; set; }
     }
 }

@@ -1,0 +1,65 @@
+{
+  "query": "where are some azure arm templates or scripts",
+  "prediction": {
+    "topIntent": "Find Cloud based resources",
+    "intents": {
+      "Find Cloud based resources": {
+        "score": 0.9956735
+      },
+      "None": {
+        "score": 0.00427947845
+      }
+    },
+    "entities": {
+      "cloud": [
+        "azure"
+      ],
+      "resourceToSearchFor": [
+        "arm templates",
+        "scripts"
+      ],
+      "$instance": {
+        "cloud": [
+          {
+            "type": "cloud",
+            "text": "azure",
+            "startIndex": 15,
+            "length": 5,
+            "score": 0.998559833,
+            "modelTypeId": 1,
+            "modelType": "Entity Extractor",
+            "recognitionSources": [
+              "model"
+            ]
+          }
+        ],
+        "resourceToSearchFor": [
+          {
+            "type": "resourceToSearchFor",
+            "text": "arm templates",
+            "startIndex": 21,
+            "length": 13,
+            "score": 0.9965712,
+            "modelTypeId": 1,
+            "modelType": "Entity Extractor",
+            "recognitionSources": [
+              "model"
+            ]
+          },
+          {
+            "type": "resourceToSearchFor",
+            "text": "scripts",
+            "startIndex": 38,
+            "length": 7,
+            "score": 0.9819473,
+            "modelTypeId": 1,
+            "modelType": "Entity Extractor",
+            "recognitionSources": [
+              "model"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

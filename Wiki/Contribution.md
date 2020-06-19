@@ -15,3 +15,5 @@ If you want to add a new integration with a new cognitive service
 * Ensure ActionDataItem class has ToQueryFragment and ToEndUriFragment implemented (even if returning nothing)
 * Add AnalysisResults class(es)
 * Add AnalysisEngine class
+* Implement *UrlTests to ensure API Url is formed correctly
+* Implement *ResponseParsingTests to ensure response parsing and paths are correct
