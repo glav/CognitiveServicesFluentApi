@@ -58,29 +58,9 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
                 }
                 var predictionChildren = predictionRoot[0].Children().ToList();
 
-                if (predictionChildren.Count < 2)
-                {
-                    return;
-                }
-                var intentsRoot = predictionChildren[1].Children().ToList();
+                ExtractIntents(predictionChildren);
 
-                if (intentsRoot.Count == 0)
-                {
-                    return;
-                }
-                var intentsChildren = intentsRoot[0].Children().ToList();
-
-                //var intents = ((Newtonsoft.Json.Linq.JObject)msg).Children().ToList()[1].Children().ToList()[0].Children().ToList()[1].Children().ToList()[0].Children().ToList();
-
-                var intents = new List<LuisAppIntent>();
-                foreach (var childIntent in intentsChildren)
-                {
-                    var prop = childIntent as JProperty;
-                    var name = prop?.Name;
-                    intents.Add(new LuisAppIntent { intent = name });
-                }
-                ResponseData.prediction.intents = intents.ToArray();
-
+                ExtractEntities(predictionChildren);
 
                 //ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LuisAppResponseRoot>(ApiCallResult.Data);
                 //// If we only have errors, then the call was not successfull. However we can have a situation where multiple
@@ -112,6 +92,65 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
                 ResponseData = new LuisAppResponseRoot  { error = new BaseApiErrorResponse { message = $"Error parsing results: {ex.Message}" } };
                 ActionSubmittedSuccessfully = false;
             }
+        }
+
+        private void ExtractEntities(List<JToken> predictionChildren)
+        {
+            if (predictionChildren.Count < 3)
+            {
+                return;
+            }
+            var entitiesRoot = predictionChildren[2].Children().ToList();
+            if (entitiesRoot.Count == 0)
+            {
+                return;
+            }
+            var entitiesChildren = entitiesRoot[0].Children().ToList();
+            var entities = new List<LuisAppEntity>();
+            foreach (var childEntitiy in entitiesChildren)
+            {
+                var prop = childEntitiy as JProperty;
+                if (prop?.Name == "$instance")
+                {
+                    continue;
+                }
+                var entitiesIdentified = prop.Children().ToList()[0].Children().ToList();
+
+                var listOfEntitiesIdentified = new List<string>();
+                foreach (var entityIdentified in entitiesIdentified)
+                {
+                    listOfEntitiesIdentified.Add(entityIdentified.Value<string>());
+                }
+
+                entities.Add(new LuisAppEntity { entityIdentifier = prop?.Name, entities = listOfEntitiesIdentified.ToArray() });
+            }
+            ResponseData.prediction.entities = new LuisAppEntities { entities = entities.ToArray(), instanceData = new LuisAppInstanceData() };
+        }
+
+        private void ExtractIntents(List<JToken> predictionChildren)
+        {
+            if (predictionChildren.Count < 2)
+            {
+                return;
+            }
+            var intentsRoot = predictionChildren[1].Children().ToList();
+
+            if (intentsRoot.Count == 0)
+            {
+                return;
+            }
+            var intentsChildren = intentsRoot[0].Children().ToList();
+
+            //var intents = ((Newtonsoft.Json.Linq.JObject)msg).Children().ToList()[1].Children().ToList()[0].Children().ToList()[1].Children().ToList()[0].Children().ToList();
+
+            var intents = new List<LuisAppIntent>();
+            foreach (var childIntent in intentsChildren)
+            {
+                var prop = childIntent as JProperty;
+                var name = prop?.Name;
+                intents.Add(new LuisAppIntent { intent = name });
+            }
+            ResponseData.prediction.intents = intents.ToArray();
         }
     }
 }
