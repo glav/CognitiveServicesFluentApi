@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Net;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Glav.CognitiveServices.FluentApi.Luis.Domain
 {
@@ -39,7 +40,47 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
                 JObject rawData = JObject.Parse(ApiCallResult.Data);
                 ResponseData = new LuisAppResponseRoot { query = (string)rawData["query"], prediction = new LuisAppPrediction() };
                 //var predictionContent = (string)rawData["prediction"];
+                dynamic msg = JsonConvert.DeserializeObject(ApiCallResult.Data);
+
+                //var intent = rawData.SelectToken("prediction.intent").ToString();
                 ResponseData.prediction.topIntent = (string)rawData["prediction"]["topIntent"];
+
+                // Ugly as sin
+                var root = ((Newtonsoft.Json.Linq.JObject)msg).Children().ToList();
+                if (root.Count < 2)
+                {
+                    return;
+                }
+                var predictionRoot = root[1].Children().ToList();
+                if (predictionRoot.Count == 0)
+                {
+                    return;
+                }
+                var predictionChildren = predictionRoot[0].Children().ToList();
+
+                if (predictionChildren.Count < 2)
+                {
+                    return;
+                }
+                var intentsRoot = predictionChildren[1].Children().ToList();
+
+                if (intentsRoot.Count == 0)
+                {
+                    return;
+                }
+                var intentsChildren = intentsRoot[0].Children().ToList();
+
+                //var intents = ((Newtonsoft.Json.Linq.JObject)msg).Children().ToList()[1].Children().ToList()[0].Children().ToList()[1].Children().ToList()[0].Children().ToList();
+
+                var intents = new List<LuisAppIntent>();
+                foreach (var childIntent in intentsChildren)
+                {
+                    var prop = childIntent as JProperty;
+                    var name = prop?.Name;
+                    intents.Add(new LuisAppIntent { intent = name });
+                }
+                ResponseData.prediction.intents = intents.ToArray();
+
 
                 //ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LuisAppResponseRoot>(ApiCallResult.Data);
                 //// If we only have errors, then the call was not successfull. However we can have a situation where multiple
