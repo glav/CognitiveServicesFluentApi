@@ -39,10 +39,7 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
             {
                 JObject rawData = JObject.Parse(ApiCallResult.Data);
                 ResponseData = new LuisAppResponseRoot { query = (string)rawData["query"], prediction = new LuisAppPrediction() };
-                //var predictionContent = (string)rawData["prediction"];
                 dynamic msg = JsonConvert.DeserializeObject(ApiCallResult.Data);
-
-                //var intent = rawData.SelectToken("prediction.intent").ToString();
                 ResponseData.prediction.topIntent = (string)rawData["prediction"]["topIntent"];
 
                 // Ugly as sin
