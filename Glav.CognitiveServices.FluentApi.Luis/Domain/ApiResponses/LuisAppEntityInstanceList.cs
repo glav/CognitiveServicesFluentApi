@@ -1,8 +1,8 @@
 ﻿namespace Glav.CognitiveServices.FluentApi.Luis.Domain.ApiResponses
 {
-    public class LuisAppEntities
+    public class LuisAppEntityInstanceList
     {
-        public LuisAppEntity[] entities { get; set; }
+        public LuisAppEntity[] entityIdentifiers { get; set; }
         public LuisAppInstanceData instanceData { get; set; }
     }
 

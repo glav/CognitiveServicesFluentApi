@@ -4,7 +4,7 @@
     {
         public string topIntent { get; set; }
         public LuisAppIntent[] intents { get; set; }
-        public LuisAppEntities entities {get; set;}
+        public LuisAppEntityInstanceList entityInstanceList {get; set;}
 
     }
 

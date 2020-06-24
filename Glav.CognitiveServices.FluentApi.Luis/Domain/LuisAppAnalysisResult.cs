@@ -43,7 +43,7 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
                 ResponseData.prediction.topIntent = (string)rawData["prediction"]["topIntent"];
 
                 // Ugly as sin
-                var root = ((Newtonsoft.Json.Linq.JObject)msg).Children().ToList();
+                var root = ((JObject)msg).Children().ToList();
                 if (root.Count < 2)
                 {
                     return;
@@ -56,32 +56,8 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
                 var predictionChildren = predictionRoot[0].Children().ToList();
 
                 ExtractIntents(predictionChildren);
-
                 ExtractEntities(predictionChildren);
 
-                //ResponseData = Newtonsoft.Json.JsonConvert.DeserializeObject<LuisAppResponseRoot>(ApiCallResult.Data);
-                //// If we only have errors, then the call was not successfull. However we can have a situation where multiple
-                //// documents are submitted and some were processed ok but some were not. This indicates the action was successful
-                //// but some some documents were not processed or valid.
-                //if (ResponseData != null
-                //        && ResponseData.errors != null
-                //        && ResponseData.errors.Length > 0
-                //        && (ResponseData.documents == null || ResponseData.documents.Length == 0))
-                //{
-                //    // If all that failed, we try just parsing into the error structure
-                //    ActionSubmittedSuccessfully = false;
-                //    return;
-                //}
-                //if (ResponseData == null || ResponseData.documents == null)
-                //{
-                //    var errors = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiErrorResponse>(ApiCallResult.Data);
-                //    if (errors != null)
-                //    {
-                //        ResponseData = new SentimentResultResponseRoot { errors = new ApiErrorResponse[] { errors } };
-                //    }
-                //    ActionSubmittedSuccessfully = false;
-                //    return;
-                //}
                 ActionSubmittedSuccessfully = true;
             }
             catch (Exception ex)
@@ -121,7 +97,7 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
 
                 entities.Add(new LuisAppEntity { entityIdentifier = prop?.Name, entities = listOfEntitiesIdentified.ToArray() });
             }
-            ResponseData.prediction.entities = new LuisAppEntities { entities = entities.ToArray(), instanceData = new LuisAppInstanceData() };
+            ResponseData.prediction.entityInstanceList = new LuisAppEntityInstanceList { entityIdentifiers = entities.ToArray(), instanceData = new LuisAppInstanceData() };
         }
 
         private void ExtractIntents(List<JToken> predictionChildren)
@@ -145,7 +121,9 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
             {
                 var prop = childIntent as JProperty;
                 var name = prop?.Name;
-                intents.Add(new LuisAppIntent { intent = name });
+                var innerChild = (childIntent.Children().FirstOrDefault() as JProperty);
+                var score = (double)childIntent.Children().FirstOrDefault().Children().FirstOrDefault();
+                intents.Add(new LuisAppIntent { intent = name, score = score });
             }
             ResponseData.prediction.intents = intents.ToArray();
         }
