@@ -22,7 +22,7 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build 
 
     # Instructions
     # 1. Setup JDK, Node.js, Python etc depending on your project type
