@@ -39,17 +39,30 @@ jobs:
       uses: actions/setup-java@v1.3.0
       with:
         java-version: 1.8
-
-    - name: Perform ShiftLeft Scan
-      uses: ShiftLeftSecurity/scan-action@master
+    
+    - name: Analyze with Inspect
+      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApi --tag branch=${GITHUB_REF} --csharp --cpg .
       env:
-        WORKSPACE: ""
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
-        SCAN_AUTO_BUILD: true
-      with:
-        output: reports
+        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+    
+    - name: Create status check
+      run: |
+        URL="https://www.shiftleft.io/violationlist/ShiftLeftJS?apps=ShiftLeftJS&isApp=1"
+        GH_CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs"
+        curl -XPOST $GH_CHECK_URL -H "Authorization: Token ${GITHUB_TOKEN}" -H "accept: application/vnd.github.antiope-preview+json" -H "Content-Type: application/json" -d "{\"name\": \"ShiftLeft Inspect\", \"head_sha\": \"${GITHUB_REF}\", \"external_id\": \"ShiftLeftJS\", \"details_url\": \"${URL}\", \"status\": \"completed\", \"conclusion\": \"action_required\", \"output\": {\"title\": \"ShiftLeft Inspect Findings\", \"summary\": \"Visit ${URL} for the findings\"}}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Perform ShiftLeft Scan
+    #   uses: ShiftLeftSecurity/scan-action@master
+    #   env:
+    #     WORKSPACE: ""
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+    #     SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
+    #     SCAN_AUTO_BUILD: true
+    #   with:
+    #     output: reports
         # Scan auto-detects the languages in your project. To override uncomment the below variable and set the type
         # type: credscan,java
         # type: csharp
