@@ -41,7 +41,7 @@ jobs:
         java-version: 1.8
     
     - name: Analyze with Inspect
-      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiCore --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Glav.CognitiveServices.FluentApi.Core
+      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiCore --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg --dep Glav.CognitiveServices.FluentApi.Core --dep Glav.CognitiveServices.FluentApi.Face --dep Glav.CognitiveServices.FluentApi.ComputerVision --dep Glav.CognitiveServices.FluentApi.TextAnalytic --dep Glav.CognitiveServices.FluentApi.Luis
       env:
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
