@@ -30,6 +30,10 @@ jobs:
     #    Example: mvn compile, or npm install or pip install goes here
     # 3. Invoke ShiftLeft Scan with the github token. Leave the workspace empty to use relative url
 
+    - name: Download ShiftLeft cli
+      run: |
+        curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
+        
     - name: Perform ShiftLeft Scan
       uses: ShiftLeftSecurity/scan-action@master
       env:
@@ -42,7 +46,7 @@ jobs:
         output: reports
         # Scan auto-detects the languages in your project. To override uncomment the below variable and set the type
         # type: credscan,java
-        type: csharp
+        # type: csharp
 
     - name: Upload report
       uses: github/codeql-action/upload-sarif@v1
