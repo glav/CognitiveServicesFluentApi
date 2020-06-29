@@ -41,7 +41,7 @@ jobs:
         java-version: 1.8
     
     - name: Analyze with Inspect
-      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApi --tag branch=${GITHUB_REF} --csharp --cpg .
+      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiCore --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Glav.CognitiveServices.FluentApi.Core
       env:
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
