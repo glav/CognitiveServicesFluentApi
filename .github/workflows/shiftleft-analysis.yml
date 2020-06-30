@@ -1,0 +1,129 @@
+# This workflow integrates ShiftLeft Scan with GitHub's code scanning feature
+# ShiftLeft Scan is a free open-source security tool for modern DevOps teams
+# Visit https://slscan.io/en/latest/integrations/code-scan for help
+name: ShiftLeft Scan
+
+# This section configures the trigger for the workflow. Feel free to customize depending on your convention
+on: push
+
+jobs:
+  Scan-Build:
+    # Scan runs on ubuntu, mac and windows
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+        
+    - name: Install dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build 
+
+    # Instructions
+    # 1. Setup JDK, Node.js, Python etc depending on your project type
+    # 2. Compile or build the project before invoking scan
+    #    Example: mvn compile, or npm install or pip install goes here
+    # 3. Invoke ShiftLeft Scan with the github token. Leave the workspace empty to use relative url
+
+    - name: Download ShiftLeft cli
+      run: |
+        curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
+    
+    # ShiftLeft requires Java 1.8. Post the package step override the version
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1.3.0
+      with:
+        java-version: 1.8
+    
+    # - name: Analyze FaceApi with Inspect
+    #   run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiFace --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Glav.CognitiveServices.FluentApi.Face
+    #   env:
+    #     SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
+    #     SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+    #     WORKSPACE: ""
+    #     SCAN_AUTO_BUILD: true
+    
+    # - name: Create status check
+    #   run: |
+    #     URL="https://www.shiftleft.io/violationlist/CognitiveServicesFluentApiFace?apps=CognitiveServicesFluentApiFace&isApp=1"
+    #     GH_CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs"
+    #     curl -XPOST $GH_CHECK_URL -H "Authorization: Token ${GITHUB_TOKEN}" -H "accept: application/vnd.github.antiope-preview+json" -H "Content-Type: application/json" -d "{\"name\": \"ShiftLeft Inspect\", \"head_sha\": \"${GITHUB_REF}\", \"external_id\": \"CognitiveServicesFluentApiFace\", \"details_url\": \"${URL}\", \"status\": \"completed\", \"conclusion\": \"action_required\", \"output\": {\"title\": \"ShiftLeft Inspect Findings\", \"summary\": \"Visit ${URL} for the findings\"}}"
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Analyze TextAnalytic with Inspect
+      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiTextAnalytic --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Extensions/TextAnalytic.Extensions
+      env:
+        SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
+        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+        WORKSPACE: ""
+        SCAN_AUTO_BUILD: true
+    
+    - name: Create status check
+      run: |
+        URL="https://www.shiftleft.io/violationlist/CognitiveServicesFluentApiTextAnalytic?apps=CognitiveServicesFluentApiTextAnalytic&isApp=1"
+        GH_CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs"
+        curl -XPOST $GH_CHECK_URL -H "Authorization: Token ${GITHUB_TOKEN}" -H "accept: application/vnd.github.antiope-preview+json" -H "Content-Type: application/json" -d "{\"name\": \"ShiftLeft Inspect\", \"head_sha\": \"${GITHUB_REF}\", \"external_id\": \"CognitiveServicesFluentApiTextAnalytic\", \"details_url\": \"${URL}\", \"status\": \"completed\", \"conclusion\": \"neutral\", \"output\": {\"title\": \"ShiftLeft Inspect Findings\", \"summary\": \"Visit ${URL} for the findings\"}}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # - name: Analyze ComputerVision with Inspect
+    #   run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiComputerVision --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Glav.CognitiveServices.FluentApi.TextAnalytic
+    #   env:
+    #     SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
+    #     SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+    #     WORKSPACE: ""
+    #     SCAN_AUTO_BUILD: true
+    
+    # - name: Create status check
+    #   run: |
+    #     URL="https://www.shiftleft.io/violationlist/CognitiveServicesFluentApiComputerVision?apps=CognitiveServicesFluentApiComputerVision&isApp=1"
+    #     GH_CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs"
+    #     curl -XPOST $GH_CHECK_URL -H "Authorization: Token ${GITHUB_TOKEN}" -H "accept: application/vnd.github.antiope-preview+json" -H "Content-Type: application/json" -d "{\"name\": \"ShiftLeft Inspect\", \"head_sha\": \"${GITHUB_REF}\", \"external_id\": \"CognitiveServicesFluentApiComputerVision\", \"details_url\": \"${URL}\", \"status\": \"completed\", \"conclusion\": \"action_required\", \"output\": {\"title\": \"ShiftLeft Inspect Findings\", \"summary\": \"Visit ${URL} for the findings\"}}"
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # - CSHARP NOT SUPPORTED USING THIS DEFAULT SCAN TOOL
+    # - name: Perform ShiftLeft Scan
+    #   uses: ShiftLeftSecurity/scan-action@master
+    #   env:
+    #     WORKSPACE: ""
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+    #     SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
+    #     SCAN_AUTO_BUILD: true
+    #   with:
+    #     output: reports
+        # Scan auto-detects the languages in your project. To override uncomment the below variable and set the type
+        # type: credscan,java
+        # type: csharp
+
+    # - name: Upload report
+    #   uses: github/codeql-action/upload-sarif@v1
+    #   with:
+    #     sarif_file: reports
+
+    # - USING THE CSHARP SPECIFIC SHIFTLEFT SCANNER HOWEVER - THIS DOES NOT WORK
+    # - name: Perform ShiftLeft Scan
+    #   uses: glav/scan-action-csharp@master
+    #   env:
+    #     WORKSPACE: ""
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+    #     SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
+    #     SCAN_AUTO_BUILD: true
+    #   with:
+    #     output: reports
+    #     # Scan auto-detects the languages in your project. To override uncomment the below variable and set the type
+    #     # type: credscan,java
+    #     type: csharp
+ 
+    # - name: Upload report
+    #   uses: github/codeql-action/upload-sarif@v1
+    #   with:
+    #     sarif_file: reports
