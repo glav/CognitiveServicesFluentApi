@@ -1,5 +1,5 @@
 # CognitiveServicesFluentApi
-A fluent API to use with the Microsoft Cortana suite of cognitive services. Currently this API only supports TextAnalytics, ComputerVision and Face services but more will come. 
+A fluent API to use with the Microsoft Cortana suite of cognitive services. Currently this API supports TextAnalytics, ComputerVision and Face cognitive services. 
 
 The objective is to make the set of Cognitive service API's really easy to consume from .Net applications. In addition, a set of helper extension methods are available to try and make common functionality super easy to access.
 
@@ -9,6 +9,15 @@ If you are new to this project, please see the getting started section below. Fo
 * [ComputerVision Fluent API](./Wiki/ComputerVision.md)
 * [Face Fluent API](./Wiki/Face.md)
 * [Scoring system](./Wiki/Scoring.md)
+
+#### Build Status
+[![Build Status](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_apis/build/status/CognitiveServicesFluentApi%20CI%20Yaml?branchName=master)](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_build/latest?definitionId=63&branchName=master)
+
+#### Sonarqube Code Analaysis
+[Sonarqube Code Analysis report](https://sonarcloud.io/dashboard?id=CognitiveFluentApi)
+
+#### Project Board
+[Azure DevOps project Board is located here](https://dev.azure.com/glav/Glav.CognitiveServices.Api)
 
 ## How to get started.
 Easiest way is to install the nuget package for your specific analysis functionality. 
@@ -20,28 +29,38 @@ details on those extension/convenience methods is provided within the specific f
 
 ```powershell
 Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic.Extensions # Fluent API with included extension/convenience methods
-
 # -or-
-
 Install-Package Glav.CognitiveServices.FluentApi.TextAnalytic  # Just the Fluent API
+```
+or using dotnet CLI
+```
+dotnet add package Glav.CognitiveServices.FluentApi.TextAnalytic.Extensions
 ```
 
 #### For ComputerVision (such as image description or adult content detection in images)
 ```powershell
 Install-Package Glav.CognitiveServices.FluentApi.ComputerVision.Extensions # Fluent API with included extension/convenience methods
-
 # -or-
-
 Install-Package Glav.CognitiveServices.FluentApi.ComputerVision # Just the Fluent API
 ```
+via dotnet CLI
+or using dotnet CLI
+```
+dotnet add package Glav.CognitiveServices.FluentApi.ComputerVision.Extensions
+```
+
 #### For Face
 ```powershell
 Install-Package Glav.CognitiveServices.FluentApi.Face.Extensions # Fluent API with included extension/convenience methods
-
 # -or-
-
 Install-Package Glav.CognitiveServices.FluentApi.Face # Just the Fluent API
 ```
+via dotnet CLI
+or using dotnet CLI
+```
+dotnet add package Glav.CognitiveServices.FluentApi.Face.Extensions
+```
+
 
 #### Azure Cognitive Services Setup
 In order to make use of Cognitive services, you need to have an instance of the cognitive service setup in your Azure subscription. [This link](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account) shows you how to do this. You will then have two crucial pieces of information:
@@ -183,11 +202,3 @@ This is just the beginning though. For full details on all the fluent API option
 ### Note
 This API is only in early stages and many refinements are yet to be applied.
 
-#### Build Status
-[![Build Status](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_apis/build/status/CognitiveServicesFluentApi%20CI%20Yaml?branchName=master)](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_build/latest?definitionId=63&branchName=master)
-
-#### Sonarqube Code Analaysis
-[Sonarqube Code Analysis report](https://sonarcloud.io/dashboard?id=CognitiveFluentApi)
-
-#### Project Board
-[Azure DevOps project Board is located here](https://dev.azure.com/glav/Glav.CognitiveServices.Api)
