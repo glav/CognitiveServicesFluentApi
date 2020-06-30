@@ -110,7 +110,7 @@ jobs:
     - name: Perform ShiftLeft Scan
       uses: glav/scan-action-csharp@master
       env:
-        WORKSPACE: ""
+        WORKSPACE: "./Glav.CognitiveServices.FluentApi.TextAnalytic/Glav.CognitiveServices.FluentApi.TextAnalytic.csproj"
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
