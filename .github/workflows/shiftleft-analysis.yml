@@ -68,7 +68,7 @@ jobs:
       run: |
         URL="https://www.shiftleft.io/violationlist/CognitiveServicesFluentApiTextAnalytic?apps=CognitiveServicesFluentApiTextAnalytic&isApp=1"
         GH_CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs"
-        curl -XPOST $GH_CHECK_URL -H "Authorization: Token ${GITHUB_TOKEN}" -H "accept: application/vnd.github.antiope-preview+json" -H "Content-Type: application/json" -d "{\"name\": \"ShiftLeft Inspect\", \"head_sha\": \"${GITHUB_REF}\", \"external_id\": \"CognitiveServicesFluentApiTextAnalytic\", \"details_url\": \"${URL}\", \"status\": \"completed\", \"conclusion\": \"action_required\", \"output\": {\"title\": \"ShiftLeft Inspect Findings\", \"summary\": \"Visit ${URL} for the findings\"}}"
+        curl -XPOST $GH_CHECK_URL -H "Authorization: Token ${GITHUB_TOKEN}" -H "accept: application/vnd.github.antiope-preview+json" -H "Content-Type: application/json" -d "{\"name\": \"ShiftLeft Inspect\", \"head_sha\": \"${GITHUB_REF}\", \"external_id\": \"CognitiveServicesFluentApiTextAnalytic\", \"details_url\": \"${URL}\", \"status\": \"completed\", \"conclusion\": \"neutral\", \"output\": {\"title\": \"ShiftLeft Inspect Findings\", \"summary\": \"Visit ${URL} for the findings\"}}"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
