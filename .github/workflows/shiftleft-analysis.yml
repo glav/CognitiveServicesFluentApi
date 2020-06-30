@@ -41,7 +41,7 @@ jobs:
         java-version: 1.8
     
     - name: Analyze FaceApi with Inspect
-      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiFace --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg --with-ProjectReference Glav.CognitiveServices.FluentApi.Face
+      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiFace --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Glav.CognitiveServices.FluentApi.Face
       env:
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
@@ -57,7 +57,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Analyze TextAnalytic with Inspect
-      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiTextAnalytic --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg --with-ProjectReference Glav.CognitiveServices.FluentApi.TextAnalytic
+      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiTextAnalytic --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Glav.CognitiveServices.FluentApi.TextAnalytic
       env:
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
@@ -73,7 +73,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Analyze ComputerVision with Inspect
-      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiComputerVision --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg --with-ProjectReference Glav.CognitiveServices.FluentApi.TextAnalytic
+      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiComputerVision --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Glav.CognitiveServices.FluentApi.TextAnalytic
       env:
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
