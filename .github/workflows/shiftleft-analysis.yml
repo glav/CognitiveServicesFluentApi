@@ -40,24 +40,24 @@ jobs:
       with:
         java-version: 1.8
     
-    - name: Analyze FaceApi with Inspect
-      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiFace --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Glav.CognitiveServices.FluentApi.Face
-      env:
-        SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
-        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
-        WORKSPACE: ""
-        SCAN_AUTO_BUILD: true
+    # - name: Analyze FaceApi with Inspect
+    #   run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiFace --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Glav.CognitiveServices.FluentApi.Face
+    #   env:
+    #     SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
+    #     SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+    #     WORKSPACE: ""
+    #     SCAN_AUTO_BUILD: true
     
-    - name: Create status check
-      run: |
-        URL="https://www.shiftleft.io/violationlist/CognitiveServicesFluentApiFace?apps=CognitiveServicesFluentApiFace&isApp=1"
-        GH_CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs"
-        curl -XPOST $GH_CHECK_URL -H "Authorization: Token ${GITHUB_TOKEN}" -H "accept: application/vnd.github.antiope-preview+json" -H "Content-Type: application/json" -d "{\"name\": \"ShiftLeft Inspect\", \"head_sha\": \"${GITHUB_REF}\", \"external_id\": \"CognitiveServicesFluentApiFace\", \"details_url\": \"${URL}\", \"status\": \"completed\", \"conclusion\": \"action_required\", \"output\": {\"title\": \"ShiftLeft Inspect Findings\", \"summary\": \"Visit ${URL} for the findings\"}}"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Create status check
+    #   run: |
+    #     URL="https://www.shiftleft.io/violationlist/CognitiveServicesFluentApiFace?apps=CognitiveServicesFluentApiFace&isApp=1"
+    #     GH_CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs"
+    #     curl -XPOST $GH_CHECK_URL -H "Authorization: Token ${GITHUB_TOKEN}" -H "accept: application/vnd.github.antiope-preview+json" -H "Content-Type: application/json" -d "{\"name\": \"ShiftLeft Inspect\", \"head_sha\": \"${GITHUB_REF}\", \"external_id\": \"CognitiveServicesFluentApiFace\", \"details_url\": \"${URL}\", \"status\": \"completed\", \"conclusion\": \"action_required\", \"output\": {\"title\": \"ShiftLeft Inspect Findings\", \"summary\": \"Visit ${URL} for the findings\"}}"
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Analyze TextAnalytic with Inspect
-      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiTextAnalytic --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Glav.CognitiveServices.FluentApi.TextAnalytic
+      run: ${GITHUB_WORKSPACE}/sl analyze --no-diagnostic --force --app CognitiveServicesFluentApiTextAnalytic --tag branch=${GITHUB_REF} --csharp --dotnet-core --cpg Extensions/TextAnalytic.Extensions
       env:
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
