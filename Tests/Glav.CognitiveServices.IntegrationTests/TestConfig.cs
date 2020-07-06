@@ -16,6 +16,8 @@ namespace Glav.CognitiveServices.IntegrationTests
         private static string _textAnalyticsApiKey;
         private static string _computerVisionApiKey;
         private static string _faceApiKey;
+        private static string _luisAppApiKey;
+        private static string _luisSubscriptionApiKey;
 
         public static IConfigurationRoot Configuration { get; set; }
 
@@ -34,6 +36,8 @@ namespace Glav.CognitiveServices.IntegrationTests
             _textAnalyticsApiKey = GetConfigOrEnvironmentVariable("ApiKeys:TextAnalytics", "TEXTANALYTIC_API_KEY");
             _computerVisionApiKey = GetConfigOrEnvironmentVariable("ApiKeys:ComputerVision", "COMPUTERVISION_API_KEY");
             _faceApiKey = GetConfigOrEnvironmentVariable("ApiKeys:Face", "FACE_API_KEY");
+            _luisAppApiKey = GetConfigOrEnvironmentVariable("ApiKeys:LuisApp", "LUIS_APP_API_KEY");
+            _luisSubscriptionApiKey = GetConfigOrEnvironmentVariable("ApiKeys:LuisSubscription", "LUIS_SUBSCRIPTION_API_KEY");
 
 
 
@@ -42,6 +46,9 @@ namespace Glav.CognitiveServices.IntegrationTests
         public static string TextAnalyticsApiKey => _textAnalyticsApiKey;
         public static string ComputerVisionApiKey => _computerVisionApiKey;
         public static string FaceApiKey => _faceApiKey;
+
+        public static string LuisAppApiKey => _luisAppApiKey;
+        public static string LuisSubscriptionApiKey => _luisSubscriptionApiKey;
 
         private static string GetConfigOrEnvironmentVariable(string configKey, string envVariable)
         {

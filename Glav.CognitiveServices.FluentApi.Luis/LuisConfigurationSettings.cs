@@ -8,6 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.Luis
     public class LuisConfigurationSettings : ConfigurationSettings
     {
         public const string APP_ID = "LuisAppId";
+        public const string SUBSCRIPTION_KEY = "LuisSubscriptionKey";
 
         public bool ShowAllIntents {get; set;}
         public bool IsVerboseLoggingEnabled {get; set;}
@@ -20,6 +21,7 @@ namespace Glav.CognitiveServices.FluentApi.Luis
                 : base(LuisAnalysisApiOperations.Category,subscriptionKey, locationKey, new ApiServiceUriCollection())
         {
             this.ApiKeys.Add(APP_ID, appId);
+            this.ApiKeys.Add(SUBSCRIPTION_KEY, subscriptionKey);
             ShowAllIntents = true;
             IsVerboseLoggingEnabled = true;
         }
