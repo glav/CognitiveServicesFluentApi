@@ -114,8 +114,6 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
             }
             var intentsChildren = intentsRoot[0].Children().ToList();
 
-            //var intents = ((Newtonsoft.Json.Linq.JObject)msg).Children().ToList()[1].Children().ToList()[0].Children().ToList()[1].Children().ToList()[0].Children().ToList();
-
             var intents = new List<LuisAppIntent>();
             foreach (var childIntent in intentsChildren)
             {
