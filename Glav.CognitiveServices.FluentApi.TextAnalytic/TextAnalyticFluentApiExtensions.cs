@@ -22,29 +22,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, TextAnalyticApiOperations.SentimentAnalysis);
         }
 
-        public static TextAnalyticAnalysisSettings AddSentimentAnalysisSplitIntoSentences(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
-        {
-            var sentences = textToAnalyse.SplitTextIntoSentences();
-            sentences.ToList().ForEach(s =>
-            {
-                apiAnalysis.AddTextForAnalysis(s, TextAnalyticApiOperations.SentimentAnalysis);
-            });
-            return apiAnalysis;
-        }
-
         public static TextAnalyticAnalysisSettings AddKeyPhraseAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
         {
             return apiAnalysis.AddTextForAnalysis(textToAnalyse, TextAnalyticApiOperations.KeyPhraseAnalysis);
-        }
-
-        public static TextAnalyticAnalysisSettings AddKeyPhraseAnalysisSplitIntoSentences(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
-        {
-            var sentences = textToAnalyse.SplitTextIntoSentences();
-            sentences.ToList().ForEach(s =>
-            {
-                apiAnalysis.AddTextForAnalysis(s, TextAnalyticApiOperations.KeyPhraseAnalysis);
-            });
-            return apiAnalysis;
         }
 
         public static TextAnalyticAnalysisSettings AddLanguageAnalysis(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
