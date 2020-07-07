@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
         public async Task ShouldBeAbleToCreateLargePersonGroup()
         {
             var groupId = System.Guid.NewGuid().ToString();
-            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -36,7 +36,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             var groupId = System.Guid.NewGuid().ToString();
             var groupName = $"integrationtest-{groupId}";
 
-            var createResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var createResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -46,7 +46,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             Assert.True(createResult.LargePersonGroupCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
 
-            var getResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var getResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -67,7 +67,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             var groupId = System.Guid.NewGuid().ToString();
             var groupName = $"integrationtest-{groupId}";
 
-            var createResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var createResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -77,7 +77,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             createResult.LargePersonGroupCreateAnalysis.AssertAnalysisContextValidity();
 
-            var listResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var listResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()

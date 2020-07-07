@@ -10,8 +10,8 @@ namespace Glav.CognitiveServices.FluentApi.Face
 {
     public class FaceConfigurationSettings : ConfigurationSettings
     {
-        public FaceConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey) 
-                : base(FaceApiOperations.Category,apiKey,locationKey, new ApiServiceUriCollection())
+        public FaceConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey, int maxNumberOfRequestRetries = Core.Configuration.ApiConstants.DefaultMaxNumberOfRequestRetries) 
+                : base(FaceApiOperations.Category,apiKey,locationKey, new ApiServiceUriCollection(),maxNumberOfRequestRetries)
         {
         }
 
@@ -19,10 +19,10 @@ namespace Glav.CognitiveServices.FluentApi.Face
         {
         }
 
-        public static FaceConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey)
+        public static FaceConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey, int maxNumberOfRequestRetries = Core.Configuration.ApiConstants.DefaultMaxNumberOfRequestRetries)
         {
             SupportedLanguages.Setup();
-            return new FaceConfigurationSettings(apiKey, locationKey);
+            return new FaceConfigurationSettings(apiKey, locationKey, maxNumberOfRequestRetries);
         }
     }
 }

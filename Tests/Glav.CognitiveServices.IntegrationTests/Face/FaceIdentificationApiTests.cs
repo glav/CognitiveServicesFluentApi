@@ -25,7 +25,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             var personId = setupResult.PersonId;
             var groupId = setupResult.GroupId;
 
-            var listFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var listFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
                 .AddConsoleAndTraceLogging()
                 .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                 .UsingHttpCommunication()
@@ -46,7 +46,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             {
 
                 // Add some faces to the person in the group
-                var addFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                var addFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
                                 .AddConsoleAndTraceLogging()
                                 .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                                 .UsingHttpCommunication()
@@ -67,7 +67,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             }
 
             // Detect a face to identify against and grab the face Id
-            var addFaceTestResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var addFaceTestResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
                 .AddConsoleAndTraceLogging()
                 .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                 .UsingHttpCommunication()
@@ -81,7 +81,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             var faceId = addFaceTestResult.FaceDetectionAnalysis.AnalysisResult.ResponseData.detectedFaces.First().faceId;
 
 
-            var identifyResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var identifyResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
                             .AddConsoleAndTraceLogging()
                             .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                             .UsingHttpCommunication()
