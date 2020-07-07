@@ -1,4 +1,86 @@
 
+## Version: 1.0.1 [07/07/2020 14:52:52]
+### New Items
+* 229a40c -Moved TextAnalytic extensions into the extensions package
+### Bugfixes
+* 544fa51 -Fixing memory issue and fixing tests
+### Full change list
+* 229a40c NEW:Moved TextAnalytic extensions into the extensions package
+* 0819b64 Merge pull request #17 from glav/glav-security-scanning
+* 65b1655 Setting check run action to neutral instead of action_required as it always fai;ls the build
+* 0b8507f Try again
+* 853f70f Reduce to one scan
+* b9b6dc7 Revert to manual method
+* 8b78661 I lied, another try
+* 262708c One more try
+* 91695eb Trying a custom action instead based from original
+* bd35aa7 Trying diff syntax again
+* b0b227a Trying diff syntax
+* edd7e42 Using separate projects for each scan
+* 784e413 Added other fluen API projects
+* bf48587 Remving reports upload from original template
+* 40e7423 Now try using a path
+* 453bda2 Trying without the actual task, using command line
+* ec278bc Damn yaml syntax
+* d3de073 Try manual install of java dependency
+* d9c3443 Try manual install of SL cli
+* 9b43f72 Fixing stupid typo
+* 838402a Adding Shiftleft access token and org ID to enable inspector
+* 97d02ac Try explicit lang support
+* ec83a4f Tried minor change to shiftleft scan
+* 45d9c66 Added build option for shift left to work
+* 9dd0c86 Merge branch 'master' into glav-security-scanning
+* 590bade Merge pull request #18 from glav/glav-code-QL-scan
+* 9d23fa1 Merge pull request #16 from glav/glav/DocumentationUpdate
+* 9f582ee Create codeql-analysis.yml
+* 9056d24 Create shiftleft-analysis.yml
+* a7e3f2f Minor documentation update
+* f44ca99 Merge pull request #14 from glav/MinorReadmeChange
+* 1533d1d Update README.md
+* 16e2345 Merge pull request #13 from glav/glav/RetryingNewSonarAction
+* 651016b Trying newer dedicated SonarCloud action
+* 672f0c2 Renaming GH action and trying update to Somarcloud azure devops task
+* 578d053 Revert "Renaming GH action and trying update to Somarcloud azure devops task"
+* e35c03d Renaming GH action and trying update to Somarcloud azure devops task
+* 6c7a755 Update azure-pipelines.yml for Azure Pipelines
+* 047f0f3 Merge pull request #12 from glav/glav/EnableIntegrationTestsOnActions
+* 863286d Reverting silly config attempts
+* 74bb56b Extra logging to determine issue with Azure DevOps
+* 72d85ea Update azure-pipelines.yml for Azure Pipelines
+* dc3ea64 Update azure-pipelines.yml for Azure Pipelines
+* bd55647 Update azure-pipelines.yml for Azure Pipelines
+* 71677f3 Update azure-pipelines.yml for Azure Pipelines
+* 10397c9 Update azure-pipelines.yml for Azure Pipelines
+* 8b82ce9 Update azure-pipelines.yml for Azure Pipelines
+* f9dad70 Update azure-pipelines.yml for Azure Pipelines
+* 08869db Silly mistake
+* 17914a9 Now fixing azure devops
+* aab91b5 Update azure-pipelines.yml for Azure Pipelines
+* b97f765 Removed tokens from config in favour of using environment vars
+* eb81ca5 Damn yaml syntax
+* 6b0f78f testing workflow again
+* 7637e04 testing workflow
+* 5711f91 Again, more stupid errors.
+* bf81b48 Stupid syntax mistake
+* 29c9648 Forgot the dollar syntax
+* 822ffbb Updated test config to use environment vars as well
+* db066d4 Added integration tests and secrets to workflow
+* a59f549 Merge pull request #11 from glav/glav/SyntaxAndCodeCleanup
+* 37184c9 Merge pull request #10 from glav/glav/SonarcloudIntegration
+* b0fd334 Minor path changes
+* 8dc4045 Removed sonarcloud stuff as it doesn't work, added in tests to actions
+* 614a2d0 reverting pattern and setting exlusions
+* 6124d7e Trying different path for sonar checks
+* 1cf94d5 Updated tests too
+* afa66d0 Use proper version
+* acfc6e7 Update .Net core installer and sdk downloaded
+* 58e1473 Disable azure pipelines sonarqube run as it was not working
+* fde4512 Trying the sonarcloud actions integration
+* 3f8b720 Merge pull request #7 from glav/glav/IssueResponderAction
+* d884ee3 Add in simple actions
+* 90455ba Minor syntax change to use latest which cleans up code a bit
+* 544fa51 BUG:Fixing memory issue and fixing tests
+
 ## Version: 1.0.0 [08/09/2019 17:58:57]
 ### Full change list
 * 18aa305 Remove some more code smells
