@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
 using System.Collections.Generic;
@@ -32,6 +33,18 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         {
             return context.AnalysisResult.ResponseData.documents.Where(d => Score(context, d).NormalisedName == sentimentClassification.ToLowerInvariant());
         }
+
+        public static TextAnalyticAnalysisSettings AddSentimentAnalysisSplitIntoSentences(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
+        {
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<TextAnalyticActionData>(TextAnalyticApiOperations.SentimentAnalysis);
+            var sentences = textToAnalyse.SplitTextIntoSentences();
+            sentences.ToList().ForEach(s =>
+            {
+                actionData.Add(TextAnalyticApiOperations.SentimentAnalysis, textToAnalyse);
+            });
+            return apiAnalysis;
+        }
+
 
         public static string GetInitialErrorMessage(this SentimentAnalysisContext context)
         {
