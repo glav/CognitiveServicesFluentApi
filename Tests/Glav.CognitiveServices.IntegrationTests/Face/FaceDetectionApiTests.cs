@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
         [Fact]
         public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysisForUrlAnalysis()
         {
-            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var result = await FaceTestHelper.CreateFaceConfig()
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -39,7 +39,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
         public async Task FaceDataShouldBeProvidedForGenderAgeImageFileAnalysis()
         {
             var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
-            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var result = await FaceTestHelper.CreateFaceConfig()
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -65,7 +65,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
         public async Task FaceAttributesShouldBeProvidedForCommonAttributesImageFileAnalysis()
         {
             var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
-            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var result = await FaceTestHelper.CreateFaceConfig()
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
@@ -87,7 +87,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
         public async Task FaceAttributesShouldBeProvidedForUnCommonAttributesImageFileAnalysis()
         {
             var imageData = _testDataHelper.GetFileDataEmbeddedInAssembly("female_face_image.jpeg");
-            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var result = await FaceTestHelper.CreateFaceConfig()
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()

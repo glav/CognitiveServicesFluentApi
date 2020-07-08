@@ -8,20 +8,19 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 {
     public class LargePersonGroupFaceApiTests
     {
-        private TestDataHelper _testDataHelper = new TestDataHelper();
         [Fact]
         public async Task ShouldBeAbleToTrainLargePersonGroupWithFaces()
         {
             var groupId = System.Guid.NewGuid().ToString();
 
-            var setupResult = await _testDataHelper.EnsureLargePersonGroupIsSetupAsync(groupId);
+            var setupResult = await FaceTestHelper.EnsureLargePersonGroupIsSetupAsync(groupId);
             if (!setupResult.Success)
             {
                 Assert.True(false, "Setup person group person failed");
             }
             var personId = setupResult.PersonId;
 
-            var addFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var addFaceResult = await FaceTestHelper.CreateFaceConfig()
                             .AddConsoleAndTraceLogging()
                             .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                             .UsingHttpCommunication()
@@ -31,7 +30,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             addFaceResult.LargePersonGroupPersonFaceAddAnalysis.AssertAnalysisContextValidity();
 
-            var faceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var faceResult = await FaceTestHelper.CreateFaceConfig()
                             .AddConsoleAndTraceLogging()
                             .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                             .UsingHttpCommunication()
@@ -48,7 +47,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             Assert.True(faceResult.IsTrainingSuccessful());
 
-            var deleteResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var deleteResult = await FaceTestHelper.CreateFaceConfig()
                     .AddConsoleAndTraceLogging()
                     .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                     .UsingHttpCommunication()

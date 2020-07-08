@@ -17,7 +17,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
         public async Task ShouldBeAbleToCreateLargePersonGroup()
         {
             var groupId = System.Guid.NewGuid().ToString();
-            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var result = await FaceTestHelper.CreateFaceConfig()
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -28,6 +28,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             Assert.NotNull(result);
             result.LargePersonGroupCreateAnalysis.AssertAnalysisContextValidity();
             Assert.Equal(HttpStatusCode.OK, result.LargePersonGroupCreateAnalysis.AnalysisResult.ApiCallResult.StatusCode);
+
+            await FaceTestHelper.DeleteLargePersonGroup(groupId);
         }
 
                 [Fact]
@@ -36,7 +38,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             var groupId = System.Guid.NewGuid().ToString();
             var groupName = $"integrationtest-{groupId}";
 
-            var createResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var createResult = await FaceTestHelper.CreateFaceConfig()
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -46,7 +48,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             Assert.True(createResult.LargePersonGroupCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully);
 
-            var getResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var getResult = await FaceTestHelper.CreateFaceConfig()
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -59,6 +61,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             getResult.LargePersonGroupGetAnalysis.AssertAnalysisContextValidity();
             Assert.Equal(groupId, getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.largePersonGroupId);
             Assert.Equal(groupName, getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.name);
+
+            await FaceTestHelper.DeleteLargePersonGroup(groupId);
         }
 
         [Fact]
@@ -67,7 +71,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             var groupId = System.Guid.NewGuid().ToString();
             var groupName = $"integrationtest-{groupId}";
 
-            var createResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var createResult = await FaceTestHelper.CreateFaceConfig()
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -77,7 +81,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             createResult.LargePersonGroupCreateAnalysis.AssertAnalysisContextValidity();
 
-            var listResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var listResult = await FaceTestHelper.CreateFaceConfig()
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .AddConsoleAndTraceLogging()
                 .UsingHttpCommunication()
@@ -90,6 +94,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             listResult.LargePersonGroupListAnalysis.AssertAnalysisContextValidity();
             Assert.NotEmpty(listResult.LargePersonGroupListAnalysis.AnalysisResult.ResponseData.LargePersonGroups);
             Assert.False(string.IsNullOrWhiteSpace(listResult.LargePersonGroupListAnalysis.AnalysisResult.ResponseData.LargePersonGroups[0].largePersonGroupId));
+
+            await FaceTestHelper.DeleteLargePersonGroup(groupId);
         }
 
     }
