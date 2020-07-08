@@ -14,13 +14,13 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
         private LoggingLevel _logLevel = LoggingLevel.ErrorsOnly;
 
         protected ConfigurationSettings(string apiCategory, string apiKey, LocationKeyIdentifier locationKey,
-                    ApiServiceUriCollectionBase serviceUris)
+                    ApiServiceUriCollectionBase serviceUris, int maxNumberOfRequestRetries = ApiConstants.DefaultMaxNumberOfRequestRetries)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
                 throw new CognitiveServicesArgumentException("APIKey cannot be empty");
             }
-            this.MaxNumberOfRequestRetries = ApiConstants.DefaultMaxNumberOfRequestRetries;
+            this.MaxNumberOfRequestRetries = maxNumberOfRequestRetries;
             this.ApiCategory = apiCategory;
             this.LocationKey = locationKey;
             this.ApiKeys = new Dictionary<string, string>(1);

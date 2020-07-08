@@ -11,13 +11,10 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 {
     public class FaceIdentificationApiTests
     {
-        
-        private TestDataHelper _testDataHelper = new TestDataHelper();
-
         [Fact]
         public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysisForUrlAnalysis()
         {
-            var setupResult = await _testDataHelper.EnsureLargePersonGroupIsSetupAsync();
+            var setupResult = await FaceTestHelper.EnsureLargePersonGroupIsSetupAsync();
             if (!setupResult.Success)
             {
                 Assert.True(false, "Setup person group person failed");
@@ -25,7 +22,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             var personId = setupResult.PersonId;
             var groupId = setupResult.GroupId;
 
-            var listFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var listFaceResult = await FaceTestHelper.CreateFaceConfig()
                 .AddConsoleAndTraceLogging()
                 .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                 .UsingHttpCommunication()
@@ -35,7 +32,6 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             listFaceResult.LargePersonGroupPersonListAnalysis.AssertAnalysisContextValidity();
 
-            // Change this once on master branch
             const string baseImageUrl = "https://raw.githubusercontent.com/glav/CognitiveServicesFluentApi/master/Tests/Glav.CognitiveServices.IntegrationTests/TestData/";
 
             // Only add in faces if we have to
@@ -46,15 +42,15 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             {
 
                 // Add some faces to the person in the group
-                var addFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                var addFaceResult = await FaceTestHelper.CreateFaceConfig()
                                 .AddConsoleAndTraceLogging()
                                 .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                                 .UsingHttpCommunication()
                                 .WithFaceAnalysisActions()
-                                .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me1.jpg"))
-                                .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me2.jpg"))
-                                .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}Me3.jpg"))
-                                .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me4.jpg"))
+                                .AddFaceToPersonGroupPerson(FaceTestHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me1.jpg"))
+                                .AddFaceToPersonGroupPerson(FaceTestHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me2.jpg"))
+                                .AddFaceToPersonGroupPerson(FaceTestHelper.GroupId, personId, new System.Uri($"{baseImageUrl}Me3.jpg"))
+                                .AddFaceToPersonGroupPerson(FaceTestHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me4.jpg"))
                                .StartTrainingLargePersonGroup(groupId)
                                .CheckTrainingStatusLargePersonGroup(groupId)
                                 .AnalyseAllAsync();
@@ -67,7 +63,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             }
 
             // Detect a face to identify against and grab the face Id
-            var addFaceTestResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var addFaceTestResult = await FaceTestHelper.CreateFaceConfig()
                 .AddConsoleAndTraceLogging()
                 .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                 .UsingHttpCommunication()
@@ -81,7 +77,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             var faceId = addFaceTestResult.FaceDetectionAnalysis.AnalysisResult.ResponseData.detectedFaces.First().faceId;
 
 
-            var identifyResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var identifyResult = await FaceTestHelper.CreateFaceConfig()
                             .AddConsoleAndTraceLogging()
                             .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                             .UsingHttpCommunication()

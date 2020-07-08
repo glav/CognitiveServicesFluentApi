@@ -1,4 +1,5 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain;
 using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
 using System.Collections.Generic;
@@ -22,6 +23,18 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         {
             return context.GetResults().SelectMany(r => r.keyPhrases);
         }
+
+        public static TextAnalyticAnalysisSettings AddKeyPhraseAnalysisSplitIntoSentences(this TextAnalyticAnalysisSettings apiAnalysis, string textToAnalyse)
+        {
+            var sentences = textToAnalyse.SplitTextIntoSentences();
+            var actionData = apiAnalysis.GetOrCreateActionDataInstance<TextAnalyticActionData>(TextAnalyticApiOperations.KeyPhraseAnalysis);
+            sentences.ToList().ForEach(s =>
+            {
+                actionData.Add(TextAnalyticApiOperations.KeyPhraseAnalysis, s);
+            });
+            return apiAnalysis;
+        }
+
 
         public static string GetInitialErrorMessage(this KeyPhraseAnalysisContext context)
         {
