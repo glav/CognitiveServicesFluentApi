@@ -16,6 +16,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
         [Fact]
         public async Task ShouldBeAbleToCreateLargePersonGroup()
         {
+            await FaceTestHelper.DeleteAllLargePersonGroups();
+
             var groupId = System.Guid.NewGuid().ToString();
             var result = await FaceTestHelper.CreateFaceConfig()
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
