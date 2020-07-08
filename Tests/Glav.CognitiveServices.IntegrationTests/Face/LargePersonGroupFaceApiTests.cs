@@ -21,7 +21,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             }
             var personId = setupResult.PersonId;
 
-            var addFaceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
+            var addFaceResult = await FaceTestHelper.CreateFaceConfig()
                             .AddConsoleAndTraceLogging()
                             .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                             .UsingHttpCommunication()
@@ -31,7 +31,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             addFaceResult.LargePersonGroupPersonFaceAddAnalysis.AssertAnalysisContextValidity();
 
-            var faceResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
+            var faceResult = await FaceTestHelper.CreateFaceConfig()
                             .AddConsoleAndTraceLogging()
                             .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                             .UsingHttpCommunication()
@@ -48,7 +48,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             Assert.True(faceResult.IsTrainingSuccessful());
 
-            var deleteResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 6)
+            var deleteResult = await FaceTestHelper.CreateFaceConfig()
                     .AddConsoleAndTraceLogging()
                     .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                     .UsingHttpCommunication()
