@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Diagnostics
     public abstract class DiagnosticLoggerBase : IDiagnosticLogger
     {
         const string MessageType_Error = "Error";
-        const string MessageType_Warning = "Wrning";
+        const string MessageType_Warning = "Warning";
         const string MessageType_Informational = "Informational";
 
         public Task LogInfoAsync(string message, string topic = null)
