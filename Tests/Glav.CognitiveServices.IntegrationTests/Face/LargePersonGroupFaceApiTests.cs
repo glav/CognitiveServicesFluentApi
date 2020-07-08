@@ -8,13 +8,12 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 {
     public class LargePersonGroupFaceApiTests
     {
-        private TestDataHelper _testDataHelper = new TestDataHelper();
         [Fact]
         public async Task ShouldBeAbleToTrainLargePersonGroupWithFaces()
         {
             var groupId = System.Guid.NewGuid().ToString();
 
-            var setupResult = await _testDataHelper.EnsureLargePersonGroupIsSetupAsync(groupId);
+            var setupResult = await FaceTestHelper.EnsureLargePersonGroupIsSetupAsync(groupId);
             if (!setupResult.Success)
             {
                 Assert.True(false, "Setup person group person failed");

@@ -11,13 +11,10 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 {
     public class FaceIdentificationApiTests
     {
-        
-        private TestDataHelper _testDataHelper = new TestDataHelper();
-
         [Fact]
         public async Task FaceDataShouldBeProvidedWhenRequestedAsPartOfAnalysisForUrlAnalysis()
         {
-            var setupResult = await _testDataHelper.EnsureLargePersonGroupIsSetupAsync();
+            var setupResult = await FaceTestHelper.EnsureLargePersonGroupIsSetupAsync();
             if (!setupResult.Success)
             {
                 Assert.True(false, "Setup person group person failed");
@@ -50,10 +47,10 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
                                 .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                                 .UsingHttpCommunication()
                                 .WithFaceAnalysisActions()
-                                .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me1.jpg"))
-                                .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me2.jpg"))
-                                .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}Me3.jpg"))
-                                .AddFaceToPersonGroupPerson(TestDataHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me4.jpg"))
+                                .AddFaceToPersonGroupPerson(FaceTestHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me1.jpg"))
+                                .AddFaceToPersonGroupPerson(FaceTestHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me2.jpg"))
+                                .AddFaceToPersonGroupPerson(FaceTestHelper.GroupId, personId, new System.Uri($"{baseImageUrl}Me3.jpg"))
+                                .AddFaceToPersonGroupPerson(FaceTestHelper.GroupId, personId, new System.Uri($"{baseImageUrl}me4.jpg"))
                                .StartTrainingLargePersonGroup(groupId)
                                .CheckTrainingStatusLargePersonGroup(groupId)
                                 .AnalyseAllAsync();

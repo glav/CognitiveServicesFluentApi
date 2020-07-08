@@ -16,8 +16,6 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
         [Fact]
         public async Task ShouldBeAbleToCreateLargePersonGroup()
         {
-            await FaceTestHelper.DeleteAllLargePersonGroups();
-
             var groupId = System.Guid.NewGuid().ToString();
             var result = await FaceTestHelper.CreateFaceConfig()
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
@@ -30,6 +28,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             Assert.NotNull(result);
             result.LargePersonGroupCreateAnalysis.AssertAnalysisContextValidity();
             Assert.Equal(HttpStatusCode.OK, result.LargePersonGroupCreateAnalysis.AnalysisResult.ApiCallResult.StatusCode);
+
+            await FaceTestHelper.DeleteLargePersonGroup(groupId);
         }
 
                 [Fact]
@@ -61,6 +61,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             getResult.LargePersonGroupGetAnalysis.AssertAnalysisContextValidity();
             Assert.Equal(groupId, getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.largePersonGroupId);
             Assert.Equal(groupName, getResult.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.name);
+
+            await FaceTestHelper.DeleteLargePersonGroup(groupId);
         }
 
         [Fact]
@@ -92,6 +94,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             listResult.LargePersonGroupListAnalysis.AssertAnalysisContextValidity();
             Assert.NotEmpty(listResult.LargePersonGroupListAnalysis.AnalysisResult.ResponseData.LargePersonGroups);
             Assert.False(string.IsNullOrWhiteSpace(listResult.LargePersonGroupListAnalysis.AnalysisResult.ResponseData.LargePersonGroups[0].largePersonGroupId));
+
+            await FaceTestHelper.DeleteLargePersonGroup(groupId);
         }
 
     }
