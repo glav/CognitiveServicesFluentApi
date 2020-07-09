@@ -56,7 +56,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
         public static async Task<OpResult> EnsureLargePersonGroupIsSetupAsync(string groupId = null)
         {
             var groupIdToUse = groupId ?? GroupId;
-            var result = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var result = await FaceTestHelper.CreateFaceConfig()
                 .AddConsoleAndTraceLogging()
                 .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
                 .UsingHttpCommunication()
@@ -67,7 +67,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             if (result.LargePersonGroupGetAnalysis.AnalysisResult.ApiCallResult.Successfull &&
                      !string.IsNullOrWhiteSpace(result.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.largePersonGroupId))
             {
-                var personResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                var personResult = await FaceTestHelper.CreateFaceConfig()
                 .AddConsoleAndTraceLogging()
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .UsingHttpCommunication()
@@ -87,7 +87,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
                     };
                 }
 
-                var addPersonResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+                var addPersonResult = await FaceTestHelper.CreateFaceConfig()
                 .AddConsoleAndTraceLogging()
                 .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
                 .UsingHttpCommunication()
@@ -102,7 +102,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
             }
 
             // Create a group and person within the group
-            var groupResult = await FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast)
+            var groupResult = await FaceTestHelper.CreateFaceConfig()
             .AddConsoleAndTraceLogging()
             .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
             .UsingHttpCommunication()

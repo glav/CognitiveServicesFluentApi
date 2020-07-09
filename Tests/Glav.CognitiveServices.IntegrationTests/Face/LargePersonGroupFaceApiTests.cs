@@ -58,6 +58,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             deleteResult.LargePersonGroupPersonDeleteAnalysis.AssertAnalysisContextValidity();
             deleteResult.LargePersonGroupDeleteAnalysis.AssertAnalysisContextValidity();
+
+            await FaceTestHelper.DeleteLargePersonGroup(groupId);
         }
 
     }
