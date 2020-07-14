@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Glav.CognitiveServices.FluentApi.Luis.Extensions</AssemblyName>
+    <RootNamespace>Glav.CognitiveServices.FluentApi.Luis</RootNamespace>
+    <Authors>Paul Glavich</Authors>
+    <Product>Cognitive Services Fluent API</Product>
+    <Description>A set of utility or convenience extensions for the fluent API for using the LUIS set of cognitive services</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/glav/CognitiveServicesFluentApi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/glav/CognitiveServicesFluentApi</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Cognitive services, .net, azure, LUIS</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Core\Glav.CognitiveServices.FluentApi.Core.csproj" />
+    <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Luis\Glav.CognitiveServices.FluentApi.Luis.csproj" />
+  </ItemGroup>
+
+</Project>
