@@ -60,6 +60,17 @@ or using dotnet CLI
 dotnet add package Glav.CognitiveServices.FluentApi.Face.Extensions
 ```
 
+#### For LUIS
+```powershell
+Install-Package Glav.CognitiveServices.FluentApi.Luis.Extensions # Fluent API with included extension/convenience methods
+# -or-
+Install-Package Glav.CognitiveServices.FluentApi.Luis # Just the Fluent API
+```
+or using dotnet CLI
+```
+dotnet add package Glav.CognitiveServices.FluentApi.Luis.Extensions
+```
+
 
 #### Azure Cognitive Services Setup
 In order to make use of Cognitive services, you need to have an instance of the cognitive service setup in your Azure subscription. [This link](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account) shows you how to do this. You will then have two crucial pieces of information:
