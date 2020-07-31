@@ -34,3 +34,11 @@ When using the extensions package, this can be simplified into:
 var topIntents = result.LuisAppAnalysis.GetTopIntents(); // We can get multiple top intents if we submit multiple queries.
 var topIntent = topIntents.First();
 ```
+
+With the extension package, you can also easily extract any intents or entities:
+```c#
+var allIntents = result.LuisAppAnalysis.GetIntents();
+
+var allEntities = result.LuisAppAnalysis.GetEntities();
+```
+
