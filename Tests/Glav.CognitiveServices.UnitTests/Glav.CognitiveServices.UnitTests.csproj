@@ -18,11 +18,13 @@
     <None Remove="TestData\FaceDetectionResponse.json" />
     <None Remove="TestData\FaceLargePersonGroupPersonListResponse.json" />
     <None Remove="TestData\FaceLargePersonGroupTrainStatusResponse.json" />
+    <None Remove="TestData\LuisAppResponse.json" />
     <None Remove="TestData\SanitisedHtmlEmail.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="TestData\FaceApiErrorResponse.json" />
+    <EmbeddedResource Include="TestData\LuisAppResponse.json" />
     <EmbeddedResource Include="TestData\FaceDetectionResponse-FemaleWithAge.json" />
     <EmbeddedResource Include="TestData\FaceDetectionResponse.json" />
     <EmbeddedResource Include="TestData\ComputerVisionImageAnalysisResponse.json" />
@@ -42,11 +44,13 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Extensions\ComputerVision.Extensions\ComputerVision.Extensions.csproj" />
     <ProjectReference Include="..\..\Extensions\Face.Extensions\Face.Extensions.csproj" />
+    <ProjectReference Include="..\..\Extensions\Luis.Extensions\Luis.Extensions.csproj" />
     <ProjectReference Include="..\..\Extensions\TextAnalytic.Extensions\TextAnalytic.Extensions.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.ComputerVision\Glav.CognitiveServices.FluentApi.ComputerVision.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Core\Glav.CognitiveServices.FluentApi.Core.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Face\Glav.CognitiveServices.FluentApi.Face.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.TextAnalytic\Glav.CognitiveServices.FluentApi.TextAnalytic.csproj" />
+    <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Luis\Glav.CognitiveServices.FluentApi.Luis.csproj" />
   </ItemGroup>
 
   <ItemGroup>

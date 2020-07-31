@@ -8,6 +8,7 @@ If you are new to this project, please see the getting started section below. Fo
 * [TextAnalytics Fluent API](./Wiki/TextAnalytics.md)
 * [ComputerVision Fluent API](./Wiki/ComputerVision.md)
 * [Face Fluent API](./Wiki/Face.md)
+* [LUIS Fluent API](./Wiki/Luis.md)
 * [Scoring system](./Wiki/Scoring.md)
 
 #### Build Status
@@ -43,7 +44,6 @@ Install-Package Glav.CognitiveServices.FluentApi.ComputerVision.Extensions # Flu
 # -or-
 Install-Package Glav.CognitiveServices.FluentApi.ComputerVision # Just the Fluent API
 ```
-via dotnet CLI
 or using dotnet CLI
 ```
 dotnet add package Glav.CognitiveServices.FluentApi.ComputerVision.Extensions
@@ -55,10 +55,20 @@ Install-Package Glav.CognitiveServices.FluentApi.Face.Extensions # Fluent API wi
 # -or-
 Install-Package Glav.CognitiveServices.FluentApi.Face # Just the Fluent API
 ```
-via dotnet CLI
 or using dotnet CLI
 ```
 dotnet add package Glav.CognitiveServices.FluentApi.Face.Extensions
+```
+
+#### For LUIS
+```powershell
+Install-Package Glav.CognitiveServices.FluentApi.Luis.Extensions # Fluent API with included extension/convenience methods
+# -or-
+Install-Package Glav.CognitiveServices.FluentApi.Luis # Just the Fluent API
+```
+or using dotnet CLI
+```
+dotnet add package Glav.CognitiveServices.FluentApi.Luis.Extensions
 ```
 
 

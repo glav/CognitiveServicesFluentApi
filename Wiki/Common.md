@@ -6,17 +6,14 @@ Before we begin adding actions and data to operate with, there are many common o
 ### ConfigurationSettings
 Before we do anything, an initial configuration settings object must be created with the API key and location specified.
 
-For TextAnalytics, this is done by:
 ``` c#
-var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier)
-```
-For Face, this is done by:
-``` c#
-var config = FaceConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier)
-```
-For ComputerVision, this is done by:
-``` c#
-var config = ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier)
+var config = TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier); // For text analytics
+
+var config = FaceConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier); // For Face
+
+var config = ComputerVisionConfigurationSettings.CreateUsingConfigurationKeys("API-KEY", LocationKeyIdentifier); // For ComputerVision
+
+var config = LuisConfigurationSettings.CreateUsingConfigurationKeys("APP-KEY","SUBSCRIPTION-KEY", LocationKeyIdentifier); // For LUIS
 ```
 
 The `CreateUsingConfigurationKeys` method returns an object of type `ConfigurationSettings`. From this, we can then begin defining the common pipeline.

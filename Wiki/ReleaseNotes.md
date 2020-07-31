@@ -1,4 +1,63 @@
 
+## Version: 1.1.0 [07/31/2020 15:47:48]
+### New Items
+* 39beb5c -Added Luis extension method GetIntents
+* 4728f2e -Added LUIS documentation
+* ecf42b6 -Added GetTopIntents extension for LUIS results and a test to verify
+* c519571 -Added ability to supply number of request retries when creating config and double retry for face tests so they pass on the free tier
+* c7e26f9 -Start simple LUIS support
+### Bugfixes
+* e71deee -Fixing typo of 'Warning'
+### Full change list
+* 9696658 Minor text removal
+* 981ed4c Added a little bit more content to Wiki for LUIS extension
+* 39beb5c NEW:Added Luis extension method GetIntents
+* 58849d7 More Luis wiki additions
+* 017d946 Wiki additions
+* 4728f2e NEW:Added LUIS documentation
+* 299251d Merge branch 'master' into glav/SimpleLuisSupport
+* b6ec7d3 Merge pull request #22 from glav/glav/RemoveShiftLeftScan
+* 406bfa3 Moved shiftleft analysis to a disabled folder to retain for education but not as a workflow
+* ecf42b6 NEW:Added GetTopIntents extension for LUIS results and a test to verify
+* d077184 Merge branch 'master' into glav/SimpleLuisSupport
+* 4a165a5 Merge pull request #21 from glav/glav/TestWorkflowDispatch
+* 78c4eeb Added workflow dispatch trigger
+* 9b438d1 Added further test checks in Luis test
+* 58c6706 Further cleanup in tests to remove test data
+* d9c3073 Merge branch 'master' into glav/SimpleLuisSupport
+* b2ddc4b Merge pull request #20 from glav/glav/EnableRetryCountConfiguration
+* 9de3048 Refactored tests to ensure face actions are grouped logically. Tests pass on free tier but take more time.
+* e71deee BUG:Fixing typo of 'Warning'
+* 0f68c3f Adding large scale deletion of large person groups to clean up test data
+* 30678ce Slight test refactor to ensure Face tests all use consistent config creation
+* c519571 NEW:Added ability to supply number of request retries when creating config and double retry for face tests so they pass on the free tier
+* 817ee0e Merge pull request #19 from glav/glav/TextAnalyticExtensionRefactor
+* 709e9eb Simple cleanup
+* a1ae3e5 The first passing integration test end to end
+* 96cb24b Added Luis ConfigurationBuilderExtensions
+* b059e00 Merge branch 'master' into glav/SimpleLuisSupport
+* 2b37c87 Modified parsing to include intent score and reviewed property names, plus added more test checks
+* 1e3e85e Remove commented code
+* bc07e5a Added entitiy processing. Made tests pass. Need to fix entity model
+* fcb723b Start to implement parsing. Is very different to others so setting up unit test on actual response data
+* b21e011 Start to implement parsing. Is very different to others so setting up unit test on actual response data
+* abff3f4 Changed name of test to properly reflect what it is
+* 5209c6b Added impl for construction of Url endpoint and a passing test
+* 3da5ad0 Minor cleanup
+* 024390d I dunno :-)
+* e83818d Add AnalysisEngine class impl
+* 22638a1 Added AnalysisResults class
+* 4628f07 Added ActionData and ActionDataItem class impl
+* df0868e Begin adding context and response analysis classes, plus a contribution instructions (WIP) as I go along
+* dc4596b Adding nuget package build to project config
+* b78f17b Added some API response data items
+* b67bc79 Adding custom config props for Luis API calls
+* 945a4ec Removed commented code
+* a3312f5 Added unit test and fixed so that unit test worked
+* 8d7c834 Added basic config class support for LUIS
+* c7e26f9 NEW:Start simple LUIS support
+* c965248 Add in Luis project
+
 ## Version: 1.0.1 [07/07/2020 14:52:52]
 ### New Items
 * 229a40c -Moved TextAnalytic extensions into the extensions package

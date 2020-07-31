@@ -95,6 +95,8 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             var returnedFace = identifyResult.FaceIdentificationAnalysis.AnalysisResult.ResponseData.identifiedFaces[0].candidates[0];
             Assert.Equal(personId, returnedFace.personId);
+
+            await FaceTestHelper.DeleteLargePersonGroup(groupId);
         }
 
 

@@ -43,6 +43,7 @@
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.ComputerVision\Glav.CognitiveServices.FluentApi.ComputerVision.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Core\Glav.CognitiveServices.FluentApi.Core.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Face\Glav.CognitiveServices.FluentApi.Face.csproj" />
+    <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.Luis\Glav.CognitiveServices.FluentApi.Luis.csproj" />
     <ProjectReference Include="..\..\Glav.CognitiveServices.FluentApi.TextAnalytic\Glav.CognitiveServices.FluentApi.TextAnalytic.csproj" />
   </ItemGroup>
 
