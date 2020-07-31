@@ -1,7 +1,5 @@
 = [Home](/README.md)/LUIS
 
-### This section is incomplete - WIP
-
 # LUIS API Service
 The LUIS cognitive service provides a language understanding ability on free form text. This Fluent API is not meant to replace the more complex LUIS library that supports stateful conversations, but rather a simplified approach to get results from basic LUIS interactions in an easy way.
 
