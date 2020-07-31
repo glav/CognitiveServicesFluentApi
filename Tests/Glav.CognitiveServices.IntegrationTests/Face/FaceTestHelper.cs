@@ -18,13 +18,13 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
         public static async Task DeleteLargePersonGroup(string groupId)
         {
-                var delResult = await FaceTestHelper.CreateFaceConfig()
-                    .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
-                    .AddConsoleAndTraceLogging()
-                    .UsingHttpCommunication()
-                    .WithFaceAnalysisActions()
-                    .DeleteLargePersonGroup(groupId)
-                    .AnalyseAllAsync();
+            var delResult = await FaceTestHelper.CreateFaceConfig()
+                .SetDiagnosticLoggingLevel(LoggingLevel.WarningsAndErrors)
+                .AddConsoleAndTraceLogging()
+                .UsingHttpCommunication()
+                .WithFaceAnalysisActions()
+                .DeleteLargePersonGroup(groupId)
+                .AnalyseAllAsync();
             delResult.LargePersonGroupDeleteAnalysis.AssertAnalysisContextValidity();
         }
 
@@ -55,6 +55,9 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
         public static async Task<OpResult> EnsureLargePersonGroupIsSetupAsync(string groupId = null)
         {
+            // Only uncomment this if you want to clean up old person groups during some testing.
+            //await DeleteAllLargePersonGroups();
+
             var groupIdToUse = groupId ?? GroupId;
             var result = await FaceTestHelper.CreateFaceConfig()
                 .AddConsoleAndTraceLogging()
@@ -64,65 +67,50 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
                 .GetLargePersonGroup(groupIdToUse)
                 .AnalyseAllAsync();
 
-            if (result.LargePersonGroupGetAnalysis.AnalysisResult.ApiCallResult.Successfull &&
-                     !string.IsNullOrWhiteSpace(result.LargePersonGroupGetAnalysis.AnalysisResult.ResponseData.LargePersonGroup.largePersonGroupId))
+            if (!result.LargePersonGroupGetAnalysis.AnalysisResult.ApiCallResult.Successfull)
             {
-                var personResult = await FaceTestHelper.CreateFaceConfig()
+                var grpResult = await FaceTestHelper.CreateFaceConfig()
                 .AddConsoleAndTraceLogging()
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .UsingHttpCommunication()
                 .WithFaceAnalysisActions()
-                .ListLargePersonGroupPersons(GroupId)
+                .CreateLargePersonGroup(groupIdToUse, GroupName)
                 .AnalyseAllAsync();
-
-                var person = personResult.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData.LargePersonGroupPersons.FirstOrDefault();
-                if (person != null)
-                {
-
-                    return new OpResult
-                    {
-                        Success = true,
-                        PersonId = person.personId,
-                        GroupId = groupIdToUse
-                    };
-                }
-
-                var addPersonResult = await FaceTestHelper.CreateFaceConfig()
-                .AddConsoleAndTraceLogging()
-                .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
-                .UsingHttpCommunication()
-                .WithFaceAnalysisActions()
-                .CreateLargePersonGroupPerson(groupIdToUse, PersonName, "Used for integration testing only")
-                .AnalyseAllAsync();
-
-                if (addPersonResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully)
-                {
-                    return new OpResult { GroupId = groupIdToUse, Success = true, PersonId = addPersonResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData.personId };
-                }
             }
 
-            // Create a group and person within the group
-            var groupResult = await FaceTestHelper.CreateFaceConfig()
-            .AddConsoleAndTraceLogging()
-            .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
-            .UsingHttpCommunication()
-            .WithFaceAnalysisActions()
-            .CreateLargePersonGroup(groupIdToUse, GroupName)
-            .CreateLargePersonGroupPerson(groupIdToUse, PersonName, "Used for integration testing only - can be deleted")
-            .AnalyseAllAsync();
+            var personResult = await FaceTestHelper.CreateFaceConfig()
+                .AddConsoleAndTraceLogging()
+                .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
+                .UsingHttpCommunication()
+                .WithFaceAnalysisActions()
+                .ListLargePersonGroupPersons(groupIdToUse)
+                .AnalyseAllAsync();
 
-            if (groupResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult != null
-                && groupResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully &&
-                groupResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData != null &&
-                !string.IsNullOrWhiteSpace(groupResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData.personId))
+            var person = personResult.LargePersonGroupPersonListAnalysis.AnalysisResult.ResponseData.LargePersonGroupPersons?.FirstOrDefault();
+            if (person != null)
             {
+
                 return new OpResult
                 {
                     Success = true,
-                    PersonId = groupResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData.personId,
+                    PersonId = person.personId,
                     GroupId = groupIdToUse
                 };
             }
+
+            var addPersonResult = await FaceTestHelper.CreateFaceConfig()
+            .AddConsoleAndTraceLogging()
+            .SetDiagnosticLoggingLevel(LoggingLevel.ErrorsOnly)
+            .UsingHttpCommunication()
+            .WithFaceAnalysisActions()
+            .CreateLargePersonGroupPerson(groupIdToUse, PersonName, "Used for integration testing only")
+            .AnalyseAllAsync();
+
+            if (addPersonResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ActionSubmittedSuccessfully)
+            {
+                return new OpResult { GroupId = groupIdToUse, Success = true, PersonId = addPersonResult.LargePersonGroupPersonCreateAnalysis.AnalysisResult.ResponseData.personId };
+            }
+
 
             return new OpResult();
         }
