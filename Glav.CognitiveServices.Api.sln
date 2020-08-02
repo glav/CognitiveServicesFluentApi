@@ -50,12 +50,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{E59F1CAE-48A1-47DF-9FCD-6D681ED3D067}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\ci-build.yml = .github\workflows\ci-build.yml
+		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
 		.github\workflows\issues.yml = .github\workflows\issues.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glav.CognitiveServices.FluentApi.Luis", "Glav.CognitiveServices.FluentApi.Luis\Glav.CognitiveServices.FluentApi.Luis.csproj", "{98ECDE0D-7459-4084-99B3-961E4D52B826}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luis.Extensions", "Extensions\Luis.Extensions\Luis.Extensions.csproj", "{3A9A0020-204E-44EC-B246-243ACCBF46C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luis.Extensions", "Extensions\Luis.Extensions\Luis.Extensions.csproj", "{3A9A0020-204E-44EC-B246-243ACCBF46C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
