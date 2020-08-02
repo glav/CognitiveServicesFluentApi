@@ -3,8 +3,7 @@ name: "Code scanning - action"
 on:
   push:
   pull_request:
-  schedule:
-    - cron: '0 15 * * 4'
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 jobs:
