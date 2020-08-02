@@ -60,10 +60,6 @@ stages:
         configuration: '$(BuildConfiguration)'
       condition: succeeded()
  
-    - script: |
-        set
-      displayName: Set a variable and then display all
-
     - task: DotNetCoreCLI@2
       displayName: 'Unit Tests'
       inputs:
