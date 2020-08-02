@@ -1,10 +1,11 @@
-name: Glav.CognitiveServices CI
+name: Github - Glav.CognitiveServices CI
 
 on:
   push:
     branches: [ master ]
   pull_request:
     types: [opened, synchronize, reopened]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -41,5 +42,7 @@ jobs:
         COMPUTERVISION_API_KEY: ${{ secrets.COMPUTERVISIONAPIKEY }}
         FACE_API_KEY: ${{ secrets.FACEAPIKEY }}
         TEXTANALYTIC_API_KEY: ${{ secrets.TEXTANALYTICAPIKEY }}
+        LUIS_APP_API_KEY: ${{ secrets.LUISAPPAPIKEY}}
+        LUIS_SUBSCRIPTION_API_KEY: ${{ secrets.LUISSUBSCRIPTIONKEY }}
       run: dotnet test --no-restore --verbosity normal ./Tests/Glav.CognitiveServices.IntegrationTests/Glav.CognitiveServices.IntegrationTests.csproj
       
