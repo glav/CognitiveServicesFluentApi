@@ -2,7 +2,7 @@ name: Github - Glav.CognitiveServices CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ trunk ]
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
