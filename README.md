@@ -12,7 +12,7 @@ If you are new to this project, please see the getting started section below. Fo
 * [Scoring system](./Wiki/Scoring.md)
 
 #### Build Status
-[![Build Status](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_apis/build/status/CognitiveServicesFluentApi%20CI%20Yaml?branchName=master)](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_build/latest?definitionId=63&branchName=master)
+[![Build Status](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_apis/build/status/CognitiveServicesFluentApi%20CI%20Yaml?branchName=trunk)](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_build/latest?definitionId=63&branchName=trunk)
 
 #### Sonarqube Code Analaysis
 [Sonarqube Code Analysis report](https://sonarcloud.io/dashboard?id=CognitiveFluentApi)
