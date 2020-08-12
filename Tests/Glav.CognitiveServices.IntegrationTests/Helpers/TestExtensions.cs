@@ -13,7 +13,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Helpers
 
             var anyErrors = analysisContext.AnalysisResults.Any(c => c.ActionSubmittedSuccessfully == false);
             var potentialError = analysisContext.AnalysisResults.FirstOrDefault(c => c.ActionSubmittedSuccessfully == false);
-            Assert.False(anyErrors,$"One or more actions failed {potentialError?.ApiCallResult?.ErrorMessage}, Code: {potentialError?.ApiCallResult?.StatusCode}");
+            Assert.False(anyErrors,$"One or more actions failed {potentialError?.ApiCallResult?.ErrorMessage}, Code: {potentialError?.ApiCallResult?.StatusCode}, Error: {potentialError?.ApiCallResult?.Data}");
         }
     }
 }
