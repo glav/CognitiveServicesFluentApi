@@ -14,7 +14,7 @@ namespace Glav.CognitiveServices.FluentApi.Core
         /// <param name="context">API Context</param>
         /// <param name="scoreValue">The value to parse</param>
         /// <returns></returns>
-        public static ScoreLevelBoundsDefinition Score<T>(this BaseApiAnalysisContext<T> context, double scoreValue) where T : IApiCallResult
+        public static ScoreLevelBoundsDefinition Score<T,TError>(this BaseApiAnalysisContext<T,TError> context, double scoreValue) where T : IApiCallResult where TError : class
         {
             return context.ScoringEngine.EvaluateScore(scoreValue);
         }

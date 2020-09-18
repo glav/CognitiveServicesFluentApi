@@ -50,6 +50,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
             ScoringEngine = scoreEngine ?? throw new CognitiveServicesArgumentException("ScoreEvaluationEngine cannot be NULL");
         }
 
-        public abstract IEnumerable<TError[]> GetAllErrors();
+        public abstract IEnumerable<TError> GetAllErrors();
     }
 }

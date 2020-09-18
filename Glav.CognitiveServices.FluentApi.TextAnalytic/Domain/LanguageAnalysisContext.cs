@@ -8,12 +8,17 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public class LanguageAnalysisContext : BaseApiAnalysisContext<LanguagesResult>
+    public class LanguageAnalysisContext : BaseApiAnalysisContext<LanguagesResult, ApiErrorResponse[]>
     {
         public LanguageAnalysisContext(ApiActionDataCollection actionData, LanguagesResult analysisResult, IScoreEvaluationEngine scoringEngine)
             : base(actionData, analysisResult, scoringEngine)
         {
         }
         public override ApiActionDefinition AnalysisType { get { return TextAnalyticApiOperations.LanguageAnalysis; } }
+
+        public override IEnumerable<ApiErrorResponse[]> GetAllErrors()
+        {
+            return AnalysisResults.Select(e => e.ResponseData?.errors);
+        }
     }
 }
