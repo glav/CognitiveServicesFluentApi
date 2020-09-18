@@ -1,6 +1,10 @@
-﻿using Glav.CognitiveServices.FluentApi.Core.Configuration;
+﻿using Glav.CognitiveServices.FluentApi.Core.Communication;
+using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
+using Glav.CognitiveServices.FluentApi.TextAnalytic.Domain.ApiResponses;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
@@ -11,6 +15,5 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         {
         }
         public override ApiActionDefinition AnalysisType { get { return TextAnalyticApiOperations.LanguageAnalysis; } }
-
     }
 }
