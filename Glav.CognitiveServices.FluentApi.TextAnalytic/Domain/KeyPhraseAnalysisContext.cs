@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public class KeyPhraseAnalysisContext : BaseApiAnalysisContext<KeyPhraseResult, ApiErrorResponse[]>
+    public class KeyPhraseAnalysisContext : BaseApiAnalysisContext<KeyPhraseResult, ApiErrorResponse>
     {
         public KeyPhraseAnalysisContext(ApiActionDataCollection actionData, KeyPhraseResult analysisResult, IScoreEvaluationEngine scoringEngine)
             :base(actionData, analysisResult, scoringEngine)
@@ -15,9 +15,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
         }
         public override ApiActionDefinition AnalysisType { get { return TextAnalyticApiOperations.KeyPhraseAnalysis; } }
 
-        public override IEnumerable<ApiErrorResponse[]> GetAllErrors()
+        public override IEnumerable<ApiErrorResponse> GetAllErrors()
         {
-            return AnalysisResults.Select(e => e.ResponseData?.errors);
+            return AnalysisResults.SelectMany(e => e.ResponseData?.errors);
         }
 
     }
