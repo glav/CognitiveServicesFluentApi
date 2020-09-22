@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Glav.CognitiveServices.FluentApi.TextAnalytic.Extensions</AssemblyName>
     <RootNamespace>Glav.CognitiveServices.FluentApi.TextAnalytic</RootNamespace>
-    <Version>1.0.1</Version>
+    <Version>1.2</Version>
     <Authors>Paul Glavich</Authors>
     <Product>Cognitive Services Fluent API</Product>
     <Description>A set of utility or convenience extensions for the fluent API for using the Text Analytic set of cognitive services</Description>
