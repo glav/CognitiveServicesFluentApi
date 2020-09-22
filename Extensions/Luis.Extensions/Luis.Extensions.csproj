@@ -13,6 +13,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Cognitive services, .net, azure, LUIS</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
