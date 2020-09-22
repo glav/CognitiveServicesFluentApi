@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.UnitTests.Helpers
 {
     public static class TestExtensions
     {
-        public static void AssertAnalysisContextValidity<TResult>(this BaseApiAnalysisContext<TResult> analysisContext) where TResult : IApiCallResult
+        public static void AssertAnalysisContextValidity<TResult, TError>(this BaseApiAnalysisContext<TResult, TError> analysisContext) where TResult : IApiCallResult where TError : class
         {
             Assert.NotNull(analysisContext);
             Assert.NotNull(analysisContext.AnalysisResult);

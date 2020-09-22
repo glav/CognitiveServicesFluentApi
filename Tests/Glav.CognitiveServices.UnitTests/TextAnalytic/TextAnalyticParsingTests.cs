@@ -64,6 +64,11 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var errMsg = result.LanguageAnalysis.GetInitialErrorMessage();
             Assert.NotNull(errMsg);
             Assert.Equal("Invalid request", errMsg);
+
+            var allErrors = result.LanguageAnalysis.GetAllErrors();
+            Assert.NotNull(allErrors);
+            Assert.Equal(1, allErrors.Count());
+
         }
 
         [Fact]
@@ -104,6 +109,8 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var phraseResults = result.KeyPhraseAnalysis.GetResults();
             Assert.NotEmpty(phraseResults);
             Assert.Equal(2, phraseResults.Count());
+            var allKeyErrors = result.KeyPhraseAnalysis.GetAllErrors();
+            Assert.Equal(0, allKeyErrors.Count());
 
             var allKeyphrases = result.KeyPhraseAnalysis.GetAllKeyPhrases().ToArray();
             Assert.NotEmpty(allKeyphrases);
