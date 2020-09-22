@@ -3,10 +3,12 @@ using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
 using System.Linq;
 using Glav.CognitiveServices.FluentApi.Core;
+using Glav.CognitiveServices.FluentApi.Core.Communication;
+using System.Collections.Generic;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
-    public class LargePersonGroupTrainStatusAnalysisContext : BaseApiAnalysisContext<LargePersonGroupTrainStatusResult> 
+    public class LargePersonGroupTrainStatusAnalysisContext : BaseApiAnalysisContext<LargePersonGroupTrainStatusResult, BaseApiErrorResponse> 
     {
         public LargePersonGroupTrainStatusAnalysisContext(ApiActionDataCollection actionData, LargePersonGroupTrainStatusResult analysisResult, IScoreEvaluationEngine scoringEngine)
             : base(actionData, analysisResult, scoringEngine)
@@ -26,6 +28,12 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
             }
             this.AnalysisResults.First().ResponseData.TrainingStatus = result.ParsingStrategy.ResponseData;
         }
+
+        public override IEnumerable<BaseApiErrorResponse> GetAllErrors()
+        {
+            return AnalysisResults.Select(e => e.ResponseData.error);
+        }
+
 
     }
 }

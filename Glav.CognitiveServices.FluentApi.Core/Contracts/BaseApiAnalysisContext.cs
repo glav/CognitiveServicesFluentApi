@@ -4,10 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Glav.CognitiveServices.FluentApi.Core.Communication;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
-    public abstract class BaseApiAnalysisContext<TResult> where TResult : IApiCallResult
+    public abstract class BaseApiAnalysisContext<TResult, TError> 
+                where TResult : IApiCallResult 
+                where TError : class
     {
         protected BaseApiAnalysisContext(ApiActionDataCollection actionData, TResult analysisResult, IScoreEvaluationEngine scoringEngine)
         {
@@ -46,5 +49,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
         {
             ScoringEngine = scoreEngine ?? throw new CognitiveServicesArgumentException("ScoreEvaluationEngine cannot be NULL");
         }
+
+        public abstract IEnumerable<TError> GetAllErrors();
     }
 }

@@ -1,4 +1,35 @@
 
+## Version: 1.2.0 [09/22/2020 09:24:42]
+### New Items
+* 3d8b500 -Adding consistent way to easily retrieve error messages from calls
+### Full change list
+* ce7bf92 Minor version bump
+* 73d9f1e Refined GetAllErrors to return flat list for TextAnalytics for simplicity, modified some tests
+* 7604315 Updated all other contexts to include GetAllErrors impl
+* 3d8b500 NEW:Adding consistent way to easily retrieve error messages from calls
+* aa10925 Merge pull request #28 from glav/glav/RemoveActionCI
+* 5e15e5e Moved action CI into disabled so that only Azure DevOps pipelines is run otherwise tests run twice and often fail due to free tier quota
+* fbcdf16 Merge branch 'trunk' of https://github.com/glav/CognitiveServicesFluentApi into trunk
+* 104e55a Merge pull request #27 from glav/glav/StatusBade
+* a11f7bd Merge branch 'trunk' of https://github.com/glav/CognitiveServicesFluentApi into trunk
+* f8d58a5 Updated status badge
+* 6e9154f Updated status badge
+* 642959f Merge pull request #26 from glav/glav/master-to-trunk
+* 515d993 Merge branch 'trunk' into glav/master-to-trunk
+* bae1af1 Change to azure pipelines
+* e71bf52 minor mod to branch triggers
+* 513ba59 Updated to use trunk
+* e8e940c Merge pull request #25 from glav/glav/LuisPackageBuild
+* e688b2e Adding missing action into artifacts solution
+* 8b6eafc Ensure Luis extension package gets created
+* ab3f2b2 Remove redundant debugging step
+* 579992e Merge pull request #24 from glav/glav/MinorTextChange
+* f6372f5 Minor filter change to Code quality action triggers
+* 9903115 Fixed type and fixed missing secrets from GH pipeline
+* 95ce193 Very minor change
+* d88946e Merge pull request #23 from glav/glav/SimpleLuisSupport
+* 77119c8 Fixing test again
+
 ## Version: 1.1.0 [07/31/2020 15:47:48]
 ### New Items
 * 39beb5c -Added Luis extension method GetIntents

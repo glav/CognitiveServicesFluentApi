@@ -1,10 +1,13 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core.Contracts;
 using Glav.CognitiveServices.FluentApi.Core.Configuration;
 using Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation;
+using Glav.CognitiveServices.FluentApi.Core.Communication;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain
 {
-    public class FaceIdentificationAnalysisContext : BaseApiAnalysisContext<FaceIdentificationResult> 
+    public class FaceIdentificationAnalysisContext : BaseApiAnalysisContext<FaceIdentificationResult, BaseApiErrorResponse> 
     {
         public FaceIdentificationAnalysisContext(ApiActionDataCollection actionData, FaceIdentificationResult analysisResult, IScoreEvaluationEngine scoringEngine)
             : base(actionData, analysisResult, scoringEngine)
@@ -15,6 +18,12 @@ namespace Glav.CognitiveServices.FluentApi.Face.Domain
         {
         }
         public override ApiActionDefinition AnalysisType => FaceApiOperations.FaceIdentification;
+
+        public override IEnumerable<BaseApiErrorResponse> GetAllErrors()
+        {
+            return AnalysisResults.Select(e => e.ResponseData.error);
+        }
+
 
     }
 }

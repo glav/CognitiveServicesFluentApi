@@ -6,14 +6,14 @@ namespace Glav.CognitiveServices.IntegrationTests.Helpers
 {
     public static class TestExtensions
     {
-        public static void AssertAnalysisContextValidity<TResult>(this BaseApiAnalysisContext<TResult> analysisContext) where TResult : IApiCallResult
+        public static void AssertAnalysisContextValidity<TResult, TError>(this BaseApiAnalysisContext<TResult, TError> analysisContext) where TResult : IApiCallResult where TError : class
         {
             Assert.NotNull(analysisContext);
             Assert.NotNull(analysisContext.AnalysisResults);
 
             var anyErrors = analysisContext.AnalysisResults.Any(c => c.ActionSubmittedSuccessfully == false);
             var potentialError = analysisContext.AnalysisResults.FirstOrDefault(c => c.ActionSubmittedSuccessfully == false);
-            Assert.False(anyErrors,$"One or more actions failed {potentialError?.ApiCallResult?.ErrorMessage}, Code: {potentialError?.ApiCallResult?.StatusCode}");
+            Assert.False(anyErrors,$"One or more actions failed {potentialError?.ApiCallResult?.ErrorMessage}, Code: {potentialError?.ApiCallResult?.StatusCode}, Error: {potentialError?.ApiCallResult?.Data}");
         }
     }
 }
