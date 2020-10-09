@@ -78,7 +78,7 @@ stages:
 
     - task: AzurePowerShell@4
       inputs:
-        azureSubscription: 'Azure Free Trial (d6876356-8975-4384-bbec-4be79f7fe030)'
+        azureSubscription: 'Azure Free Trial'
         ScriptType: 'InlineScript'
         Inline: |
           $ver = (Get-ChildItem $env:USERPROFILE\.nuget\packages\Microsoft.CodeCoverage | Select-Object -Property Name | Sort-Object -Descending | Select-Object -First 1).Name
@@ -141,7 +141,7 @@ stages:
           steps:
           - task: AzurePowerShell@4
             inputs:
-              azureSubscription: 'Azure Free Trial (d6876356-8975-4384-bbec-4be79f7fe030)'
+              azureSubscription: 'Azure Free Trial'
               ScriptType: 'InlineScript'
               Inline: 'Write-Output "Deploy stage WIP"'
               azurePowerShellVersion: 'LatestVersion'  
