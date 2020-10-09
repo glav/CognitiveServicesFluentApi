@@ -24,7 +24,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
             ItemList.ForEach(i =>
             {
                 var item = i as TextAnalyticActionDataItem;
-                if (item.Id > 1) { builder.Append(","); }
+                if ( item != null && item.Id > 1) { builder.Append(","); }
                 builder.Append(i.ToString());
             });
             builder.Append("] }");
