@@ -69,7 +69,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
 
             if (!result.LargePersonGroupGetAnalysis.AnalysisResult.ApiCallResult.Successfull)
             {
-                var grpResult = await FaceTestHelper.CreateFaceConfig()
+                await FaceTestHelper.CreateFaceConfig()
                 .AddConsoleAndTraceLogging()
                 .SetDiagnosticLoggingLevel(LoggingLevel.Everything)
                 .UsingHttpCommunication()

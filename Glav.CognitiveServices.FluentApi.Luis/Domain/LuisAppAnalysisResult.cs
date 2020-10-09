@@ -87,7 +87,7 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
                 {
                     continue;
                 }
-                var entitiesIdentified = prop.Children().ToList()[0].Children().ToList();
+                var entitiesIdentified = prop?.Children().ToList()[0].Children().ToList();
 
                 var listOfEntitiesIdentified = new List<string>();
                 foreach (var entityIdentified in entitiesIdentified)
@@ -119,7 +119,6 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Domain
             {
                 var prop = childIntent as JProperty;
                 var name = prop?.Name;
-                var innerChild = (childIntent.Children().FirstOrDefault() as JProperty);
                 var score = (double)childIntent.Children().FirstOrDefault().Children().FirstOrDefault();
                 intents.Add(new LuisAppIntent { intent = name, score = score });
             }
