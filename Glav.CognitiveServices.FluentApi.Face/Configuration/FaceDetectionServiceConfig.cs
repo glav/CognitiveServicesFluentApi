@@ -9,7 +9,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 
         public override string Template => "face/{0}/detect";
 
-        public override string Version => ApiConstants.FACE_VERSION;
+        public override string Version => ApiConstants.DEFAULT_FACE_VERSION;
 
         public override ApiActionDefinition ApiAction => FaceApiOperations.FaceDetection;
     }

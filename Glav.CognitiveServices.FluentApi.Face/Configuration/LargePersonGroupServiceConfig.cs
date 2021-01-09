@@ -9,7 +9,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 
         public override string Template => "face/{0}/largepersongroups";
 
-        public override string Version => ApiConstants.FACE_VERSION;
+        public override string Version => ApiConstants.DEFAULT_FACE_VERSION;
 
         public override ApiActionDefinition ApiAction => FaceApiOperations.LargePersonGroupCreate;
     }
@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 
         public override string Template => "face/{0}/largepersongroups";
 
-        public override string Version => ApiConstants.FACE_VERSION;
+        public override string Version => ApiConstants.DEFAULT_FACE_VERSION;
 
         public override ApiActionDefinition ApiAction => FaceApiOperations.LargePersonGroupList;
     }
@@ -27,7 +27,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 
         public override string Template => "face/{0}/largepersongroups";
 
-        public override string Version => ApiConstants.FACE_VERSION;
+        public override string Version => ApiConstants.DEFAULT_FACE_VERSION;
 
         public override ApiActionDefinition ApiAction => FaceApiOperations.LargePersonGroupTrainStart;
     }
@@ -37,7 +37,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 
         public override string Template => "face/{0}/largepersongroups";
 
-        public override string Version => ApiConstants.FACE_VERSION;
+        public override string Version => ApiConstants.DEFAULT_FACE_VERSION;
 
         public override ApiActionDefinition ApiAction => FaceApiOperations.LargePersonGroupTrainStatus;
     }
@@ -46,7 +46,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 
         public override string Template => "face/{0}/largepersongroups";
 
-        public override string Version => ApiConstants.FACE_VERSION;
+        public override string Version => ApiConstants.DEFAULT_FACE_VERSION;
 
         public override ApiActionDefinition ApiAction => FaceApiOperations.LargePersonGroupGet;
     }
@@ -56,7 +56,7 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 
         public override string Template => "face/{0}/largepersongroups";
 
-        public override string Version => ApiConstants.FACE_VERSION;
+        public override string Version => ApiConstants.DEFAULT_FACE_VERSION;
 
         public override ApiActionDefinition ApiAction => FaceApiOperations.LargePersonGroupDelete;
     }

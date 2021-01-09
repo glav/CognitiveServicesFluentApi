@@ -8,7 +8,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
     public class OperationStatusServiceConfig : ApiServiceUriFragment
     {
         public override string Template => "text/analytics/{0}/operations";
-        public override string Version => ApiConstants.TEXT_ANALYTIC_VERSION;
+        public override string Version => ApiConstants.DEFAULT_TEXT_ANALYTIC_VERSION;
 
         public override ApiActionDefinition ApiAction => TextAnalyticApiOperations.OperationStatus;
     }
