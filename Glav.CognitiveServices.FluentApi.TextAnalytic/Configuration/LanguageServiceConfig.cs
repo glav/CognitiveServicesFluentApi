@@ -7,8 +7,9 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
 {
     public class LanguageServiceConfig : ApiServiceUriFragment
     {
+        public LanguageServiceConfig(string apiVersionIdentifier) : base(apiVersionIdentifier) { }
+
         public override string Template => ApiConstants.TEXT_ANALYTIC_API_CATEGORY_PREFIX + "{0}/languages";
-        public override string Version => ApiConstants.DEFAULT_TEXT_ANALYTIC_VERSION;
 
         public override ApiActionDefinition ApiAction => TextAnalyticApiOperations.LanguageAnalysis;
     }

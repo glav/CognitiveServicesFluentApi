@@ -1,5 +1,6 @@
 ﻿using Glav.CognitiveServices.FluentApi.Core;
 using Glav.CognitiveServices.FluentApi.Face;
+using Glav.CognitiveServices.FluentApi.Face.Configuration;
 using Glav.CognitiveServices.IntegrationTests.Helpers;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Glav.CognitiveServices.IntegrationTests.Face
     {
         public static FaceConfigurationSettings CreateFaceConfig()
         {
-            return FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast, 10);
+            return FaceConfigurationSettings.CreateUsingConfigurationKeys(TestConfig.FaceApiKey, LocationKeyIdentifier.AustraliaEast,ApiConstants.DEFAULT_FACE_VERSION, 10);
         }
 
         public static async Task DeleteLargePersonGroup(string groupId)

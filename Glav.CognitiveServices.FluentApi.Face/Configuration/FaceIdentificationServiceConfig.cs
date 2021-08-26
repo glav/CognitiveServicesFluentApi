@@ -6,10 +6,9 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 {
     public class FaceIdentificationServiceConfig : ApiServiceUriFragment
     {
+        public FaceIdentificationServiceConfig(string apiVersionIdentifier) : base(apiVersionIdentifier) { }
 
         public override string Template => "face/{0}/identify";
-
-        public override string Version => ApiConstants.DEFAULT_FACE_VERSION;
 
         public override ApiActionDefinition ApiAction => FaceApiOperations.FaceIdentification;
     }

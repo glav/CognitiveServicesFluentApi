@@ -8,9 +8,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
 {
     public class OcrAnalysisServiceConfig : ApiServiceUriFragment
     {
+        public OcrAnalysisServiceConfig(string apiVersionIdentifier) : base(apiVersionIdentifier) { }
         public override string Template => "vision/{0}/ocr";
-
-        public override string Version => ApiConstants.DEFAULT_ComputerVisionVersion;
 
         public override ApiActionDefinition ApiAction => ComputerVisionApiOperations.OcrAnalysis;
     }

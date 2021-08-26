@@ -5,9 +5,9 @@ namespace Glav.CognitiveServices.FluentApi.Luis.Configuration
 {
     public class ApiServiceUriCollection : ApiServiceUriCollectionBase
     {
-        public ApiServiceUriCollection()
+        public ApiServiceUriCollection(string apiVersionIdentifier)
         {
-            Services.Add(LuisAnalysisApiOperations.LuisAnalysis.Name,new LuisAppServiceConfig());
+            Services.Add(LuisAnalysisApiOperations.LuisAnalysis.Name,new LuisAppServiceConfig(apiVersionIdentifier));
         }
     }
 }

@@ -10,8 +10,9 @@ namespace Glav.CognitiveServices.FluentApi.Face
 {
     public class FaceConfigurationSettings : ConfigurationSettings
     {
-        public FaceConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey, int maxNumberOfRequestRetries = Core.Configuration.ApiConstants.DefaultMaxNumberOfRequestRetries) 
-                : base(FaceApiOperations.Category,apiKey,locationKey, new ApiServiceUriCollection(),maxNumberOfRequestRetries)
+        public FaceConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey, string apiVersionIdentifier = Configuration.ApiConstants.DEFAULT_FACE_VERSION,
+                                        int maxNumberOfRequestRetries = Core.Configuration.ApiConstants.DefaultMaxNumberOfRequestRetries) 
+                : base(FaceApiOperations.Category,apiKey,locationKey, new ApiServiceUriCollection(apiVersionIdentifier),maxNumberOfRequestRetries)
         {
         }
 
@@ -19,10 +20,11 @@ namespace Glav.CognitiveServices.FluentApi.Face
         {
         }
 
-        public static FaceConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey, int maxNumberOfRequestRetries = Core.Configuration.ApiConstants.DefaultMaxNumberOfRequestRetries)
+        public static FaceConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey, string apiVersionIdentifier = Configuration.ApiConstants.DEFAULT_FACE_VERSION,
+                                                                        int maxNumberOfRequestRetries = Core.Configuration.ApiConstants.DefaultMaxNumberOfRequestRetries)
         {
             SupportedLanguages.Setup();
-            return new FaceConfigurationSettings(apiKey, locationKey, maxNumberOfRequestRetries);
+            return new FaceConfigurationSettings(apiKey, locationKey,apiVersionIdentifier, maxNumberOfRequestRetries);
         }
     }
 }
