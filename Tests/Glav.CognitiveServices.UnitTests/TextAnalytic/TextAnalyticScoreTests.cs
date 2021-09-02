@@ -15,9 +15,14 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         public async Task ShouldCalculateCorrectScoreFromDefaultSet()
         {
             // Prepare our dummy response
-            const double knownScore = 0.7988085;
-            var input = "{\"documents\":[{\"score\":"+knownScore.ToString()+",\"id\":\"1\"}],\"errors\":[]}";
-            var dummyResult = new MockCommsResult(input);
+            var negativeInput = "{" +
+                "\"documents\":[" +
+                    "{\"sentiment\":\"negative\"," +
+                        "\"confidenceScores\": " +
+                            "{\"positive\": 0.0, \"neutral\":0.0,\"negative\":1.0 }," +
+                        "\"id\":\"1\"}],\"errors\":[]}";
+
+            var dummyResult = new MockCommsResult(negativeInput);
             var dummyEngine = new MockCommsEngine(dummyResult);
 
             // Run the dummy comms result through the pipeline
@@ -29,7 +34,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 
             // Calculate what we expect to get from our default score levels
             var defaultScoreLevels = new DefaultScoreLevels();  // this is the default set we are using.
-            var expectedResult = defaultScoreLevels.ScoreLevels.FirstOrDefault(s => s.LowerBound <= knownScore && s.UpperBound >= knownScore);
+            var expectedResult = defaultScoreLevels.ScoreLevels.FirstOrDefault(s => s.Name == DefaultScoreLevels.Negative);
             Assert.NotNull(expectedResult);
 
             // Check we got what we expect
@@ -44,9 +49,13 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         public async Task ShouldCalculateCorrectScoreFromCustomSet()
         {
             // Prepare our dummy response
-            const double knownScore = 0.2;
-            var input = "{\"documents\":[{\"score\":" + knownScore.ToString() + ",\"id\":\"1\"}],\"errors\":[]}";
-            var dummyResult = new MockCommsResult(input);
+            var positiveInput = "{" +
+                "\"documents\":[" +
+                    "{\"sentiment\":\"positive\"," +
+                        "\"confidenceScores\": " +
+                            "{\"positive\": 1.0, \"neutral\":0.0,\"negative\":0.0 }," +
+                        "\"id\":\"1\"}],\"errors\":[]}";
+            var dummyResult = new MockCommsResult(positiveInput);
             var dummyEngine = new MockCommsEngine(dummyResult);
 
             // Run the dummy comms result through the pipeline
@@ -57,8 +66,8 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
                 .AnalyseAllAsync();
 
             // Calculate what we expect to get from our score levels
-            var scoreLevels = new CustomScoreLevels();  
-            var expectedResult = scoreLevels.ScoreLevels.First();
+            var scoreLevels = new CustomScoreLevels();
+            var expectedResult = scoreLevels.ScoreLevels.Last();
 
             // override the scoring engine for sentiments
             result.SentimentAnalysis.UseCustomScoreLevelsAndDefaultScoringEngine(scoreLevels);

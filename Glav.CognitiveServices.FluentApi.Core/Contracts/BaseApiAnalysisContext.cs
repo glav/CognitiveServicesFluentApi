@@ -16,7 +16,7 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
         {
             AnalysisInput = actionData;
             AnalysisResults = new List<TResult> { analysisResult };
-            //ScoringEngine = scoringEngine;
+            ScoringEngine = scoringEngine;
         }
         protected BaseApiAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine<TScoreItem> scoringEngine)
         {
