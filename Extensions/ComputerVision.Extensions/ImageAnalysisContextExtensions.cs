@@ -21,7 +21,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         public static string[] GetDescriptiveCaptions(this ImageAnalysisContext context, double minimumConfidenceLevel)
         {
             return context.AnalysisResult.ResponseData.description.captions
-                .Where(d => context.ScoringEngine.EvaluateScore(d.confidence).LowerBound >= minimumConfidenceLevel)
+                .Where(d => context.ScoringEngine.Evaluate(d.confidence).LowerBound >= minimumConfidenceLevel)
                 .Select(i => i.text)
                 .ToArray();
         }
@@ -29,7 +29,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         {
             var scoreLevelName = scoreLevelDescription.ToLowerInvariant();
             return context.AnalysisResult.ResponseData.description.captions
-                .Where(d => context.ScoringEngine.EvaluateScore(d.confidence).NormalisedName == scoreLevelName)
+                .Where(d => context.ScoringEngine.Evaluate(d.confidence).NormalisedName == scoreLevelName)
                 .Select(i => i.text)
                 .ToArray();
         }
@@ -38,7 +38,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         {
             var scoreLevelName = scoreLevelDescription.ToLowerInvariant();
             return context.AnalysisResult.ResponseData.tags
-                .Where(d => context.ScoringEngine.EvaluateScore(d.confidence).NormalisedName == scoreLevelName)
+                .Where(d => context.ScoringEngine.Evaluate(d.confidence).NormalisedName == scoreLevelName)
                 .Select(i => i.name)
                 .ToArray();
         }

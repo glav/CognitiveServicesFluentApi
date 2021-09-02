@@ -28,8 +28,8 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.SentimentAnalysis.AnalysisResult.ResponseData.documents);
 
-            var scoringEngine = result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine;
-            Assert.Equal(DefaultScoreLevels.Positive, scoringEngine.EvaluateScore(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
+            var scoringEngine = result.SentimentAnalysis.ScoringEngine;
+            Assert.Equal(DefaultScoreLevels.Positive, scoringEngine.Evaluate(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0]).Name);
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems().First().Id;
             var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
-            Assert.Equal(DefaultScoreLevels.Positive, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
+            Assert.Equal(DefaultScoreLevels.Positive, result.SentimentAnalysis.ScoringEngine.Evaluate(resultById).Name);
 
             var collectedResults = result.SentimentAnalysis.GetResults(DefaultScoreLevels.Positive);
             Assert.NotNull(collectedResults);
@@ -78,7 +78,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.SentimentAnalysis.AnalysisResult.ResponseData.documents);
 
-            Assert.Equal(DefaultScoreLevels.Negative, result.SentimentAnalysis.ScoringEngine.EvaluateScore(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
+            Assert.Equal(DefaultScoreLevels.Negative, result.SentimentAnalysis.ScoringEngine.Evaluate(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0]).Name);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems().First().Id;
             var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
-            Assert.Equal(DefaultScoreLevels.Negative, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
+            Assert.Equal(DefaultScoreLevels.Negative, result.SentimentAnalysis.ScoringEngine.Evaluate(resultById).Name);
 
             var collectedResults = result.SentimentAnalysis.GetResults(DefaultScoreLevels.Negative);
             Assert.NotNull(collectedResults);
@@ -131,7 +131,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             var submittedId = result.SentimentAnalysis.AnalysisInput.GetAllItems().ToArray()[1].Id;
             var resultById = result.SentimentAnalysis.GetResult(submittedId);
             Assert.NotNull(resultById);
-            Assert.Equal(DefaultScoreLevels.Positive, result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(resultById.score).Name);
+            Assert.Equal(DefaultScoreLevels.Positive, result.SentimentAnalysis.ScoringEngine.Evaluate(resultById).Name);
 
         }
     }

@@ -7,13 +7,13 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain.LargePersonGroup
 {
-    public class LargePersonGroupTrainStartAnalysisContext : BaseApiAnalysisContext<LargePersonGroupTrainStartResult, BaseApiErrorResponse> 
+    public class LargePersonGroupTrainStartAnalysisContext : BaseApiAnalysisContext<LargePersonGroupTrainStartResult, BaseApiErrorResponse, double> 
     {
-        public LargePersonGroupTrainStartAnalysisContext(ApiActionDataCollection actionData, LargePersonGroupTrainStartResult analysisResult, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, analysisResult, scoringEngine)
+        public LargePersonGroupTrainStartAnalysisContext(ApiActionDataCollection actionData, LargePersonGroupTrainStartResult analysisResult)
+            : base(actionData, analysisResult, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
-        public LargePersonGroupTrainStartAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
+        public LargePersonGroupTrainStartAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine<double> scoringEngine)
             : base(actionData, scoringEngine)
         {
         }

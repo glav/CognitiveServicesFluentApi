@@ -8,17 +8,17 @@ using Glav.CognitiveServices.FluentApi.Core.Communication;
 
 namespace Glav.CognitiveServices.FluentApi.Core.Contracts
 {
-    public abstract class BaseApiAnalysisContext<TResult, TError> 
+    public abstract class BaseApiAnalysisContext<TResult, TError, TScoreItem> 
                 where TResult : IApiCallResult 
                 where TError : class
     {
-        protected BaseApiAnalysisContext(ApiActionDataCollection actionData, TResult analysisResult, IScoreEvaluationEngine scoringEngine)
+        protected BaseApiAnalysisContext(ApiActionDataCollection actionData, TResult analysisResult, IScoreEvaluationEngine<TScoreItem> scoringEngine)
         {
             AnalysisInput = actionData;
             AnalysisResults = new List<TResult> { analysisResult };
-            ScoringEngine = scoringEngine;
+            //ScoringEngine = scoringEngine;
         }
-        protected BaseApiAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
+        protected BaseApiAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine<TScoreItem> scoringEngine)
         {
             AnalysisInput = actionData;
             AnalysisResults = new List<TResult>();
@@ -43,9 +43,9 @@ namespace Glav.CognitiveServices.FluentApi.Core.Contracts
         /// </summary>
         public virtual TResult AnalysisResult { get { return AnalysisResults.FirstOrDefault(); }  }
 
-        public IScoreEvaluationEngine ScoringEngine { get; private set; }
+        public IScoreEvaluationEngine<TScoreItem> ScoringEngine { get; private set; }
 
-        public void SetScoringEngine(IScoreEvaluationEngine scoreEngine)
+        public void SetScoringEngine(IScoreEvaluationEngine<TScoreItem> scoreEngine)
         {
             ScoringEngine = scoreEngine ?? throw new CognitiveServicesArgumentException("ScoreEvaluationEngine cannot be NULL");
         }

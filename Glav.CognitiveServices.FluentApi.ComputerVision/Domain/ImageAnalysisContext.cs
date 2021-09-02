@@ -7,14 +7,14 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class ImageAnalysisContext : BaseApiAnalysisContext<ImageAnalysisResult, RequestIdErrorResponse> 
+    public class ImageAnalysisContext : BaseApiAnalysisContext<ImageAnalysisResult, RequestIdErrorResponse, double> 
     {
-        public ImageAnalysisContext(ApiActionDataCollection actionData, ImageAnalysisResult analysisResult, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, analysisResult, scoringEngine)
+        public ImageAnalysisContext(ApiActionDataCollection actionData, ImageAnalysisResult analysisResult)
+            : base(actionData, analysisResult, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
-        public ImageAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, scoringEngine)
+        public ImageAnalysisContext(ApiActionDataCollection actionData)
+            : base(actionData, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
         public override ApiActionDefinition AnalysisType => ComputerVisionApiOperations.ImageAnalysis;

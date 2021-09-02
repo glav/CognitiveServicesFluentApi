@@ -15,7 +15,8 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         [Fact]
         public void ShouldParseSentimentResultSuccessfully()
         {
-            var input = "{\"documents\":[{\"score\":0.7988085,\"id\":\"1\"}],\"errors\":[]}";
+            //var input = "{\"documents\":[{\"score\":0.7988085,\"id\":\"1\"}],\"errors\":[]}";
+            var input = "{\"documents\":[{\"id\":\"1\",\"sentiment\":\"positive\",\"confidenceScores\":{\"positive\":1.0,\"neutral\":0.0,\"negative\":0.0},\"sentences\":[{\"sentiment\":\"positive\",\"confidenceScores\":{\"positive\":1.0,\"neutral\":0.0,\"negative\":0.0},\"offset\":0,\"length\":29,\"text\":\"I am having a fantastic time.\"}],\"warnings\":[]}],\"errors\":[],\"modelVersion\":\"2020 - 04 - 01\"}";
             var result = new SentimentResult(new MockCommsResult(input));
 
             Assert.NotNull(result);
@@ -24,7 +25,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.NotNull(result.ResponseData);
             Assert.NotEmpty(result.ResponseData.documents);
             Assert.Equal<long>(1, result.ResponseData.documents[0].id);
-            Assert.Equal<double>(0.7988085, result.ResponseData.documents[0].score);
+            Assert.Equal<double>(0.7988085, result.ResponseData.documents[0].confidenceScores.positive);
             Assert.Empty(result.ResponseData.errors);
         }
 

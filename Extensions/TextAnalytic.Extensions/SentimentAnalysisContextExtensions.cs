@@ -11,7 +11,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
     {
         public static ScoreLevelBoundsDefinition Score(this SentimentAnalysisContext context, SentimentResultResponseItem responseItem)
         {
-            return context.ScoringEngine.EvaluateScore(responseItem.score);
+            return context.ScoringEngine.Evaluate(responseItem);
         }
 
         public static int NumberOfResponses(this SentimentAnalysisContext context, string sentimentClassification)

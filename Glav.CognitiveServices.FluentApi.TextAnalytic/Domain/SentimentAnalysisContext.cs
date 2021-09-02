@@ -7,10 +7,10 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public class SentimentAnalysisContext : BaseApiAnalysisContext<SentimentResult, ApiErrorResponse>
+    public class SentimentAnalysisContext : BaseApiAnalysisContext<SentimentResult, ApiErrorResponse, SentimentResultResponseItem>
     {
-        public SentimentAnalysisContext(ApiActionDataCollection actionData, SentimentResult analysisResult, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, analysisResult, scoringEngine)
+        public SentimentAnalysisContext(ApiActionDataCollection actionData, SentimentResult analysisResult)
+            : base(actionData, analysisResult, new SentimentCustomScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
         public override ApiActionDefinition AnalysisType { get { return TextAnalyticApiOperations.SentimentAnalysis; } }

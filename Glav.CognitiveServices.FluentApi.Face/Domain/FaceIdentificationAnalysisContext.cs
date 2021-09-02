@@ -7,14 +7,14 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.Face.Domain
 {
-    public class FaceIdentificationAnalysisContext : BaseApiAnalysisContext<FaceIdentificationResult, BaseApiErrorResponse> 
+    public class FaceIdentificationAnalysisContext : BaseApiAnalysisContext<FaceIdentificationResult, BaseApiErrorResponse, double> 
     {
-        public FaceIdentificationAnalysisContext(ApiActionDataCollection actionData, FaceIdentificationResult analysisResult, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, analysisResult, scoringEngine)
+        public FaceIdentificationAnalysisContext(ApiActionDataCollection actionData, FaceIdentificationResult analysisResult)
+            : base(actionData, analysisResult, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
-        public FaceIdentificationAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, scoringEngine)
+        public FaceIdentificationAnalysisContext(ApiActionDataCollection actionData)
+            : base(actionData, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
         public override ApiActionDefinition AnalysisType => FaceApiOperations.FaceIdentification;

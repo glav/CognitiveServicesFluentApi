@@ -9,10 +9,6 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public static class KeyPhraseAnalysisContextExtensions
     {
-        public static ScoreLevelBoundsDefinition Score(this KeyPhraseAnalysisContext context, SentimentResultResponseItem responseItem)
-        {
-            return context.ScoringEngine.EvaluateScore(responseItem.score);
-        }
 
         public static IEnumerable<KeyPhraseResultResponseItem> GetResults(this KeyPhraseAnalysisContext context)
         {

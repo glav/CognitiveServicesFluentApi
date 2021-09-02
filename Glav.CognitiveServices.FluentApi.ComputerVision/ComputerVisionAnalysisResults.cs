@@ -40,7 +40,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         {
             if (ImageAnalysis == null)
             {
-                ImageAnalysis = new ImageAnalysisContext(actionData, new ImageAnalysisResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                ImageAnalysis = new ImageAnalysisContext(actionData, new ImageAnalysisResult(commsResult));
                 return;
             }
             ImageAnalysis.AnalysisResults.Add(new ImageAnalysisResult(commsResult));
@@ -51,7 +51,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         {
             if (OcrAnalysis == null)
             {
-                OcrAnalysis = new OcrAnalysisContext(actionData, new OcrAnalysisResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                OcrAnalysis = new OcrAnalysisContext(actionData, new OcrAnalysisResult(commsResult));
                 return;
             }
             OcrAnalysis.AnalysisResults.Add(new OcrAnalysisResult(commsResult));
@@ -61,7 +61,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         {
             if (RecognizeTextAnalysis == null)
             {
-                RecognizeTextAnalysis = new RecognizeTextAnalysisContext(actionData, new RecognizeTextAnalysisResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                RecognizeTextAnalysis = new RecognizeTextAnalysisContext(actionData, new RecognizeTextAnalysisResult(commsResult));
                 return;
             }
             RecognizeTextAnalysis.AnalysisResults.Add(new RecognizeTextAnalysisResult(commsResult));

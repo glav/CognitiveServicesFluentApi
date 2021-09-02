@@ -52,8 +52,7 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.SentimentAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.SentimentAnalysis.AnalysisResult.ResponseData.documents);
             Assert.Equal("Negative", 
-                result.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine.EvaluateScore(
-                    result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0].score).Name);
+                result.SentimentAnalysis.ScoringEngine.Evaluate(result.SentimentAnalysis.AnalysisResult.ResponseData.documents[0]).Name);
         }
     }
 }

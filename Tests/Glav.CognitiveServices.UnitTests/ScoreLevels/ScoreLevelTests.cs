@@ -13,10 +13,10 @@ namespace Glav.CognitiveServices.UnitTests.ScoreLevels
         [Fact]
         public void EmptyScoreLevelsShouldNotValidate()
         {
-            var scoreEngine = new DefaultScoreEvaluationEngine(new EmptyScoreLevelCollection());
+            var scoreEngine = new NumericScoreEvaluationEngine(new EmptyScoreLevelCollection());
             Assert.Throws(typeof(CognitiveServicesArgumentException), () =>
              {
-                 scoreEngine.EvaluateScore(1);
+                 scoreEngine.Evaluate(1);
              });
         }
 
@@ -24,7 +24,7 @@ namespace Glav.CognitiveServices.UnitTests.ScoreLevels
         public void DefaultScoreLevelsShouldValidateAndDetectScore()
         {
             var scoreLevels = new DefaultScoreLevels();
-            var scoreEngine = new DefaultScoreEvaluationEngine(scoreLevels);
+            var scoreEngine = new NumericScoreEvaluationEngine(scoreLevels);
 
             // Loop through all score level definitions and set the expected value just lower than the upperbound for each level so we ensure
             // that the expected result is that score.
@@ -32,7 +32,7 @@ namespace Glav.CognitiveServices.UnitTests.ScoreLevels
             {
                 var testValue = expectedItem.UpperBound - 0.0001;
 
-                var result = scoreEngine.EvaluateScore(testValue);
+                var result = scoreEngine.Evaluate(testValue);
                 Assert.Equal(expectedItem.Name, result.Name);
             }
 
@@ -42,10 +42,10 @@ namespace Glav.CognitiveServices.UnitTests.ScoreLevels
         public void InvalidScoreLevelCollectionWithNoEndLevelShouldNotValidate()
         {
             var scoreLevels = new InvalidScoreLevelCollectionNoEnd();
-            var scoreEngine = new DefaultScoreEvaluationEngine(scoreLevels);
+            var scoreEngine = new NumericScoreEvaluationEngine(scoreLevels);
             Assert.Throws(typeof(CognitiveServicesException),() =>
             {
-                scoreEngine.EvaluateScore(0.4);
+                scoreEngine.Evaluate(0.4);
             });
         }
 
@@ -53,10 +53,10 @@ namespace Glav.CognitiveServices.UnitTests.ScoreLevels
         public void InvalidScoreLevelCollectionWithNoStartLevelShouldNotValidate()
         {
             var scoreLevels = new InvalidScoreLevelCollectionNoStart();
-            var scoreEngine = new DefaultScoreEvaluationEngine(scoreLevels);
+            var scoreEngine = new NumericScoreEvaluationEngine(scoreLevels);
             Assert.Throws(typeof(CognitiveServicesException), () =>
             {
-                scoreEngine.EvaluateScore(0.4);
+                scoreEngine.Evaluate(0.4);
             });
         }
 
@@ -64,10 +64,10 @@ namespace Glav.CognitiveServices.UnitTests.ScoreLevels
         public void InvalidScoreLevelCollectionWithGapInSequenceLevelShouldNotValidate()
         {
             var scoreLevels = new InvalidScoreLevelCollectionHasGap();
-            var scoreEngine = new DefaultScoreEvaluationEngine(scoreLevels);
+            var scoreEngine = new NumericScoreEvaluationEngine(scoreLevels);
             Assert.Throws(typeof(CognitiveServicesException), () =>
             {
-                scoreEngine.EvaluateScore(0.4);
+                scoreEngine.Evaluate(0.4);
             });
         }
 
@@ -89,7 +89,7 @@ namespace Glav.CognitiveServices.UnitTests.ScoreLevels
             Assert.NotNull(result.LanguageAnalysis);
             Assert.NotEmpty(result.LanguageAnalysis.AnalysisResults);
 
-            result.LanguageAnalysis.SetScoringEngine(new DefaultScoreEvaluationEngine(new CustomValidScoreLevelCollection()));
+            result.LanguageAnalysis.SetScoringEngine(new NumericScoreEvaluationEngine(new CustomValidScoreLevelCollection()));
 
             var results = result.LanguageAnalysis.GetResults().ToList();
             Assert.Equal(2, results.First().detectedLanguages.Length);
