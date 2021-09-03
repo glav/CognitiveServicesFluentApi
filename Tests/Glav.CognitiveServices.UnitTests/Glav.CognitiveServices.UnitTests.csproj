@@ -18,6 +18,7 @@
     <None Remove="TestData\FaceDetectionResponse.json" />
     <None Remove="TestData\FaceLargePersonGroupPersonListResponse.json" />
     <None Remove="TestData\FaceLargePersonGroupTrainStatusResponse.json" />
+    <None Remove="TestData\language-analysis-result-multiple.json" />
     <None Remove="TestData\language-analysis-result.json" />
     <None Remove="TestData\LuisAppResponse.json" />
     <None Remove="TestData\SanitisedHtmlEmail.txt" />
@@ -26,6 +27,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="TestData\FaceApiErrorResponse.json" />
+    <EmbeddedResource Include="TestData\language-analysis-result-multiple.json" />
     <EmbeddedResource Include="TestData\LuisAppResponse.json" />
     <EmbeddedResource Include="TestData\FaceDetectionResponse-FemaleWithAge.json" />
     <EmbeddedResource Include="TestData\FaceDetectionResponse.json" />

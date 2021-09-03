@@ -167,12 +167,11 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var results = result.LanguageAnalysis.GetResults();
             Assert.NotNull(results);
             Assert.Equal(1, results.Count());
-            Assert.NotEmpty(results.First().detectedLanguages);
-            Assert.Equal(1, results.First().detectedLanguages.Length);
-            Assert.Equal("English", results.First().detectedLanguages[0].name);
-            Assert.Equal("en", results.First().detectedLanguages[0].iso6391name);
-            Assert.Equal(1.0, results.First().detectedLanguages[0].score);
-            Assert.Equal(1, results.First().detectedLanguages.Length);
+            Assert.NotNull(results.First().detectedLanguage);
+            Assert.Equal(1, results.Count());
+            Assert.Equal("English", results.First().detectedLanguage.name);
+            Assert.Equal("en", results.First().detectedLanguage.iso6391name);
+            Assert.Equal(1.0, results.First().detectedLanguage.confidenceScore);
         }
 
         [Fact]
@@ -197,12 +196,12 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var results = result.LanguageAnalysis.GetResultsThatContainConfidenceLevel(DefaultScoreLevels.Positive);
             Assert.NotNull(results);
             Assert.Equal(1, results.Count());
-            Assert.NotEmpty(results.First().detectedLanguages);
-            Assert.Equal(1, results.First().detectedLanguages.Length);
-            Assert.Equal("English", results.First().detectedLanguages[0].name);
-            Assert.Equal("en", results.First().detectedLanguages[0].iso6391name);
-            Assert.Equal(1.0, results.First().detectedLanguages[0].score);
-            Assert.Equal(1, results.First().detectedLanguages.Length);
+            Assert.NotNull(results.First().detectedLanguage);
+            Assert.Equal(1, results.Count());
+            Assert.Equal("English", results.First().detectedLanguage.name);
+            Assert.Equal("en", results.First().detectedLanguage.iso6391name);
+            Assert.Equal(1.0, results.First().detectedLanguage.confidenceScore);
+            Assert.Equal(1, results.Count());
         }
 
 

@@ -10,12 +10,12 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
     {
         public static ScoreLevelBoundsDefinition Score(this LanguageAnalysisContext context, DetectedLanguage languageResult)
         {
-            return context.ScoringEngine.Evaluate(languageResult.score);
+            return context.ScoringEngine.Evaluate(languageResult.confidenceScore);
         }
 
         public static int NumberOfResponses(this LanguageAnalysisContext context, string languageConfidence)
         {
-            var allLangResults = context.AnalysisResult.ResponseData.documents.SelectMany(d => d.detectedLanguages);
+            var allLangResults = context.AnalysisResult.ResponseData.documents.Select(d => d.detectedLanguage);
             return allLangResults.Count(d => Score(context, d).Name == languageConfidence);
         }
 
@@ -46,7 +46,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             var normalisedLevel = languageConfidenceDescriptor.ToLowerInvariant();
             context.AnalysisResult.ResponseData.documents.ToList().ForEach((item) =>
             {
-                if (item.detectedLanguages.Any(i => Score(context,i).NormalisedName == normalisedLevel)
+                if (context.ScoringEngine.Evaluate(item.detectedLanguage.confidenceScore).NormalisedName == normalisedLevel
                     && !results.Any(i => i.id == item.id))
                 {
                     results.Add(item);

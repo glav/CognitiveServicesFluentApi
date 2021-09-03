@@ -5,11 +5,14 @@ using System.Linq;
 using Glav.CognitiveServices.FluentApi.Core;
 using System.Threading.Tasks;
 using Glav.CognitiveServices.FluentApi.TextAnalytic;
+using Glav.CognitiveServices.UnitTests.Helpers;
 
 namespace Glav.CognitiveServices.UnitTests.ScoreLevels
 {
     public class ScoreLevelTests
     {
+        private TestDataHelper _testDataHelper = new TestDataHelper();
+
         [Fact]
         public void EmptyScoreLevelsShouldNotValidate()
         {
@@ -74,7 +77,7 @@ namespace Glav.CognitiveServices.UnitTests.ScoreLevels
         [Fact]
         public async Task ShouldUtiliseCustomScoreLevel()
         {
-            var langResult = "{\"documents\":[{\"id\":\"1\",\"detectedLanguages\":[{\"name\":\"English\",\"iso6391Name\":\"en\",\"score\":1.0},{\"name\":\"English\",\"iso6391Name\":\"en\",\"score\":0.45}]}],\"errors\":[]}";
+            var langResult = _testDataHelper.GetFileDataEmbeddedInAssembly("language-analysis-result-multiple.json");
             var commsEngine = new MockCommsEngine(new MockCommsResult(langResult));
 
             var result = await TextAnalyticConfigurationSettings.CreateUsingConfigurationKeys("test", LocationKeyIdentifier.WestUs)
@@ -92,12 +95,12 @@ namespace Glav.CognitiveServices.UnitTests.ScoreLevels
             result.LanguageAnalysis.SetScoringEngine(new NumericScoreEvaluationEngine(new CustomValidScoreLevelCollection()));
 
             var results = result.LanguageAnalysis.GetResults().ToList();
-            Assert.Equal(2, results.First().detectedLanguages.Length);
+            Assert.Equal(2, results.Count);
 
-            var scoreResult1 = result.LanguageAnalysis.Score(results[0].detectedLanguages[0]);
+            var scoreResult1 = result.LanguageAnalysis.Score(results[0].detectedLanguage);
             Assert.NotNull(scoreResult1);
             Assert.Equal(CustomValidScoreLevelCollection.HighestScore, scoreResult1.Name);
-            var scoreResult2 = result.LanguageAnalysis.Score(results[0].detectedLanguages[1]);
+            var scoreResult2 = result.LanguageAnalysis.Score(results[1].detectedLanguage);
             Assert.NotNull(scoreResult2);
             Assert.Equal(CustomValidScoreLevelCollection.Level2Score, scoreResult2.Name);
         }
