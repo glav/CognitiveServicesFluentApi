@@ -98,7 +98,7 @@ Assert.NotEmpty(result.ImageAnalysis.AnalysisResults[0].ResponseData.tags);
 Assert.NotEmpty(result.ImageAnalysis.AnalysisResults[1].ResponseData.faces);
 ```
 
-The Recognize text API is currently in preview at the time of this writing and provides recognition of handwritten or printed text. Thus API requires that a job
+The Read image API provides recognition of handwritten or printed text. This API requires that a job
 be submitted, and then queried to see when it has completed. To submit a job for processing, use the following:
 
 ```c#
@@ -107,7 +107,7 @@ var result = await ComputerVisionConfigurationSettings.CreateUsingConfigurationK
     .AddDebugDiagnosticLogging()
     .UsingHttpCommunication()
     .WithComputerVisionAnalysisActions()
-    .AddFileForRecognizeTextAnalysis("c:\\Images\\your_image.jpg",FluentApi.ComputerVision.Domain.RecognizeTextMode.Handwritten)
+    .AddFileForReadImageAnalysis("c:\\Images\\your_image.jpg",SupportedLanguageType.English)
     .AnalyseAllAsync();
 ```
 
@@ -119,7 +119,7 @@ var status = await result.CheckOperationStatusAsync();
 var isFirstOpFinished = status.First().OperationState == FluentApi.Core.Operations.OperationStateType.CompletedSuccessfully;
 ```
 
-This queries the operation status endpoint once for each RecognizeText action to retrieve the status of the operations. That status object will contain 
+This queries the operation status endpoint once for each ReadImage action to retrieve the status of the operations. That status object will contain 
 an OperationState property which can be one of the following values:
 * NotStarted
 * BadRequest

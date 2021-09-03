@@ -57,7 +57,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         /// Will poll the operation status service until the ReadImage operation has completed processing. The total timeout period for this operation
         /// (or effectively the maximum time to wait) defaults to 30 seconds with a 3 second delay between  each query of the operation status endpoint.
         /// </summary>
-        /// <param name="results">The RecognizeText analysis results</param>
+        /// <param name="results">The ReadImage analysis results</param>
         /// <returns>An enumerable list of <see cref="ReadImageAnalysisResult"/></returns>
         public static async Task<IEnumerable<ReadImageAnalysisResult>> WaitForOperationToCompleteAsync(this ComputerVisionAnalysisResults results)
         {
