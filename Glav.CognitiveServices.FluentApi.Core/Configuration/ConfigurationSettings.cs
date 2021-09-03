@@ -27,7 +27,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             this.ApiKeys.Add(apiCategory, apiKey);
             this.ServiceUris = serviceUris;
             this.DiagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
-            //this.GlobalScoringEngine = new DefaultScoreEvaluationEngine(new DefaultScoreLevels());
         }
 
         protected ConfigurationSettings(ConfigurationSettings settings)
@@ -37,7 +36,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             this.ServiceUris = settings.ServiceUris;
             this.MaxNumberOfRequestRetries = settings.MaxNumberOfRequestRetries;
             this.LogLevel = settings.LogLevel;
-            //this.GlobalScoringEngine = settings.GlobalScoringEngine;
             this.RegisteredDiagnosticLoggers = settings.RegisteredDiagnosticLoggers;
             this.DiagnosticLogger = new DiagnosticProxy(_registeredDiagnosticLoggers, LogLevel);
         }
@@ -50,10 +48,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
 
         public int MaxNumberOfRequestRetries { get; private set; }
         public string ApiCategory { get; private set; }
-        //public void SetScoringEngine(IScoreEvaluationEngine scoringEngine)
-        //{
-        //    this.GlobalScoringEngine = scoringEngine ?? throw new CognitiveServicesArgumentException("ScoringEngine cannot be NULL");
-        //}
 
         public void SetMaxRequestRetries(int maxRetries)
         {
@@ -83,8 +77,6 @@ namespace Glav.CognitiveServices.FluentApi.Core.Configuration
             LocationKey != LocationKeyIdentifier.Global
                 ? string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, $"{LocationKey.ToTextLocation()}.")
                 : string.Format(ApiServiceUriCollectionBase.BASE_URL_TEMPLATE, string.Empty);
-
-        //public IScoreEvaluationEngine GlobalScoringEngine { get; protected set; }
 
         /// <summary>
         /// Constructs a complete absolute API Endpoint URL based on the API region, type and query parameters.

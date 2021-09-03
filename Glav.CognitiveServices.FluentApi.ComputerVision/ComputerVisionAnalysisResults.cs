@@ -19,7 +19,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 
         public ImageAnalysisContext ImageAnalysis { get; private set; }
         public OcrAnalysisContext OcrAnalysis { get; private set; }
-        public RecognizeTextAnalysisContext RecognizeTextAnalysis { get; private set; }
+        public ReadImageAnalysisContext ReadImageAnalysis { get; private set; }
 
         public void SetImageResultContext(ImageAnalysisContext imageAnalysisCtxt)
         {
@@ -30,9 +30,9 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             OcrAnalysis = ocrAnalysisCtxt ?? throw new ArgumentNullException("ocrAnalysisCtxt");
         }
 
-        public void SetRecognizeTextResultContext(RecognizeTextAnalysisContext recognizeTxtCtxt)
+        public void SetReadImageResultContext(ReadImageAnalysisContext readImageCtxt)
         {
-            RecognizeTextAnalysis = recognizeTxtCtxt ?? throw new ArgumentNullException("recognizeTxtCtxt");
+            ReadImageAnalysis = readImageCtxt ?? throw new ArgumentNullException("readImageCtxt");
 
         }
 
@@ -57,14 +57,14 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             OcrAnalysis.AnalysisResults.Add(new OcrAnalysisResult(commsResult));
         }
 
-        public void AddRecognizeTextResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddReadImageResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
-            if (RecognizeTextAnalysis == null)
+            if (ReadImageAnalysis == null)
             {
-                RecognizeTextAnalysis = new RecognizeTextAnalysisContext(actionData, new RecognizeTextAnalysisResult(commsResult));
+                ReadImageAnalysis = new ReadImageAnalysisContext(actionData, new ReadImageAnalysisResult(commsResult));
                 return;
             }
-            RecognizeTextAnalysis.AnalysisResults.Add(new RecognizeTextAnalysisResult(commsResult));
+            ReadImageAnalysis.AnalysisResults.Add(new ReadImageAnalysisResult(commsResult));
         }
     }
 }

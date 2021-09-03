@@ -13,11 +13,11 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         {
             ImageAnalysis = new ImageAnalysisApiOperation();
             OcrAnalysis = new OcrAnalysisApiOperation();
-            RecognizeText = new RecognizeTextApiOperation();
+            ReadImage = new ReadImageApiOperation();
         }
         public static ImageAnalysisApiOperation ImageAnalysis { get; }
         public static OcrAnalysisApiOperation OcrAnalysis { get; }
-        public static RecognizeTextApiOperation RecognizeText { get; }
+        public static ReadImageApiOperation ReadImage { get; }
 
     }
 
@@ -35,9 +35,9 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         {
         }
     }
-    public class RecognizeTextApiOperation : ApiActionDefinition
+    public class ReadImageApiOperation : ApiActionDefinition
     {
-        public RecognizeTextApiOperation() : base(HttpMethod.Post, ComputerVisionApiOperations.Category)
+        public ReadImageApiOperation() : base(HttpMethod.Post, ComputerVisionApiOperations.Category)
         {
         }
     }

@@ -6,6 +6,5 @@
         public const string ImageAnalysisVisualFeaturesUrlParameterName = "visualFeatures";
         public const string ImageAnalysisDetailsUrlParameterName = "details";
         public const string DetectOrientation = "detectOrientation";
-        public const string RecognizeTextMode = "mode";
     }
 }
