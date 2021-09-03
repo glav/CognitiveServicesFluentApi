@@ -12,10 +12,11 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
     public class TextAnalyticParsingTests
     {
+        private TestDataHelper _testDataHelper = new TestDataHelper();
+
         [Fact]
         public void ShouldParseSentimentResultSuccessfully()
         {
-            //var input = "{\"documents\":[{\"score\":0.7988085,\"id\":\"1\"}],\"errors\":[]}";
             var input = "{\"documents\":[{\"id\":\"1\",\"sentiment\":\"positive\",\"confidenceScores\":{\"positive\":0.7988085,\"neutral\":0.01,\"negative\":0.02},\"sentences\":[{\"sentiment\":\"positive\",\"confidenceScores\":{\"positive\":1.0,\"neutral\":0.0,\"negative\":0.0},\"offset\":0,\"length\":29,\"text\":\"I am having a fantastic time.\"}],\"warnings\":[]}],\"errors\":[],\"modelVersion\":\"2020 - 04 - 01\"}";
             var result = new SentimentResult(new MockCommsResult(input));
 
@@ -148,7 +149,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         [Fact]
         public async Task ShouldParseLanguageResultSuccessfully()
         {
-            var langResult = "{\"documents\":[{\"id\":\"1\",\"detectedLanguages\":[{\"name\":\"English\",\"iso6391Name\":\"en\",\"score\":1.0}]}],\"errors\":[]}";
+            var langResult = _testDataHelper.GetFileDataEmbeddedInAssembly("language-analysis-result.json");
             var commsEngine = new MockCommsEngine(new MockCommsResult(langResult));
             var logger = new TestLogger();
 
@@ -177,7 +178,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         [Fact]
         public async Task ShouldReturnResultsMatchingAConfidenceLevelDescriptor()
         {
-            var langResult = "{\"documents\":[{\"id\":\"1\",\"detectedLanguages\":[{\"name\":\"English\",\"iso6391Name\":\"en\",\"score\":1.0}]}],\"errors\":[]}";
+            var langResult = _testDataHelper.GetFileDataEmbeddedInAssembly("language-analysis-result.json");
             var commsEngine = new MockCommsEngine(new MockCommsResult(langResult));
             var logger = new TestLogger();
 

@@ -18,8 +18,10 @@
     <None Remove="TestData\FaceDetectionResponse.json" />
     <None Remove="TestData\FaceLargePersonGroupPersonListResponse.json" />
     <None Remove="TestData\FaceLargePersonGroupTrainStatusResponse.json" />
+    <None Remove="TestData\language-analysis-result.json" />
     <None Remove="TestData\LuisAppResponse.json" />
     <None Remove="TestData\SanitisedHtmlEmail.txt" />
+    <None Remove="TestData\sentiment-result.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,12 +35,18 @@
     <EmbeddedResource Include="TestData\FaceLargePersonGroupTrainStatusResponse.json" />
     <EmbeddedResource Include="TestData\FaceLargePersonGroupPersonListResponse.json" />
     <EmbeddedResource Include="TestData\SanitisedHtmlEmail.txt" />
+    <EmbeddedResource Include="TestData\sentiment-result.json" />
+    <EmbeddedResource Include="TestData\language-analysis-result.json" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="TestData\language-analysis-result.json" />
   </ItemGroup>
 
   <ItemGroup>
