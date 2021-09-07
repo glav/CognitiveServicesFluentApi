@@ -34,7 +34,7 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
                 {
                     return _scoreLevelBoundsCollection.ScoreLevels.OrderBy(o => o.LowerBound).First();
                 }
-                if (item.confidenceScores.neutral > item.confidenceScores.positive && item.confidenceScores.neutral > item.confidenceScores.neutral)
+                if (item.confidenceScores.neutral > item.confidenceScores.positive && item.confidenceScores.neutral > item.confidenceScores.negative)
                 {
                     return _scoreLevelBoundsCollection.ScoreLevels.OrderBy(o => o.UpperBound).ElementAt(_scoreLevelBoundsCollection.ScoreLevels.ToList().Count / 2);
                 }
