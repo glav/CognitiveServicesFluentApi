@@ -5,11 +5,11 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
 {
     public class ApiServiceUriCollection : ApiServiceUriCollectionBase
     {
-        public ApiServiceUriCollection()
+        public ApiServiceUriCollection(string apiVersionIdentifier)
         {
-            Services.Add(ComputerVisionApiOperations.ImageAnalysis.Name, new ImageAnalysisServiceConfig());
-            Services.Add(ComputerVisionApiOperations.OcrAnalysis.Name, new OcrAnalysisServiceConfig());
-            Services.Add(ComputerVisionApiOperations.RecognizeText.Name, new RecognizeTextAnalysisServiceConfig());
+            Services.Add(ComputerVisionApiOperations.ImageAnalysis.Name, new ImageAnalysisServiceConfig(apiVersionIdentifier));
+            Services.Add(ComputerVisionApiOperations.OcrAnalysis.Name, new OcrAnalysisServiceConfig(apiVersionIdentifier));
+            Services.Add(ComputerVisionApiOperations.ReadImage.Name, new ReadImageAnalysisServiceConfig(apiVersionIdentifier));
         }
     }
 }

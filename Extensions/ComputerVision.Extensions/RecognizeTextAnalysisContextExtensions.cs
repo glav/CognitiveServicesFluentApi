@@ -2,9 +2,9 @@
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision
 {
-    public static class RecognizeTextAnalysisContextExtensions
+    public static class ReadImageAnalysisContextExtensions
     {
-        public static string GetInitialErrorMessage(this RecognizeTextAnalysisContext context)
+        public static string GetInitialErrorMessage(this ReadImageAnalysisContext context)
         {
             var message = context.AnalysisResult.ResponseData.error != null ?
                 context.AnalysisResult.ResponseData.error.message :

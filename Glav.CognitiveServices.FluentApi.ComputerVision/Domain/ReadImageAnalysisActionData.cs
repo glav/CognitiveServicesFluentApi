@@ -6,38 +6,38 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class RecognizeTextAnalysisActionData : ApiActionDataCollection
+    public class ReadImageAnalysisActionData : ApiActionDataCollection
     {
         public override bool SupportsBatchingMultipleItems => false;
 
-        public void Add(Uri imageUri,RecognizeTextMode mode)
+        public void Add(Uri imageUri,SupportedLanguageType language)
         {
-            ItemList.Add(new RecognizeTextAnalysisActionDataItem(ItemList.Count+1, imageUri, mode));
+            ItemList.Add(new ReadimageAnalysisActionDataItem(ItemList.Count+1, imageUri, language));
         }
 
-        public void Add(byte[] imageData, RecognizeTextMode mode)
+        public void Add(byte[] imageData, SupportedLanguageType language)
         {
-            ItemList.Add(new RecognizeTextAnalysisActionDataItem(ItemList.Count + 1, imageData, mode));
+            ItemList.Add(new ReadimageAnalysisActionDataItem(ItemList.Count + 1, imageData, language));
         }
 
     }
 
-    public class RecognizeTextAnalysisActionDataItem : IActionDataItem
+    public class ReadimageAnalysisActionDataItem : IActionDataItem
     {
-        public RecognizeTextAnalysisActionDataItem(long id,Uri imageUri,
-                RecognizeTextMode mode)
+        public ReadimageAnalysisActionDataItem(long id,Uri imageUri,
+                SupportedLanguageType language)
         {
             Id = id;
             ImageUriToAnalyse = imageUri ?? throw new ArgumentNullException("imageUri");
-            Mode = mode;
+            Language = language;
         }
 
-        public RecognizeTextAnalysisActionDataItem(long id, byte[] imageData,
-                RecognizeTextMode mode)
+        public ReadimageAnalysisActionDataItem(long id, byte[] imageData,
+                SupportedLanguageType language)
         {
             Id = id;
             ImageDataToAnalyse = imageData ?? throw new ArgumentNullException("imageData");
-            Mode = mode;
+            Language = language;
         }
 
         public bool IsBinaryData => ImageUriToAnalyse == null && ImageDataToAnalyse != null;
@@ -45,9 +45,9 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
         public byte[] ImageDataToAnalyse { get; private set; }
         public Uri ImageUriToAnalyse { get; private set; }
 
-        public ApiActionDefinition ApiDefintition => ComputerVisionApiOperations.RecognizeText;
+        public ApiActionDefinition ApiDefintition => ComputerVisionApiOperations.ReadImage;
 
-        public RecognizeTextMode Mode { get; private set; }
+        public SupportedLanguageType Language { get; private set; }
         public long Id { get; private set; }
 
         public byte[] ToBinary()
@@ -66,7 +66,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 
         public string ToUrlQueryParameters()
         {
-            return $"mode={Mode.ToUrlQueryArgument()}";
+            return Language.ToUrlQueryParameter();
         }
         public string ToEndUriFragment()
         {

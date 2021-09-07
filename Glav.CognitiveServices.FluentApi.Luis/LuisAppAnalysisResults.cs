@@ -29,7 +29,7 @@ namespace Glav.CognitiveServices.FluentApi.Luis
         {
             if (LuisAppAnalysis == null)
             {
-                LuisAppAnalysis = new LuisAppAnalysisContext(actionData, new LuisAppAnalysisResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                LuisAppAnalysis = new LuisAppAnalysisContext(actionData, new LuisAppAnalysisResult(commsResult));
                 return;
             }
             LuisAppAnalysis.AnalysisResults.Add(new LuisAppAnalysisResult(commsResult));

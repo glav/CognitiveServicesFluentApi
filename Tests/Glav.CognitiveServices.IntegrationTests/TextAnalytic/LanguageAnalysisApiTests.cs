@@ -24,11 +24,11 @@ namespace Glav.CognitiveServices.IntegrationTests.TextAnalytic
             Assert.NotNull(result.LanguageAnalysis.AnalysisResult);
             Assert.NotNull(result.LanguageAnalysis.AnalysisResult.ResponseData);
             Assert.NotEmpty(result.LanguageAnalysis.AnalysisResult.ResponseData.documents);
-            Assert.NotEmpty(result.LanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguages);
+            Assert.NotNull(result.LanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguage);
 
-            Assert.Equal<string>("en", result.LanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguages[0].iso6391name);
-            Assert.Equal<string>("English", result.LanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguages[0].name);
-            Assert.Equal<double>(1, result.LanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguages[0].score);
+            Assert.Equal<string>("en", result.LanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguage.iso6391name);
+            Assert.Equal<string>("English", result.LanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguage.name);
+            Assert.Equal<double>(1, result.LanguageAnalysis.AnalysisResult.ResponseData.documents[0].detectedLanguage.confidenceScore);
         }
     }
 }

@@ -91,11 +91,11 @@ namespace Glav.CognitiveServices.FluentApi.Core
         /// <param name="configSettings"></param>
         /// <param name="scoringEngine"></param>
         /// <returns></returns>
-        public static ConfigurationSettings UsingCustomGlobalScoringEngine(this ConfigurationSettings configSettings, IScoreEvaluationEngine scoringEngine)
-        {
-            configSettings.SetScoringEngine(scoringEngine);
-            return configSettings;
-        }
+        //public static ConfigurationSettings UsingCustomGlobalScoringEngine(this ConfigurationSettings configSettings, IScoreEvaluationEngine scoringEngine)
+        //{
+        //    configSettings.SetScoringEngine(scoringEngine);
+        //    return configSettings;
+        //}
 
         /// <summary>
         /// Sets the global scoring engine to the default engine but with custom score levels specified. This scoring engine is then 
@@ -104,11 +104,11 @@ namespace Glav.CognitiveServices.FluentApi.Core
         /// <param name="configSettings"></param>
         /// <param name="scoreLevels"></param>
         /// <returns></returns>
-        public static ConfigurationSettings UsingDefaultGlobalScoringEngineWithCustomScoreLevels(this ConfigurationSettings configSettings, IScoreLevelBoundsCollection scoreLevels)
-        {
-            configSettings.SetScoringEngine(new DefaultScoreEvaluationEngine(scoreLevels));
-            return configSettings;
-        }
+        //public static ConfigurationSettings UsingDefaultGlobalScoringEngineWithCustomScoreLevels(this ConfigurationSettings configSettings, IScoreLevelBoundsCollection scoreLevels)
+        //{
+        //    configSettings.SetScoringEngine(new NumericScoreEvaluationEngine(scoreLevels));
+        //    return configSettings;
+        //}
 
         /// <summary>
         /// Sets the maximum number of retries for any request issued if a Rate limit has been exceeded. The service will return how

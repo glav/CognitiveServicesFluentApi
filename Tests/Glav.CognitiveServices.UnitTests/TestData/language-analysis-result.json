@@ -1,0 +1,13 @@
+{
+    "documents": [{
+        "id": "1",
+        "detectedLanguage": {
+            "name": "English",
+            "iso6391Name": "en",
+            "confidenceScore": 1.0
+        },
+        "warnings": []
+    }],
+    "errors": [],
+    "modelVersion": "2021-01-05"
+}

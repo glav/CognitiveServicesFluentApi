@@ -7,14 +7,14 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class OcrAnalysisContext : BaseApiAnalysisContext<OcrAnalysisResult, RequestIdErrorResponse> 
+    public class OcrAnalysisContext : BaseApiAnalysisContext<OcrAnalysisResult, RequestIdErrorResponse, double> 
     {
-        public OcrAnalysisContext(ApiActionDataCollection actionData, OcrAnalysisResult analysisResult, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, analysisResult, scoringEngine)
+        public OcrAnalysisContext(ApiActionDataCollection actionData, OcrAnalysisResult analysisResult)
+            : base(actionData, analysisResult, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
-        public OcrAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, scoringEngine)
+        public OcrAnalysisContext(ApiActionDataCollection actionData)
+            : base(actionData, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
         public override ApiActionDefinition AnalysisType => ComputerVisionApiOperations.OcrAnalysis;

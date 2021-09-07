@@ -9,13 +9,14 @@ using System.Text;
 
 namespace Glav.CognitiveServices.FluentApi.Luis.Domain
 {
-    public class LuisAppAnalysisContext : BaseApiAnalysisContext<LuisAppAnalysisResult, BaseApiErrorResponse>
+    public class LuisAppAnalysisContext : BaseApiAnalysisContext<LuisAppAnalysisResult, BaseApiErrorResponse, double>
     {
-        public LuisAppAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine) : base(actionData, scoringEngine)
+        public LuisAppAnalysisContext(ApiActionDataCollection actionData) : base(actionData, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
 
-        public LuisAppAnalysisContext(ApiActionDataCollection actionData, LuisAppAnalysisResult analysisResult, IScoreEvaluationEngine scoringEngine) : base(actionData, analysisResult, scoringEngine)
+        public LuisAppAnalysisContext(ApiActionDataCollection actionData, LuisAppAnalysisResult analysisResult) 
+            : base(actionData, analysisResult, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
 

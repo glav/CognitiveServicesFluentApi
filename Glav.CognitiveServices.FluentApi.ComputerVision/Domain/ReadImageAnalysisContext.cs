@@ -8,17 +8,17 @@ using Glav.CognitiveServices.FluentApi.ComputerVision.Domain.ApiResponses;
 
 namespace Glav.CognitiveServices.FluentApi.ComputerVision.Domain
 {
-    public class RecognizeTextAnalysisContext : BaseApiAnalysisContext<RecognizeTextAnalysisResult, RequestIdErrorResponse> 
+    public class ReadImageAnalysisContext : BaseApiAnalysisContext<ReadImageAnalysisResult, RequestIdErrorResponse, double> 
     {
-        public RecognizeTextAnalysisContext(ApiActionDataCollection actionData, RecognizeTextAnalysisResult analysisResult, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, analysisResult, scoringEngine)
+        public ReadImageAnalysisContext(ApiActionDataCollection actionData, ReadImageAnalysisResult analysisResult)
+            : base(actionData, analysisResult, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
-        public RecognizeTextAnalysisContext(ApiActionDataCollection actionData, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, scoringEngine)
+        public ReadImageAnalysisContext(ApiActionDataCollection actionData)
+            : base(actionData, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
-        public override ApiActionDefinition AnalysisType => ComputerVisionApiOperations.RecognizeText;
+        public override ApiActionDefinition AnalysisType => ComputerVisionApiOperations.ReadImage;
 
         public override IEnumerable<RequestIdErrorResponse> GetAllErrors()
         {

@@ -7,10 +7,10 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public class KeyPhraseAnalysisContext : BaseApiAnalysisContext<KeyPhraseResult, ApiErrorResponse>
+    public class KeyPhraseAnalysisContext : BaseApiAnalysisContext<KeyPhraseResult, ApiErrorResponse, double>
     {
-        public KeyPhraseAnalysisContext(ApiActionDataCollection actionData, KeyPhraseResult analysisResult, IScoreEvaluationEngine scoringEngine)
-            :base(actionData, analysisResult, scoringEngine)
+        public KeyPhraseAnalysisContext(ApiActionDataCollection actionData, KeyPhraseResult analysisResult)
+            :base(actionData, analysisResult, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
         public override ApiActionDefinition AnalysisType { get { return TextAnalyticApiOperations.KeyPhraseAnalysis; } }

@@ -17,8 +17,9 @@ namespace Glav.CognitiveServices.FluentApi.Luis
         /// Luis is slightly different to other cognitive services in that instead of just an API Key, it requires an
         /// AppId (from Luis portal application settings) and a subscription Key (from Luid portal publish settings).
         /// </summary>
-        public LuisConfigurationSettings(string appId, string subscriptionKey, LocationKeyIdentifier locationKey) 
-                : base(LuisAnalysisApiOperations.Category,subscriptionKey, locationKey, new ApiServiceUriCollection())
+        public LuisConfigurationSettings(string appId, string subscriptionKey, LocationKeyIdentifier locationKey, 
+            string apiVersionIdentifier = Configuration.ApiConstants.DEFAULT_LUIS_VERSION) 
+                : base(LuisAnalysisApiOperations.Category,subscriptionKey, locationKey, new ApiServiceUriCollection(apiVersionIdentifier))
         {
             this.ApiKeys.Add(APP_ID, appId);
             this.ApiKeys.Add(SUBSCRIPTION_KEY, subscriptionKey);
@@ -34,9 +35,9 @@ namespace Glav.CognitiveServices.FluentApi.Luis
         /// Luis is slightly different to other cognitive services in that instead of just an API Key, it requires an
         /// AppId (from Luis portal application settings) and a subscription Key (from Luid portal publish settings).
         /// </summary>
-        public static LuisConfigurationSettings CreateUsingConfigurationKeys(string appId, string subscriptionKey, LocationKeyIdentifier locationKey)
+        public static LuisConfigurationSettings CreateUsingConfigurationKeys(string appId, string subscriptionKey, LocationKeyIdentifier locationKey, string apiVersionIdentifier = Configuration.ApiConstants.DEFAULT_LUIS_VERSION)
         {
-            return new LuisConfigurationSettings(appId, subscriptionKey,locationKey);
+            return new LuisConfigurationSettings(appId, subscriptionKey,locationKey,apiVersionIdentifier);
         }
     }
 }

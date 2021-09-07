@@ -1,4 +1,34 @@
 
+## Version: 1.3.0 [09/07/2021 22:15:07]
+### New Items
+* 1c26a3e -Replaced deprecated RecognizeText with Read API call in ComputerVision and brought version up to latest
+* 6bdf502 -Added support to allow API version supplied through configuration and more adaptable scoring engine. NOTE: Potentially breaking change
+### Full change list
+* 5a038b2 Bumped minor version number on all libraries to same (1.3)
+* 5da4335 Updated documentation for Read API
+* 1c26a3e NEW:Replaced deprecated RecognizeText with Read API call in ComputerVision and brought version up to latest
+* e6c6ae7 Made all unit tests pass
+* 5ac33a5 Made unit tests fail again with proper return data to parse so I could fix them
+* 1ea1be1 Ensured all unit tests pass
+* ab134ba Made most of the unit tests pass - still WIP
+* 6bdf502 NEW:Added support to allow API version supplied through configuration and more adaptable scoring engine. NOTE: Potentially breaking change
+* 0500c1f Added support for version of cognitive svc call, made it compile
+* 3568457 Prepare for local container support by supporting configurable version numbers for APIs. Start by renaming constants
+* 6857b61 Stupid line endings
+* 805dab5 Merge pull request #37 from glav/glav/CodeScanFixes
+* 2fa75f9 Fixed potential null ref
+* 1a34bd3 Updating Service connection
+* 562e505 Cleaned up some reported issues via CodeQL and LGTM
+* b6bde07 Merge pull request #34 from glav/glav/BumpingExtensionPackagesToMatchParent
+* c8da6b5 Bumping extension packages in line with parent packages
+* a909f9c Merge pull request #33 from glav/glav/ForgotVersionBump
+* 82c48a6 Merge branch 'trunk' into glav/ForgotVersionBump
+* 93cd294 Did the version bump for Core, renamed a file that should have been renamed ages ago
+* 2e718f0 Merge pull request #32 from glav/glav/ConsistentErrorRetrieval
+* 520ae4d Merge pull request #29 from glav/glav/FixingTests
+* efce6bb Fixing base image URL after default branch change
+* 4453245 Adding more verbose checkout
+
 ## Version: 1.2.0 [09/22/2020 09:24:42]
 ### New Items
 * 3d8b500 -Adding consistent way to easily retrieve error messages from calls

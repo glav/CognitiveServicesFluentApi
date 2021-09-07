@@ -12,10 +12,12 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
 {
     public class TextAnalyticParsingTests
     {
+        private TestDataHelper _testDataHelper = new TestDataHelper();
+
         [Fact]
         public void ShouldParseSentimentResultSuccessfully()
         {
-            var input = "{\"documents\":[{\"score\":0.7988085,\"id\":\"1\"}],\"errors\":[]}";
+            var input = "{\"documents\":[{\"id\":\"1\",\"sentiment\":\"positive\",\"confidenceScores\":{\"positive\":0.7988085,\"neutral\":0.01,\"negative\":0.02},\"sentences\":[{\"sentiment\":\"positive\",\"confidenceScores\":{\"positive\":1.0,\"neutral\":0.0,\"negative\":0.0},\"offset\":0,\"length\":29,\"text\":\"I am having a fantastic time.\"}],\"warnings\":[]}],\"errors\":[],\"modelVersion\":\"2020 - 04 - 01\"}";
             var result = new SentimentResult(new MockCommsResult(input));
 
             Assert.NotNull(result);
@@ -24,7 +26,9 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             Assert.NotNull(result.ResponseData);
             Assert.NotEmpty(result.ResponseData.documents);
             Assert.Equal<long>(1, result.ResponseData.documents[0].id);
-            Assert.Equal<double>(0.7988085, result.ResponseData.documents[0].score);
+            Assert.Equal<double>(0.7988085, result.ResponseData.documents[0].confidenceScores.positive);
+            Assert.Equal<double>(0.01, result.ResponseData.documents[0].confidenceScores.neutral);
+            Assert.Equal<double>(0.02, result.ResponseData.documents[0].confidenceScores.negative);
             Assert.Empty(result.ResponseData.errors);
         }
 
@@ -145,7 +149,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         [Fact]
         public async Task ShouldParseLanguageResultSuccessfully()
         {
-            var langResult = "{\"documents\":[{\"id\":\"1\",\"detectedLanguages\":[{\"name\":\"English\",\"iso6391Name\":\"en\",\"score\":1.0}]}],\"errors\":[]}";
+            var langResult = _testDataHelper.GetFileDataEmbeddedInAssembly("language-analysis-result.json");
             var commsEngine = new MockCommsEngine(new MockCommsResult(langResult));
             var logger = new TestLogger();
 
@@ -163,18 +167,17 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var results = result.LanguageAnalysis.GetResults();
             Assert.NotNull(results);
             Assert.Equal(1, results.Count());
-            Assert.NotEmpty(results.First().detectedLanguages);
-            Assert.Equal(1, results.First().detectedLanguages.Length);
-            Assert.Equal("English", results.First().detectedLanguages[0].name);
-            Assert.Equal("en", results.First().detectedLanguages[0].iso6391name);
-            Assert.Equal(1.0, results.First().detectedLanguages[0].score);
-            Assert.Equal(1, results.First().detectedLanguages.Length);
+            Assert.NotNull(results.First().detectedLanguage);
+            Assert.Equal(1, results.Count());
+            Assert.Equal("English", results.First().detectedLanguage.name);
+            Assert.Equal("en", results.First().detectedLanguage.iso6391name);
+            Assert.Equal(1.0, results.First().detectedLanguage.confidenceScore);
         }
 
         [Fact]
         public async Task ShouldReturnResultsMatchingAConfidenceLevelDescriptor()
         {
-            var langResult = "{\"documents\":[{\"id\":\"1\",\"detectedLanguages\":[{\"name\":\"English\",\"iso6391Name\":\"en\",\"score\":1.0}]}],\"errors\":[]}";
+            var langResult = _testDataHelper.GetFileDataEmbeddedInAssembly("language-analysis-result.json");
             var commsEngine = new MockCommsEngine(new MockCommsResult(langResult));
             var logger = new TestLogger();
 
@@ -193,12 +196,12 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
             var results = result.LanguageAnalysis.GetResultsThatContainConfidenceLevel(DefaultScoreLevels.Positive);
             Assert.NotNull(results);
             Assert.Equal(1, results.Count());
-            Assert.NotEmpty(results.First().detectedLanguages);
-            Assert.Equal(1, results.First().detectedLanguages.Length);
-            Assert.Equal("English", results.First().detectedLanguages[0].name);
-            Assert.Equal("en", results.First().detectedLanguages[0].iso6391name);
-            Assert.Equal(1.0, results.First().detectedLanguages[0].score);
-            Assert.Equal(1, results.First().detectedLanguages.Length);
+            Assert.NotNull(results.First().detectedLanguage);
+            Assert.Equal(1, results.Count());
+            Assert.Equal("English", results.First().detectedLanguage.name);
+            Assert.Equal("en", results.First().detectedLanguage.iso6391name);
+            Assert.Equal(1.0, results.First().detectedLanguage.confidenceScore);
+            Assert.Equal(1, results.Count());
         }
 
 

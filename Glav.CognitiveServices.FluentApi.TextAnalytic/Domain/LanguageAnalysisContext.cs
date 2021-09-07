@@ -8,10 +8,10 @@ using System.Linq;
 
 namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Domain
 {
-    public class LanguageAnalysisContext : BaseApiAnalysisContext<LanguagesResult, ApiErrorResponse>
+    public class LanguageAnalysisContext : BaseApiAnalysisContext<LanguagesResult, ApiErrorResponse, double>
     {
-        public LanguageAnalysisContext(ApiActionDataCollection actionData, LanguagesResult analysisResult, IScoreEvaluationEngine scoringEngine)
-            : base(actionData, analysisResult, scoringEngine)
+        public LanguageAnalysisContext(ApiActionDataCollection actionData, LanguagesResult analysisResult)
+            : base(actionData, analysisResult, new NumericScoreEvaluationEngine(new DefaultScoreLevels()))
         {
         }
         public override ApiActionDefinition AnalysisType { get { return TextAnalyticApiOperations.LanguageAnalysis; } }

@@ -1,9 +1,8 @@
 ﻿namespace Glav.CognitiveServices.FluentApi.Core.ScoreEvaluation
 {
-    public interface IScoreEvaluationEngine
+    public interface IScoreEvaluationEngine<T>
     {
-        ScoreLevelBoundsDefinition EvaluateScore(double score);
-
+        ScoreLevelBoundsDefinition Evaluate(T item);
         IScoreLevelBoundsCollection ScoreLevels { get; }
     }
 }

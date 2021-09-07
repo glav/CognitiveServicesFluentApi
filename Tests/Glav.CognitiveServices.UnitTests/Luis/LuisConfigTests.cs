@@ -14,7 +14,7 @@ namespace Glav.CognitiveServices.UnitTests.uis
         public void ShouldHaveDefinedUrisForuisActions()
         {
             // Get our text analytic config
-            var uriLocations = new Glav.CognitiveServices.FluentApi.Luis.Configuration.ApiServiceUriCollection();
+            var uriLocations = new Glav.CognitiveServices.FluentApi.Luis.Configuration.ApiServiceUriCollection(ApiConstants.DEFAULT_LUIS_VERSION);
 
             Assert.NotNull(uriLocations.GetServiceConfig(LuisAnalysisApiOperations.LuisAnalysis));
             const string expected = "luis/prediction/v3.0/apps";

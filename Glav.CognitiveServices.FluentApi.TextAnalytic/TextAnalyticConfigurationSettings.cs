@@ -7,8 +7,8 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
 {
     public class TextAnalyticConfigurationSettings : ConfigurationSettings
     {
-        public TextAnalyticConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey) 
-                : base(TextAnalyticApiOperations.Category,apiKey, locationKey, new ApiServiceUriCollection())
+        public TextAnalyticConfigurationSettings(string apiKey, LocationKeyIdentifier locationKey, string apiVerrsionIdentifier = Configuration.ApiConstants.DEFAULT_TEXT_ANALYTIC_VERSION) 
+                : base(TextAnalyticApiOperations.Category,apiKey, locationKey, new ApiServiceUriCollection(apiVerrsionIdentifier))
         {
         }
 
@@ -16,10 +16,11 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
         {
         }
 
-        public static TextAnalyticConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey)
+        public static TextAnalyticConfigurationSettings CreateUsingConfigurationKeys(string apiKey, LocationKeyIdentifier locationKey,
+            string apiVerrsionIdentifier = Configuration.ApiConstants.DEFAULT_TEXT_ANALYTIC_VERSION)
         {
             SupportedLanguages.Setup();
-            return new TextAnalyticConfigurationSettings(apiKey,locationKey);
+            return new TextAnalyticConfigurationSettings(apiKey,locationKey,apiVerrsionIdentifier);
         }
     }
 }

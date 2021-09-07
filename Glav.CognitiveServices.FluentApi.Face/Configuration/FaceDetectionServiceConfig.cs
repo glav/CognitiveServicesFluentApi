@@ -6,10 +6,8 @@ namespace Glav.CognitiveServices.FluentApi.Face.Configuration
 {
     public class FaceDetectionServiceConfig : ApiServiceUriFragment
     {
-
+        public FaceDetectionServiceConfig(string apiVersionIdentifier) : base(apiVersionIdentifier) { }
         public override string Template => "face/{0}/detect";
-
-        public override string Version => ApiConstants.FACE_VERSION;
 
         public override ApiActionDefinition ApiAction => FaceApiOperations.FaceDetection;
     }

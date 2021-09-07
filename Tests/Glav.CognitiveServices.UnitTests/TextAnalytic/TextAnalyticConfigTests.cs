@@ -34,7 +34,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         public void ShouldHaveDefinedUrisForTextAnalyticActions()
         {
             // Get our text analytic config
-            var uriLocations = new Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration.ApiServiceUriCollection();
+            var uriLocations = new Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration.ApiServiceUriCollection(FluentApi.TextAnalytic.Configuration.ApiConstants.DEFAULT_TEXT_ANALYTIC_VERSION);
 
             Assert.NotNull(uriLocations.GetServiceConfig(TextAnalyticApiOperations.KeyPhraseAnalysis));
             Assert.NotNull(uriLocations.GetServiceConfig(TextAnalyticApiOperations.LanguageAnalysis));
@@ -46,7 +46,7 @@ namespace Glav.CognitiveServices.UnitTests.TextAnalytic
         public void ShouldNotHaveDefinedUrisForTextAnalyticForNonTetyticActions()
         {
             // Get our text analytic config
-            var uriLocations = new Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration.ApiServiceUriCollection();
+            var uriLocations = new Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration.ApiServiceUriCollection(FluentApi.TextAnalytic.Configuration.ApiConstants.DEFAULT_TEXT_ANALYTIC_VERSION);
 
             Assert.Throws<KeyNotFoundException>(() =>
             {

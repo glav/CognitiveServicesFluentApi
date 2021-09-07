@@ -8,9 +8,8 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision.Configuration
 {
     public class ImageAnalysisServiceConfig : ApiServiceUriFragment
     {
+        public ImageAnalysisServiceConfig(string apiVersionIdentifier) : base(apiVersionIdentifier) { }
         public override string Template => "vision/{0}/analyze";
-
-        public override string Version => ApiConstants.ComputerVisionVersion;
 
         public override ApiActionDefinition ApiAction => ComputerVisionApiOperations.ImageAnalysis;
     }

@@ -18,7 +18,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             var apiResults = new ComputerVisionAnalysisResults(AnalysisSettings);
             await AnalyseApiActionAsync(apiResults, ComputerVisionApiOperations.ImageAnalysis).ConfigureAwait(continueOnCapturedContext: false);
             await AnalyseApiActionAsync(apiResults, ComputerVisionApiOperations.OcrAnalysis).ConfigureAwait(continueOnCapturedContext: false);
-            await AnalyseApiActionAsync(apiResults, ComputerVisionApiOperations.RecognizeText).ConfigureAwait(continueOnCapturedContext: false);
+            await AnalyseApiActionAsync(apiResults, ComputerVisionApiOperations.ReadImage).ConfigureAwait(continueOnCapturedContext: false);
             return apiResults;
 
         }
@@ -37,9 +37,9 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
                       apiResults.AddOcrAnalysisResult(actionData,commsResult);
                       return;
                   }
-                  if (apiAction == ComputerVisionApiOperations.RecognizeText)
+                  if (apiAction == ComputerVisionApiOperations.ReadImage)
                   {
-                      apiResults.AddRecognizeTextResult(actionData, commsResult);
+                      apiResults.AddReadImageResult(actionData, commsResult);
                       return;
                   }
                   throw new NotSupportedException($"{apiAction.ToString()} not supported yet");

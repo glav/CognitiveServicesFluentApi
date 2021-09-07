@@ -5,12 +5,12 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic.Configuration
 {
     public class ApiServiceUriCollection : ApiServiceUriCollectionBase
     {
-        public ApiServiceUriCollection()
+        public ApiServiceUriCollection(string apiVersionIdentifier)
         {
-            Services.Add(TextAnalyticApiOperations.SentimentAnalysis.Name, new SentimentServiceConfig());
-            Services.Add(TextAnalyticApiOperations.KeyPhraseAnalysis.Name, new KeyPhraseServiceConfig());
-            Services.Add(TextAnalyticApiOperations.LanguageAnalysis.Name, new LanguageServiceConfig());
-            Services.Add(TextAnalyticApiOperations.OperationStatus.Name, new OperationStatusServiceConfig());
+            Services.Add(TextAnalyticApiOperations.SentimentAnalysis.Name, new SentimentServiceConfig(apiVersionIdentifier));
+            Services.Add(TextAnalyticApiOperations.KeyPhraseAnalysis.Name, new KeyPhraseServiceConfig(apiVersionIdentifier));
+            Services.Add(TextAnalyticApiOperations.LanguageAnalysis.Name, new LanguageServiceConfig(apiVersionIdentifier));
+            Services.Add(TextAnalyticApiOperations.OperationStatus.Name, new OperationStatusServiceConfig(apiVersionIdentifier));
         }
     }
 }

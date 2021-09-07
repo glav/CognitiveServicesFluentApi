@@ -19,7 +19,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
 
         public ImageAnalysisContext ImageAnalysis { get; private set; }
         public OcrAnalysisContext OcrAnalysis { get; private set; }
-        public RecognizeTextAnalysisContext RecognizeTextAnalysis { get; private set; }
+        public ReadImageAnalysisContext ReadImageAnalysis { get; private set; }
 
         public void SetImageResultContext(ImageAnalysisContext imageAnalysisCtxt)
         {
@@ -30,9 +30,9 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
             OcrAnalysis = ocrAnalysisCtxt ?? throw new ArgumentNullException("ocrAnalysisCtxt");
         }
 
-        public void SetRecognizeTextResultContext(RecognizeTextAnalysisContext recognizeTxtCtxt)
+        public void SetReadImageResultContext(ReadImageAnalysisContext readImageCtxt)
         {
-            RecognizeTextAnalysis = recognizeTxtCtxt ?? throw new ArgumentNullException("recognizeTxtCtxt");
+            ReadImageAnalysis = readImageCtxt ?? throw new ArgumentNullException("readImageCtxt");
 
         }
 
@@ -40,7 +40,7 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         {
             if (ImageAnalysis == null)
             {
-                ImageAnalysis = new ImageAnalysisContext(actionData, new ImageAnalysisResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                ImageAnalysis = new ImageAnalysisContext(actionData, new ImageAnalysisResult(commsResult));
                 return;
             }
             ImageAnalysis.AnalysisResults.Add(new ImageAnalysisResult(commsResult));
@@ -51,20 +51,20 @@ namespace Glav.CognitiveServices.FluentApi.ComputerVision
         {
             if (OcrAnalysis == null)
             {
-                OcrAnalysis = new OcrAnalysisContext(actionData, new OcrAnalysisResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                OcrAnalysis = new OcrAnalysisContext(actionData, new OcrAnalysisResult(commsResult));
                 return;
             }
             OcrAnalysis.AnalysisResults.Add(new OcrAnalysisResult(commsResult));
         }
 
-        public void AddRecognizeTextResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
+        public void AddReadImageResult(ApiActionDataCollection actionData, ICommunicationResult commsResult)
         {
-            if (RecognizeTextAnalysis == null)
+            if (ReadImageAnalysis == null)
             {
-                RecognizeTextAnalysis = new RecognizeTextAnalysisContext(actionData, new RecognizeTextAnalysisResult(commsResult), AnalysisSettings.ConfigurationSettings.GlobalScoringEngine);
+                ReadImageAnalysis = new ReadImageAnalysisContext(actionData, new ReadImageAnalysisResult(commsResult));
                 return;
             }
-            RecognizeTextAnalysis.AnalysisResults.Add(new RecognizeTextAnalysisResult(commsResult));
+            ReadImageAnalysis.AnalysisResults.Add(new ReadImageAnalysisResult(commsResult));
         }
     }
 }

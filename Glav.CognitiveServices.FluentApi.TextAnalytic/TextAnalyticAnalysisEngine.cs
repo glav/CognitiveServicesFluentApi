@@ -32,17 +32,17 @@ namespace Glav.CognitiveServices.FluentApi.TextAnalytic
             {
                 if (apiAction == TextAnalyticApiOperations.SentimentAnalysis)
                 {
-                    apiResults.SetResult(new SentimentAnalysisContext(actionData, new SentimentResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    apiResults.SetResult(new SentimentAnalysisContext(actionData, new SentimentResult(commsResult)));
                     return;
                 }
                 if (apiAction == TextAnalyticApiOperations.KeyPhraseAnalysis)
                 {
-                    apiResults.SetResult(new KeyPhraseAnalysisContext(actionData, new KeyPhraseResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    apiResults.SetResult(new KeyPhraseAnalysisContext(actionData, new KeyPhraseResult(commsResult)));
                     return;
                 }
                 if (apiAction == TextAnalyticApiOperations.LanguageAnalysis)
                 {
-                    apiResults.SetResult(new LanguageAnalysisContext(actionData, new LanguagesResult(commsResult), apiResults.AnalysisSettings.ConfigurationSettings.GlobalScoringEngine));
+                    apiResults.SetResult(new LanguageAnalysisContext(actionData, new LanguagesResult(commsResult)));
                     return;
                 }
                 throw new NotSupportedException($"{apiAction.ToString()} not supported yet");
