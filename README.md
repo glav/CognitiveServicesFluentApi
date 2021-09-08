@@ -1,5 +1,9 @@
 # CognitiveServicesFluentApi
-A fluent API to use with the Microsoft Cortana suite of cognitive services. Currently this API supports TextAnalytics, ComputerVision and Face cognitive services. 
+A fluent API to use with the Microsoft Cortana suite of cognitive services. Currently this API supports the following Cognitive Services API's:
+* TextAnalytics
+* ComputerVision
+* Face
+* LUIS
 
 The objective is to make the set of Cognitive service API's really easy to consume from .Net applications. In addition, a set of helper extension methods are available to try and make common functionality super easy to access.
 
@@ -12,7 +16,7 @@ If you are new to this project, please see the getting started section below. Fo
 * [Scoring system](./Wiki/Scoring.md)
 
 #### Build Status
-[![Build Status](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_apis/build/status/CognitiveServicesFluentApi%20CI%20Yaml?branchName=trunk)](https://dev.azure.com/glav/Glav.CognitiveServices.Api/_build/latest?definitionId=63&branchName=trunk)
+[![Github - Glav.CognitiveServices CI](https://github.com/glav/CognitiveServicesFluentApi/actions/workflows/ci-build.yml/badge.svg)](https://github.com/glav/CognitiveServicesFluentApi/actions/workflows/ci-build.yml)
 
 #### Sonarqube Code Analaysis
 [Sonarqube Code Analysis report](https://sonarcloud.io/dashboard?id=CognitiveFluentApi)
