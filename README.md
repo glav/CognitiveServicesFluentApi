@@ -17,8 +17,8 @@ If you are new to this project, please see the getting started section below. Fo
 #### Sonarqube Code Analaysis
 [Sonarqube Code Analysis report](https://sonarcloud.io/dashboard?id=CognitiveFluentApi)
 
-#### Project Board
-[Azure DevOps project Board is located here](https://dev.azure.com/glav/Glav.CognitiveServices.Api)
+#### LGTM Analysis
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/glav/CognitiveServicesFluentApi.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/glav/CognitiveServicesFluentApi/alerts/)
 
 ## How to get started.
 Easiest way is to install the nuget package for your specific analysis functionality. 
