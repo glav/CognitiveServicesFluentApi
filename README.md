@@ -1,5 +1,9 @@
 # CognitiveServicesFluentApi
-A fluent API to use with the Microsoft Cortana suite of cognitive services. Currently this API supports TextAnalytics, ComputerVision and Face cognitive services. 
+A fluent API to use with the Microsoft Cortana suite of cognitive services. Currently this API supports the following Cognitive Services API's:
+* TextAnalytics
+* ComputerVision
+* Face
+* LUIS
 
 The objective is to make the set of Cognitive service API's really easy to consume from .Net applications. In addition, a set of helper extension methods are available to try and make common functionality super easy to access.
 
